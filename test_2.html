@@ -1,0 +1,95 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>div+css+js实现弹出框</title>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /*背景层*/
+        #popLayer {
+            display: none;
+            background-color: #B3B3B3;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=80);/* 只支持IE6、7、8、9 */
+        }
+ 
+        /*弹出层*/
+        #popBox {
+            display: none;
+            background-color: #FFFFFF;
+            z-index: 11;
+            width: 40%;
+            height: 40%;
+            position:fixed;
+            top:0;
+            right:0;
+            left:0;
+            bottom:0;
+            margin:auto;
+        }
+ 
+        #popBox .close{
+            text-align: right;
+            margin-right: 5px;
+            background-color: #F8F8F8;
+        }
+ 
+        /*关闭按钮*/
+        #popBox .close a {
+            text-decoration: none;
+            color: #2D2C3B;
+        }
+ 
+    </style>
+</head>
+<body>
+<input type="button" name="popBox" value="弹出框" onclick="popBox()">
+<div id="popLayer"></div>
+<div id="popBox">
+    <div class="close">
+        <a href="javascript:void(0)" onclick="closeBox()">关闭</a>
+    </div>
+    <div class="content" style="overflow: scroll; height: 100%; width: 100%;">
+      <p>
+        稻盛和夫，1932年出生于日本鹿儿岛，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长。 稻盛和夫的释义是涵盖了生活态度、哲学、思想、伦理观等因素人格。痛惜战后的日本以选择聪明才辩型的人做领导为潮流，忽略了道德规范和伦理标准，导致政界、商界丑闻频发。他建议领导者的选拔标准是德要高于才，也就是居人上者，人格第一，勇气第二，能力第三。他指出热爱是点燃工作激情的火把。无论什么工作，只要全力以赴去做就能产生很大的成就感和自信心，而且会产生向下一个目标挑战的积极性。成功的人往往都是那些沉醉于所做事的人。
+        稻盛和夫，1932年出生于日本鹿儿岛，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长。 稻盛和夫的释义是涵盖了生活态度、哲学、思想、伦理观等因素人格。痛惜战后的日本以选择聪明才辩型的人做领导为潮流，忽略了道德规范和伦理标准，导致政界、商界丑闻频发。他建议领导者的选拔标准是德要高于才，也就是居人上者，人格第一，勇气第二，能力第三。他指出热爱是点燃工作激情的火把。无论什么工作，只要全力以赴去做就能产生很大的成就感和自信心，而且会产生向下一个目标挑战的积极性。成功的人往往都是那些沉醉于所做事的人。
+        稻盛和夫，1932年出生于日本鹿儿岛，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长。 稻盛和夫的释义是涵盖了生活态度、哲学、思想、伦理观等因素人格。痛惜战后的日本以选择聪明才辩型的人做领导为潮流，忽略了道德规范和伦理标准，导致政界、商界丑闻频发。他建议领导者的选拔标准是德要高于才，也就是居人上者，人格第一，勇气第二，能力第三。他指出热爱是点燃工作激情的火把。无论什么工作，只要全力以赴去做就能产生很大的成就感和自信心，而且会产生向下一个目标挑战的积极性。成功的人往往都是那些沉醉于所做事的人。
+        稻盛和夫，1932年出生于日本鹿儿岛，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长。 稻盛和夫的释义是涵盖了生活态度、哲学、思想、伦理观等因素人格。痛惜战后的日本以选择聪明才辩型的人做领导为潮流，忽略了道德规范和伦理标准，导致政界、商界丑闻频发。他建议领导者的选拔标准是德要高于才，也就是居人上者，人格第一，勇气第二，能力第三。他指出热爱是点燃工作激情的火把。无论什么工作，只要全力以赴去做就能产生很大的成就感和自信心，而且会产生向下一个目标挑战的积极性。成功的人往往都是那些沉醉于所做事的人。
+        稻盛和夫，1932年出生于日本鹿儿岛，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长。 稻盛和夫的释义是涵盖了生活态度、哲学、思想、伦理观等因素人格。痛惜战后的日本以选择聪明才辩型的人做领导为潮流，忽略了道德规范和伦理标准，导致政界、商界丑闻频发。他建议领导者的选拔标准是德要高于才，也就是居人上者，人格第一，勇气第二，能力第三。他指出热爱是点燃工作激情的火把。无论什么工作，只要全力以赴去做就能产生很大的成就感和自信心，而且会产生向下一个目标挑战的积极性。成功的人往往都是那些沉醉于所做事的人。
+      </p>
+
+    </div>
+</div>
+<script>
+    /*点击弹出按钮*/
+    function popBox() {
+        // var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        // popBox.style.display = "block";
+        popLayer.style.display = "block";
+        $("#popBox").show("normal");
+    };
+ 
+    /*点击关闭按钮*/
+    function closeBox() {
+        // var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        // popBox.style.display = "none";
+        popLayer.style.display = "none";
+        $("#popBox").hide("normal");
+
+    }
+</script>
+</body>
+</html>
