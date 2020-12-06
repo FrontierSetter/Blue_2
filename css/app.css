@@ -56,9 +56,9 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 	min-height:100%;
 	box-sizing:border-box;
 }
-.col {margin:0 10px;height:100%;}
-.col-l {-webkit-flex:2;-ms-flex:2;flex:2}
-.col-c {-webkit-flex:3;-ms-flex:3;flex:3;}
+.col {margin:0 10px;height:95%;margin-top: 2%;}
+.col-l {-webkit-flex:2;-ms-flex:2;flex:2;}
+.col-c {-webkit-flex:2;-ms-flex:2;flex:2;}
 .col-r {-webkit-flex:2;-ms-flex:2;flex:2;}
 /* PC */
 @media (max-width:1919px) {
@@ -95,6 +95,7 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 .xpanel-l-t {background-image:url("../img/panel-l-t.png");}
 .xpanel-l-b {background-image:url("../img/panel-l-b.png");}
 .xpanel-c-b {background-image:url("../img/panel-c-b.png");}
+.xpanel-c-t {background-image:url("../img/panel-c-t.png");}
 .xpanel-r-t {background-image:url("../img/panel-r-t.png");}
 .xpanel-r-m {background-image:url("../img/panel-r-m.png");}
 .xpanel-r-b {background-image:url("../img/panel-r-b.png");}
