@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 弹出窗口 -->
+		<link rel="stylesheet" href="css/hover_window_2.css" />
+		<link rel="stylesheet" href="css/hover_window.css" />
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+	</head>
+	
+	<body>
+		<div class="header">
+			<h1 class="header-title">质量大数据平台</h1>
+		</div>
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">2008-2017年上海市服务名牌数量变化图</div>
+							<div id="container_1_1" style="height: 100%"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">2011-2017年上海市主要餐饮服务单位变化趋势</div>
+							<div id="container_1_2" style="height: 100%"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-t">
+							<div class="title title-long">2009-2017年上海市服务业标准化示范点数目(累计数)</div>
+							<div id="container_2_1" style="height: 100%"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-b">
+							<div class="title title-long">2008-2017年上海市名牌及著名商标情况</div>
+							<div id="container_2_2" style="height: 100%"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">2008-2017年地方标准立项和当年年底现行有效总数</div>
+							<div id="container_3_1" style="height: 100%"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">2011-2017年上海市餐饮服务单位量化监督动态等级评定情况</div>
+							<div id="container_3_2" style="height: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="popLayer"></div>
+		<div id="popBox_1_1" class="popBox">
+			<!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+			</div> -->
+			<div class="content" style="overflow: scroll; max-height: 80%;">
+				<table id="table_1_1" class="ui definition table">
+					<thead>
+						<tr><th></th>
+						<th>Arguments</th>
+					</tr></thead>
+					<tbody>
+						<tr>
+						<td>reset rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+						<tr>
+						<td>set rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="dlg_bottom">
+				<button class="ui primary button" onclick="alert('submit success!')">
+					保存
+				</button>
+				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
+					关闭
+				</button>
+				<button class="ui button" onclick="addTableRow('_1_1')">
+					添加一行
+				</button>
+			</div>
+
+		</div>
+		<script>
+			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+		</script>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res){
+        alldata = res;
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+<!--配置页面 5-1 的Echart图-->
+<script>
+	var dom_5_1 = document.getElementById("container_1_1");
+	var myChart_5_1 = echarts.init(dom_5_1);
+    var data_5_1 = alldata["2008年-2017年上海市服务名牌数量变化图"]
+    var xAxis_5_1 = []
+	var yAxis_5_1 = []
+    for(var i = 1; i < data_5_1.length; ++i) {
+		xAxis_5_1.push(data_5_1[i][0])
+		yAxis_5_1.push(data_5_1[i][1])
+	}
+	var option_5_1 = {
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		calculable: true,
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+		    data: xAxis_5_1
+		},
+		yAxis: {
+			type: 'value',
+			name: '服务名牌数'
+		},
+		series: [{
+			//data: [157, 226, 254, 248, 237, 295, 318, 351, 373, 384],
+			data: yAxis_5_1,
+			name: '服务名牌数',
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+	if (option_5_1 && typeof option_5_1 === 'object') {
+		myChart_5_1.setOption(option_5_1);
+		console.log(data_5_1)
+	}
+</script>
+
+<!--配置页面 5-2 的Echart图-->
+<script>
+	var dom_5_2 = document.getElementById("container_1_2");
+	var myChart_5_2 = echarts.init(dom_5_2);
+	var data_5_1 = alldata["2011-2017年上海市主要餐饮服务单位变化趋势"]
+    var xAxis_5_2 = []
+	var yAxis_5_2a = []
+	var yAxis_5_2b = []
+	var yAxis_5_2c = []
+	var yAxis_5_2d = []
+	var yAxis_5_2e = []
+    for(var i = 1; i < data_5_1.length; ++i) {
+		xAxis_5_2.push(data_5_1[i][0])
+		yAxis_5_2a.push(data_5_1[i][1])
+		yAxis_5_2b.push(data_5_1[i][2])
+		yAxis_5_2c.push(data_5_1[i][3])
+		yAxis_5_2d.push(data_5_1[i][4])
+		yAxis_5_2e.push(data_5_1[i][1] + data_5_1[i][2] + data_5_1[i][3])
+	}
+	var option_5_2 = {
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		calculable: true,
+		legend: {
+			data: [
+				{
+					name: '集体用餐',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '食堂',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '公共餐饮',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '合计',
+                    textStyle: { color:"#5793f3" }
+				},
+			],
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_5_2
+			//data: ['2011', '2012', '2013', '2014', '2015', '2016', '2017']
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '数目',
+                position: 'left',
+                axisLabel: {
+                    formatter: '{value} 个'
+                }
+            }
+		],
+		series: [
+		    {
+				name: '公共餐饮',
+				data: yAxis_5_2c,
+			    //data: [45835, 43170, 45463, 48969, 42881, 43446, 53554],
+			    type: 'bar',
+				stack: '总量',
+				label: {
+                    show: true,
+                    position: 'inside',
+					textStyle: { color:"#5793f3" }
+                }
+		    },
+			{
+				name: '集体用餐',
+				data: yAxis_5_2a,
+			    //data: [349, 338, 332, 340, 336, 272, 269],
+			    type: 'bar',
+				stack: '总量',
+				label: {
+                    show: true,
+                    position: 'inside',
+					textStyle: { color:"#5793f3" }
+                }
+		    },
+		    {
+				name: '食堂',
+				data: yAxis_5_2b,
+			    //data: [15066, 12937, 14223, 15089, 14348, 13286, 13315],
+			    type: 'bar',
+				stack: '总量',
+				label: {
+                    show: true,
+                    position: 'inside',
+					textStyle: { color:"#5793f3" }
+                }
+		    },
+			{
+				name: '合计',
+				data: yAxis_5_2e,
+				type: 'line',
+				label: {
+                    show: true,
+                    position: 'inside',
+					textStyle: { color:"#d14a61" }
+                }
+		    },
+		]
+	};
+	if (option_5_2 && typeof option_5_2 === 'object') {
+		myChart_5_2.setOption(option_5_2);
+		console.log(data_5_2)
+	}
+</script>
+
+<!--配置页面 5-3 的Echart图-->
+<script>
+	var dom_5_3 = document.getElementById("container_2_1");
+	var myChart_5_3 = echarts.init(dom_5_3);
+	var data_5_3 = alldata["2009-2017年上海市服务业标准化示范点数目（累计数）"]
+    var xAxis_5_3 = []
+	var yAxis_5_3a = []
+	var yAxis_5_3b = []
+	for(var i = 1; i < data_5_3[0].length; ++i) {
+		xAxis_5_3.push(data_5_3[0][i])
+		yAxis_5_3a.push(data_5_3[1][i])
+	    yAxis_5_3b.push(data_5_3[2][i])
+	}
+	var option_5_3 = {
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		legend: {
+			data: [
+				{
+					name: '国家级',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '市级',
+                    textStyle: { color:"#5793f3" }
+				},
+			],
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			//data: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+		    data: xAxis_5_3
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '数目',
+                position: 'left',
+                axisLabel: {
+                    formatter: '{value} 个'
+                }
+            }
+		],
+		series: [
+			{
+				name: '国家级',
+			    //data: [4, 6, 7, 13, 23, 23, 23, 23, 34, 35],
+			    data: yAxis_5_3a,
+				type: 'line'
+		    },
+			{
+				name: '市级',
+			    //data: [24, 43, 62, 84, 109, 135, 145, 156, 188],
+			    data: yAxis_5_3b,
+				type: 'line'
+		    },
+
+		]
+	};
+	if (option_5_3 && typeof option_5_3 === 'object') {
+		myChart_5_3.setOption(option_5_3);
+		console.log(data_5_3)
+	}
+</script>
+
+<!--配置页面 5-4 的Echart图-->
+<script>
+	var dom_5_4 = document.getElementById("container_2_2");
+	var myChart_5_4 = echarts.init(dom_5_4);
+	var data_5_4 = alldata["2008-2017年上海市名牌及著名商标情况"]
+    var xAxis_5_4 = []
+	var yAxis_5_4a = []
+	var yAxis_5_4b = []
+	var yAxis_5_4c = []
+	var yAxis_5_4d = []
+    for(var i = 1; i < data_5_4.length; ++i) {
+		xAxis_5_4.push(data_5_4[i][0])
+		yAxis_5_4a.push(data_5_4[i][1])
+		yAxis_5_4b.push(data_5_4[i][2])
+		yAxis_5_4c.push(data_5_4[i][3])
+		yAxis_5_4d.push(data_5_4[i][4])
+	}
+	var option_5_4 = {
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		legend: [
+		    {
+				top: "8%",
+			    data: [
+				    {
+					    name: '上海财富世界五百强',
+                        textStyle: { color:"#5793f3" }
+				    },
+				    {
+					    name: '全国财富世界五百强',
+                        textStyle: { color:"#5793f3" }
+				    },
+				    {
+					    name: '上海名牌产品项',
+                        textStyle: { color:"#5793f3" }
+				    },
+			    ],
+		    },
+			{
+			    data: [
+				    {
+					    name: '上海市著名商标新认定',
+                        textStyle: { color:"#5793f3" }
+				    },
+				    {
+				 	    name: '上海市著名商标总数',
+                        textStyle: { color:"#5793f3" }
+				    },
+					{
+					    name: '全国名牌产品项',
+                        textStyle: { color:"#5793f3" }
+				    },
+			    ],
+		    },
+		],
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+		    data: xAxis_5_4
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '数目',
+                position: 'left',
+                axisLabel: {
+                    formatter: '{value} 个'
+                }
+            }
+		],
+		series: [
+			{
+				name: '上海财富世界五百强',
+			    data: [2, 4, 4, 5, 6, 8, 8, 8, 8, 8],
+			    type: 'line'
+		    },
+			{
+				name: '全国财富世界五百强',
+			    data: [29, 37, 46, 61, 73, 89, 96, 98, 103, 115],
+			    type: 'line'
+		    },
+			{
+				name: '上海名牌产品项',
+			    //data: [49, 46, 44, 45, 45, 35, 35, 39, 37],
+				data: yAxis_5_4c,
+			    type: 'line'
+		    },
+			{
+				name: '全国名牌产品项',
+			    //data: [569, 666, 749, 703, 885, 911, 908, 883, 808, 735],
+				data: yAxis_5_4b,
+			    type: 'line'
+		    },
+			{
+				name: '上海市著名商标新认定',
+			    data: [198, 116, 79, 118, 133, 158, 164, 79, 78],
+			    type: 'line'
+		    },
+			{
+				name: '上海市著名商标总数',
+			    data: [324, 285, 256, 377, 405, 379, 497, 426, 409],
+			    type: 'line'
+		    },
+		]
+	};
+	if (option_5_4 && typeof option_5_4 === 'object') {
+		myChart_5_4.setOption(option_5_4);
+		console.log(data_5_4)
+	}
+</script>
+
+<!--配置页面 5-5 的Echart图-->
+<script>
+	var dom_5_5 = document.getElementById("container_3_1");
+	var myChart_5_5 = echarts.init(dom_5_5);
+	var data_5_5 = alldata["2008-2017年地方标准立项和当年年底现行有效总数"]
+    var xAxis_5_5 = []
+	var yAxis_5_5a = []
+	var yAxis_5_5b = []
+    for(var i = 1; i < data_5_5.length; ++i) {
+		xAxis_5_5.push(data_5_5[i][0])
+		yAxis_5_5a.push(data_5_5[i][1])
+		yAxis_5_5b.push(data_5_5[i][2])
+	}
+	var option_5_5 = {
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		legend: {
+			data: [
+				{
+					name: '当年地方立项标准数',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '当年年底现行有效地方标准数',
+                    textStyle: { color:"#5793f3" }
+				},
+			],
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+		    data: xAxis_5_5
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '数目',
+                position: 'left',
+                axisLabel: {
+                    formatter: '{value} 个'
+                }
+            }
+		],
+		series: [
+			{
+				name: '当年地方立项标准数',
+			    //data: [74, 89, 164, 111, 105, 70, 108, 71, 147],
+				data: yAxis_5_5a,
+			    type: 'bar'
+		    },
+			{
+				name: '当年年底现行有效地方标准数',
+			    //data: [294, 400, 457, 573, 649, 809, 917, 988, 990],
+				data: yAxis_5_5b,
+			    type: 'bar'
+		    },
+
+		]
+	};
+	if (option_5_5 && typeof option_5_5 === 'object') {
+		myChart_5_5.setOption(option_5_5);
+		console.log(data_5_5)
+	}
+</script>
+
+<!--配置页面 5-6 的Echart图-->
+<script>
+    var dom_5_6 = document.getElementById("container_3_2");
+	var myChart_5_6 = echarts.init(dom_5_6);
+	var option_5_6 = {
+		title: [
+			{
+				subtext: '2011',
+				left: '20%',
+				top: '30%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2012',
+				left: '40%',
+				top: '30%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2013',
+				left: '60%',
+				top: '30%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2014',
+				left: '80%',
+				top: '30%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2015',
+				left: '30%',
+				top: '70%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2016',
+				left: '50%',
+				top: '70%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			},
+			{
+				subtext: '2017',
+				left: '70%',
+				top: '70%',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			}
+		],
+        legend: {
+			data: [
+				{
+					name: 'A级',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: 'B级',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: 'C级',
+                    textStyle: { color:"#5793f3" }
+				}
+			],
+		},
+		tooltip: {
+            trigger: 'item',
+			formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+		toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        series: [
+			{
+                type: 'pie',
+				name: '2011',
+                radius: 40,
+                center: ['20%', '30%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3",
+                },
+				data: [
+					{value: 5026, name: 'A级'},
+					{value: 39476, name: 'B级'},
+					{value: 5156, name: 'C级'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2012',
+                radius: 40,
+                center: ['40%', '30%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 18255, name: 'A级'},
+					{value: 27022, name: 'B级'},
+					{value: 4855, name: 'C级'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2013',
+                radius: 40,
+                center: ['60%', '30%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 14715, name: 'A级'},
+					{value: 28059, name: 'B级'},
+					{value: 2925, name: 'C级'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2014',
+                radius: 40,
+                center: ['80%', '30%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 14089, name: 'A级'},
+					{value: 30703, name: 'B级'},
+					{value: 2132, name: 'C级'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2015',
+                radius: 40,
+                center: ['30%', '70%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 14595, name: 'A级'},
+					{value: 32836, name: 'B级'},
+					{value: 1758, name: 'C级'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2016',
+                radius: 40,
+                center: ['50%', '70%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 18846, name: 'A级'},
+					{value: 37352, name: 'B级'},
+					{value: 1460, name: 'C级'},
+				]
+            },
+			{
+                type: 'pie',
+				name: '2017',
+                radius: 40,
+                center: ['70%', '70%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3"
+                },
+				data: [
+					{value: 24613, name: 'A级'},
+					{value: 42788, name: 'B级'},
+					{value: 2179, name: 'C级'},
+				]
+            }
+		]
+    };
+	if (option_5_6 && typeof option_5_6 === 'object') {
+		myChart_5_6.setOption(option_5_6);
+		console.log(data_5_6)
+	}
+</script>
+
