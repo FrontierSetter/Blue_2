@@ -25,7 +25,7 @@
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
 
-		<script src="json/data.json"></script>
+		<!-- <script src="json/data.json"></script> -->
 	</head>
 	
 	<body>
@@ -37,7 +37,7 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2008-2017年上海市在用特种设备情况<i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
+							<div class="title">2008-2017年上海市在用特种设备情况<i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
 							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2008-2017年上海市食品安全风险监测总体合格率</div>
+							<div class="title">2008-2017年上海市食品安全风险监测总体合格率<i class="edit exchange icon" onclick="change_option_2_5()""></i></div>
 							<div id="container_2_5" style="height: 90%"></div>
 						</div>
 					</div>
@@ -130,6 +130,16 @@
 	</body>
 </html>
 
+<script>
+    var data_1 = {};
+
+    function demo(res){
+        data_1 = res;
+		console.log(data_1);
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
 <!--* 图 2_1 -->
 <script>
 
@@ -137,7 +147,8 @@
 	var myChart_2_1 = echarts.init(dom_2_1);
 	var app_2_1 = {};
 
-	var option_2_1 = {
+	// 柱状图
+	var option_2_1_1 = {
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -149,7 +160,11 @@
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			min: 0,
+			max: function (value) {
+				return value.max + 20;
+			},
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -161,8 +176,36 @@
 		}]
 	};
 
-	if (option_2_1 && typeof option_2_1 === 'object') {
-		myChart_2_1.setOption(option_2_1);
+	// 折线图
+	var option_2_1_2 = {
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min - 20;
+			},
+			max: function (value) {
+				return value.max + 20;
+			},
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	if (option_2_1_1 && typeof option_2_1_1 === 'object') {
+		myChart_2_1.setOption(option_2_1_1);
 	}
 
 	console.log(data_1["2008-2017年上海市在用特种设备情况"])
@@ -176,11 +219,26 @@
 		Y_2_1.push(data_2_1[i][1]);
 	}
 
-	console.log(option_2_1)
+	console.log(option_2_1_1)
 
-	option_2_1['series'][0]['data'] = Y_2_1;
-	option_2_1['xAxis']['data'] = X_2_1;
-	myChart_2_1.setOption(option_2_1);
+	option_2_1_1['series'][0]['data'] = Y_2_1;
+	option_2_1_1['xAxis']['data'] = X_2_1;
+	myChart_2_1.setOption(option_2_1_1);
+
+	option_2_1_2['series'][0]['data'] = Y_2_1;
+	option_2_1_2['xAxis']['data'] = X_2_1;
+
+	var arr_option_2_1 = [option_2_1_1, option_2_1_2];
+	var cur_option_2_1 = 0;
+
+	// console.log('arr_option_2_1')
+	// console.log(arr_option_2_1)
+
+	function change_option_2_1(){
+		console.log('exchange');
+		cur_option_2_1 = (cur_option_2_1+1)%arr_option_2_1.length;
+		myChart_2_1.setOption(arr_option_2_1[cur_option_2_1]);
+	}
 
 
 
@@ -457,7 +515,8 @@
 	var myChart_2_5 = echarts.init(dom_2_5);
 	var app_2_5 = {};
 
-	var option_2_5 = {
+	// 柱状图 
+	var option_2_5_1 = {
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -469,7 +528,9 @@
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			min: 0,
+			max: 1,
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -481,10 +542,36 @@
 		}]
 	};
 
-	if (option_2_5 && typeof option_2_5 === 'object') {
-		myChart_2_5.setOption(option_2_5);
+	// 初始化
+	if (option_2_5_1 && typeof option_2_5_1 === 'object') {
+		myChart_2_5.setOption(option_2_5_1);
 	}
 
+	// 折线图
+	var option_2_5_2 = {
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: 0.9,
+			max:1,
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	// 获取数据
 	console.log(data_1["2008-2017年上海市食品安全风险监测总体合格率"])
 	var data_2_5 = data_1["2008-2017年上海市食品安全风险监测总体合格率"];
 
@@ -496,11 +583,23 @@
 		Y_2_5.push(data_2_5[1][i]);
 	}
 
-	console.log(option_2_5)
+	console.log(option_2_5_1)
 
-	option_2_5['series'][0]['data'] = Y_2_5;
-	option_2_5['xAxis']['data'] = X_2_5;
-	myChart_2_5.setOption(option_2_5);
+	option_2_5_1['series'][0]['data'] = Y_2_5;
+	option_2_5_1['xAxis']['data'] = X_2_5;
+	myChart_2_5.setOption(option_2_5_1);
+
+	option_2_5_2['series'][0]['data'] = Y_2_5;
+	option_2_5_2['xAxis']['data'] = X_2_5;
+
+	var arr_option_2_5 = [option_2_5_1, option_2_5_2];
+	var cur_option_2_5 = 0;
+
+	function change_option_2_5(){
+		console.log('exchange');
+		cur_option_2_5 = (cur_option_2_5+1)%arr_option_2_5.length;
+		myChart_2_5.setOption(arr_option_2_5[cur_option_2_5]);
+	}
 
 </script>
 
