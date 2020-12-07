@@ -110,6 +110,15 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 }
+.xpanel .subtitle {
+	padding:6px;
+	height:30px;
+	line-height:40px;
+	font-size:18px;
+	font-weight:bold;
+	color:#fff;
+	text-align: center;
+}
 .xpanel .title-long {background-image:url("../img/title-bg-long.png");}
 /* PC */
 @media (max-width:1919px) {
