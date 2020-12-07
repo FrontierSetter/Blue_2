@@ -252,9 +252,27 @@
         xAxis_1_2.push(data_1_2[i][0])
         yAxis_1_2a.push(data_1_2[i][1])
         yAxis_1_2b.push(data_1_2[i][2])
+        yAxis_1_2c.push(data_1_2[i][3])
     }
 
+    var labelOption = {
+        show: true,
+        position: 'insideBottom',
+        distance: 15,
+        align: 'left',
+        verticalAlign: 'middle',
+        rotate: 90,
+        formatter: '{c}  {name|{a}}',
+        fontSize: 16,
+        rich: {
+            name: {
+                textBorderColor: '#fff'
+            }
+        }
+    };
+
     var option_1_2 = {
+        color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
         title: {
             text: '2008年-2017年上海市采用国际标准数量与制修订地方标准数',
             textStyle:{
@@ -262,59 +280,58 @@
             }
         },
         tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
         },
         legend: {
-            data: ['国际标准数', '地方标准数', '企业标准数'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
+            data: ['国际标准数', '地方标准数', '企业标准数']
         },
         toolbox: {
             show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
+                mark: {show: true},
                 dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
         },
-        calculable: true,
         xAxis: [
             {
                 type: 'category',
-                //data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                axisTick: {show: false},
                 data: xAxis_1_2
             }
         ],
         yAxis: [
             {
-                type: 'value',
-                name: '案件数',
-                max: 4000,
-                min: 0,
-                boundaryGap: [0.2, 0.2]
-            },
-            {
-                type: 'value',
-                name: '金额/万',
-                max: 8000,
-                min: 0,
-                boundaryGap: [0.2, 0.2]
+                type: 'value'
             }
         ],
         series: [
             {
-                name: '立案案件数',
+                name: '国际标准数',
                 type: 'bar',
-                data: yAxis_1_2a,
-                yAxisIndex: 0
+                barGap: 0,
+                //label: labelOption,
+                data: yAxis_1_2a
             },
             {
-                name: '罚没款/万',
-                type: 'line',
-                data: yAxis_1_2b,
-                yAxisIndex: 1,
+                name: '地方标准数',
+                type: 'bar',
+                //label: labelOption,
+                data: yAxis_1_2b
+            },
+            {
+                name: '企业标准数',
+                type: 'bar',
+                //label: labelOption,
+                data: yAxis_1_2c
             }
         ]
     };
