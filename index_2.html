@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
 		<title>大屏数据可视化 - 模板</title>
 		<link rel="stylesheet" href="css/app.css" />
 
@@ -32,18 +33,19 @@
 		<div class="header">
 			<h1 class="header-title">质量大数据平台</h1>
 		</div>
+		
 		<div class="wrapper">
 			<div class="content">
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2008-2017年上海市在用特种设备情况<i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
+							<div class="title">2008-2017年上海市在用特种设备情况<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
 							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2016-2017年上海市药品监督抽查情况表</div>
+							<div class="title">2016-2017年上海市药品监督抽查情况表<!-- a href="./index_2.html">质量大数据平台</a--></div>
 							<div id="container_2_2" style="height: 90%"></div>
 						</div>
 					</div>
@@ -65,7 +67,7 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2008-2017年上海市食品安全风险监测总体合格率<i class="edit exchange icon" onclick="change_option_2_5()""></i></div>
+							<div class="title">2008-2017年上海市食品安全风险监测总体合格率<!--i class="edit exchange icon" onclick="change_option_2_5()""></i--></div>
 							<div id="container_2_5" style="height: 90%"></div>
 						</div>
 					</div>
@@ -155,6 +157,15 @@
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 			}
 		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
 		xAxis: {
 			type: 'category',
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -176,8 +187,17 @@
 		}]
 	};
 
-	// 折线图
+	// // 折线图
 	var option_2_1_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
 		xAxis: {
 			type: 'category',
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -204,9 +224,6 @@
 		}]
 	};
 
-	if (option_2_1_1 && typeof option_2_1_1 === 'object') {
-		myChart_2_1.setOption(option_2_1_1);
-	}
 
 	console.log(data_1["2008-2017年上海市在用特种设备情况"])
 	var data_2_1 = data_1["2008-2017年上海市在用特种设备情况"];
@@ -228,17 +245,28 @@
 	option_2_1_2['series'][0]['data'] = Y_2_1;
 	option_2_1_2['xAxis']['data'] = X_2_1;
 
-	var arr_option_2_1 = [option_2_1_1, option_2_1_2];
-	var cur_option_2_1 = 0;
+	// var arr_option_2_1 = [option_2_1_1, option_2_1_2];
+	// var cur_option_2_1 = 0;
 
 	// console.log('arr_option_2_1')
 	// console.log(arr_option_2_1)
 
-	function change_option_2_1(){
-		console.log('exchange');
-		cur_option_2_1 = (cur_option_2_1+1)%arr_option_2_1.length;
-		myChart_2_1.setOption(arr_option_2_1[cur_option_2_1]);
-	}
+	// function change_option_2_1(){
+	// 	console.log('exchange');
+	// 	cur_option_2_1 = (cur_option_2_1+1)%arr_option_2_1.length;
+	// 	myChart_2_1.setOption(arr_option_2_1[cur_option_2_1]);
+	// }
+
+	myChart_2_1.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_1_1;
+		}
+		myChart_2_1.setOption(o.newOption, true);
+	});
 
 
 
@@ -251,56 +279,117 @@
 	var myChart_2_2 = echarts.init(dom_2_2);
 	var app_2_2 = {};
 
-	var option_2_2 = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-		data: ['不合格数', '合格数'],
-		textStyle: { //图例文字的样式
-			color: '#fff',
-			fontSize: 16
+	var option_2_2_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
 		},
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            type: 'category',
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value'
-        }
-    ],
-    series: [
-        {
-            name: '不合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name: '合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [220, 182, 191, 234, 290, 330, 310]
-		}
-	]
-};
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: '不合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
 
-	if (option_2_2 && typeof option_2_2 === 'object') {
-		myChart_2_2.setOption(option_2_2);
-	}
+	var option_2_2_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		tooltip: {},
+		dataset: {
+			source: [
+				['product', '2016', '2017'],
+				['不合格数', 230, 193],
+				['合格数', 11229-230, 11950-193],
+			]
+		},
+		series: [{
+			type: 'pie',
+			radius: 60,
+			name: '2016',
+			center: ['25%', '50%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2016'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: 60,
+			name: '2017',
+			center: ['75%', '50%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2017'
+			}
+		}]
+	};
+
 
 	console.log(data_1["2016-2017年上海市药品监督抽查情况表"])
 	var data_2_2 = data_1["2016-2017年上海市药品监督抽查情况表"];
@@ -321,12 +410,39 @@
 		Y_2_2_3.push(data_2_2[i][1]-data_2_2[i][2]);
 	}
 
-	console.log(option_2_2)
+	console.log(option_2_2_1)
 
-	option_2_2['series'][0]['data'] = Y_2_2_2;
-	option_2_2['series'][1]['data'] = Y_2_2_3;
-	option_2_2['xAxis'][0]['data'] = X_2_2;
-	myChart_2_2.setOption(option_2_2);
+	option_2_2_1['series'][0]['data'] = Y_2_2_2;
+	option_2_2_1['series'][1]['data'] = Y_2_2_3;
+	option_2_2_1['xAxis'][0]['data'] = X_2_2;
+	// myChart_2_2.setOption(option_2_2_1);
+
+	// option_2_2_2['dataset']['source'] = [
+	// 	['product'].concat(X_2_2);
+	// 	['不合格数'].concat(Y_2_2_2);
+	// 	['合格数'].concat(Y_2_2_3);
+	// ];
+	// option_2_2_2['dataset']['source'].push(['product'].concat(X_2_2));
+	myChart_2_2.setOption(option_2_2_2);
+
+	myChart_2_2.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			// o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_2_1;
+		}
+		myChart_2_2.setOption(o.newOption, true);
+	});
+
+	myChart_2_2.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_2_2_2;
+		myChart_2_2.setOption(o.newOption, true);
+	});
+
 
 
 
@@ -339,56 +455,143 @@
 	var myChart_2_3 = echarts.init(dom_2_3);
 	var app_2_3 = {};
 
-	var option_2_3 = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-		data: ['不合格数', '合格数'],
-		textStyle: { //图例文字的样式
-			color: '#fff',
-			fontSize: 16
+	var option_2_3_1 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
 		},
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            type: 'category',
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value'
-        }
-    ],
-    series: [
-        {
-            name: '不合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name: '合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [220, 182, 191, 234, 290, 330, 310]
-		}
-	]
-};
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: '不合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
 
-	if (option_2_3 && typeof option_2_3 === 'object') {
-		myChart_2_3.setOption(option_2_3);
-	}
+	var option_2_3_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		tooltip: {},
+		dataset: {
+			source: [
+				['product', '2014', '2015', '2016', '2017'],
+				['不合格数', 10, 9, 14, 50],
+				['合格数', 1559-10, 2486-29, 2204-14, 2636-50],
+			]
+		},
+		series: [{
+			type: 'pie',
+			radius: 60,
+			name: '2014',
+			center: ['25%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2014'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: 60,
+			name: '2015',
+			center: ['75%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2015'
+			}
+		},{
+			type: 'pie',
+			radius: 60,
+			name: '2016',
+			center: ['25%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2016'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: 60,
+			name: '2017',
+			center: ['75%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2017'
+			}
+		}]
+	};
 
 	console.log(data_1["2014-2017年上海市化妆品监督抽查情况表"])
 	var data_2_3 = data_1["2014-2017年上海市化妆品监督抽查情况表"];
@@ -409,12 +612,31 @@
 		Y_2_3_3.push(data_2_3[i][1]-data_2_3[i][2]);
 	}
 
-	console.log(option_2_3)
+	console.log(option_2_3_1)
 
-	option_2_3['series'][0]['data'] = Y_2_3_2;
-	option_2_3['series'][1]['data'] = Y_2_3_3;
-	option_2_3['xAxis'][0]['data'] = X_2_3;
-	myChart_2_3.setOption(option_2_3);
+	option_2_3_1['series'][0]['data'] = Y_2_3_2;
+	option_2_3_1['series'][1]['data'] = Y_2_3_3;
+	option_2_3_1['xAxis'][0]['data'] = X_2_3;
+
+	myChart_2_3.setOption(option_2_3_2);
+
+	myChart_2_3.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			// o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_3_1;
+		}
+		myChart_2_3.setOption(o.newOption, true);
+	});
+
+	myChart_2_3.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_2_3_2;
+		myChart_2_3.setOption(o.newOption, true);
+	});
 
 
 
@@ -427,56 +649,130 @@
 	var myChart_2_4 = echarts.init(dom_2_4);
 	var app_2_4 = {};
 
-	var option_2_4 = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-		data: ['不合格数', '合格数'],
-		textStyle: { //图例文字的样式
-			color: '#fff',
-			fontSize: 16
+	var option_2_4_1 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
 		},
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            type: 'category',
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value'
-        }
-    ],
-    series: [
-        {
-            name: '不合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name: '合格数',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [220, 182, 191, 234, 290, 330, 310]
-		}
-	]
-};
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: '不合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '合格数',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
 
-	if (option_2_4 && typeof option_2_4 === 'object') {
-		myChart_2_4.setOption(option_2_4);
-	}
+	var option_2_4_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['不合格数', '合格数'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		tooltip: {},
+		dataset: {
+			source: [
+				['product', '2015', '2016', '2017'],
+				['不合格数', 9, 23, 39],
+				['合格数', 598-9, 520-23, 690-39],
+			]
+		},
+		series: [{
+			type: 'pie',
+			radius: 60,
+			name: '2014',
+			center: ['25%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2014'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: 60,
+			name: '2017',
+			center: ['75%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2017'
+			}
+		},{
+			type: 'pie',
+			radius: 60,
+			name: '2016',
+			center: ['25%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2016'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, ]
+	};
 
 	console.log(data_1["2015-2017年上海市医疗器械监督抽查情况表"])
 	var data_2_4 = data_1["2015-2017年上海市医疗器械监督抽查情况表"];
@@ -497,12 +793,31 @@
 		Y_2_4_3.push(data_2_4[i][1]-data_2_4[i][2]);
 	}
 
-	console.log(option_2_4)
+	console.log(option_2_4_1)
 
-	option_2_4['series'][0]['data'] = Y_2_4_2;
-	option_2_4['series'][1]['data'] = Y_2_4_3;
-	option_2_4['xAxis'][0]['data'] = X_2_4;
-	myChart_2_4.setOption(option_2_4);
+	option_2_4_1['series'][0]['data'] = Y_2_4_2;
+	option_2_4_1['series'][1]['data'] = Y_2_4_3;
+	option_2_4_1['xAxis'][0]['data'] = X_2_4;
+
+	myChart_2_4.setOption(option_2_4_2);
+
+	myChart_2_4.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			// o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_4_1;
+		}
+		myChart_2_4.setOption(o.newOption, true);
+	});
+
+	myChart_2_4.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_2_4_2;
+		myChart_2_4.setOption(o.newOption, true);
+	});
 
 
 
@@ -521,6 +836,15 @@
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
 			}
 		},
 		xAxis: {
@@ -549,6 +873,15 @@
 
 	// 折线图
 	var option_2_5_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
 		xAxis: {
 			type: 'category',
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -592,14 +925,27 @@
 	option_2_5_2['series'][0]['data'] = Y_2_5;
 	option_2_5_2['xAxis']['data'] = X_2_5;
 
-	var arr_option_2_5 = [option_2_5_1, option_2_5_2];
-	var cur_option_2_5 = 0;
+	// var arr_option_2_5 = [option_2_5_1, option_2_5_2];
+	// var cur_option_2_5 = 0;
 
-	function change_option_2_5(){
-		console.log('exchange');
-		cur_option_2_5 = (cur_option_2_5+1)%arr_option_2_5.length;
-		myChart_2_5.setOption(arr_option_2_5[cur_option_2_5]);
-	}
+	// function change_option_2_5(){
+	// 	console.log('exchange');
+	// 	cur_option_2_5 = (cur_option_2_5+1)%arr_option_2_5.length;
+	// 	myChart_2_5.setOption(arr_option_2_5[cur_option_2_5]);
+	// }
+
+	myChart_2_5.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			o.newOption = option_2_5_2;
+			// myChart_2_5.setOption(option_2_5_2, true);
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_5_1;
+			// myChart_2_5.setOption(option_2_5_1, true);
+		}
+		myChart_2_5.setOption(o.newOption, true);
+	});
 
 </script>
 
@@ -610,56 +956,117 @@
 	var myChart_2_6 = echarts.init(dom_2_6);
 	var app_2_6 = {};
 
-	var option_2_6 = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    legend: {
-		data: ['开具整改通知单', '未开具整改通知单'],
-		textStyle: { //图例文字的样式
-			color: '#fff',
-			fontSize: 16
+	var option_2_6_1 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
 		},
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            type: 'category',
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value'
-        }
-    ],
-    series: [
-        {
-            name: '开具整改通知单',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name: '未开具整改通知单',
-            type: 'bar',
-            stack: '抽查情况',
-            data: [220, 182, 191, 234, 290, 330, 310]
-		}
-	]
-};
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend: {
+			data: ['开具整改通知单', '未开具整改通知单'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: '开具整改通知单',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '未开具整改通知单',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
 
-	if (option_2_6 && typeof option_2_6 === 'object') {
-		myChart_2_6.setOption(option_2_6);
-	}
+	var option_2_6_2 = {
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['开具整改通知单', '未开具整改通知单'],
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: 16
+			},
+		},
+		tooltip: {},
+		dataset: {
+			source: [
+				['product', '2014', '2015'],
+				['开具整改通知单', 37, 142],
+				['未开具整改通知单', 83-37, 153-142],
+			]
+		},
+		series: [{
+			type: 'pie',
+			radius: 60,
+			name: '2014',
+			center: ['25%', '50%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2014'
+			}
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: 60,
+			name: '2015',
+			center: ['75%', '50%'],
+			label: {
+				formatter: '{d}%',
+				color:"#5793f3"
+			},
+			encode: {
+				itemName: 'product',
+				value: '2015'
+			}
+		}]
+	};
+
 
 	console.log(data_1["2014年和2015年勘察设计质量监管情况对比"])
 	var data_2_6 = data_1["2014年和2015年勘察设计质量监管情况对比"];
@@ -680,14 +1087,31 @@
 		Y_2_6_3.push(data_2_6[1][i]-data_2_6[2][i]);
 	}
 
-	console.log(option_2_6)
+	console.log(option_2_6_1)
 
-	option_2_6['series'][0]['data'] = Y_2_6_2;
-	option_2_6['series'][1]['data'] = Y_2_6_3;
-	option_2_6['xAxis'][0]['data'] = X_2_6;
-	myChart_2_6.setOption(option_2_6);
+	option_2_6_1['series'][0]['data'] = Y_2_6_2;
+	option_2_6_1['series'][1]['data'] = Y_2_6_3;
+	option_2_6_1['xAxis'][0]['data'] = X_2_6;
 
+	myChart_2_6.setOption(option_2_6_2);
 
+	myChart_2_6.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			// o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_2_6_1;
+		}
+		myChart_2_6.setOption(o.newOption, true);
+	});
+
+	myChart_2_6.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_2_6_2;
+		myChart_2_6.setOption(o.newOption, true);
+	});
 
 </script>
 
