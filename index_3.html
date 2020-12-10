@@ -67,7 +67,7 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2008-2017年固定式压力容器、电梯、其中机械及场（厂）内<!--i class="edit exchange icon" onclick="change_option_2_5()""></i--></div>
+							<div class="title">2008-2017年固定式压力容器、电梯、其中机械及场（厂）内<!--i class="edit exchange icon" onclick="change_option_3_5()""></i--></div>
 							<div id="container_3_5" style="height: 90%"></div>
 						</div>
 					</div>
@@ -954,390 +954,14 @@ var dom_3_1 = document.getElementById("container_3_1");
 
 </script>
 
-<!--* 图 2_3 -->
+<!--* 图 3_3 -->
 <script>
 
-	var dom_2_3 = document.getElementById("container_3_3");
-	var myChart_2_3 = echarts.init(dom_2_3);
-	var app_2_3 = {};
+	var dom_3_3 = document.getElementById("container_3_3");
+	var myChart_3_3 = echarts.init(dom_3_3);
+	var app_3_3 = {};
 
-	var option_2_3_1 = {
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		legend: {
-			data: ['不合格数', '合格数'],
-			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
-			},
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: [
-			{
-				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-			}
-		],
-		yAxis: [
-			{
-				type: 'value'
-			}
-		],
-		series: [
-			{
-				name: '不合格数',
-				type: 'bar',
-				stack: '抽查情况',
-				data: [120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name: '合格数',
-				type: 'bar',
-				stack: '抽查情况',
-				data: [220, 182, 191, 234, 290, 330, 310]
-			}
-		]
-	};
-
-	var option_2_3_2 = {
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		legend: {
-			data: ['不合格数', '合格数'],
-			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
-			},
-		},
-		tooltip: {},
-		dataset: {
-			source: [
-				['product', '2014', '2015', '2016', '2017'],
-				['不合格数', 10, 9, 14, 50],
-				['合格数', 1559-10, 2486-29, 2204-14, 2636-50],
-			]
-		},
-		series: [{
-			type: 'pie',
-			radius: 60,
-			name: '2014',
-			center: ['25%', '30%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2014'
-			}
-			// No encode specified, by default, it is '2012'.
-		}, {
-			type: 'pie',
-			radius: 60,
-			name: '2015',
-			center: ['75%', '30%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2015'
-			}
-		},{
-			type: 'pie',
-			radius: 60,
-			name: '2016',
-			center: ['25%', '75%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2016'
-			}
-			// No encode specified, by default, it is '2012'.
-		}, {
-			type: 'pie',
-			radius: 60,
-			name: '2017',
-			center: ['75%', '75%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2017'
-			}
-		}]
-	};
-
-	console.log(data_1["2014-2017年上海市化妆品监督抽查情况表"])
-	var data_2_3 = data_1["2014-2017年上海市化妆品监督抽查情况表"];
-
-	var X_2_3 = [];
-	// 总数
-	var Y_2_3_1 = [];
-	// 不合格数
-	var Y_2_3_2 = [];
-	// 合格数
-	var Y_2_3_3 = [];
-
-
-	for(var i = 1; i < data_2_3.length; ++i){
-		X_2_3.push(data_2_3[i][0]);
-		Y_2_3_1.push(data_2_3[i][1]);
-		Y_2_3_2.push(data_2_3[i][2]);
-		Y_2_3_3.push(data_2_3[i][1]-data_2_3[i][2]);
-	}
-
-	console.log(option_2_3_1)
-
-	option_2_3_1['series'][0]['data'] = Y_2_3_2;
-	option_2_3_1['series'][1]['data'] = Y_2_3_3;
-	option_2_3_1['xAxis'][0]['data'] = X_2_3;
-
-	myChart_2_3.setOption(option_2_3_2);
-
-	myChart_2_3.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_3_1;
-		}
-		myChart_2_3.setOption(o.newOption, true);
-	});
-
-	myChart_2_3.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_3_2;
-		myChart_2_3.setOption(o.newOption, true);
-	});
-
-
-
-</script>
-
-<!--* 图 2_4 -->
-<script>
-
-	var dom_2_4 = document.getElementById("container_3_4");
-	var myChart_2_4 = echarts.init(dom_2_4);
-	var app_2_4 = {};
-
-	var option_2_4_1 = {
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		legend: {
-			data: ['不合格数', '合格数'],
-			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
-			},
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: [
-			{
-				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-			}
-		],
-		yAxis: [
-			{
-				type: 'value'
-			}
-		],
-		series: [
-			{
-				name: '不合格数',
-				type: 'bar',
-				stack: '抽查情况',
-				data: [120, 132, 101, 134, 90, 230, 210]
-			},
-			{
-				name: '合格数',
-				type: 'bar',
-				stack: '抽查情况',
-				data: [220, 182, 191, 234, 290, 330, 310]
-			}
-		]
-	};
-
-	var option_2_4_2 = {
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		legend: {
-			data: ['不合格数', '合格数'],
-			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
-			},
-		},
-		tooltip: {},
-		dataset: {
-			source: [
-				['product', '2015', '2016', '2017'],
-				['不合格数', 9, 23, 39],
-				['合格数', 598-9, 520-23, 690-39],
-			]
-		},
-		series: [{
-			type: 'pie',
-			radius: 60,
-			name: '2014',
-			center: ['25%', '30%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2014'
-			}
-			// No encode specified, by default, it is '2012'.
-		}, {
-			type: 'pie',
-			radius: 60,
-			name: '2017',
-			center: ['75%', '30%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2017'
-			}
-		},{
-			type: 'pie',
-			radius: 60,
-			name: '2016',
-			center: ['25%', '75%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2016'
-			}
-			// No encode specified, by default, it is '2012'.
-		}, ]
-	};
-
-	console.log(data_1["2015-2017年上海市医疗器械监督抽查情况表"])
-	var data_2_4 = data_1["2015-2017年上海市医疗器械监督抽查情况表"];
-
-	var X_2_4 = [];
-	// 总数
-	var Y_2_4_1 = [];
-	// 不合格数
-	var Y_2_4_2 = [];
-	// 合格数
-	var Y_2_4_3 = [];
-
-
-	for(var i = 1; i < data_2_4.length; ++i){
-		X_2_4.push(data_2_4[i][0]);
-		Y_2_4_1.push(data_2_4[i][1]);
-		Y_2_4_2.push(data_2_4[i][2]);
-		Y_2_4_3.push(data_2_4[i][1]-data_2_4[i][2]);
-	}
-
-	console.log(option_2_4_1)
-
-	option_2_4_1['series'][0]['data'] = Y_2_4_2;
-	option_2_4_1['series'][1]['data'] = Y_2_4_3;
-	option_2_4_1['xAxis'][0]['data'] = X_2_4;
-
-	myChart_2_4.setOption(option_2_4_2);
-
-	myChart_2_4.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_4_1;
-		}
-		myChart_2_4.setOption(o.newOption, true);
-	});
-
-	myChart_2_4.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_4_2;
-		myChart_2_4.setOption(o.newOption, true);
-	});
-
-
-
-</script>
-
-<!--* 图 2_5 -->
-<script>
-
-	var dom_2_5 = document.getElementById("container_3_5");
-	var myChart_2_5 = echarts.init(dom_2_5);
-	var app_2_5 = {};
-
-	// 柱状图 
-	var option_2_5_1 = {
+	var option_3_3_1 = {
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -1360,7 +984,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 		yAxis: {
 			type: 'value',
 			min: 0,
-			max: 1,
+			max: function (value) {
+				return value.max + 20;
+			},
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -1372,13 +998,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 		}]
 	};
 
-	// 初始化
-	if (option_2_5_1 && typeof option_2_5_1 === 'object') {
-		myChart_2_5.setOption(option_2_5_1);
-	}
-
-	// 折线图
-	var option_2_5_2 = {
+	// // 折线图
+	var option_3_3_2 = {
 		toolbox: {
         	show: true,
 			feature: {
@@ -1394,8 +1015,12 @@ var dom_3_1 = document.getElementById("container_3_1");
 		},
 		yAxis: {
 			type: 'value',
-			min: 0.9,
-			max:1,
+			min: function (value) {
+				return value.min - 20;
+			},
+			max: function (value) {
+				return value.max + 20;
+			},
 		},
 		series: [{
 			markPoint: {
@@ -1410,67 +1035,64 @@ var dom_3_1 = document.getElementById("container_3_1");
 		}]
 	};
 
-	// 获取数据
-	console.log(data_1["2008-2017年上海市食品安全风险监测总体合格率"])
-	var data_2_5 = data_1["2008-2017年上海市食品安全风险监测总体合格率"];
 
-	var X_2_5 = [];
-	var Y_2_5 = [];
+	console.log(data_1["2008-2017年获得许可的特种设备生产单位图"])
+	var data_3_3 = data_1["2008-2017年获得许可的特种设备生产单位图"];
 
-	for(var i = 1; i < data_2_5[0].length; ++i){
-		X_2_5.push(data_2_5[0][i]);
-		Y_2_5.push(data_2_5[1][i]);
+	var X_3_3 = [];
+	var Y_3_3 = [];
+
+	for(var i = 1; i < data_3_3.length; ++i){
+		X_3_3.push(data_3_3[i][0]);
+		Y_3_3.push(data_3_3[i][1]);
 	}
 
-	console.log(option_2_5_1)
+	console.log(option_3_3_1)
 
-	option_2_5_1['series'][0]['data'] = Y_2_5;
-	option_2_5_1['xAxis']['data'] = X_2_5;
-	myChart_2_5.setOption(option_2_5_1);
+	option_3_3_1['series'][0]['data'] = Y_3_3;
+	option_3_3_1['xAxis']['data'] = X_3_3;
+	myChart_3_3.setOption(option_3_3_1);
 
-	option_2_5_2['series'][0]['data'] = Y_2_5;
-	option_2_5_2['xAxis']['data'] = X_2_5;
+	option_3_3_2['series'][0]['data'] = Y_3_3;
+	option_3_3_2['xAxis']['data'] = X_3_3;
 
-	// var arr_option_2_5 = [option_2_5_1, option_2_5_2];
-	// var cur_option_2_5 = 0;
+	// var arr_option_3_3 = [option_3_3_1, option_3_3_2];
+	// var cur_option_3_3 = 0;
 
-	// function change_option_2_5(){
+	// console.log('arr_option_3_3')
+	// console.log(arr_option_3_3)
+
+	// function change_option_3_3(){
 	// 	console.log('exchange');
-	// 	cur_option_2_5 = (cur_option_2_5+1)%arr_option_2_5.length;
-	// 	myChart_2_5.setOption(arr_option_2_5[cur_option_2_5]);
+	// 	cur_option_3_3 = (cur_option_3_3+1)%arr_option_3_3.length;
+	// 	myChart_3_3.setOption(arr_option_3_3[cur_option_3_3]);
 	// }
 
-	myChart_2_5.on('magictypechanged', function (params) {
+	myChart_3_3.on('magictypechanged', function (params) {
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
-			o.newOption = option_2_5_2;
-			// myChart_2_5.setOption(option_2_5_2, true);
+			o.newOption = option_3_3_2;
 		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_5_1;
-			// myChart_2_5.setOption(option_2_5_1, true);
+			o.newOption = option_3_3_1;
 		}
-		myChart_2_5.setOption(o.newOption, true);
+		myChart_3_3.setOption(o.newOption, true);
 	});
+
 
 </script>
 
-<!--* 图 2_6 -->
+<!--* 图 3_4 -->
 <script>
 
-	var dom_2_6 = document.getElementById("container_3_6");
-	var myChart_2_6 = echarts.init(dom_2_6);
-	var app_2_6 = {};
+var dom_3_4 = document.getElementById("container_3_4");
+	var myChart_3_4 = echarts.init(dom_3_4);
+	var app_3_4 = {};
 
-	var option_2_6_1 = {
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
+	// 事故数柱状图
+	var option_3_4_1 = {
+		title:{
+			text:'事故数',
 		},
 		tooltip: {
 			trigger: 'axis',
@@ -1478,8 +1100,347 @@ var dom_3_1 = document.getElementById("container_3_1");
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 			}
 		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			max: function (value) {
+				return value.max;
+			},
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 事故数折线图
+	var option_3_4_2 = {
+		title:{
+			text:'事故数',
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min;
+			},
+			max: function (value) {
+				return value.max;
+			},
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	// 指令书柱状图
+	var option_3_4_3 = {
+		title:{
+			text:'死亡人数',
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			max: function (value) {
+				return value.max;
+			},
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 指令书折线图
+	var option_3_4_4 = {
+		title:{
+			text:'死亡人数',
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min;
+			},
+			max: function (value) {
+				return value.max;
+			},
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	// 罚金柱状图
+	var option_3_4_5 = {
+		title:{
+			text:'万台特种设备死亡率（本市）',
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			max: 1
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 罚金折线图
+	var option_3_4_6 = {
+		title:{
+			text:'万台特种设备死亡率（本市/全国）',
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min;
+			},
+			max: function (value) {
+				return value.max;
+			},
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	console.log(data_1["2008-2017年上海市特种设备安全状况"])
+	var data_3_4 = data_1["2008-2017年上海市特种设备安全状况"];
+
+	var X_3_4 = [];
+	// 事故数
+	var Y_3_4_1 = [];
+	// 死亡人数
+	var Y_3_4_2 = [];
+	// 万台特种设备死亡率（本市
+	var Y_3_4_3 = [];
+
+	for(var i = 1; i < data_3_4.length; ++i){
+		X_3_4.push(data_3_4[i][0]);
+		Y_3_4_1.push(data_3_4[i][1]);
+		Y_3_4_2.push(data_3_4[i][2]);
+		Y_3_4_3.push(Number.parseFloat(data_3_4[i][3].split('/')[0]));
+	}
+
+	console.log(option_3_4_1)
+
+	option_3_4_1['series'][0]['data'] = Y_3_4_1;
+	option_3_4_1['xAxis']['data'] = X_3_4;
+	myChart_3_4.setOption(option_3_4_1);
+
+	option_3_4_2['series'][0]['data'] = Y_3_4_1;
+	option_3_4_2['xAxis']['data'] = X_3_4;
+
+	option_3_4_3['series'][0]['data'] = Y_3_4_2;
+	option_3_4_3['xAxis']['data'] = X_3_4;
+
+	option_3_4_4['series'][0]['data'] = Y_3_4_2;
+	option_3_4_4['xAxis']['data'] = X_3_4;
+
+	option_3_4_5['series'][0]['data'] = Y_3_4_3;
+	option_3_4_5['xAxis']['data'] = X_3_4;
+
+	option_3_4_6['series'][0]['data'] = Y_3_4_3;
+	option_3_4_6['xAxis']['data'] = X_3_4;
+
+	// var arr_option_3_4 = [option_3_4_1, option_3_4_2];
+	// var cur_option_3_4 = 0;
+
+	// console.log('arr_option_3_4')
+	// console.log(arr_option_3_4)
+
+	// function change_option_3_4(){
+	// 	console.log('exchange');
+	// 	cur_option_3_4 = (cur_option_3_4+1)%arr_option_3_4.length;
+	// 	myChart_3_4.setOption(arr_option_3_4[cur_option_3_4]);
+	// }
+
+	// 0 bar; 1 line
+	var cur_type = 0;
+	var cur_idx = 0;
+	var arr_opt = [
+		[option_3_4_1, option_3_4_2],
+		[option_3_4_3, option_3_4_4],
+		[option_3_4_5, option_3_4_6]
+	];
+
+	myChart_3_4.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			cur_type = 1;
+			o.newOption = arr_opt[cur_idx][cur_type];
+		}else if(params.currentType == 'bar'){
+			cur_type = 0;
+			o.newOption = arr_opt[cur_idx][cur_type];
+		}
+		myChart_3_4.setOption(o.newOption, true);
+	});
+
+	myChart_3_4.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		cur_idx = (cur_idx+1)%arr_opt.length
+		o.newOption = arr_opt[cur_idx][cur_type];
+		myChart_3_4.setOption(o.newOption, true);
+	});
+
+
+
+</script>
+
+<!--* 图 3_5 -->
+<script>
+
+	var dom_3_5 = document.getElementById("container_3_5");
+	var myChart_3_5 = echarts.init(dom_3_5);
+	var app_3_5 = {};
+
+	// 柱状图 
+	var option_3_5_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
 		legend: {
-			data: ['开具整改通知单', '未开具整改通知单'],
+			data: ['固定式压力容器', '电梯', '起重机', '场(厂)内机动车辆'],
 			textStyle: { //图例文字的样式
 				color: '#fff',
 				fontSize: 16
@@ -1499,125 +1460,225 @@ var dom_3_1 = document.getElementById("container_3_1");
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				// max: 365,
 			}
 		],
 		series: [
 			{
-				name: '开具整改通知单',
+				name: '固定式压力容器',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
-				name: '未开具整改通知单',
+				name: '电梯',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '起重机',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '场(厂)内机动车辆',
+				type: 'bar',
+				// stack: '抽查情况',
 				data: [220, 182, 191, 234, 290, 330, 310]
 			}
 		]
 	};
 
-	var option_2_6_2 = {
+
+	console.log(data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"])
+	var data_3_5 = data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"];
+
+	var X_3_5 = [];
+	// 固定式压力容器
+	var Y_3_5_1 = [];
+	// 电梯
+	var Y_3_5_2 = [];
+	// 起重机
+	var Y_3_5_3 = [];
+	// 场(厂)内机动车辆
+	var Y_3_5_4 = [];
+
+
+	for(var i = 1; i < data_3_5.length; ++i){
+		X_3_5.push(data_3_5[i][0]);
+		Y_3_5_1.push(data_3_5[i][1]);
+		Y_3_5_2.push(data_3_5[i][2]);
+		Y_3_5_3.push(data_3_5[i][3]);
+		Y_3_5_4.push(data_3_5[i][4]);
+	}
+
+	console.log(option_3_5_1)
+
+	option_3_5_1['series'][0]['data'] = Y_3_5_1;
+	option_3_5_1['series'][1]['data'] = Y_3_5_2;
+	option_3_5_1['series'][2]['data'] = Y_3_5_3;
+	option_3_5_1['series'][3]['data'] = Y_3_5_4;
+	option_3_5_1['xAxis'][0]['data'] = X_3_5;
+
+	myChart_3_5.setOption(option_3_5_1);
+
+	// myChart_3_5.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_5_1;
+	// 	}
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
+
+	// myChart_3_5.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_5_2;
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
+
+</script>
+
+<!--* 图 3_6 -->
+<script>
+
+	var dom_3_6 = document.getElementById("container_3_6");
+	var myChart_3_6 = echarts.init(dom_3_6);
+	var app_3_6 = {};
+
+	var option_3_6_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
 		toolbox: {
         	show: true,
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
 		legend: {
-			data: ['开具整改通知单', '未开具整改通知单'],
+			data: ['1-综合检验机构', '2-综合检验机构', '3-气瓶检验机构', '4-无损检测机构', '5-安全阀校验机构'],
 			textStyle: { //图例文字的样式
 				color: '#fff',
 				fontSize: 16
 			},
 		},
-		tooltip: {},
-		dataset: {
-			source: [
-				['product', '2014', '2015'],
-				['开具整改通知单', 37, 142],
-				['未开具整改通知单', 83-37, 153-142],
-			]
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
 		},
-		series: [{
-			type: 'pie',
-			radius: 60,
-			name: '2014',
-			center: ['25%', '50%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2014'
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 			}
-			// No encode specified, by default, it is '2012'.
-		}, {
-			type: 'pie',
-			radius: 60,
-			name: '2015',
-			center: ['75%', '50%'],
-			label: {
-				formatter: '{d}%',
-				color:"#5793f3"
-			},
-			encode: {
-				itemName: 'product',
-				value: '2015'
+		],
+		yAxis: [
+			{
+				type: 'value',
+				// max: 365,
 			}
-		}]
+		],
+		series: [
+			{
+				name: '1-综合检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '2-综合检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '3-气瓶检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '4-无损检测机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '5-安全阀校验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
 	};
 
 
-	console.log(data_1["2014年和2015年勘察设计质量监管情况对比"])
-	var data_2_6 = data_1["2014年和2015年勘察设计质量监管情况对比"];
+	console.log(data_1["2009-2017年检测机构分布情况"])
+	var data_3_6 = data_1["2009-2017年检测机构分布情况"];
 
-	var X_2_6 = [];
-	// 总数
-	var Y_2_6_1 = [];
-	// 开具整改通知单
-	var Y_2_6_2 = [];
-	// 未开具整改通知单
-	var Y_2_6_3 = [];
+	var X_3_6 = [];
+	// 综合检验机构
+	var Y_3_6_1 = [];
+	// 综合检验机构
+	var Y_3_6_2 = [];
+	// 气瓶检验机构
+	var Y_3_6_3 = [];
+	// 无损检测机构
+	var Y_3_6_4 = [];
+	// 安全阀校验机构
+	var Y_3_6_5 = [];
 
+	X_3_6 = data_3_6[0].slice(2);
 
-	for(var i = 1; i < data_2_6[0].length; ++i){
-		X_2_6.push(data_2_6[0][i]);
-		Y_2_6_1.push(data_2_6[1][i]);
-		Y_2_6_2.push(data_2_6[2][i]);
-		Y_2_6_3.push(data_2_6[1][i]-data_2_6[2][i]);
-	}
+	Y_3_6_1 = data_3_6[1].slice(2);
+	Y_3_6_2 = data_3_6[2].slice(2);
+	Y_3_6_3 = data_3_6[3].slice(2);
+	Y_3_6_4 = data_3_6[4].slice(2);
+	Y_3_6_5 = data_3_6[5].slice(2);
 
-	console.log(option_2_6_1)
+	console.log(option_3_6_1)
 
-	option_2_6_1['series'][0]['data'] = Y_2_6_2;
-	option_2_6_1['series'][1]['data'] = Y_2_6_3;
-	option_2_6_1['xAxis'][0]['data'] = X_2_6;
+	option_3_6_1['series'][0]['data'] = Y_3_6_1;
+	option_3_6_1['series'][1]['data'] = Y_3_6_2;
+	option_3_6_1['series'][2]['data'] = Y_3_6_3;
+	option_3_6_1['series'][3]['data'] = Y_3_6_4;
+	option_3_6_1['series'][4]['data'] = Y_3_6_5;
+	option_3_6_1['xAxis'][0]['data'] = X_3_6;
 
-	myChart_2_6.setOption(option_2_6_2);
+	myChart_3_6.setOption(option_3_6_1);
 
-	myChart_2_6.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_6_1;
-		}
-		myChart_2_6.setOption(o.newOption, true);
-	});
+	// myChart_3_6.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_6_1;
+	// 	}
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
 
-	myChart_2_6.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_6_2;
-		myChart_2_6.setOption(o.newOption, true);
-	});
+	// myChart_3_6.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_6_2;
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
 
 </script>
 
@@ -1625,9 +1686,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// window.addEventListener("resize", () => { 
 	// 	this.myChart_2_1.resize();  
 	// 	this.myChart_3_2.resize();  
-	// 	this.myChart_2_3.resize();  
+	// 	this.myChart_3_3.resize();  
 	// 	this.myChart_2_4.resize();  
-	// 	this.myChart_2_5.resize();  
-	// 	this.myChart_2_6.resize();  
+	// 	this.myChart_3_5.resize();  
+	// 	this.myChart_3_6.resize();  
 	// });
 </script>
