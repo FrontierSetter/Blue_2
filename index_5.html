@@ -28,7 +28,7 @@
 	
 	<body>
 		<div class="header">
-			<h1 class="header-title">质量大数据平台</h1>
+			<h1 class="header-title">上海市行业状况分析</h1>
 		</div>
 		<div class="wrapper">
 			<div class="content">
@@ -197,20 +197,20 @@
 <script>
 	var dom_5_2 = document.getElementById("container_1_2");
 	var myChart_5_2 = echarts.init(dom_5_2);
-	var data_5_1 = alldata["2011-2017年上海市主要餐饮服务单位变化趋势"]
+	var data_5_2 = alldata["2011-2017年上海市主要餐饮服务单位变化趋势"]
     var xAxis_5_2 = []
 	var yAxis_5_2a = []
 	var yAxis_5_2b = []
 	var yAxis_5_2c = []
 	var yAxis_5_2d = []
 	var yAxis_5_2e = []
-    for(var i = 1; i < data_5_1.length; ++i) {
-		xAxis_5_2.push(data_5_1[i][0])
-		yAxis_5_2a.push(data_5_1[i][1])
-		yAxis_5_2b.push(data_5_1[i][2])
-		yAxis_5_2c.push(data_5_1[i][3])
-		yAxis_5_2d.push(data_5_1[i][4])
-		yAxis_5_2e.push(data_5_1[i][1] + data_5_1[i][2] + data_5_1[i][3])
+    for(var i = 1; i < data_5_2.length; ++i) {
+		xAxis_5_2.push(data_5_2[i][0])
+		yAxis_5_2a.push(data_5_2[i][1])
+		yAxis_5_2b.push(data_5_2[i][2])
+		yAxis_5_2c.push(data_5_2[i][3])
+		yAxis_5_2d.push(data_5_2[i][4])
+		yAxis_5_2e.push(data_5_2[i][1] + data_5_2[i][2] + data_5_2[i][3])
 	}
 	var option_5_2 = {
 		tooltip: {
