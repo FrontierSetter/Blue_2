@@ -56,9 +56,9 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 	min-height:100%;
 	box-sizing:border-box;
 }
-.col {margin:0;height:95%;margin-top: 16px;}
+.col {margin:0;height:95%;margin-top: 27px;}
 .col-l {-webkit-flex:9;-ms-flex:2;flex:96;margin-left: -10px;padding-right:8px}
-.col-c {-webkit-flex:10;-ms-flex:2;flex:98.5;}
+.col-c {-webkit-flex:10;-ms-flex:2;flex:98;}
 .col-r {-webkit-flex:9;-ms-flex:2;flex:96;margin-right:-10px;padding-left:8px}
 
 /* PC */
@@ -102,10 +102,10 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 .xpanel-r-m {background-image:url("../img/panel-r-m.png");}
 .xpanel-r-b {background-image:url("../img/panel-r-b.png");}
 .xpanel .title {
-	padding-left:24px;
-	height:44px;
-	line-height:44px;
-	font-size:24px;
+	padding-left:45px;
+	height:66px;
+	line-height:66px;
+	font-size:36px;
 	font-weight:normal;
 	color:#fff;
 	background-image:url("../img/title-bg.png");

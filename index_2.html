@@ -28,9 +28,10 @@
 
 		<!-- <script src="json/data.json"></script> -->
 	</head>
+
 	
 	
-	<body style="zoom:150%">
+	<body style="zoom:100%">
 		<div class="header" style="padding:0px">
 			<h1 class="header-title" style="font-size:40px">质量大数据平台</h1>
 		</div>
@@ -41,13 +42,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市在用特种设备情况<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
-							<div id="container_2_1" style="height: 90%"></div>
+							<div id="container_2_1" style="height: 90%;zoom:66.6%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2016-2017年上海市药品监督抽查情况表<!-- a href="./index_2.html">质量大数据平台</a--></div>
-							<div id="container_2_2" style="height: 90%"></div>
+							<div id="container_2_2" style="height: 90%;zoom:100%""></div>
 						</div>
 					</div>
 				</div>
@@ -150,6 +151,8 @@
 	var myChart_2_1 = echarts.init(dom_2_1);
 	var app_2_1 = {};
 
+var font_test = 22;
+
 	// 柱状图
 	var option_2_1_1 = {
 		tooltip: {
@@ -169,7 +172,14 @@
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+axisLabel:{
+			textStyle: { //图例文字的样式
+				color: '#fff',
+				fontSize: font_test
+			},
+}
+
 		},
 		yAxis: {
 			type: 'value',
