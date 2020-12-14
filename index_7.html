@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="header-title">质量大数据平台</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">2008-2017年上海市名建设工程白玉兰奖获得情况</div>
+                        <!-- <h1 class="subtitle">2008-2017年上海市名建设工程白玉兰奖获得情况</h1> -->
+                        <div id="container_1_1" style="height: 90%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">2008年-2017年上海市采用国际标准数量与制修订地方标准数</div>
+                        <!-- <h1 class="subtitle">2008年-2017年上海市采用国际标准数量与制修订地方标准数</h1> -->
+                        <div id="container_1_2" style="height: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <!-- <div class="xpanel xpanel-c-t">
+                        <div class="title">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</div>
+                        <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1>
+                        <div id="container_1_3" style="height: 90%"></div>
+                    </div> -->
+                    <div class="xpanel no-bg">
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-c-b">
+                        <div class="title">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</div>
+                        <!-- <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1> -->
+                        <div id="container_1_4" style="height: 90%"></div>                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-t">
+                        <div class="title">2009-2017年生产许可证获证企业数和省 市级审查数</div>
+                        <!-- <h1 class="subtitle">2009-2017年生产许可证获证企业数和省 市级审查数</h1> -->
+                        <div id="container_1_5" style="height: 90%"></div>                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-b">
+                        <div class="title">2008-2017年《中国500最具价值品牌》上海品牌数</div>
+                        <!-- <h1 class="subtitle">2008-2017年《中国500最具价值品牌》上海品牌数</h1> -->
+                        <div id="container_1_6" style="height: 90%"></div>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popLayer"></div>
+    <div id="popBox_1_1" class="popBox">
+        <!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+			</div> -->
+        <div class="content" style="overflow: scroll; max-height: 80%;">
+            <table id="table_1_1" class="ui definition table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Arguments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>reset rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>set rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dlg_bottom">
+            <button class="ui primary button" onclick="alert('submit success!')">
+                保存
+            </button>
+            <button class="ui button" onclick="closeBoxSuffix('_1_1')">
+                关闭
+            </button>
+            <button class="ui button" onclick="addTableRow('_1_1')">
+                添加一行
+            </button>
+        </div>
+
+    </div>
+    <script>
+			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+    </script>
+</body>
+
+</html>
+
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res){
+        alldata = res;
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+
+<!--配置页面 1-1 的Echart图-->
+<script>
+    var dom_1_1 = document.getElementById("container_1_1");
+    var myChart_1_1 = echarts.init(dom_1_1);
+
+    var data_1_1 = alldata["2008-2017年上海市名建设工程“白玉兰”奖获得情况"]
+    
+    var xAxis_1_1 = [] 
+    var yAxis_1_1a = []
+    
+    for(var i = 1; i < data_1_1[0].length; ++i){
+        xAxis_1_1.push(data_1_1[0][i])
+        yAxis_1_1a.push(data_1_1[1][i])
+    }
+
+
+    var option_1_1 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['建设工程“白玉兰”奖数量'],
+            textStyle:{
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_1_1
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '建设工程“白玉兰”奖数量',
+                max: 250,
+                min: 150,
+                boundaryGap: [0.2, 0.2]
+            }
+        ],
+        series: [
+            {
+                name: '建设工程“白玉兰”奖数量',
+                type: 'bar',
+                data: yAxis_1_1a,
+                yAxisIndex: 0
+            }
+        ]
+    };
+
+
+
+    if (option_1_1 && typeof option_1_1 === 'object') {
+        myChart_1_1.setOption(option_1_1);
+        console.log(data_1_1)
+    }
+
+</script>
+
+
+<!--配置页面 1-2 的Echart图-->
+<script>
+    var dom_1_2 = document.getElementById("container_1_2");
+    var myChart_1_2 = echarts.init(dom_1_2);
+
+    var data_1_2 = alldata["2009-2017年获得强制性认证产品证书的企业数及发放的证书"]
+    
+    var xAxis_1_2 = [] 
+    var yAxis_1_2a = []
+    var yAxis_1_2b = []
+    
+    for(var i = 1; i < data_1_2[0].length; ++i){
+        xAxis_1_2.push(data_1_2[0][i])
+        yAxis_1_2a.push(data_1_2[1][i])
+        yAxis_1_2b.push(data_1_2[2][i])
+    }
+
+    var labelOption = {
+        show: true,
+        position: 'insideBottom',
+        distance: 15,
+        align: 'left',
+        verticalAlign: 'middle',
+        rotate: 90,
+        formatter: '{c}  {name|{a}}',
+        fontSize: 16,
+        rich: {
+            name: {
+                textBorderColor: '#fff'
+            }
+        }
+    };
+
+    var option_1_2 = {
+        //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['认证企业数', '认证证书数'],
+            textStyle:{
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: xAxis_1_2
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '认证企业数',
+                type: 'bar',
+                barGap: 0,
+                //label: labelOption,
+                data: yAxis_1_2a
+            },
+            {
+                name: '认证证书数',
+                type: 'line',
+                //label: labelOption,
+                data: yAxis_1_2b
+            }
+        ]
+    };
+
+
+
+    if (option_1_2 && typeof option_1_2 === 'object') {
+        myChart_1_2.setOption(option_1_2);
+        console.log(data_1_2)
+    }
+
+</script> 
+
+
+<!--配置页面 1-3 的Echart图-->
+<script>
+    var dom_1_3 = document.getElementById("container_1_3");
+    var myChart_1_3 = echarts.init(dom_1_3);
+
+    var data_1_3 = alldata["2008-2017年上海市国家级监督抽查及市级监督抽查合格率"]
+    
+    var xAxis_1_3 = [] 
+    var yAxis_1_3a = []
+    var yAxis_1_3b = []
+    
+    for(var i = 1; i < data_1_3.length; ++i){
+        xAxis_1_3.push(data_1_3[i][0])
+        yAxis_1_3a.push(data_1_3[i][1])
+        yAxis_1_3b.push(data_1_3[i][2])
+    }
+
+
+    var option_1_3 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['国抽', '市抽'],
+            textStyle:{
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_1_3
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '合格率',
+            }
+        ],
+        series: [
+            {
+                name: '国抽',
+                type: 'line',
+                data: yAxis_1_3a,
+            },
+            {
+                name: '市抽',
+                type: 'line',
+                data: yAxis_1_3b,
+            }
+        ]
+    };
+
+
+
+    if (option_1_3 && typeof option_1_3 === 'object') {
+        myChart_1_3.setOption(option_1_3);
+        console.log(data_1_3)
+    }
+
+</script>
+
+
+<!--配置页面 1-4 的Echart图-->
+<script>
+    var dom_1_4 = document.getElementById("container_1_4");
+    var myChart_1_4 = echarts.init(dom_1_4);
+
+    var data_1_4 = alldata["社区卫生服务历年公众满意度结果"]
+    
+    var xAxis_1_4 = [] 
+    var yAxis_1_4a = []
+    
+    for(var i = 1; i < data_1_4.length; ++i){
+        xAxis_1_4.push(data_1_4[i][0])
+        yAxis_1_4a.push(data_1_4[i][1])
+    }
+
+
+    var option_1_4 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['社区卫生服务公众满意度'],
+            textStyle:{
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_1_4
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '合格率',
+            }
+        ],
+        series: [
+            {
+                name: '社区卫生服务公众满意度',
+                type: 'line',
+                data: yAxis_1_4a,
+            }
+        ]
+    };
+
+
+
+    if (option_1_4 && typeof option_1_4 === 'object') {
+        myChart_1_4.setOption(option_1_4);
+        console.log(data_1_4)
+    }
+
+</script>
+
+
+<!--配置页面 1-5 的Echart图-->
+<script>
+    var dom_1_5 = document.getElementById("container_1_5");
+    var myChart_1_5 = echarts.init(dom_1_5);
+
+    var data_1_5 = alldata["2009-2017年生产许可证获证企业数和省 市级审查数"]
+    
+    var xAxis_1_5 = [] 
+    var yAxis_1_5a = []
+    var yAxis_1_5b = []
+    
+    for(var i = 1; i < data_1_5.length; ++i){
+        xAxis_1_5.push(data_1_5[i][0])
+        yAxis_1_5a.push(data_1_5[i][1])
+        yAxis_1_5b.push(data_1_5[i][2])
+    }
+
+
+    var option_1_5 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['发证总数','省/市级审查数'],
+            textStyle:{
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: xAxis_1_5
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+            }
+        ],
+        series: [
+        {
+                name: '发证总数',
+                type: 'line',
+                data: yAxis_1_5a,
+            },
+            {
+                name: '省/市级审查数',
+                type: 'line',
+                data: yAxis_1_5b,
+            }
+        ]
+    };
+
+    if (option_1_5 && typeof option_1_5 === 'object') {
+        myChart_1_5.setOption(option_1_5);
+        console.log(data_1_5)
+    }
+
+</script>
+
+
+<!--配置页面 1-5 的Echart图-->
+<script>
+    var dom_1_6 = document.getElementById("container_1_6");
+    var myChart_1_6 = echarts.init(dom_1_6);
+
+    var data_1_6 = alldata["2008-2017年《中国500最具价值品牌》上海品牌数"]
+    
+    var xAxis_1_6 = [] 
+    var yAxis_1_6a = []
+
+    for(var i = 1; i < data_1_6.length; ++i){
+        xAxis_1_6.push(data_1_6[i][0])
+        yAxis_1_6a.push(data_1_6[i][1])
+    }
+
+
+    var option_1_6 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: xAxis_1_6
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+        {
+                type: 'bar',
+                data: yAxis_1_6a,
+            }
+        ]
+    };
+
+    if (option_1_6 && typeof option_1_6 === 'object') {
+        myChart_1_6.setOption(option_1_6);
+        console.log(data_1_6)
+    }
+
+</script>
