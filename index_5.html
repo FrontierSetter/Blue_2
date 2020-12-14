@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
 		<title>大屏数据可视化 - 模板</title>
 		<link rel="stylesheet" href="css/app.css" />
 
@@ -26,9 +27,12 @@
 
 	</head>
 	
-	<body>
-		<div class="header">
-			<h1 class="header-title">上海市行业状况分析</h1>
+	<body style="zoom:100%">
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">质量大数据平台</h1>
+			<!--
+			<h1 class="header-title" style="font-size:40px">上海市行业状况分析</h1>
+			-->
 		</div>
 		<div class="wrapper">
 			<div class="content">
@@ -36,13 +40,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市服务名牌数量变化图</div>
-							<div id="container_1_1" style="height: 100%"></div>
+							<div id="container_1_1" style="height: 90%; zoom: 100%"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2011-2017年上海市主要餐饮服务单位变化趋势</div>
-							<div id="container_1_2" style="height: 100%"></div>
+							<div id="container_1_2" style="height: 90%; zoom: 100%"></div>
 						</div>
 					</div>
 				</div>
@@ -50,13 +54,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
 							<div class="title title-long">2009-2017年上海市服务业标准化示范点数目(累计数)</div>
-							<div id="container_2_1" style="height: 100%"></div>
+							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
 							<div class="title title-long">2008-2017年上海市名牌及著名商标情况</div>
-							<div id="container_2_2" style="height: 100%"></div>
+							<div id="container_2_2" style="height: 90%"></div>
 						</div>
 					</div>
 				</div>
@@ -64,13 +68,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
 							<div class="title">2008-2017年地方标准立项和当年年底现行有效总数</div>
-							<div id="container_3_1" style="height: 100%"></div>
+							<div id="container_3_1" style="height: 90%"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
 							<div class="title">2011-2017年上海市餐饮服务单位量化监督动态等级评定情况</div>
-							<div id="container_3_2" style="height: 100%"></div>
+							<div id="container_3_2" style="height: 90%;zoom: 100%"></div>
 						</div>
 					</div>
 				</div>
@@ -273,9 +277,10 @@
 			    type: 'bar',
 				stack: '总量',
 				label: {
-                    show: true,
+                    show: false,
                     position: 'inside',
-					textStyle: { color:"#5793f3" }
+					textStyle: { color:"#5793f3" },
+					fontSize: 20,
                 }
 		    },
 			{
@@ -285,9 +290,10 @@
 			    type: 'bar',
 				stack: '总量',
 				label: {
-                    show: true,
+                    show: false,
                     position: 'inside',
-					textStyle: { color:"#5793f3" }
+					textStyle: { color:"#5793f3" },
+					fontSize: 20,
                 }
 		    },
 		    {
@@ -297,9 +303,10 @@
 			    type: 'bar',
 				stack: '总量',
 				label: {
-                    show: true,
+                    show: false,
                     position: 'inside',
-					textStyle: { color:"#5793f3" }
+					textStyle: { color:"#5793f3" },
+					fontSize: 20,
                 }
 		    },
 			{
@@ -307,9 +314,10 @@
 				data: yAxis_5_2e,
 				type: 'line',
 				label: {
-                    show: true,
+                    show: false,
                     position: 'inside',
-					textStyle: { color:"#d14a61" }
+					textStyle: { color:"#d14a61" },
+					fontSize: 20,
                 }
 		    },
 		]
@@ -607,6 +615,87 @@
 <script>
     var dom_5_6 = document.getElementById("container_3_2");
 	var myChart_5_6 = echarts.init(dom_5_6);
+	var data_5_6 = alldata["2011-2017年上海市餐饮服务单位量化监督动态等级评定情况"]
+    var xAxis_5_6 = [2011, 2012, 2013, 2014, 2015, 2016, 2017]
+	var yAxis_5_6a = []
+	var yAxis_5_6b = []
+	var yAxis_5_6c = []
+    for(var i = 1; i < data_5_6[1].length; i+=2) {
+		yAxis_5_6a.push(data_5_6[1][i])
+		yAxis_5_6b.push(data_5_6[2][i])
+		yAxis_5_6c.push(data_5_6[3][i])
+	}
+
+    var option_5_6_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: [
+				{
+					name: 'A级',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: 'B级',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: 'C级',
+                    textStyle: { color:"#5793f3" }
+				},
+			],
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+		    data: xAxis_5_6,
+		},
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: 'A级',
+				type: 'bar',
+				stack: '合计',
+				data: yAxis_5_6a
+			},
+			{
+				name: 'B级',
+				type: 'bar',
+				stack: '合计',
+				data: yAxis_5_6b
+			},
+			{
+				name: 'C级',
+				type: 'bar',
+				stack: '合计',
+				data: yAxis_5_6c
+			},
+		]
+	};
+
 	var option_5_6 = {
 		title: [
 			{
@@ -710,7 +799,8 @@
 		toolbox: {
             show: true,
             feature: {
-                dataView: {show: true, readOnly: false},
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -719,106 +809,106 @@
 			{
                 type: 'pie',
 				name: '2011',
-                radius: 40,
+                radius: 70,
                 center: ['20%', '30%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3",
                 },
 				data: [
-					{value: 5026, name: 'A级'},
-					{value: 39476, name: 'B级'},
-					{value: 5156, name: 'C级'},
+					{value: yAxis_5_6a[0], name: 'A级'},
+					{value: yAxis_5_6b[0], name: 'B级'},
+					{value: yAxis_5_6c[0], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2012',
-                radius: 40,
+                radius: 70,
                 center: ['40%', '30%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 18255, name: 'A级'},
-					{value: 27022, name: 'B级'},
-					{value: 4855, name: 'C级'},
+				    {value: yAxis_5_6a[1], name: 'A级'},
+					{value: yAxis_5_6b[1], name: 'B级'},
+					{value: yAxis_5_6c[1], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2013',
-                radius: 40,
+                radius: 70,
                 center: ['60%', '30%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 14715, name: 'A级'},
-					{value: 28059, name: 'B级'},
-					{value: 2925, name: 'C级'},
+				    {value: yAxis_5_6a[2], name: 'A级'},
+					{value: yAxis_5_6b[2], name: 'B级'},
+					{value: yAxis_5_6c[2], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2014',
-                radius: 40,
+                radius: 70,
                 center: ['80%', '30%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 14089, name: 'A级'},
-					{value: 30703, name: 'B级'},
-					{value: 2132, name: 'C级'},
+				    {value: yAxis_5_6a[3], name: 'A级'},
+					{value: yAxis_5_6b[3], name: 'B级'},
+					{value: yAxis_5_6c[3], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2015',
-                radius: 40,
+                radius: 70,
                 center: ['30%', '70%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 14595, name: 'A级'},
-					{value: 32836, name: 'B级'},
-					{value: 1758, name: 'C级'},
+				    {value: yAxis_5_6a[4], name: 'A级'},
+					{value: yAxis_5_6b[4], name: 'B级'},
+					{value: yAxis_5_6c[4], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2016',
-                radius: 40,
+                radius: 70,
                 center: ['50%', '70%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 18846, name: 'A级'},
-					{value: 37352, name: 'B级'},
-					{value: 1460, name: 'C级'},
+				    {value: yAxis_5_6a[5], name: 'A级'},
+					{value: yAxis_5_6b[5], name: 'B级'},
+					{value: yAxis_5_6c[5], name: 'C级'},
 				]
             },
 			{
                 type: 'pie',
 				name: '2017',
-                radius: 40,
+                radius: 70,
                 center: ['70%', '70%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3"
                 },
 				data: [
-					{value: 24613, name: 'A级'},
-					{value: 42788, name: 'B级'},
-					{value: 2179, name: 'C级'},
+				    {value: yAxis_5_6a[6], name: 'A级'},
+					{value: yAxis_5_6b[6], name: 'B级'},
+					{value: yAxis_5_6c[6], name: 'C级'},
 				]
             }
 		]
@@ -827,5 +917,22 @@
 		myChart_5_6.setOption(option_5_6);
 		console.log(data_5_6)
 	}
+	myChart_5_6.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			// o.newOption = option_2_1_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_5_6_1;
+		}
+		myChart_5_6.setOption(o.newOption, true);
+	});
+
+	myChart_5_6.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_5_6;
+		myChart_5_6.setOption(o.newOption, true);
+	});
 </script>
 
