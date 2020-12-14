@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+    <!-- bootstrap -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="header-title">质量大数据平台</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">2014-2017上海质量热线举报中计量类分类</div>
+                        <div id="container_11_1" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">2013-2017上海质量热线举报信息分类</div>
+                        <div id="container_11_2" style="height: 95%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">2013-2017上海质量申诉总体情况</div>
+                        <div id="container_11_3" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-c-b">
+                        <div class="title">2013-2017上海质量违法案件查处分类</div>
+                        <div id="container_11_4" style="height: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-t">
+                        <div class="title">2012-2017上海市“三品”认证变化率趋势</div>
+                        <div id="container_11_5" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-r-b">
+                        <div class="title">2012-2017年吊销营业执照数量（单位张）</div>
+                        <div id="container_11_6" style="height: 95%"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popLayer"></div>
+    <div id="popBox_11_1" class="popBox">
+        <!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_11_1')">关闭</a>
+			</div> -->
+        <div class="content" style="overflow: scroll; max-height: 80%;">
+            <table id="table_11_1" class="ui definition table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Arguments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>reset rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>set rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dlg_bottom">
+            <button class="ui primary button" onclick="alert('submit success!')">
+                保存
+            </button>
+            <button class="ui button" onclick="closeBoxSuffix('_11_1')">
+                关闭
+            </button>
+            <button class="ui button" onclick="addTableRow('_11_1')">
+                添加一行
+            </button>
+        </div>
+
+    </div>
+    <script>
+			// initHoverWindowBySuffix('_11_1', submitHandler, function(){hideDialogID('_11_1')});
+    </script>
+</body>
+
+</html>
+
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res) {
+        alldata = res;
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+<!--全局页面字体配置 -->
+<script>
+    var fontSize_all_legend = 18
+    var fontSize_axis_label = 14
+</script>
+
+
+
+<!--配置页面 11-1 的Echart图-->
+<script>
+    var dom_11_1 = document.getElementById("container_11_1");
+    var myChart_11_1 = echarts.init(dom_11_1);
+
+    var data_11_1 = alldata["2014-2017上海质量热线举报中计量类分类（按件数）"]
+
+    var xAxis_11_1 = []
+    var yAxis_11_1a = []
+    var yAxis_11_1b = []
+    var yAxis_11_1c = []
+    var yAxis_11_1d = []
+
+    for (var i = 1; i < data_11_1.length; ++i) {
+        xAxis_11_1.push(data_11_1[i][0])
+        yAxis_11_1a.push(data_11_1[i][1])
+        yAxis_11_1b.push(data_11_1[i][2])
+        yAxis_11_1c.push(data_11_1[i][3])
+        yAxis_11_1d.push(data_11_1[i][4])
+    }
+
+
+    var option_11_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['电子秤计量不准', '加油机计量不准', '民用三表', '其他'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_11_1,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '数量（件）',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '电子秤计量不准',
+                type: 'line',
+                data: yAxis_11_1a,
+            },
+            {
+                name: '加油机计量不准',
+                type: 'line',
+                data: yAxis_11_1b,
+            },
+            {
+                name: '民用三表',
+                type: 'line',
+                data: yAxis_11_1c,
+            },
+            {
+                name: '其他',
+                type: 'line',
+                data: yAxis_11_1d,
+            }
+        ]
+    };
+
+
+
+    if (option_11_1 && typeof option_11_1 === 'object') {
+        myChart_11_1.setOption(option_11_1);
+        console.log(data_11_1)
+    }
+
+</script>
+
+
+<!--配置页面 11-2 的表格-->
+<script>
+    var dom_11_2 = document.getElementById("container_11_2");
+    var myChart_11_2 = echarts.init(dom_11_2);
+
+    var data_11_2 = alldata[" 2013-2017上海质量热线举报信息分类（件）"]
+
+    var xAxis_11_2 = []
+    var yAxis_11_2a = []
+    var yAxis_11_2b = []
+    var yAxis_11_2c = []
+    var yAxis_11_2d = []
+    var yAxis_11_2e = []
+    var yAxis_11_2f = []
+    var yAxis_11_2g = []
+    var yAxis_11_2h = []
+    var yAxis_11_2i = []
+    var yAxis_11_2j = []
+
+    for (var i = 1; i < data_11_2.length; ++i) {
+        xAxis_11_2.push(data_11_2[i][0])
+        yAxis_11_2a.push(data_11_2[i][1])
+        yAxis_11_2b.push(data_11_2[i][2])
+        yAxis_11_2c.push(data_11_2[i][3])
+        yAxis_11_2d.push(data_11_2[i][4])
+        yAxis_11_2e.push(data_11_2[i][5])
+        yAxis_11_2f.push(data_11_2[i][6])
+        yAxis_11_2g.push(data_11_2[i][7])
+        yAxis_11_2h.push(data_11_2[i][8])
+        yAxis_11_2i.push(data_11_2[i][9])
+        yAxis_11_2j.push(data_11_2[i][10])
+    }
+
+
+    var option_11_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data: ["特种设备类","轻工产品类","机电类","计量类","办公通讯类","家电类","食品相关类","建材产品类","能源类","其他"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        }, xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+
+                data: xAxis_11_2,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '特种设备类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2a
+            },
+            {
+                name: '轻工产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2b
+            },
+            {
+                name: '机电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2c
+            },
+            {
+                name: '计量类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2d
+            },
+            {
+                name: '办公通讯类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2e
+            },
+            {
+                name: '家电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2f
+            },
+            {
+                name: '食品相关类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2g
+            },
+            {
+                name: '建材产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2h
+            },
+            {
+                name: '能源类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2i
+            },
+            {
+                name: '其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_2j
+            },
+        ]
+    };
+
+
+
+    if (option_11_2 && typeof option_11_2 === 'object') {
+        myChart_11_2.setOption(option_11_2);
+        console.log(data_11_2)
+    }
+
+</script>
+
+
+<!--配置页面 11-3 的Echart图-->
+<script>
+    var dom_11_3 = document.getElementById("container_11_3");
+    var myChart_11_3 = echarts.init(dom_11_3);
+
+    var data_11_3 = alldata["013-2017上海质量申诉总体情况（按件数）"]
+
+    var xAxis_11_3 = []
+    var yAxis_11_3a = []
+    var yAxis_11_3b = []
+    var yAxis_11_3c = []
+    var yAxis_11_3d = []
+    var yAxis_11_3e = []
+    var yAxis_11_3f = []
+    var yAxis_11_3g = []
+    var yAxis_11_3h = []
+
+    for (var i = 1; i < data_11_3[0].length; ++i) {
+        xAxis_11_3.push(data_11_3[0][i])
+        yAxis_11_3a.push(data_11_3[1][i])
+        yAxis_11_3b.push(data_11_3[2][i])
+        yAxis_11_3c.push(data_11_3[3][i])
+        yAxis_11_3d.push(data_11_3[4][i])
+        yAxis_11_3e.push(data_11_3[5][i])
+        yAxis_11_3f.push(data_11_3[6][i])
+        yAxis_11_3g.push(data_11_3[7][i])
+        yAxis_11_3h.push(data_11_3[8][i])
+    }
+
+
+    var option_11_3 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data: ["机电产品类","轻工产品类","家电类","办公通讯类","建材产品类","食品相关类","农用产品类","其他"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        }, xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+
+                data: xAxis_11_3,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '机电产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3a
+            },
+            {
+                name: '轻工产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3b
+            },
+            {
+                name: '家电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3c
+            },
+            {
+                name: '办公通讯类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3d
+            },
+            {
+                name: '建材产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3e
+            },
+            {
+                name: '食品相关类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3f
+            },
+            {
+                name: '农用产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3g
+            },
+            {
+                name: '其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_3h
+            },
+        ]
+    };
+
+
+
+    if (option_11_3 && typeof option_11_3 === 'object') {
+        myChart_11_3.setOption(option_11_3);
+        console.log(data_11_3)
+    }
+
+</script>
+
+
+<!--配置页面 11-4 的Echart图-->
+<script>
+    var dom_11_4 = document.getElementById("container_11_4");
+    var myChart_11_4 = echarts.init(dom_11_4);
+
+    var data_11_4 = alldata["2013-2017上海质量违法案件查处分类（件）（缺2017年"]
+
+
+    var xAxis_11_4 = []
+    var yAxis_11_4a = []
+    var yAxis_11_4b = []
+    var yAxis_11_4c = []
+    var yAxis_11_4d = []
+    var yAxis_11_4e = []
+    var yAxis_11_4f = []
+    var yAxis_11_4g = []
+    var yAxis_11_4h = []
+    var yAxis_11_4i = []
+
+    for (var i = 1; i < data_11_4.length; ++i) {
+        xAxis_11_4.push(data_11_4[i][0])
+        yAxis_11_4a.push(data_11_4[i][1])
+        yAxis_11_4b.push(data_11_4[i][2])
+        yAxis_11_4c.push(data_11_4[i][3])
+        yAxis_11_4d.push(data_11_4[i][4])
+        yAxis_11_4e.push(data_11_4[i][5])
+        yAxis_11_4f.push(data_11_4[i][6])
+        yAxis_11_4g.push(data_11_4[i][7])
+        yAxis_11_4h.push(data_11_4[i][8])
+        yAxis_11_4i.push(data_11_4[i][9])
+    }
+
+
+    var option_11_4 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data: ["产品质量违法行为","认证相关违法行为","标准违法行为","计量违法行为","特种设备违法行为","纤维违法行为","强制性产品认证违法行为","生产许可违法行为","其他违法行为"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        }, xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+
+                data: xAxis_11_4,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '产品质量违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4a
+            },
+            {
+                name: '认证相关违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4b
+            },
+            {
+                name: '标准违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4c
+            },
+            {
+                name: '计量违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4d
+            },
+            {
+                name: '特种设备违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4e
+            },
+            {
+                name: '纤维违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4f
+            },
+            {
+                name: '强制性产品认证违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4g
+            },
+            {
+                name: '生产许可违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4h
+            },
+            {
+                name: '其他违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_11_4i
+            },
+        ]
+    };
+
+
+
+    if (option_11_4 && typeof option_11_4 === 'object') {
+        myChart_11_4.setOption(option_11_4);
+        console.log(data_11_4)
+    }
+
+</script>
+
+
+<!--配置页面 11-5 的Echart图-->
+<script>
+    var dom_11_5 = document.getElementById("container_11_5");
+    var myChart_11_5 = echarts.init(dom_11_5);
+
+    var data_11_5 = alldata["2012-2017上海市“三品”认证变化率趋势"]
+
+    var xAxis_11_5 = []
+    var yAxis_11_5a = []
+
+
+    for (var i = 1; i < data_11_5.length; ++i) {
+        xAxis_11_5.push(data_11_5[i][0])
+        yAxis_11_5a.push(data_11_5[i][1])
+    }
+
+
+    var option_11_5 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['“三品”认证率'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar', 'tiled'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: xAxis_11_5,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: "百分比",
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '“三品”认证率',
+                type: 'line',
+                data: yAxis_11_5a,
+            },
+        ]
+    };
+
+    if (option_11_5 && typeof option_11_5 === 'object') {
+        myChart_11_5.setOption(option_11_5);
+        console.log(data_11_5)
+    }
+
+</script>
+
+
+<!--配置页面 11-6 的Echart图-->
+<script>
+    var dom_11_6 = document.getElementById("container_11_6");
+    var myChart_11_6 = echarts.init(dom_11_6);
+
+    var data_11_6 = alldata["2012-2017年吊销营业执照数量（单位 张）"]
+
+    var xAxis_11_6 = []
+    var yAxis_11_6a = []
+
+
+    for (var i = 1; i < data_11_6.length; ++i) {
+        xAxis_11_6.push(data_11_6[i][0])
+        yAxis_11_6a.push(data_11_6[i][1])
+    }
+
+
+    var option_11_6 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['吊销营业执照数量'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar', 'tiled'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: xAxis_11_6,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: "单位(张）",
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '吊销营业执照数量',
+                type: 'line',
+                data: yAxis_11_6a,
+            },
+        ]
+    };
+
+    if (option_11_6 && typeof option_11_6 === 'object') {
+        myChart_11_6.setOption(option_11_6);
+        console.log(data_11_6)
+    }
+
+</script>

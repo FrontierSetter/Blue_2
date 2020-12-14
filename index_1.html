@@ -42,7 +42,7 @@
                         <div id="container_1_1" style="height: 90%"></div>
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-l-b">
                         <div class="title">上海市行业状况分析</div>
                         <h1 class="subtitle">2008年-2017年上海市采用国际标准数量与制修订地方标准数</h1>
@@ -58,9 +58,12 @@
                         <div id="container_1_3" style="height: 90%"></div>
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-c-b">
-                        <div class="title">上海市社区服务分析</div>
+                        <div class="title">上海市社区服务分析
+                            <a href="./index_6.html"><img border="0" height=40px src="img/rightarror.jpg" />
+                            </a>
+                        </div>
                         <h1 class="subtitle">社区卫生服务历年公众满意度结果</h1>
                         <div id="container_1_4" style="height: 90%"></div>                    </div>
                 </div>
@@ -72,7 +75,7 @@
                         <h1 class="subtitle">2010-2017年上海食品监督抽检合格率情况</h1>
                         <div id="container_1_5" style="height: 90%"></div>                    </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
                         <div class="title">上海市质量奖获奖状况</div>
                         <h1 class="subtitle">2008-2017年上海市各质量激励奖获得情况</h1>
@@ -147,6 +150,13 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
+<!--全局页面字体配置 -->
+<script>
+    var fontSize_all_legend = 18
+    var fontSize_axis_label = 14
+</script>
+
+
 
 <!--配置页面 1-1 的Echart图-->
 <script>
@@ -167,6 +177,9 @@
 
 
     var option_1_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         tooltip: {
             trigger: 'axis'
         },
@@ -189,7 +202,10 @@
         xAxis: [
             {
                 type: 'category',
-                data: xAxis_1_1
+                data: xAxis_1_1,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
@@ -198,14 +214,20 @@
                 name: '案件数',
                 max: 4000,
                 min: 0,
-                boundaryGap: [0.2, 0.2]
+                boundaryGap: [0.2, 0.2],
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             },
             {
                 type: 'value',
                 name: '金额/万',
                 max: 8000,
                 min: 0,
-                boundaryGap: [0.2, 0.2]
+                boundaryGap: [0.2, 0.2],
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [
@@ -270,6 +292,9 @@
     };
 
     var option_1_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
         tooltip: {
             trigger: 'axis',
@@ -285,9 +310,9 @@
         },
         toolbox: {
             show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
+            //orient: 'vertical',
+            //left: 'right',
+            //top: 'center',
             feature: {
                 mark: {show: true},
                 dataView: {show: true, readOnly: false},
@@ -300,12 +325,32 @@
             {
                 type: 'category',
                 axisTick: {show: false},
-                data: xAxis_1_2
+                data: xAxis_1_2,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                name: '标准数',
+                max: 4000,
+                min: 0,
+                boundaryGap: [0.2, 0.2],
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '企业标准数',
+                max: 200000,
+                min: 0,
+                boundaryGap: [0.2, 0.2],
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [
@@ -314,19 +359,22 @@
                 type: 'bar',
                 barGap: 0,
                 //label: labelOption,
-                data: yAxis_1_2a
+                data: yAxis_1_2a,
+                yAxisIndex: 0
             },
             {
                 name: '地方标准数',
                 type: 'bar',
                 //label: labelOption,
-                data: yAxis_1_2b
+                data: yAxis_1_2b,
+                yAxisIndex: 0
             },
             {
                 name: '企业标准数',
-                type: 'bar',
+                type: 'line',
                 //label: labelOption,
-                data: yAxis_1_2c
+                data: yAxis_1_2c,
+                yAxisIndex: 1
             }
         ]
     };
@@ -360,6 +408,9 @@
 
 
     var option_1_3 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         tooltip: {
             trigger: 'axis'
         },
@@ -382,13 +433,21 @@
         xAxis: [
             {
                 type: 'category',
-                data: xAxis_1_3
+                data: xAxis_1_3,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
             {
                 type: 'value',
                 name: '合格率',
+                min: 60,
+                max: 100,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [
@@ -432,6 +491,9 @@
 
 
     var option_1_4 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         tooltip: {
             trigger: 'axis'
         },
@@ -454,13 +516,21 @@
         xAxis: [
             {
                 type: 'category',
-                data: xAxis_1_4
+                data: xAxis_1_4,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
             {
                 type: 'value',
                 name: '合格率',
+                min: 60,
+                max: 100,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [
@@ -509,6 +579,9 @@
 
 
     var option_1_5 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         tooltip: {
             trigger: 'axis'
         },
@@ -532,14 +605,20 @@
             {
                 type: 'category',
                 boundaryGap: false,
-                data: xAxis_1_5
+                data: xAxis_1_5,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
             {
                 type: 'value',
                 max: 1,
-                min: 0.85
+                min: 0.85,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [
@@ -584,7 +663,7 @@
 </script>
 
 
-<!--配置页面 1-5 的Echart图-->
+<!--配置页面 1-6 的Echart图-->
 <script>
     var dom_1_6 = document.getElementById("container_1_6");
     var myChart_1_6 = echarts.init(dom_1_6);
@@ -607,6 +686,9 @@
 
 
     var option_1_6 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
         tooltip: {
             trigger: 'axis'
         },
@@ -629,12 +711,18 @@
             {
                 type: 'category',
                 boundaryGap: true,
-                data: xAxis_1_6
+                data: xAxis_1_6,
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLabel:{
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
         series: [

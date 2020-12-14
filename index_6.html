@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+    <!-- bootstrap -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="header-title">质量大数据平台</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">2013-2017年上海市绿化市容质量指标完成情况统计</div>
+                        <div id="container_6_1" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">上海市近年与环保规划相关的政策文件</div>
+                        <div id="container_6_2" style="height: 95%">
+                            <div class="container_table">
+                                <table class="pure-table pure-table-horizontal" id="table_6_2">
+                                    <thead>
+                                        <tr>
+                                            <th>出台年份</th>
+                                            <th>文件名称</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">2012-2017年食品安全发现问题的数目</div>
+                        <div id="container_6_3" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-c-b">
+                        <div class="title">2013-2017上海质监12365质量热线各类业务受理
+                            <a href="./index_11.html"><img border="0" height=40px src="img/rightarror.jpg" />
+                            </a>
+                        </div>
+                        <div id="container_6_4" style="height: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-t">
+                        <div class="title">2009-2016年上海市两级环保部门年审批相关文件数统计</div>
+                        <div id="container_6_5" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-r-b">
+                        <div class="title">上海市近年开展的环保科研项目和标准化文件</div>
+                        <div id="container_6_6" style="height: 95%">
+                            <div class="container_table">
+                                <table class="pure-table pure-table-horizontal" id="table_6_6">
+                                    <thead>
+                                        <tr>
+                                            <th>出台年份</th>
+                                            <th>项目或标准化文件名称</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popLayer"></div>
+    <div id="popBox_6_1" class="popBox">
+        <!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_6_1')">关闭</a>
+			</div> -->
+        <div class="content" style="overflow: scroll; max-height: 80%;">
+            <table id="table_6_1" class="ui definition table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Arguments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>reset rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>set rating</td>
+                        <td>
+                            <div class="ui input">
+                                <input type="text" placeholder="搜索...">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dlg_bottom">
+            <button class="ui primary button" onclick="alert('submit success!')">
+                保存
+            </button>
+            <button class="ui button" onclick="closeBoxSuffix('_6_1')">
+                关闭
+            </button>
+            <button class="ui button" onclick="addTableRow('_6_1')">
+                添加一行
+            </button>
+        </div>
+
+    </div>
+    <script>
+			// initHoverWindowBySuffix('_6_1', submitHandler, function(){hideDialogID('_6_1')});
+    </script>
+</body>
+
+</html>
+
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res) {
+        alldata = res;
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+<!--全局页面字体配置 -->
+<script>
+    var fontSize_all_legend = 18
+    var fontSize_axis_label = 14
+</script>
+
+
+
+<!--配置页面 6-1 的Echart图-->
+<script>
+    var dom_6_1 = document.getElementById("container_6_1");
+    var myChart_6_1 = echarts.init(dom_6_1);
+
+    var data_6_1 = alldata["2013-2017年上海市绿化市容质量指标完成情况统计"]
+
+    var xAxis_6_1 = []
+    var yAxis_6_1a = []
+    var yAxis_6_1b = []
+    var yAxis_6_1c = []
+    var yAxis_6_1d = []
+
+    for (var i = 1; i < data_6_1.length; ++i) {
+        xAxis_6_1.push(data_6_1[i][0])
+        yAxis_6_1a.push(data_6_1[i][1] * 100)
+        yAxis_6_1b.push(data_6_1[i][2] * 100)
+        yAxis_6_1c.push(data_6_1[i][3] * 100)
+        yAxis_6_1d.push(data_6_1[i][4] * 100)
+    }
+
+
+    var option_6_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['建成区绿化覆盖率', '森林覆盖率', '生活垃圾无害化处理率', '人均生活垃圾处理减量率'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_6_1,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '百分比%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '建成区绿化覆盖率',
+                type: 'line',
+                data: yAxis_6_1a,
+            },
+            {
+                name: '森林覆盖率',
+                type: 'line',
+                data: yAxis_6_1b,
+            },
+            {
+                name: '生活垃圾无害化处理率',
+                type: 'line',
+                data: yAxis_6_1c,
+            },
+            {
+                name: '人均生活垃圾处理减量率',
+                type: 'line',
+                data: yAxis_6_1d,
+            }
+        ]
+    };
+
+
+
+    if (option_6_1 && typeof option_6_1 === 'object') {
+        myChart_6_1.setOption(option_6_1);
+        console.log(data_6_1)
+    }
+
+</script>
+
+
+<!--配置页面 6-2 的表格-->
+<script>
+    var data_6_2 = alldata["上海市近年与环保规划相关的政策文件"]
+
+    function addRow_6_2_once(data1, data2) {
+        var oTable = document.getElementById("table_6_2");
+        var tBodies = oTable.tBodies;
+        var tbody = tBodies[0];
+        var tr = tbody.insertRow(tbody.rows.length);
+        var td_1 = tr.insertCell(0);
+        td_1.innerHTML = "<div contenteditable='true'>" + data1 + "</div>";
+        var td_2 = tr.insertCell(1);
+        td_2.innerHTML = "<div contenteditable='true'>" + data2 + "</div>";
+    }
+
+    function addRow_6_2(data) {
+        for (var i = 1; i < data.length; ++i) {
+            addRow_6_2_once(data[i][0], data[i][1])
+        }
+    }
+    window.onload = addRow_6_2(data_6_2);
+
+</script>
+
+
+<!--配置页面 6-3 的Echart图-->
+<script>
+    var dom_6_3 = document.getElementById("container_6_3");
+    var myChart_6_3 = echarts.init(dom_6_3);
+
+    var data_6_3 = alldata["2012-2017年食品安全发现问题的数目（单位 万户次）"]
+
+    var xAxis_6_3 = []
+    var yAxis_6_3a = []
+
+    for (var i = 1; i < data_6_3.length; ++i) {
+        xAxis_6_3.push(data_6_3[i][0])
+        yAxis_6_3a.push(data_6_3[i][1])
+    }
+
+
+    var option_6_3 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['发现问题数量'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_6_3,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '发现问题(单位 万户次)',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '国抽',
+                type: 'line',
+                data: yAxis_6_3a,
+            }
+        ]
+    };
+
+
+
+    if (option_6_3 && typeof option_6_3 === 'object') {
+        myChart_6_3.setOption(option_6_3);
+        console.log(data_6_3)
+    }
+
+</script>
+
+
+<!--配置页面 6-4 的Echart图-->
+<script>
+    var dom_6_4 = document.getElementById("container_6_4");
+    var myChart_6_4 = echarts.init(dom_6_4);
+
+    var data_6_4 = alldata["2013-2017上海质监12365质量热线各类业务受理"]
+
+    var xAxis_6_4 = []
+    var yAxis_6_4a = []
+    var yAxis_6_4b = []
+    var yAxis_6_4c = []
+
+    for (var i = 1; i < data_6_4[0].length; ++i) {
+        xAxis_6_4.push(data_6_4[0][i])
+        yAxis_6_4a.push(data_6_4[1][i])
+        yAxis_6_4b.push(data_6_4[2][i])
+        yAxis_6_4c.push(data_6_4[3][i])
+    }
+
+
+    var option_6_4 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data: ['咨询和其他', '打假举报', '质量申诉'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        }, xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+
+                data: xAxis_6_4,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '咨询和其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_6_4c
+            },
+            {
+                name: '打假举报',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_6_4a
+            },
+            {
+                name: '质量申诉',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+                data: yAxis_6_4b
+            },
+        ]
+    };
+
+
+
+    if (option_6_4 && typeof option_6_4 === 'object') {
+        myChart_6_4.setOption(option_6_4);
+        console.log(data_6_4)
+    }
+
+</script>
+
+
+<!--配置页面 6-5 的Echart图-->
+<script>
+    var dom_6_5 = document.getElementById("container_6_5");
+    var myChart_6_5 = echarts.init(dom_6_5);
+
+    var data_6_5 = alldata["2009-2016年上海市两级环保部门年审批相关文件数统计"]
+
+    var xAxis_6_5 = []
+    var yAxis_6_5a = []
+    var yAxis_6_5b = []
+    var yAxis_6_5c = []
+    var yAxis_6_5d = []
+    var yAxis_6_5e = []
+    var yAxis_6_5f = []
+
+    for (var i = 1; i < data_6_5.length; ++i) {
+        xAxis_6_5.push(data_6_5[i][0])
+        yAxis_6_5a.push(data_6_5[i][1])
+        yAxis_6_5b.push(data_6_5[i][2])
+        yAxis_6_5c.push(data_6_5[i][3])
+        yAxis_6_5d.push(data_6_5[i][4])
+    }
+
+
+    var option_6_5 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['环评文件', '环境影响报告书', '报告表', '登记表'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar', 'tiled'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: xAxis_6_5,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        series: [
+            {
+                name: '环评文件',
+                type: 'line',
+                data: yAxis_6_5a,
+            },
+            {
+                name: '环境影响报告书',
+                type: 'line',
+                data: yAxis_6_5b,
+            },
+            {
+                name: '报告表',
+                type: 'line',
+                data: yAxis_6_5c,
+            },
+            {
+                name: '登记表',
+                type: 'line',
+                data: yAxis_6_5d,
+            },
+        ]
+    };
+
+    if (option_6_5 && typeof option_6_5 === 'object') {
+        myChart_6_5.setOption(option_6_5);
+        console.log(data_6_5)
+    }
+
+</script>
+
+
+<!--配置页面 6-6 的Echart图-->
+<script>
+    var data_6_6 = alldata["上海市近年开展的环保科研项目和标准化文件"]
+
+    function addRow_6_6_once(data1, data2) {
+        var oTable = document.getElementById("table_6_6");
+        var tBodies = oTable.tBodies;
+        var tbody = tBodies[0];
+        var tr = tbody.insertRow(tbody.rows.length);
+        var td_1 = tr.insertCell(0);
+        td_1.innerHTML = "<div contenteditable='true'>" + data1 + "</div>";
+        var td_2 = tr.insertCell(1);
+        td_2.innerHTML = "<div contenteditable='true'>" + data2 + "</div>";
+    }
+
+    function addRow_6_6(data) {
+        for (var i = 1; i < data.length; ++i) {
+            addRow_6_6_once(data[i][0], data[i][1])
+        }
+    }
+    window.onload = addRow_6_6(data_6_6);
+
+
+</script>
