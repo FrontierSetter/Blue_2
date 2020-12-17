@@ -143,21 +143,37 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
-
-<!--配置页面 6-1 的Echart图-->
+<!--全局页面字体配置、颜色配置 -->
 <script>
-	var dom_6_1 = document.getElementById("container_1_1");
-	var myChart_6_1 = echarts.init(dom_6_1);
-    var data_6_1 = alldata["2008-2017年上海市食物中毒事件发生情况"]
-    var xAxis_6_1 = []
-	var yAxis_6_1a = []
-    var yAxis_6_1b = []
-    for(var i = 1; i < data_6_1.length; ++i) {
-		xAxis_6_1.push(data_6_1[i][0])
-		yAxis_6_1a.push(data_6_1[i][1])
-        yAxis_6_1b.push(data_6_1[i][2])
+    var fontSize_all_legend = 18;
+	var fontSize_axis_label = 14;
+	//0-白色-axisLine-lineStyle-color
+	//1-淡灰蓝-legend-textStyle-color
+	//2-绿色
+	//3-黄色
+	//4-红色
+	//5-蓝色-饼状图label-color
+	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
+</script>
+
+
+<!--配置页面 8-1 的Echart图-->
+<script>
+	var dom_8_1 = document.getElementById("container_1_1");
+	var myChart_8_1 = echarts.init(dom_8_1);
+    var data_8_1 = alldata["2008-2017年上海市食物中毒事件发生情况"]
+    var xAxis_8_1 = []
+	var yAxis_8_1a = []
+    var yAxis_8_1b = []
+    for(var i = 1; i < data_8_1.length; ++i) {
+		xAxis_8_1.push(data_8_1[i][0])
+		yAxis_8_1a.push(data_8_1[i][1])
+        yAxis_8_1b.push(data_8_1[i][2])
 	}
-	var option_6_1 = {
+	var option_8_1 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -166,6 +182,9 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
@@ -175,33 +194,35 @@
         },
 		calculable: true,
         legend: {
-			data: [
-				{
-					name: '中毒起数',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '中毒人数',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
+			data: ['中毒起数', '中毒人数'],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-		    data: xAxis_6_1,
+			data: xAxis_8_1,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
             {
                 type: 'value',
                 name: '中毒起数',
-                data: yAxis_6_1a,
+                data: yAxis_8_1a,
                 min: 0,
                 max: 50,
                 position: 'left',
                 axisLine: {
                     lineStyle: {
-                        color: '#5793f3'
+                        color: colors[2],
                     }
                 },
                 axisLabel: {
@@ -211,13 +232,13 @@
             {
                 type: 'value',
                 name: '中毒人数',
-                data: yAxis_6_1b,
+                data: yAxis_8_1b,
                 min: 0,
                 max: 1000,
                 position: 'right',
                 axisLine: {
                     lineStyle: {
-                        color: '#d14a61'
+                        color: colors[3],
                     }
                 },
                 axisLabel: {
@@ -230,126 +251,60 @@
 			    name: '中毒起数',
 			    type: 'bar',
                 yAxisIndex: 0,
-			    data: yAxis_6_1a,
-                color: '#5793f3'
+				data: yAxis_8_1a,
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
+                color: colors[2],
 		    },
             {
 			    name: '中毒人数',
 			    type: 'bar',
                 yAxisIndex: 1,
-			    data: yAxis_6_1b,
-                color: '#d14a61'
+				data: yAxis_8_1b,
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
+                color: colors[3],
 		    },
         ]
 	};
-	if (option_6_1 && typeof option_6_1 === 'object') {
-		myChart_6_1.setOption(option_6_1);
-		console.log(data_6_1)
+	if (option_8_1 && typeof option_8_1 === 'object') {
+		myChart_8_1.setOption(option_8_1);
+		console.log(data_8_1)
 	}
 </script>
 
-<!--配置页面 6-2 的Echart图-->
+<!--配置页面 8-2 的Echart图-->
 <script>
-    var dom_6_2 = document.getElementById("container_1_2");
-	var myChart_6_2 = echarts.init(dom_6_2);
-    var data_6_2 = alldata["2011-2017年上海市食品流通企业分类监管占比情况"]
-    var xAxis_6_2 = []
-	var yAxis_6_2a = []
-	var yAxis_6_2b = []
-	var yAxis_6_2c = []
-	var yAxis_6_2d = []
-    for(var i = 1; i < data_6_2.length; ++i) {
-		xAxis_6_2.push(data_6_2[i][0])
-		yAxis_6_2a.push(data_6_2[i][1])
-		yAxis_6_2b.push(data_6_2[i][2])
-		yAxis_6_2c.push(data_6_2[i][3])
-		yAxis_6_2d.push(data_6_2[i][4])
+    var dom_8_2 = document.getElementById("container_1_2");
+	var myChart_8_2 = echarts.init(dom_8_2);
+    var data_8_2 = alldata["2011-2017年上海市食品流通企业分类监管占比情况"]
+    var xAxis_8_2 = []
+	var yAxis_8_2a = []
+	var yAxis_8_2b = []
+	var yAxis_8_2c = []
+	var yAxis_8_2d = []
+    for(var i = 1; i < data_8_2.length; ++i) {
+		xAxis_8_2.push(data_8_2[i][0])
+		yAxis_8_2a.push(data_8_2[i][1])
+		yAxis_8_2b.push(data_8_2[i][2])
+		yAxis_8_2c.push(data_8_2[i][3])
+		yAxis_8_2d.push(data_8_2[i][4])
 	}
-    /*
-    var option_6_2_1 = {
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
+	var option_8_2 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
 		},
-		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		legend: {
-			data: [
-				{
-					name: '一类',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '二类',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '三类',
-                    textStyle: { color:"#5793f3" }
-				},
-                {
-					name: '四类',
-                    textStyle: { color:"#5793f3" }
-				}
-			],
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: {
-			type: 'category',
-			name: '年份',
-		    data: xAxis_6_2,
-		},
-		yAxis: [
-			{
-				type: 'value'
-			}
-		],
-		series: [
-			{
-				name: '一类',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6_2a
-			},
-			{
-				name: '二类',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6_2b
-			},
-			{
-				name: '三类',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6_2c
-			},
-			{
-				name: '四类',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6_2d
-			}
-		]
-	};
-    */
-	var option_6_2 = {
 		title: [
 			{
-				subtext: '20111',
+				subtext: '2011',
 				left: '20%',
 				top: '30%',
 				textAlign: 'center',
@@ -427,24 +382,10 @@
 			}
 		],
         legend: {
-			data: [
-				{
-					name: '一类',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '二类',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '三类',
-                    textStyle: { color:"#5793f3" }
-				},
-                {
-					name: '四类',
-                    textStyle: { color:"#5793f3" }
-				}
-			],
+			data: ['一类', '二类', '三类', '四类'],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		tooltip: {
             trigger: 'item',
@@ -452,9 +393,11 @@
         },
 		toolbox: {
             show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
 				dataView: {show: true, readOnly: false},
-				//magicType: {show: true, type: ['bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -467,14 +410,24 @@
                 center: ['20%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[0], name: '二类'},
-					{value: yAxis_6_2a[0], name: '一类'},
-					{value: yAxis_6_2c[0], name: '三类'},
-                    {value: yAxis_6_2d[0], name: '四类'},
+				    {value: yAxis_8_2b[0], name: '二类'},
+					{value: yAxis_8_2a[0], name: '一类'},
+					{value: yAxis_8_2c[0], name: '三类'},
+                    {value: yAxis_8_2d[0], name: '四类'},
 				]
             }, 
 			{
@@ -484,14 +437,24 @@
                 center: ['40%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[1], name: '二类'},
-                    {value: yAxis_6_2a[1], name: '一类'},
-					{value: yAxis_6_2c[1], name: '三类'},
-                    {value: yAxis_6_2d[1], name: '四类'},
+				    {value: yAxis_8_2b[1], name: '二类'},
+                    {value: yAxis_8_2a[1], name: '一类'},
+					{value: yAxis_8_2c[1], name: '三类'},
+                    {value: yAxis_8_2d[1], name: '四类'},
 				]
             }, 
 			{
@@ -501,14 +464,24 @@
                 center: ['60%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[2], name: '二类'},
-					{value: yAxis_6_2a[2], name: '一类'},
-					{value: yAxis_6_2c[2], name: '三类'},
-                    {value: yAxis_6_2d[2], name: '四类'},
+				    {value: yAxis_8_2b[2], name: '二类'},
+					{value: yAxis_8_2a[2], name: '一类'},
+					{value: yAxis_8_2c[2], name: '三类'},
+                    {value: yAxis_8_2d[2], name: '四类'},
 				]
             }, 
 			{
@@ -518,14 +491,24 @@
                 center: ['80%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[3], name: '二类'},
-                    {value: yAxis_6_2a[3], name: '一类'},
-					{value: yAxis_6_2c[3], name: '三类'},
-                    {value: yAxis_6_2d[3], name: '四类'},
+				    {value: yAxis_8_2b[3], name: '二类'},
+                    {value: yAxis_8_2a[3], name: '一类'},
+					{value: yAxis_8_2c[3], name: '三类'},
+                    {value: yAxis_8_2d[3], name: '四类'},
 				]
             }, 
 			{
@@ -535,14 +518,24 @@
                 center: ['30%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[4], name: '二类'},
-                    {value: yAxis_6_2a[4], name: '一类'},
-					{value: yAxis_6_2c[4], name: '三类'},
-                    {value: yAxis_6_2d[4], name: '四类'},
+				    {value: yAxis_8_2b[4], name: '二类'},
+                    {value: yAxis_8_2a[4], name: '一类'},
+					{value: yAxis_8_2c[4], name: '三类'},
+                    {value: yAxis_8_2d[4], name: '四类'},
 				]
             }, 
 			{
@@ -552,14 +545,24 @@
                 center: ['50%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[5], name: '二类'},
-                    {value: yAxis_6_2a[5], name: '一类'},
-					{value: yAxis_6_2c[5], name: '三类'},
-                    {value: yAxis_6_2d[5], name: '四类'},
+				    {value: yAxis_8_2b[5], name: '二类'},
+                    {value: yAxis_8_2a[5], name: '一类'},
+					{value: yAxis_8_2c[5], name: '三类'},
+                    {value: yAxis_8_2d[5], name: '四类'},
 				]
             },
 			{
@@ -569,57 +572,51 @@
                 center: ['70%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
 					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+							    colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
-				    {value: yAxis_6_2b[6], name: '二类'},
-                    {value: yAxis_6_2a[6], name: '一类'},
-					{value: yAxis_6_2c[6], name: '三类'},
-                    {value: yAxis_6_2d[6], name: '四类'},
+				    {value: yAxis_8_2b[6], name: '二类'},
+                    {value: yAxis_8_2a[6], name: '一类'},
+					{value: yAxis_8_2c[6], name: '三类'},
+                    {value: yAxis_8_2d[6], name: '四类'},
 				]
             }
 		]
     };
-	if (option_6_2 && typeof option_6_2 === 'object') {
-		myChart_6_2.setOption(option_6_2);
-		console.log(data_6_2)
+	if (option_8_2 && typeof option_8_2 === 'object') {
+		myChart_8_2.setOption(option_8_2);
+		console.log(data_8_2)
 	}
-    /*
-	myChart_6_2.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_6_2_1;
-		}
-		myChart_6_2.setOption(o.newOption, true);
-	});
-
-	myChart_6_2.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_6_2;
-		myChart_6_2.setOption(o.newOption, true);
-	});
-	*/
 </script>
 
-<!--配置页面 6-3 的Echart图-->
+<!--配置页面 8-3 的Echart图-->
 <script>
-	var dom_6_3 = document.getElementById("container_2_1");
-	var myChart_6_3 = echarts.init(dom_6_3);
-	var data_6_3 = alldata["009-2017年上海市获得生产许可证的食品添加剂及食品相关产"]
-    var xAxis_6_3 = []
-	var yAxis_6_3a = []
-	var yAxis_6_3b = []
-	for(var i = 1; i < data_6_3.length; ++i) {
-		xAxis_6_3.push(data_6_3[i][0])
-		yAxis_6_3a.push(data_6_3[i][1])
-	    yAxis_6_3b.push(data_6_3[i][2])
+	var dom_8_3 = document.getElementById("container_2_1");
+	var myChart_8_3 = echarts.init(dom_8_3);
+	var data_8_3 = alldata["009-2017年上海市获得生产许可证的食品添加剂及食品相关产"]
+    var xAxis_8_3 = []
+	var yAxis_8_3a = []
+	var yAxis_8_3b = []
+	for(var i = 1; i < data_8_3.length; ++i) {
+		xAxis_8_3.push(data_8_3[i][0])
+		yAxis_8_3a.push(data_8_3[i][1])
+	    yAxis_8_3b.push(data_8_3[i][2])
 	}
-	var option_6_3 = {
+	var option_8_3 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -628,80 +625,115 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
+		},
+		calculable: true,
 		legend: {
 			data: [
 				{
 					name: '食品添加剂',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: '食品相关产品',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 			],
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			data: xAxis_6_3
+			data: xAxis_8_3,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
-                axisLabel: {
-                    formatter: '{value} 个'
-                }
+				position: 'left',
+				axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
+			    axisLabel: {
+				    formatter: '{value} 个',
+				    fontSize: fontSize_axis_label
+			    },
             }
 		],
 		series: [
 			{
 				name: '食品添加剂',
-			    data: yAxis_6_3a,
-				type: 'line'
+			    data: yAxis_8_3a,
+				type: 'line',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+			    color: colors[2],
 		    },
 			{
 				name: '食品相关产品',
-			    data: yAxis_6_3b,
-				type: 'line'
+			    data: yAxis_8_3b,
+				type: 'line',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+			    color: colors[3],
 		    },
 
 		]
 	};
-	if (option_6_3 && typeof option_6_3 === 'object') {
-		myChart_6_3.setOption(option_6_3);
-		console.log(data_6_3)
+	if (option_8_3 && typeof option_8_3 === 'object') {
+		myChart_8_3.setOption(option_8_3);
+		console.log(data_8_3)
 	}
 </script>
 
 <!--配置页面 6-4 的Echart图-->
 <script>
-	var dom_6_4 = document.getElementById("container_2_2");
-	var myChart_6_4 = echarts.init(dom_6_4);
-	var data_6_4 = alldata["2009-2017年上海市食品生产经营许可证发放情况"]
-    var xAxis_6_4 = []
-	var yAxis_6_4a = []
-	var yAxis_6_4b = []
-	var yAxis_6_4c = []
-	var yAxis_6_4d = []
-	for(var i = 1; i < data_6_4[0].length; ++i) {
-		xAxis_6_4.push(data_6_4[0][i])
+	var dom_8_4 = document.getElementById("container_2_2");
+	var myChart_8_4 = echarts.init(dom_8_4);
+	var data_8_4 = alldata["2009-2017年上海市食品生产经营许可证发放情况"]
+    var xAxis_8_4 = []
+	var yAxis_8_4a = []
+	var yAxis_8_4b = []
+	var yAxis_8_4c = []
+	var yAxis_8_4d = []
+	for(var i = 1; i < data_8_4[0].length; ++i) {
+		xAxis_8_4.push(data_8_4[0][i])
 	}
-    for(var i = 1; i < data_6_4[1].length; ++i) {
-		yAxis_6_4a.push(data_6_4[1][i])
-		yAxis_6_4b.push(data_6_4[2][i])
-		yAxis_6_4c.push(data_6_4[3][i])
-		yAxis_6_4d.push(data_6_4[1][i] + data_6_4[2][i] + data_6_4[3][i])
+    for(var i = 1; i < data_8_4[1].length; ++i) {
+		yAxis_8_4a.push(data_8_4[1][i])
+		yAxis_8_4b.push(data_8_4[2][i])
+		yAxis_8_4c.push(data_8_4[3][i])
+		yAxis_8_4d.push(data_8_4[1][i] + data_8_4[2][i] + data_8_4[3][i])
 	}
-	var option_6_4 = {
+	var option_8_4 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -710,9 +742,12 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['bar']},
+                magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -722,34 +757,44 @@
 			data: [
 				{
 					name: '食品生产',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: '食品流通',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: '餐饮服务',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '总数',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 			],
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			data: xAxis_6_4
+			data: xAxis_8_4,
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
-                    formatter: '{value} 个'
+					formatter: '{value} 个',
+					fontSize: fontSize_axis_label
                 }
             }
 		],
@@ -757,75 +802,61 @@
 		    
 			{
 				name: '食品流通',
-				data: yAxis_6_4b,
-			    type: 'bar',
+				data: yAxis_8_4b,
+			    type: 'line',
 				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
+				areaStyle: {},
+				color: colors[2]
 		    },
 			{
 				name: '食品生产',
-				data: yAxis_6_4a,
-			    type: 'bar',
+				data: yAxis_8_4a,
+			    type: 'line',
 				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
+				areaStyle: {},
+				color: colors[3]
 		    },
 		    {
 				name: '餐饮服务',
-				data: yAxis_6_4c,
-			    type: 'bar',
+				data: yAxis_8_4c,
+			    type: 'line',
 				stack: '总量',
+				areaStyle: {},
 				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
-		    },
-			{
-				name: '总数',
-				data: yAxis_6_4d,
-				type: 'line',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#d14a61" },
-					fontSize: 20,
-                }
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[4]
 		    },
 		]
 	};
-	if (option_6_4 && typeof option_6_4 === 'object') {
-		myChart_6_4.setOption(option_6_4);
-		console.log(data_6_4)
+	if (option_8_4 && typeof option_8_4 === 'object') {
+		myChart_8_4.setOption(option_8_4);
+		console.log(data_8_4)
 	}
 </script>
 
 <!--配置页面 6-5 的Echart图-->
 <script>
-	var dom_6_5 = document.getElementById("container_3_1");
-	var myChart_6_5 = echarts.init(dom_6_5);
-	var data_6_5 = alldata["2011-2017年上海市年获证食品生产企业分布情况（按年销售"]
-    var xAxis_6_5 = []
-	var yAxis_6_5a = []
-	var yAxis_6_5b = []
-    for(var i = 1; i < data_6_5[0].length; ++i) {
-		xAxis_6_5.push(data_6_5[0][i])
+	var dom_8_5 = document.getElementById("container_3_1");
+	var myChart_8_5 = echarts.init(dom_8_5);
+	var data_8_5 = alldata["2011-2017年上海市年获证食品生产企业分布情况（按年销售"]
+    var xAxis_8_5 = []
+	var yAxis_8_5a = []
+	var yAxis_8_5b = []
+    for(var i = 1; i < data_8_5[0].length; ++i) {
+		xAxis_8_5.push(data_8_5[0][i])
 	}
-    for(var i = 1; i < data_6_5[1].length; ++i) {
-		yAxis_6_5a.push(data_6_5[1][i])
-		yAxis_6_5b.push(data_6_5[2][i])
+    for(var i = 1; i < data_8_5[1].length; ++i) {
+		yAxis_8_5a.push(data_8_5[1][i])
+		yAxis_8_5b.push(data_8_5[2][i])
 	}
-	var option_6_5 = {
+	var option_8_5 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -834,71 +865,105 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
+		},
+		calculable: true,
 		legend: {
 			data: [
 				{
 					name: '2000万及以上',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: '2000万以下',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 			],
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-		    data: xAxis_6_5
+			data: xAxis_8_5,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
+				axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
-                    formatter: '{value} 个'
+					formatter: '{value} 个',
+					fontSize: fontSize_axis_label
                 }
             }
 		],
 		series: [
 			{
 				name: '2000万及以上',
-				data: yAxis_6_5a,
-			    type: 'bar'
+				data: yAxis_8_5a,
+				type: 'bar',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[2]
 		    },
 			{
 				name: '2000万以下',
-				data: yAxis_6_5b,
-			    type: 'bar'
+				data: yAxis_8_5b,
+				type: 'bar',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[3]
 		    },
 
 		]
 	};
-	if (option_6_5 && typeof option_6_5 === 'object') {
-		myChart_6_5.setOption(option_6_5);
-		console.log(data_6_5)
+	if (option_8_5 && typeof option_8_5 === 'object') {
+		myChart_8_5.setOption(option_8_5);
+		console.log(data_8_5)
 	}
 </script>
 
 <!--配置页面 6-6 的Echart图-->
 <script>
-	var dom_6_6 = document.getElementById("container_3_2");
-	var myChart_6_6 = echarts.init(dom_6_6);
-	var data_6_6 = alldata["2009-2017年上海市各级食品生产企业占比情况"]
-    var xAxis_6_6 = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
-	var yAxis_6_6a = [510, 409, 343, 326, 312, 353, 340, 482, 670]
-	var yAxis_6_6b = [1479, 1506, 1210, 1102, 986, 921, 925, 942, 534]
-	var yAxis_6_6c = [437, 445, 554, 406, 321, 269, 261, 187, 79]
-	var yAxis_6_6d = [2426, 2360, 2107, 1834, 1619, 1543, 1526, 1611, 1283]
-	var option_6_6 = {
+	var dom_8_6 = document.getElementById("container_3_2");
+	var myChart_8_6 = echarts.init(dom_8_6);
+	var data_8_6 = alldata["2009-2017年上海市各级食品生产企业占比情况"]
+    var xAxis_8_6 = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
+	var yAxis_8_6a = [510, 409, 343, 326, 312, 353, 340, 482, 670]
+	var yAxis_8_6b = [1479, 1506, 1210, 1102, 986, 921, 925, 942, 534]
+	var yAxis_8_6c = [437, 445, 554, 406, 321, 269, 261, 187, 79]
+	var yAxis_8_6d = [2426, 2360, 2107, 1834, 1619, 1543, 1526, 1611, 1283]
+	var option_8_6 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -907,9 +972,12 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['bar']},
+                magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -919,89 +987,82 @@
 			data: [
 				{
 					name: 'A级',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: 'B级',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 				{
 					name: 'C级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '合计',
-                    textStyle: { color:"#5793f3" }
+                    textStyle: { color: colors[1] }
 				},
 			],
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			data: xAxis_6_6
+			data: xAxis_8_6,
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
-                    formatter: '{value} 个'
+					formatter: '{value} 个',
+					fontSize: fontSize_axis_label
                 }
             }
 		],
 		series: [
 		    {
 				name: 'A级',
-				data: yAxis_6_6a,
-			    type: 'bar',
+				data: yAxis_8_6a,
+			    type: 'line',
 				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
+				areaStyle: {},
+				color: colors[2]
 		    },
 			{
 				name: 'B级',
-				data: yAxis_6_6b,
-			    type: 'bar',
+				data: yAxis_8_6b,
+			    type: 'line',
 				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
+				areaStyle: {},
+				color: colors[3]
 		    },
 		    {
 				name: 'C级',
-				data: yAxis_6_6c,
-			    type: 'bar',
+				data: yAxis_8_6c,
+			    type: 'line',
 				stack: '总量',
+				areaStyle: {},
 				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
-		    },
-			{
-				name: '合计',
-				data: yAxis_6_6d,
-				type: 'line',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#d14a61" },
-					fontSize: 20,
-                }
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[4]
 		    },
 		]
 	};
-	if (option_6_6 && typeof option_6_6 === 'object') {
-		myChart_6_6.setOption(option_6_6);
-		console.log(data_6_6)
+	if (option_8_6 && typeof option_8_6 === 'object') {
+		myChart_8_6.setOption(option_8_6);
+		console.log(data_8_6)
 	}
 </script>

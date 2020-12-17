@@ -142,6 +142,19 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
+<!--全局页面字体配置、颜色配置 -->
+<script>
+    var fontSize_all_legend = 18;
+	var fontSize_axis_label = 14;
+	//0-白色-axisLine-lineStyle-color
+	//1-淡灰蓝-legend-textStyle-color
+	//2-绿色
+	//3-黄色
+	//4-红色
+	//5-蓝色-饼状图label-color
+	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
+</script>
+
 <!--配置页面 5-1 的Echart图-->
 <script>
 	var dom_5_1 = document.getElementById("container_1_1");
@@ -154,41 +167,71 @@
 		yAxis_5_1.push(data_5_1[i][1])
 	}
 	var option_5_1 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
                 type: 'shadow'        
             }
-        },
+		},
 		toolbox: {
-            show: true,
+			show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
+		},	
 		calculable: true,
+		legend: {
+            data: ["服务名牌"],
+            textStyle: {
+                color: colors[1]
+            }
+        },
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
-		    data: xAxis_5_1
+			data: xAxis_5_1,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: {
 			type: 'value',
-			name: '服务名牌数'
+			name: '数目',
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+				fontSize: fontSize_axis_label
+			}
 		},
 		series: [{
-			//data: [157, 226, 254, 248, 237, 295, 318, 351, 373, 384],
 			data: yAxis_5_1,
-			name: '服务名牌数',
+			name: '服务名牌',
 			type: 'bar',
-			showBackground: true,
-			backgroundStyle: {
-				color: 'rgba(180, 180, 180, 0.2)'
-			}
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]  
+            },
+			color: colors[4],
 		}]
 	};
 	if (option_5_1 && typeof option_5_1 === 'object') {
@@ -217,6 +260,9 @@
 		yAxis_5_2e.push(data_5_2[i][1] + data_5_2[i][2] + data_5_2[i][3])
 	}
 	var option_5_2 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -225,103 +271,85 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['bar']},
+                magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
         },
 		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '集体用餐',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '食堂',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '公共餐饮',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '合计',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
+			data: ["食堂", "公共餐饮", "集体用餐"],
+			textStyle: {
+				color: colors[1]
+			},
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			data: xAxis_5_2
-			//data: ['2011', '2012', '2013', '2014', '2015', '2016', '2017']
+			data: xAxis_5_2,
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
+				axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
-                    formatter: '{value} 个'
+					formatter: '{value} 个',
+					fontSize: fontSize_axis_label
                 }
             }
 		],
 		series: [
+		{
+				name: '食堂',
+				data: yAxis_5_2b,
+			    type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				color: colors[2]
+		    },
 		    {
 				name: '公共餐饮',
 				data: yAxis_5_2c,
-			    //data: [45835, 43170, 45463, 48969, 42881, 43446, 53554],
-			    type: 'bar',
-				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
-		    },
+			    type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				color: colors[3]
+			},
 			{
 				name: '集体用餐',
 				data: yAxis_5_2a,
-			    //data: [349, 338, 332, 340, 336, 272, 269],
-			    type: 'bar',
-				stack: '总量',
+			    type: 'line',
+				stack: '合计',
+				areaStyle: {},
 				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
-		    },
-		    {
-				name: '食堂',
-				data: yAxis_5_2b,
-			    //data: [15066, 12937, 14223, 15089, 14348, 13286, 13315],
-			    type: 'bar',
-				stack: '总量',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#5793f3" },
-					fontSize: 20,
-                }
-		    },
-			{
-				name: '合计',
-				data: yAxis_5_2e,
-				type: 'line',
-				label: {
-                    show: false,
-                    position: 'inside',
-					textStyle: { color:"#d14a61" },
-					fontSize: 20,
-                }
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[4]
 		    },
 		]
-	};
+	};  
 	if (option_5_2 && typeof option_5_2 === 'object') {
 		myChart_5_2.setOption(option_5_2);
 		console.log(data_5_2)
@@ -342,6 +370,9 @@
 	    yAxis_5_3b.push(data_5_3[2][i])
 	}
 	var option_5_3 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -350,55 +381,76 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
+		},
+		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '国家级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '市级',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
+			data: ["国家级", "市级"],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			//data: ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
-		    data: xAxis_5_3
+			data: xAxis_5_3,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
-                axisLabel: {
-                    formatter: '{value} 个'
-                }
+				axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
+			    axisLabel: {
+				    formatter: '{value} 个',
+				    fontSize: fontSize_axis_label
+			    }
             }
 		],
 		series: [
 			{
 				name: '国家级',
-			    //data: [4, 6, 7, 13, 23, 23, 23, 23, 34, 35],
 			    data: yAxis_5_3a,
-				type: 'line'
+				type: 'line',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+			    color: colors[2],
 		    },
 			{
 				name: '市级',
-			    //data: [24, 43, 62, 84, 109, 135, 145, 156, 188],
 			    data: yAxis_5_3b,
-				type: 'line'
+				type: 'line',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+			    color: colors[3],
 		    },
-
 		]
 	};
 	if (option_5_3 && typeof option_5_3 === 'object') {
@@ -425,6 +477,9 @@
 		yAxis_5_4d.push(data_5_4[i][4])
 	}
 	var option_5_4 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -433,60 +488,47 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
-		legend: [
-		    {
-				top: "8%",
-			    data: [
-				    {
-					    name: '上海财富世界五百强',
-                        textStyle: { color:"#5793f3" }
-				    },
-				    {
-					    name: '全国财富世界五百强',
-                        textStyle: { color:"#5793f3" }
-				    },
-				    {
-					    name: '上海名牌产品项',
-                        textStyle: { color:"#5793f3" }
-				    },
-			    ],
-		    },
-			{
-			    data: [
-				    {
-					    name: '上海市著名商标新认定',
-                        textStyle: { color:"#5793f3" }
-				    },
-				    {
-				 	    name: '上海市著名商标总数',
-                        textStyle: { color:"#5793f3" }
-				    },
-					{
-					    name: '全国名牌产品项',
-                        textStyle: { color:"#5793f3" }
-				    },
-			    ],
-		    },
-		],
+		},
+		calculable: true,
+		legend: {
+			data: ['上海财富世界五百强', '全国财富世界五百强', '上海名牌产品项', '上海市著名商标新认定', '上海市著名商标总数', '全国名牌产品项'],
+			textStyle: {
+				color: colors[1]
+			}
+		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
-		    data: xAxis_5_4
+			data: xAxis_5_4,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
-                name: '数目',
-                position: 'left',
+				name: '数目',
+				axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
+					fontSize: fontSize_axis_label,
                     formatter: '{value} 个'
                 }
             }
@@ -495,34 +537,56 @@
 			{
 				name: '上海财富世界五百强',
 			    data: [2, 4, 4, 5, 6, 8, 8, 8, 8, 8],
-			    type: 'line'
+				type: 'line',
 		    },
 			{
 				name: '全国财富世界五百强',
 			    data: [29, 37, 46, 61, 73, 89, 96, 98, 103, 115],
-			    type: 'line'
+				type: 'line',
 		    },
 			{
 				name: '上海名牌产品项',
-			    //data: [49, 46, 44, 45, 45, 35, 35, 39, 37],
 				data: yAxis_5_4c,
-			    type: 'line'
+				type: 'line',
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
 		    },
 			{
 				name: '全国名牌产品项',
-			    //data: [569, 666, 749, 703, 885, 911, 908, 883, 808, 735],
 				data: yAxis_5_4b,
-			    type: 'line'
+				type: 'line',
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
 		    },
 			{
 				name: '上海市著名商标新认定',
 			    data: [198, 116, 79, 118, 133, 158, 164, 79, 78],
-			    type: 'line'
+				type: 'line',
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
 		    },
 			{
 				name: '上海市著名商标总数',
 			    data: [324, 285, 256, 377, 405, 379, 497, 426, 409],
-			    type: 'line'
+				type: 'line',
+				markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]  
+                },
 		    },
 		]
 	};
@@ -546,6 +610,9 @@
 		yAxis_5_5b.push(data_5_5[i][2])
 	}
 	var option_5_5 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		tooltip: {
             trigger: 'axis',
 			axisPointer: {
@@ -554,53 +621,75 @@
         },
 		toolbox: {
             show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
-        },
+		},
+		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '当年地方立项标准数',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '当年年底现行有效地方标准数',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
+			data: ['当年地方立项标准数', '当年年底现行有效地方标准数'],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
-			//data: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
-		    data: xAxis_5_5
+			data: xAxis_5_5,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
 		},
 		yAxis: [
 			{
                 type: 'value',
                 name: '数目',
-                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+			    },
                 axisLabel: {
-                    formatter: '{value} 个'
+					formatter: '{value} 个',
+					fontSize: fontSize_axis_label
                 }
             }
 		],
 		series: [
 			{
 				name: '当年地方立项标准数',
-			    //data: [74, 89, 164, 111, 105, 70, 108, 71, 147],
 				data: yAxis_5_5a,
-			    type: 'bar'
+				type: 'bar',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[2]
 		    },
 			{
 				name: '当年年底现行有效地方标准数',
-			    //data: [294, 400, 457, 573, 649, 809, 917, 988, 990],
 				data: yAxis_5_5b,
-			    type: 'bar'
+				type: 'bar',
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[3]
 		    },
 
 		]
@@ -625,78 +714,187 @@
 		yAxis_5_6b.push(data_5_6[2][i])
 		yAxis_5_6c.push(data_5_6[3][i])
 	}
-
+    //option_5_6_1-柱状图
     var option_5_6_1 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		tooltip: {
 			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			axisPointer: {        
+				type: 'shadow'
 			}
 		},
 		toolbox: {
         	show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['bar', 'line']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
 		legend: {
-			data: [
-				{
-					name: 'A级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: 'B级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: 'C级',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
+			data: ['A级', 'B级', 'C级'],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		xAxis: {
 			type: 'category',
 			name: '年份',
+			boundaryGap: true,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
 		    data: xAxis_5_6,
 		},
-		yAxis: [
-			{
-				type: 'value'
-			}
-		],
+		yAxis: {
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+                fontSize: fontSize_axis_label
+            }
+		},
 		series: [
 			{
 				name: 'A级',
 				type: 'bar',
 				stack: '合计',
+				areaStyle: {},
+				color: colors[2],
 				data: yAxis_5_6a
 			},
 			{
 				name: 'B级',
 				type: 'bar',
 				stack: '合计',
+				areaStyle: {},
+				color: colors[3],
 				data: yAxis_5_6b
 			},
 			{
 				name: 'C级',
 				type: 'bar',
 				stack: '合计',
+				areaStyle: {},
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[4],
 				data: yAxis_5_6c
 			},
 		]
 	};
-
+	//option_5_6_2-折线图
+    var option_5_6_2 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {        
+				type: 'shadow'
+			}
+		},
+		toolbox: {
+        	show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar', 'line']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['A级', 'B级', 'C级'],
+			textStyle: {
+				color: colors[1]
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
+		    data: xAxis_5_6,
+		},
+		yAxis: {
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+                fontSize: fontSize_axis_label
+            }
+		},
+		series: [
+			{
+				name: 'A级',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				color: colors[2],
+				data: yAxis_5_6a
+			},
+			{
+				name: 'B级',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				color: colors[3],
+				data: yAxis_5_6b
+			},
+			{
+				name: 'C级',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+			    },
+				color: colors[4],
+				data: yAxis_5_6c
+			},
+		]
+	};
+    //option_5_6-饼状图
 	var option_5_6 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
 		title: [
 			{
 				subtext: '2011',
@@ -777,20 +975,10 @@
 			}
 		],
         legend: {
-			data: [
-				{
-					name: 'A级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: 'B级',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: 'C级',
-                    textStyle: { color:"#5793f3" }
-				}
-			],
+			data: ['A级', 'B级', 'C级'],
+			textStyle: {
+				color: colors[1]
+			}
 		},
 		tooltip: {
             trigger: 'item',
@@ -798,9 +986,12 @@
         },
 		toolbox: {
             show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -813,7 +1004,18 @@
                 center: ['20%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3",
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 					{value: yAxis_5_6a[0], name: 'A级'},
@@ -828,7 +1030,18 @@
                 center: ['40%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[1], name: 'A级'},
@@ -843,7 +1056,18 @@
                 center: ['60%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[2], name: 'A级'},
@@ -858,7 +1082,18 @@
                 center: ['80%', '30%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[3], name: 'A级'},
@@ -873,7 +1108,18 @@
                 center: ['30%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[4], name: 'A级'},
@@ -888,7 +1134,18 @@
                 center: ['50%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[5], name: 'A级'},
@@ -903,7 +1160,18 @@
                 center: ['70%', '70%'],
 				label: {
                     formatter: '{d}%',
-					color:"#5793f3"
+					color: colors[5],
+					fontSize: 20,
+				},
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
                 },
 				data: [
 				    {value: yAxis_5_6a[6], name: 'A级'},
@@ -912,7 +1180,8 @@
 				]
             }
 		]
-    };
+	};
+	//option之间切换，默认饼状图
 	if (option_5_6 && typeof option_5_6 === 'object') {
 		myChart_5_6.setOption(option_5_6);
 		console.log(data_5_6)
@@ -921,7 +1190,7 @@
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
+			o.newOption = option_5_6_2;
 		}else if(params.currentType == 'bar'){
 			o.newOption = option_5_6_1;
 		}
