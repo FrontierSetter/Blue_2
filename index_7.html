@@ -44,9 +44,9 @@
                         <div id="container_1_1" style="height: 90%"></div>
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-l-b">
-                        <div class="title">2008年-2017年上海市采用国际标准数量与制修订地方标准数</div>
+                        <div class="title">2009-2017年获得强制性认证产品证书的企业数及发放的证书</div>
                         <!-- <h1 class="subtitle">2008年-2017年上海市采用国际标准数量与制修订地方标准数</h1> -->
                         <div id="container_1_2" style="height: 90%"></div>
                     </div>
@@ -54,19 +54,35 @@
             </div>
             <div class="col col-c">
                 <div class="xpanel-wrapper xpanel-wrapper-50">
-                    <!-- <div class="xpanel xpanel-c-t">
-                        <div class="title">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</div>
-                        <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1>
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">2017年有效期内上海名牌产品行业分布情况</div>
+                        <!-- <h1 class="subtitle">2017年有效期内上海名牌产品行业分布情况</h1> -->
                         <div id="container_1_3" style="height: 90%"></div>
-                    </div> -->
+                    </div>
                     <div class="xpanel no-bg">
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-c-b">
-                        <div class="title">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</div>
+                        <div class="title">2017年度上海市“质量标杆”获奖组织一览表</div>
                         <!-- <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1> -->
-                        <div id="container_1_4" style="height: 90%"></div>                    </div>
+                        <div id="container_1_4" style="height: 95%">
+                            <div class="container_table">
+                                <table class="pure-table pure-table-horizontal" id="table_1_4">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>“质量标杆”名称                                            </th>
+                                            <th>获奖组织名称</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col col-r">
@@ -76,7 +92,7 @@
                         <!-- <h1 class="subtitle">2009-2017年生产许可证获证企业数和省 市级审查数</h1> -->
                         <div id="container_1_5" style="height: 90%"></div>                    </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
                         <div class="title">2008-2017年《中国500最具价值品牌》上海品牌数</div>
                         <!-- <h1 class="subtitle">2008-2017年《中国500最具价值品牌》上海品牌数</h1> -->
@@ -140,7 +156,6 @@
 
 </html>
 
-
 <!--解决本地json跨域问题-->
 <script>
     var alldata = {};
@@ -148,8 +163,17 @@
     function demo(res){
         alldata = res;
     }
+//0-白色-axisLine-lineStyle-color
+    //1-淡灰蓝-legend-textStyle-color
+    //2-绿色
+    //3-黄色
+    //4-红色
+    //5-蓝色-饼状图label-color
+        var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
 </script>
 <script src="data/data2.json?callback=demo"></script>
+
+
 
 
 <!--配置页面 1-1 的Echart图-->
@@ -207,6 +231,7 @@
             {
                 name: '建设工程“白玉兰”奖数量',
                 type: 'bar',
+                color: colors[4],
                 data: yAxis_1_1a,
                 yAxisIndex: 0
             }
@@ -300,18 +325,21 @@
                 name: '认证企业数',
                 type: 'bar',
                 barGap: 0,
+                color:colors[3],
                 //label: labelOption,
                 data: yAxis_1_2a
             },
             {
                 name: '认证证书数',
-                type: 'line',
+                type: 'bar',
+                color:colors[2],
                 //label: labelOption,
                 data: yAxis_1_2b
             }
         ]
     };
 
+    
 
 
     if (option_1_2 && typeof option_1_2 === 'object') {
@@ -327,138 +355,148 @@
     var dom_1_3 = document.getElementById("container_1_3");
     var myChart_1_3 = echarts.init(dom_1_3);
 
-    var data_1_3 = alldata["2008-2017年上海市国家级监督抽查及市级监督抽查合格率"]
-    
-    var xAxis_1_3 = [] 
-    var yAxis_1_3a = []
-    var yAxis_1_3b = []
-    
-    for(var i = 1; i < data_1_3.length; ++i){
-        xAxis_1_3.push(data_1_3[i][0])
-        yAxis_1_3a.push(data_1_3[i][1])
-        yAxis_1_3b.push(data_1_3[i][2])
-    }
-
-
-    var option_1_3 = {
-        tooltip: {
-            trigger: 'axis'
-        },
+    var option_1_3 ={
+		title: [
+			{
+				text: '2011',
+				textAlign: 'center',
+				textStyle:{
+                    color:"#5793f3",
+                    fontSize:36,
+                    align:"center"
+                }
+			}
+		],
         legend: {
-            data: ['国抽', '市抽'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
+			data: [
+				{
+					name: '机电',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '轻工',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '食品',
+                    textStyle: { color:"#5793f3" }
+                }
+                ,
+				{
+					name: '建材',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '农产品',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '化工',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '医药',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '汽车及零部件',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '服装',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '仪电',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '纺织',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '化学建材',
+                    textStyle: { color:"#5793f3" }
+				},
+				{
+					name: '冶金有色金属',
+                    textStyle: { color:"#5793f3" }
+				}
+			],
+		},
+		tooltip: {
+            trigger: 'item',
+			formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
-        toolbox: {
+		toolbox: {
             show: true,
             feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
         },
-        calculable: true,
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxis_1_3
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '合格率',
-            }
-        ],
         series: [
-            {
-                name: '国抽',
-                type: 'line',
-                data: yAxis_1_3a,
-            },
-            {
-                name: '市抽',
-                type: 'line',
-                data: yAxis_1_3b,
+			{
+                type: 'pie',
+				name: '2011',
+                radius: 140,
+                center: ['50%', '50%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3",
+                },
+				data: [
+					{value: 24.63, name: '机电'},
+					{value: 18.23, name: '轻工'},
+                    {value: 8.29, name: '食品'},
+                    {value: 8.02, name: '建材'},
+                    {value: 7.21, name: '农产品'},
+                    {value: 6.80, name: '化工'},
+                    {value: 6.53, name: '医药'},
+                    {value: 5.85, name: '汽车及零部件'},
+                    {value: 4.35, name: '服装'},
+                    {value: 3.94, name: '仪电'},
+                    {value: 2.85, name: '纺织'},
+                    {value: 2.44, name: '化学建材'},
+                    {value: 0.82, name: '冶金及有色金属'},
+				]
             }
-        ]
+		]
     };
-
 
 
     if (option_1_3 && typeof option_1_3 === 'object') {
         myChart_1_3.setOption(option_1_3);
         console.log(data_1_3)
     }
-
 </script>
 
 
 <!--配置页面 1-4 的Echart图-->
 <script>
-    var dom_1_4 = document.getElementById("container_1_4");
-    var myChart_1_4 = echarts.init(dom_1_4);
+    var data_1_4 = alldata["2017年度上海市“质量标杆”获奖组织一览表"]
 
-    var data_1_4 = alldata["社区卫生服务历年公众满意度结果"]
-    
-    var xAxis_1_4 = [] 
-    var yAxis_1_4a = []
-    
-    for(var i = 1; i < data_1_4.length; ++i){
-        xAxis_1_4.push(data_1_4[i][0])
-        yAxis_1_4a.push(data_1_4[i][1])
+    function addRow_1_4_once(data1, data2,data3) {
+    var oTable = document.getElementById("table_1_4");
+    var tBodies = oTable.tBodies;
+    var tbody = tBodies[0];
+    var tr = tbody.insertRow(tbody.rows.length);
+    var td_1 = tr.insertCell(0);
+    td_1.innerHTML = "<div contenteditable='true'>" + data1 + "</div>";
+    var td_2 = tr.insertCell(1);
+    td_2.innerHTML = "<div contenteditable='true'>" + data2 + "</div>";
+    var td_3 = tr.insertCell(1);
+    td_3.innerHTML = "<div contenteditable='true'>" + data3 + "</div>";
+}
+
+function addRow_1_4(data) {
+    for (var i = 1; i < data.length-2; ++i) {
+        addRow_1_4_once(data[i][0], data[i][1],data[i][2])
     }
-
-
-    var option_1_4 = {
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['社区卫生服务公众满意度'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxis_1_4
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '合格率',
-            }
-        ],
-        series: [
-            {
-                name: '社区卫生服务公众满意度',
-                type: 'line',
-                data: yAxis_1_4a,
-            }
-        ]
-    };
-
-
-
-    if (option_1_4 && typeof option_1_4 === 'object') {
-        myChart_1_4.setOption(option_1_4);
-        console.log(data_1_4)
-    }
+}
+window.onload = addRow_1_4(data_1_4);
 
 </script>
 
@@ -516,12 +554,14 @@
         series: [
         {
                 name: '发证总数',
-                type: 'line',
+                type: 'bar',
+                color: colors[4],
                 data: yAxis_1_5a,
             },
             {
                 name: '省/市级审查数',
-                type: 'line',
+                type: 'bar',
+                color: colors[0],
                 data: yAxis_1_5b,
             }
         ]
@@ -579,7 +619,8 @@
         ],
         series: [
         {
-                type: 'bar',
+                type: 'line',
+                color: colors[3],
                 data: yAxis_1_6a,
             }
         ]

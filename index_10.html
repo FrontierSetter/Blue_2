@@ -42,7 +42,7 @@
                         <div id="container_1_1" style="height: 90%"></div>
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-l-b">
                         <div class="title">2015-2017年上海市农业标准化示范试点立项</div>
                         <!-- <h1 class="subtitle">2008年-2017年上海市采用国际标准数量与制修订地方标准数</h1> -->
@@ -52,15 +52,15 @@
             </div>
             <div class="col col-c">
                 <div class="xpanel-wrapper xpanel-wrapper-50">
-                    <!-- <div class="xpanel xpanel-c-t">
-                        <div class="title">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</div>
-                        <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1>
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">2013-2017年上海市食品销售经营方式分类情况</div>
                         <div id="container_1_3" style="height: 90%"></div>
-                    </div> -->
+                        
+                    </div>
                     <div class="xpanel no-bg">
                     </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-c-b">
                         <div class="title">2012-2017上海市“三品”认证变化率趋势</div>
                         <!-- <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1> -->
@@ -74,7 +74,7 @@
                         <!-- <h1 class="subtitle">2009-2017年生产许可证获证企业数和省 市级审查数</h1> -->
                         <div id="container_1_5" style="height: 90%"></div>                    </div>
                 </div>
-                <div class="xpanel-wrapper xpanel-wrapper-50">
+                <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
                         <div class="title"> 2016年不同产业“三品”认证率分布情况</div>
                         <!-- <h1 class="subtitle">2008-2017年《中国500最具价值品牌》上海品牌数</h1> -->
@@ -146,6 +146,14 @@
     function demo(res){
         alldata = res;
     }
+
+    //0-白色-axisLine-lineStyle-color
+        //1-淡灰蓝-legend-textStyle-color
+    //2-绿色
+    //3-黄色
+    //4-红色
+    //5-蓝色-饼状图label-color
+        var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
@@ -205,6 +213,7 @@
             {
                 name: '地产蔬菜合格率',
                 type: 'bar',
+                color:colors[4],
                 data: yAxis_1_1a,
                 yAxisIndex: 0
             }
@@ -303,7 +312,7 @@
             },
             {
                 name: '市级',
-                type: 'line',
+                type: 'bar',
                 //label: labelOption,
                 data: yAxis_1_2b
             }
@@ -325,58 +334,81 @@
     var dom_1_3 = document.getElementById("container_1_3");
     var myChart_1_3 = echarts.init(dom_1_3);
 
-    var data_1_3 = alldata["2012-2017上海市“三品”认证变化率趋势"]
     
-    var xAxis_1_3 = [] 
-    var yAxis_1_3a = []
-    
-    for(var i = 1; i < data_1_3.length; ++i){
-        xAxis_1_3.push(data_1_3[i][0])
-        yAxis_1_3a.push(data_1_3[i][1])
-    }
-
-
     var option_1_3 = {
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['“三品”认证率'],
-            textStyle:{
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    legend: {
+                  data: ['批发','零售','批发兼零售','其他','总和'],
+            textStyle: {
                 color: '#F0F8FF'
             }
-        },
-        toolbox: {
+    },
+    toolbox: {
             show: true,
             feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
             }
         },
-        calculable: true,
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxis_1_3
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '“三品”认证率'
-            }
-        ],
-        series: [
-            {
-                name: '“三品”认证率',
-                type: 'line',
-                data: yAxis_1_3a,
-            }
-        ]
-    };
-
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: ['2013','2014','2015','2016','2017']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            name: '批发',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [23218,27892,39350,44805,32395]
+        },
+        {
+            name: '零售',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [101140,108456,116692,125887,83586]
+        },
+        {
+            name: '批发兼零售',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [12668,13441,15724,17098,9547]
+        },
+        {
+            name: '其他',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [172,233,277,0,2321]
+        }
+    ]
+};
 
 
     if (option_1_3 && typeof option_1_3 === 'object') {
@@ -579,6 +611,7 @@
         {
             name: '“三品”认证率',
                 type: 'bar',
+                color:colors[2],
                 data: yAxis_1_6a,
             }
         ]
