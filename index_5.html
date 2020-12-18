@@ -2,6 +2,7 @@
 
 <html>
 	<head>
+
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -19,20 +20,21 @@
 		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
 
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	</head>
 	
-	<body style="zoom:100%">
+	<body>
 		<div class="header" style="padding:0px">
 			<h1 class="header-title" style="font-size:40px">质量大数据平台</h1>
-			<!--
-			<h1 class="header-title" style="font-size:40px">上海市行业状况分析</h1>
-			-->
 		</div>
 		<div class="wrapper">
 			<div class="content">
@@ -40,13 +42,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市服务名牌数量变化图</div>
-							<div id="container_1_1" style="height: 90%; zoom: 100%"></div>
+							<div id="container_1_1" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2011-2017年上海市主要餐饮服务单位变化趋势</div>
-							<div id="container_1_2" style="height: 90%; zoom: 100%"></div>
+							<div id="container_1_2" style="height: 90%"></div>
 						</div>
 					</div>
 				</div>
@@ -146,6 +148,7 @@
 <script>
     var fontSize_all_legend = 18;
 	var fontSize_axis_label = 14;
+	var echart_toolbox_size = 16;
 	//0-白色-axisLine-lineStyle-color
 	//1-淡灰蓝-legend-textStyle-color
 	//2-绿色
@@ -158,7 +161,7 @@
 <!--配置页面 5-1 的Echart图-->
 <script>
 	var dom_5_1 = document.getElementById("container_1_1");
-	var myChart_5_1 = echarts.init(dom_5_1);
+	var myChart_5_1 = echarts.init(dom_5_1, 'chalk');
     var data_5_1 = alldata["2008年-2017年上海市服务名牌数量变化图"]
     var xAxis_5_1 = []
 	var yAxis_5_1 = []
@@ -178,6 +181,7 @@
 		},
 		toolbox: {
 			show: true,
+			itemSize: echart_toolbox_size,
 			orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -231,7 +235,7 @@
                     {type: 'min', name: '最小值'}
                 ]  
             },
-			color: colors[4],
+			//color: colors[4],
 		}]
 	};
 	if (option_5_1 && typeof option_5_1 === 'object') {
@@ -243,7 +247,7 @@
 <!--配置页面 5-2 的Echart图-->
 <script>
 	var dom_5_2 = document.getElementById("container_1_2");
-	var myChart_5_2 = echarts.init(dom_5_2);
+	var myChart_5_2 = echarts.init(dom_5_2, 'chalk');
 	var data_5_2 = alldata["2011-2017年上海市主要餐饮服务单位变化趋势"]
     var xAxis_5_2 = []
 	var yAxis_5_2a = []
@@ -270,7 +274,8 @@
             }
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
 			orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -305,12 +310,12 @@
 		yAxis: [
 			{
                 type: 'value',
-                name: '数目',
+				name: '数目',
 				axisLine: {
                     lineStyle: {
                         color: colors[0]
                     }
-			    },
+				},
                 axisLabel: {
 					formatter: '{value} 个',
 					fontSize: fontSize_axis_label
@@ -324,7 +329,7 @@
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[2]
+				//color: colors[2]
 		    },
 		    {
 				name: '公共餐饮',
@@ -332,7 +337,7 @@
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[3]
+				//color: colors[3]
 			},
 			{
 				name: '集体用餐',
@@ -346,7 +351,7 @@
                         position: 'top'
                     }
 			    },
-				color: colors[4]
+				//color: colors[4]
 		    },
 		]
 	};  
@@ -359,7 +364,7 @@
 <!--配置页面 5-3 的Echart图-->
 <script>
 	var dom_5_3 = document.getElementById("container_2_1");
-	var myChart_5_3 = echarts.init(dom_5_3);
+	var myChart_5_3 = echarts.init(dom_5_3, 'chalk');
 	var data_5_3 = alldata["2009-2017年上海市服务业标准化示范点数目（累计数）"]
     var xAxis_5_3 = []
 	var yAxis_5_3a = []
@@ -380,7 +385,8 @@
             }
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
 			orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -437,7 +443,7 @@
                         position: 'top'
                     }
 			    },
-			    color: colors[2],
+			    //color: colors[2],
 		    },
 			{
 				name: '市级',
@@ -449,7 +455,7 @@
                         position: 'top'
                     }
 			    },
-			    color: colors[3],
+			    //color: colors[3],
 		    },
 		]
 	};
@@ -462,7 +468,7 @@
 <!--配置页面 5-4 的Echart图-->
 <script>
 	var dom_5_4 = document.getElementById("container_2_2");
-	var myChart_5_4 = echarts.init(dom_5_4);
+	var myChart_5_4 = echarts.init(dom_5_4, 'chalk');
 	var data_5_4 = alldata["2008-2017年上海市名牌及著名商标情况"]
     var xAxis_5_4 = []
 	var yAxis_5_4a = []
@@ -487,7 +493,8 @@
             }
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
 			orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -599,7 +606,7 @@
 <!--配置页面 5-5 的Echart图-->
 <script>
 	var dom_5_5 = document.getElementById("container_3_1");
-	var myChart_5_5 = echarts.init(dom_5_5);
+	var myChart_5_5 = echarts.init(dom_5_5, 'chalk');
 	var data_5_5 = alldata["2008-2017年地方标准立项和当年年底现行有效总数"]
     var xAxis_5_5 = []
 	var yAxis_5_5a = []
@@ -620,7 +627,8 @@
             }
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
 			orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -677,7 +685,7 @@
                         position: 'top'
                     }
 			    },
-				color: colors[2]
+				//color: colors[2]
 		    },
 			{
 				name: '当年年底现行有效地方标准数',
@@ -689,7 +697,7 @@
                         position: 'top'
                     }
 			    },
-				color: colors[3]
+				//color: colors[3]
 		    },
 
 		]
@@ -703,7 +711,7 @@
 <!--配置页面 5-6 的Echart图-->
 <script>
     var dom_5_6 = document.getElementById("container_3_2");
-	var myChart_5_6 = echarts.init(dom_5_6);
+	var myChart_5_6 = echarts.init(dom_5_6, 'chalk');
 	var data_5_6 = alldata["2011-2017年上海市餐饮服务单位量化监督动态等级评定情况"]
     var xAxis_5_6 = [2011, 2012, 2013, 2014, 2015, 2016, 2017]
 	var yAxis_5_6a = []
@@ -726,7 +734,8 @@
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
             orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -775,7 +784,7 @@
 				type: 'bar',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[2],
+				//color: colors[2],
 				data: yAxis_5_6a
 			},
 			{
@@ -783,7 +792,7 @@
 				type: 'bar',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[3],
+				//color: colors[3],
 				data: yAxis_5_6b
 			},
 			{
@@ -797,7 +806,7 @@
                         position: 'top'
                     }
 			    },
-				color: colors[4],
+				//color: colors[4],
 				data: yAxis_5_6c
 			},
 		]
@@ -814,7 +823,8 @@
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
             orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -863,7 +873,7 @@
 				type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[2],
+				//color: colors[2],
 				data: yAxis_5_6a
 			},
 			{
@@ -871,7 +881,7 @@
 				type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				color: colors[3],
+				//color: colors[3],
 				data: yAxis_5_6b
 			},
 			{
@@ -885,7 +895,7 @@
                         position: 'top'
                     }
 			    },
-				color: colors[4],
+				//color: colors[4],
 				data: yAxis_5_6c
 			},
 		]
@@ -985,7 +995,8 @@
 			formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size,
             orient: 'vertical',
             left: 'right',
             top: 'center',
@@ -1006,7 +1017,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1016,7 +1027,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 					{value: yAxis_5_6a[0], name: 'A级'},
 					{value: yAxis_5_6b[0], name: 'B级'},
@@ -1032,7 +1043,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1042,7 +1053,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[1], name: 'A级'},
 					{value: yAxis_5_6b[1], name: 'B级'},
@@ -1058,7 +1069,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1068,7 +1079,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[2], name: 'A级'},
 					{value: yAxis_5_6b[2], name: 'B级'},
@@ -1084,7 +1095,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1094,7 +1105,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[3], name: 'A级'},
 					{value: yAxis_5_6b[3], name: 'B级'},
@@ -1110,7 +1121,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1120,7 +1131,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[4], name: 'A级'},
 					{value: yAxis_5_6b[4], name: 'B级'},
@@ -1136,7 +1147,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1146,7 +1157,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[5], name: 'A级'},
 					{value: yAxis_5_6b[5], name: 'B级'},
@@ -1162,7 +1173,7 @@
                     formatter: '{d}%',
 					color: colors[5],
 					fontSize: 20,
-				},
+				},/*
 				itemStyle: {
                     normal: {
                         color: function(params) {
@@ -1172,7 +1183,7 @@
 							return colorList[params.dataIndex]
 						}
                     }
-                },
+                },*/
 				data: [
 				    {value: yAxis_5_6a[6], name: 'A级'},
 					{value: yAxis_5_6b[6], name: 'B级'},
@@ -1204,4 +1215,3 @@
 		myChart_5_6.setOption(o.newOption, true);
 	});
 </script>
-
