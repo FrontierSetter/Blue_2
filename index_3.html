@@ -8,6 +8,7 @@
 		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
 		<title>大屏数据可视化 - 模板</title>
 		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
 
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,6 +21,7 @@
 		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -27,11 +29,12 @@
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
 
 		<!-- <script src="json/data.json"></script> -->
+		<script type="text/javascript" src="js/global_config.js"></script>
 	</head>
 	
 	<body>
-		<div class="header">
-			<h1 class="header-title">质量大数据平台</h1>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">质量大数据平台</h1>
 		</div>
 		
 		<div class="wrapper">
@@ -40,13 +43,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2011-2017年上海市特种设备事故发生环节百分比<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
-							<div id="container_3_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_1"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2008-2017年各类在用特种设备情况<!-- a href="./index_2.html">质量大数据平台</a--></div>
-							<div id="container_3_2" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_2"></div>
 						</div>
 					</div>
 				</div>
@@ -54,13 +57,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
 							<div class="title">2008-2017年获得许可的特种设备生产单位图</div>
-							<div id="container_3_3" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_3"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
 							<div class="title">2008-2017年上海市特种设备安全状况</div>
-							<div id="container_3_4" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_4"></div>
 						</div>
 					</div>
 				</div>
@@ -68,13 +71,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
 							<div class="title">2008-2017年固定式压力容器、电梯、其中机械及场（厂）内<!--i class="edit exchange icon" onclick="change_option_3_5()""></i--></div>
-							<div id="container_3_5" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_5"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
 							<div class="title">2009-2017年检测机构分布情况</div>
-							<div id="container_3_6" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_6"></div>
 						</div>
 					</div>
 				</div>
@@ -147,12 +150,14 @@
 <script>
 
 var dom_3_1 = document.getElementById("container_3_1");
-	var myChart_3_1 = echarts.init(dom_3_1);
+	var myChart_3_1 = echarts.init(dom_3_1, 'chalk');
 	var app_3_1 = {};
 
 	var option_3_1_1 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -169,8 +174,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 		legend: {
 			data: ['安装', '使用', '维修'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -182,12 +187,24 @@ var dom_3_1 = document.getElementById("container_3_1");
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		series: [
@@ -238,7 +255,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 
 	var option_3_1_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -249,8 +268,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 		legend: {
 			data: ['安装', '使用', '维修'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -296,7 +315,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['20%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -310,7 +329,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['40%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -324,7 +343,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['60%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -338,7 +357,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['80%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -352,7 +371,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['20%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -365,7 +384,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['40%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -379,7 +398,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['60%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -443,7 +462,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 <script>
 
 	var dom_3_2 = document.getElementById("container_3_2");
-	var myChart_3_2 = echarts.init(dom_3_2);
+	var myChart_3_2 = echarts.init(dom_3_2, 'chalk');
 	var app_3_2 = {};
 
 	var option_3_2_1 = {
@@ -454,7 +473,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -465,8 +486,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 		legend: {
 			data: ['锅炉', '固定式压力容器', '移动式电容器', '电梯', '起重机械', '场(厂)内机动车辆', '大型游乐设施', '客运索道'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -478,12 +499,24 @@ var dom_3_1 = document.getElementById("container_3_1");
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		series: [
@@ -629,7 +662,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// var 20 = 25
 	var option_3_2_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -640,8 +675,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 		legend: {
 			data: ['锅炉', '固定式压力容器', '移动式电容器', '电梯', '起重机械', '场(厂)内机动车辆', '大型游乐设施', '客运索道'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -761,7 +796,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['10%', '25%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -775,7 +810,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['30%', '25%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -789,7 +824,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['50%', '25%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -803,7 +838,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['70%', '25%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -817,7 +852,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['90%', '25%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -831,7 +866,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['10%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -845,7 +880,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['30%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -859,7 +894,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['50%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -873,7 +908,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['70%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -887,7 +922,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 			center: ['90%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -958,7 +993,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 <script>
 
 	var dom_3_3 = document.getElementById("container_3_3");
-	var myChart_3_3 = echarts.init(dom_3_3);
+	var myChart_3_3 = echarts.init(dom_3_3, 'chalk');
 	var app_3_3 = {};
 
 	var option_3_3_1 = {
@@ -969,7 +1004,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -979,7 +1016,13 @@ var dom_3_1 = document.getElementById("container_3_1");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -987,6 +1030,12 @@ var dom_3_1 = document.getElementById("container_3_1");
 			max: function (value) {
 				return value.max + 20;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -1001,7 +1050,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// // 折线图
 	var option_3_3_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1011,7 +1062,13 @@ var dom_3_1 = document.getElementById("container_3_1");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1021,6 +1078,12 @@ var dom_3_1 = document.getElementById("container_3_1");
 			max: function (value) {
 				return value.max + 20;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -1086,7 +1149,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 <script>
 
 var dom_3_4 = document.getElementById("container_3_4");
-	var myChart_3_4 = echarts.init(dom_3_4);
+	var myChart_3_4 = echarts.init(dom_3_4, 'chalk');
 	var app_3_4 = {};
 
 	// 事故数柱状图
@@ -1101,7 +1164,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1111,7 +1176,13 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1119,6 +1190,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 			max: function (value) {
 				return value.max;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -1136,7 +1213,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			text:'事故数',
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1146,7 +1225,13 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1156,6 +1241,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 			max: function (value) {
 				return value.max;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -1182,7 +1273,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1192,7 +1285,13 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1200,6 +1299,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 			max: function (value) {
 				return value.max;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -1217,7 +1322,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			text:'死亡人数',
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1227,7 +1334,13 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1237,6 +1350,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 			max: function (value) {
 				return value.max;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -1263,7 +1382,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1273,12 +1394,24 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
 			min: 0,
-			max: 1
+			max: 1,
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -1296,7 +1429,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			text:'万台特种设备死亡率（本市/全国）',
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -1306,7 +1441,13 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -1316,6 +1457,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 			max: function (value) {
 				return value.max;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -1419,7 +1566,7 @@ var dom_3_4 = document.getElementById("container_3_4");
 <script>
 
 	var dom_3_5 = document.getElementById("container_3_5");
-	var myChart_3_5 = echarts.init(dom_3_5);
+	var myChart_3_5 = echarts.init(dom_3_5, 'chalk');
 	var app_3_5 = {};
 
 	// 柱状图 
@@ -1431,7 +1578,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
@@ -1442,8 +1591,8 @@ var dom_3_4 = document.getElementById("container_3_4");
 		legend: {
 			data: ['固定式压力容器', '电梯', '起重机', '场(厂)内机动车辆'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -1455,12 +1604,24 @@ var dom_3_4 = document.getElementById("container_3_4");
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 			}
 		],
 		yAxis: [
 			{
 				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 				// max: 365,
 			}
 		],
@@ -1549,7 +1710,7 @@ var dom_3_4 = document.getElementById("container_3_4");
 <script>
 
 	var dom_3_6 = document.getElementById("container_3_6");
-	var myChart_3_6 = echarts.init(dom_3_6);
+	var myChart_3_6 = echarts.init(dom_3_6, 'chalk');
 	var app_3_6 = {};
 
 	var option_3_6_1 = {
@@ -1560,7 +1721,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
@@ -1571,8 +1734,8 @@ var dom_3_4 = document.getElementById("container_3_4");
 		legend: {
 			data: ['1-综合检验机构', '2-综合检验机构', '3-气瓶检验机构', '4-无损检测机构', '5-安全阀校验机构'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -1584,12 +1747,24 @@ var dom_3_4 = document.getElementById("container_3_4");
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
 				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 				// max: 365,
 			}
 		],

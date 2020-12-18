@@ -8,6 +8,7 @@
 		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
 		<title>大屏数据可视化 - 模板</title>
 		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
 
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,6 +21,7 @@
 		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -27,6 +29,7 @@
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
 
 		<!-- <script src="json/data.json"></script> -->
+		<script type="text/javascript" src="js/global_config.js"></script>
 	</head>
 
 	
@@ -42,13 +45,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市在用特种设备情况<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
-							<div id="container_2_1" style="height: 90%;zoom:66.6%"></div>
+							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2016-2017年上海市药品监督抽查情况表<!-- a href="./index_2.html">质量大数据平台</a--></div>
-							<div id="container_2_2" style="height: 90%;zoom:100%""></div>
+							<div class="echart-container" id="container_2_2"></div>
 						</div>
 					</div>
 				</div>
@@ -56,13 +59,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
 							<div class="title">2014-2017年上海市化妆品监督抽查情况表</div>
-							<div id="container_2_3" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_3"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
 							<div class="title">2015-2017年上海市医疗器械监督抽查情况表</div>
-							<div id="container_2_4" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_4"></div>
 						</div>
 					</div>
 				</div>
@@ -70,13 +73,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
 							<div class="title">2008-2017年上海市食品安全风险监测总体合格率<!--i class="edit exchange icon" onclick="change_option_2_5()""></i--></div>
-							<div id="container_2_5" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_5"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
 							<div class="title">2014年和2015年勘察设计质量监管情况对比</div>
-							<div id="container_2_6" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_6"></div>
 						</div>
 					</div>
 				</div>
@@ -148,7 +151,7 @@
 <script>
 
 	var dom_2_1 = document.getElementById("container_2_1");
-	var myChart_2_1 = echarts.init(dom_2_1);
+	var myChart_2_1 = echarts.init(dom_2_1, 'chalk');
 	var app_2_1 = {};
 
 var font_test = 22;
@@ -162,7 +165,9 @@ var font_test = 22;
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -173,12 +178,12 @@ var font_test = 22;
 		xAxis: {
 			type: 'category',
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-axisLabel:{
-			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: font_test
-			},
-}
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 
 		},
 		yAxis: {
@@ -187,6 +192,12 @@ axisLabel:{
 			max: function (value) {
 				return value.max + 20;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -201,7 +212,9 @@ axisLabel:{
 	// // 折线图
 	var option_2_1_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -211,7 +224,13 @@ axisLabel:{
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
@@ -221,6 +240,12 @@ axisLabel:{
 			max: function (value) {
 				return value.max + 20;
 			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -287,7 +312,7 @@ axisLabel:{
 <script>
 
 	var dom_2_2 = document.getElementById("container_2_2");
-	var myChart_2_2 = echarts.init(dom_2_2);
+	var myChart_2_2 = echarts.init(dom_2_2, 'chalk');
 	var app_2_2 = {};
 
 	var option_2_2_1 = {
@@ -298,7 +323,9 @@ axisLabel:{
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -309,8 +336,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -322,13 +349,25 @@ axisLabel:{
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
-			}
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
 		],
 		series: [
 			{
@@ -348,7 +387,9 @@ axisLabel:{
 
 	var option_2_2_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -359,8 +400,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -378,7 +419,7 @@ axisLabel:{
 			center: ['25%', '50%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -392,7 +433,7 @@ axisLabel:{
 			center: ['75%', '50%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -463,12 +504,14 @@ axisLabel:{
 <script>
 
 	var dom_2_3 = document.getElementById("container_2_3");
-	var myChart_2_3 = echarts.init(dom_2_3);
+	var myChart_2_3 = echarts.init(dom_2_3, 'chalk');
 	var app_2_3 = {};
 
 	var option_2_3_1 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -485,8 +528,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -498,12 +541,24 @@ axisLabel:{
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		series: [
@@ -524,7 +579,9 @@ axisLabel:{
 
 	var option_2_3_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -535,8 +592,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -554,7 +611,7 @@ axisLabel:{
 			center: ['25%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -568,7 +625,7 @@ axisLabel:{
 			center: ['75%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -581,7 +638,7 @@ axisLabel:{
 			center: ['25%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -595,7 +652,7 @@ axisLabel:{
 			center: ['75%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -657,12 +714,14 @@ axisLabel:{
 <script>
 
 	var dom_2_4 = document.getElementById("container_2_4");
-	var myChart_2_4 = echarts.init(dom_2_4);
+	var myChart_2_4 = echarts.init(dom_2_4, 'chalk');
 	var app_2_4 = {};
 
 	var option_2_4_1 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -679,8 +738,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -692,12 +751,24 @@ axisLabel:{
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		series: [
@@ -718,7 +789,9 @@ axisLabel:{
 
 	var option_2_4_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -729,8 +802,8 @@ axisLabel:{
 		legend: {
 			data: ['不合格数', '合格数'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -748,7 +821,7 @@ axisLabel:{
 			center: ['25%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -762,7 +835,7 @@ axisLabel:{
 			center: ['75%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -775,7 +848,7 @@ axisLabel:{
 			center: ['25%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -838,7 +911,7 @@ axisLabel:{
 <script>
 
 	var dom_2_5 = document.getElementById("container_2_5");
-	var myChart_2_5 = echarts.init(dom_2_5);
+	var myChart_2_5 = echarts.init(dom_2_5, 'chalk');
 	var app_2_5 = {};
 
 	// 柱状图 
@@ -850,7 +923,9 @@ axisLabel:{
 			}
 		},
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -860,12 +935,24 @@ axisLabel:{
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
 			min: 0,
 			max: 1,
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
@@ -885,7 +972,9 @@ axisLabel:{
 	// 折线图
 	var option_2_5_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
@@ -895,12 +984,24 @@ axisLabel:{
 		},
 		xAxis: {
 			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		yAxis: {
 			type: 'value',
 			min: 0.9,
 			max:1,
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
 		},
 		series: [{
 			markPoint: {
@@ -964,12 +1065,14 @@ axisLabel:{
 <script>
 
 	var dom_2_6 = document.getElementById("container_2_6");
-	var myChart_2_6 = echarts.init(dom_2_6);
+	var myChart_2_6 = echarts.init(dom_2_6, 'chalk');
 	var app_2_6 = {};
 
 	var option_2_6_1 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -986,8 +1089,8 @@ axisLabel:{
 		legend: {
 			data: ['开具整改通知单', '未开具整改通知单'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		grid: {
@@ -999,12 +1102,24 @@ axisLabel:{
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: 'value'
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
 			}
 		],
 		series: [
@@ -1025,7 +1140,9 @@ axisLabel:{
 
 	var option_2_6_2 = {
 		toolbox: {
-        	show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -1036,8 +1153,8 @@ axisLabel:{
 		legend: {
 			data: ['开具整改通知单', '未开具整改通知单'],
 			textStyle: { //图例文字的样式
-				color: '#fff',
-				fontSize: 16
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
 		},
 		tooltip: {},
@@ -1055,7 +1172,7 @@ axisLabel:{
 			center: ['25%', '50%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -1069,7 +1186,7 @@ axisLabel:{
 			center: ['75%', '50%'],
 			label: {
 				formatter: '{d}%',
-				color:"#5793f3"
+				color:color_axis
 			},
 			encode: {
 				itemName: 'product',
