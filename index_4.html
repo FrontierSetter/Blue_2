@@ -18,11 +18,15 @@
 		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	</head>
 	
@@ -35,43 +39,43 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2012-2017年质量监督执法情况（缺2017年数据） <i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
-							<div id="container_1_1" style="height: 100%"></div>
+							<div class="title">2012-2017年质量监督执法情况（缺2017年数据）</div>
+							<div id="container_1_1" style="height: 90%"></div>
 						</div>
 						
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2012-2017年食品安全执法检查次数（单位 万户次） <i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
-							<div id="container_2_1" style="height: 100%"></div>
+							<div class="title">2012-2017年食品安全执法检查次数（单位 万户次）</div>
+							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
 				</div>
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
-							<div class="title">2008-2017年上海市产品质量监督抽查合格率 <i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
-							<div id="container_1_2" style="height: 100%"></div>
+							<div class="title">2008-2017年上海市产品质量监督抽查合格率</div>
+							<div id="container_1_2" style="height: 90%"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
-							<div class="title">2007-2017年上海市国家监督抽查及市监督抽查合格率 <i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
-							<div id="container_2_2" style="height: 100%"></div>
+							<div class="title">2007-2017年上海市国家监督抽查及市监督抽查合格率</div>
+							<div id="container_2_2" style="height: 90%"></div>
 						</div>
 					</div>
 				</div>
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2009-2017年上海市各类产品质量监督抽查合格率 <i class="edit outline icon" onclick="popBoxSuffix('_1_3')"></i></div>
-							<div id="container_1_3" style="height: 100%"></div>
+							<div class="title">2009-2017年上海市各类产品质量监督抽查合格率 <i  onclick="popBoxSuffix('_1_3')"></i></div>
+							<div id="container_1_3" style="height: 90%"></div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2009-2015年特种设备安全监督执法情况 <i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i></div>
-							<div id="container_2_3" style="height: 100%"></div>
+							<div class="title">2009-2015年特种设备安全监督执法情况</div>
+							<div id="container_2_3" style="height: 90%"></div>
 						</div>
 					</div>
 				</div>
@@ -132,14 +136,9 @@
 <!--全局页面字体配置 -->
 <script>
     var fontSize_all_legend = 18
-    var fontSize_axis_label = 14
-    //0-白色-axisLine-lineStyle-color
-        //1-淡灰蓝-legend-textStyle-color
-    //2-绿色
-    //3-黄色
-    //4-红色
-    //5-蓝色-饼状图label-color
-    var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
+	var fontSize_axis_label = 14
+	var echart_toolbox_size = 16
+
 </script>
 
 <!--解决本地json跨域问题-->
@@ -155,13 +154,16 @@
 <script>
 
 	var dom = document.getElementById("container_1_1");
-	var myChart = echarts.init(dom);
+	var myChart = echarts.init(dom, 'chalk');
 	var app = {};
 
 	var option = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		legend : {
             textStyle:{
-                color: '#F0F8FF'
+				color: '#F0F8FF',
             },
 			data : ['立案查办案件（起）', '案件信息公开（起）', '涉案金额（亿元）','罚没款（万元）','移送公安机关案件（起）','捣毁假冒窝点（个）']
 		},
@@ -169,7 +171,11 @@
             trigger: 'axis'
         },
         toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
@@ -181,10 +187,16 @@
     xAxis: [
         {
             type: 'category',
-            data: ['2012','2013','2014','2015','2016']
+			data: ['2012','2013','2014','2015','2016'],
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
         }
     ],
     yAxis: [ {
+		axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type : 'value',
 				name : '起',
 				min : 0,
@@ -197,6 +209,9 @@
 					formatter : '{value}'
 				}
 			}, {
+				axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type : 'value',
 				name : '涉案金额（亿元）',
 				min : 1,
@@ -209,6 +224,9 @@
 					formatter : '{value}'
 				}
 			}, {
+				axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type : 'value',
 				name : '',
 				offset:50,
@@ -222,11 +240,14 @@
 					formatter : '{value}'
 				}
 			}, {
+				axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type : 'value',
 				name : '',
 				offset:20,
 				min : 4000,
-				max : 10000,
+				max : 9000,
 				position : 'right',
 				axisLine : {
 					lineStyle : {}
@@ -341,7 +362,7 @@
 	// 			type : 'value',
 	// 			name : '设备新增数量',
 	// 			min : 0,
-	// 			max : 11000,
+	// 			max : 1900,
 	// 			position : 'left',
 	// 			axisLine : {
 	// 				lineStyle : {}
@@ -366,14 +387,14 @@
 	// 				{
 	// 					name : '设备新增数量',
 	// 					type : 'bar',
-	// 					data : [ 10000, 2000, 1065, 3620, 6530, 9510, 2000,
+	// 					data : [ 9000, 2000, 1065, 3620, 6530, 9510, 2000,
 	// 							3002, 3580, 5063, 1520, 9000 ]
 	// 				},
 	// 				{
 	// 					name : '产品新增数量',
 	// 					type : 'bar',
 	// 					yAxisIndex : 1,
-	// 					data : [ 10, 50, 100, 32, 56, 87, 41, 25, 46, 96, 30,
+	// 					data : [ 10, 50, 90, 32, 56, 87, 41, 25, 46, 96, 30,
 	// 							150 ]
 	// 				} ]
 	// 	};
@@ -382,10 +403,13 @@
 	// 	myChart.setOption(option);
 
 	var dom2 = document.getElementById("container_1_2");
-	var myChart2 = echarts.init(dom2);
+	var myChart2 = echarts.init(dom2, 'chalk');
 	var app2 = {};
 
 	var option2 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		legend : {
             textStyle:{
                 color: '#F0F8FF'
@@ -396,7 +420,11 @@
             trigger: 'axis'
         },
         toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
@@ -406,17 +434,22 @@
         },
         calculable: true,
 		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'category',
 			data: ['2008','2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
 		},
 		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'value'
 		},
 		series: [{
 			name:'上海市产品',
 			data: [0.841,0.87,0.89,0.892,0.899,0.92,0.894,0.91,0.923,0.921],
 			type: 'line',
-			color:colors[3],
 			showBackground: true,
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
@@ -425,7 +458,6 @@
 			name:'外省市产品',
 			data: [0.713,0.83,0.837,0.85,0.855,0.873,0.8034,0.84,0.843,0.828],
 			type: 'line',
-			color:colors[2],
 			showBackground: true,
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
@@ -490,7 +522,7 @@
 	// 	myChart3.setOption(option3);
 	// }
 	var dom_3 = document.getElementById("container_1_3");
-	var myChart_3 = echarts.init(dom_3);
+	var myChart_3 = echarts.init(dom_3, 'chalk');
 	var data_3 = alldata["2009-2017年上海市各类产品质量监督抽查合格率"]
     var xAxis_3 = ['2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
 	var yAxis_3a = []
@@ -503,6 +535,9 @@
 	}
 
     var option_3_1 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -510,14 +545,18 @@
 			}
 		},
 		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
 		legend: {
 			data: [
 				{
@@ -541,12 +580,18 @@
 			containLabel: true
 		},
 		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'category',
 			name: '年份',
 		    data: xAxis_3,
 		},
 		yAxis: [
 			{
+				axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type: 'value'
 			}
 		],
@@ -573,6 +618,9 @@
 	};
 
 	var option_3 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		title: [
 			{
 				subtext: '2009',
@@ -695,7 +743,11 @@
 			formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
 		toolbox: {
-            show: true,
+			show: true,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+			itemSize: echart_toolbox_size, 
             feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
@@ -865,22 +917,43 @@
 
 
     var dom4 = document.getElementById("container_2_1");
-	var myChart4 = echarts.init(dom4);
+	var myChart4 = echarts.init(dom4, 'chalk');
 	var app4 = {};
 
 	var option4 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
 		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'category',
 			data: ['2012', '2013', '2014', '2015', '2016', '2017']
 		},
 		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'value'
 		},
 		series: [{
 			data: [40, 55.5, 30.8, 50.3, 45.9, 0],
 			type: 'bar',
 			showBackground: true,
-			color:colors[4],
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
 			}
@@ -892,10 +965,13 @@
 	}
 
 	var dom5 = document.getElementById("container_2_2");
-	var myChart5 = echarts.init(dom5);
+	var myChart5 = echarts.init(dom5, 'chalk');
 	var app5 = {};
 
 	var option5 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
 		legend : {
             textStyle:{
                 color: '#F0F8FF'
@@ -906,7 +982,11 @@
             trigger: 'axis'
         },
         toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: {show: true, readOnly: false},
                 magicType: {show: true, type: ['line', 'bar']},
@@ -916,17 +996,22 @@
         },
         calculable: true,
 		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'category',
 			data: ['2007','2008','2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
 		},
 		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'value'
 		},
 		series: [{
 			name:'国抽',
 			data: [0.836,0.871,0.926,0.922,0.94,0.92,0.932,0.931,0.907,0.924,0.923],
 			type: 'line',
-			color:colors[1],
 			showBackground: true,
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
@@ -936,7 +1021,6 @@
 			data: [0.765,0.805,0.853,0.88,0.892,0.888,0.913,0.894,0.887,0.892,0.881],
 			type: 'line',
 			showBackground: true,
-			color:colors[2],
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
 			}
@@ -1014,7 +1098,7 @@
 
 
 	var dom_6 = document.getElementById("container_2_3");
-	var myChart_6 = echarts.init(dom_6);
+	var myChart_6 = echarts.init(dom_6, 'chalk');
 	var data_6 = alldata["2009-2015年特种设备安全监督执法情况"]
 	// var data_6 = alldata["2009-2017年上海市各类产品质量监督抽查合格率"]
     var xAxis_6 = ['2009','2010','2011','2012', '2013', '2014', '2015']
@@ -1035,14 +1119,18 @@
 			}
 		},
 		toolbox: {
-        	show: true,
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
 		legend: {
 			data: [
 				{
@@ -1066,12 +1154,18 @@
 			containLabel: true
 		},
 		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 			type: 'category',
 			name: '年份',
 		    data: xAxis_6,
 		},
 		yAxis: [
 			{
+				axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
 				type: 'value'
 			}
 		],
@@ -1198,7 +1292,11 @@
 			formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
 		toolbox: {
-            show: true,
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
