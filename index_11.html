@@ -20,6 +20,7 @@
 
     <!-- echarts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/color.js"></script>
 
     <!-- semantic UI -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -54,8 +55,8 @@
             <div class="col col-c">
                 <div class="xpanel-wrapper xpanel-wrapper-50">
                     <div class="xpanel xpanel-c-t">
-                        <div class="title">2013-2017上海质量申诉总体情况</div>
-                        <div id="container_11_3" style="height: 95%"></div>
+                        <div class="title">2012-2017年吊销营业执照数量（单位张）</div>
+                        <div id="container_11_6" style="height: 95%"> </div>
                     </div>
                 </div>
                 <div class="xpanel-wrapper xpanel-wrapper-55">
@@ -74,8 +75,8 @@
                 </div>
                 <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
-                        <div class="title">2012-2017年吊销营业执照数量（单位张）</div>
-                        <div id="container_11_6" style="height: 95%"> </div>
+                        <div class="title">2013-2017上海质量申诉总体情况</div>
+                        <div id="container_11_3" style="height: 95%"></div>
                     </div>
                 </div>
             </div>
@@ -158,7 +159,7 @@
 <!--配置页面 11-1 的Echart图-->
 <script>
     var dom_11_1 = document.getElementById("container_11_1");
-    var myChart_11_1 = echarts.init(dom_11_1);
+    var myChart_11_1 = echarts.init(dom_11_1, 'chalk');
 
     var data_11_1 = alldata["2014-2017上海质量热线举报中计量类分类（按件数）"]
 
@@ -255,7 +256,7 @@
 <!--配置页面 11-2 的表格-->
 <script>
     var dom_11_2 = document.getElementById("container_11_2");
-    var myChart_11_2 = echarts.init(dom_11_2);
+    var myChart_11_2 = echarts.init(dom_11_2, 'chalk');
 
     var data_11_2 = alldata[" 2013-2017上海质量热线举报信息分类（件）"]
 
@@ -428,7 +429,7 @@
 <!--配置页面 11-3 的Echart图-->
 <script>
     var dom_11_3 = document.getElementById("container_11_3");
-    var myChart_11_3 = echarts.init(dom_11_3);
+    var myChart_11_3 = echarts.init(dom_11_3, 'chalk');
 
     var data_11_3 = alldata["013-2017上海质量申诉总体情况（按件数）"]
 
@@ -583,7 +584,7 @@
 <!--配置页面 11-4 的Echart图-->
 <script>
     var dom_11_4 = document.getElementById("container_11_4");
-    var myChart_11_4 = echarts.init(dom_11_4);
+    var myChart_11_4 = echarts.init(dom_11_4, 'chalk');
 
     var data_11_4 = alldata["2013-2017上海质量违法案件查处分类（件）（缺2017年"]
 
@@ -748,7 +749,7 @@
 <!--配置页面 11-5 的Echart图-->
 <script>
     var dom_11_5 = document.getElementById("container_11_5");
-    var myChart_11_5 = echarts.init(dom_11_5);
+    var myChart_11_5 = echarts.init(dom_11_5, 'chalk');
 
     var data_11_5 = alldata["2012-2017上海市“三品”认证变化率趋势"]
 
@@ -824,7 +825,7 @@
 <!--配置页面 11-6 的Echart图-->
 <script>
     var dom_11_6 = document.getElementById("container_11_6");
-    var myChart_11_6 = echarts.init(dom_11_6);
+    var myChart_11_6 = echarts.init(dom_11_6, 'chalk');
 
     var data_11_6 = alldata["2012-2017年吊销营业执照数量（单位 张）"]
 
@@ -883,7 +884,7 @@
         series: [
             {
                 name: '吊销营业执照数量',
-                type: 'line',
+                type: 'bar',
                 data: yAxis_11_6a,
             },
         ]

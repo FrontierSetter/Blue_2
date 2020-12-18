@@ -75,7 +75,7 @@
                 <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-c-b">
                         <div class="title">2013-2017上海质监12365质量热线各类业务受理
-                            <a href="./index_11.html"><img border="0" height=40px src="img/rightarror.jpg" />
+                            <a href="./index_11.html"><img border="0" height=20px src="img/rightarror.jpg" />
                             </a>
                         </div>
                         <div id="container_6_4" style="height: 90%"></div>
@@ -182,6 +182,7 @@
 <script>
     var fontSize_all_legend = 18
     var fontSize_axis_label = 14
+    var echart_toolbox_size = 16
 </script>
 
 
@@ -223,6 +224,10 @@
         },
         toolbox: {
             show: true,
+            itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: { show: true, readOnly: false },
                 magicType: { show: true, type: ['line', 'bar'] },
@@ -293,9 +298,9 @@
         var tbody = tBodies[0];
         var tr = tbody.insertRow(tbody.rows.length);
         var td_1 = tr.insertCell(0);
-        td_1.innerHTML = "<div contenteditable='true'>" + data1 + "</div>";
+        td_1.innerHTML = "<div contenteditable='true' class='table_info'>" + data1 + "</div>";
         var td_2 = tr.insertCell(1);
-        td_2.innerHTML = "<div contenteditable='true'>" + data2 + "</div>";
+        td_2.innerHTML = "<div contenteditable='true' class='table_info'>" + data2 + "</div>";
     }
 
     function addRow_6_2(data) {
@@ -339,6 +344,10 @@
         },
         toolbox: {
             show: true,
+            itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: { show: true, readOnly: false },
                 magicType: { show: true, type: ['line', 'bar'] },
@@ -368,7 +377,7 @@
         series: [
             {
                 name: '国抽',
-                type: 'line',
+                type: 'bar',
                 data: yAxis_6_3a,
             }
         ]
@@ -425,6 +434,10 @@
         },
         toolbox: {
             show: true,
+            itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 dataView: { show: true, readOnly: false },
                 magicType: { show: true, type: ['line', 'bar'] },
@@ -523,13 +536,17 @@
             trigger: 'axis'
         },
         legend: {
-            data: ['环评文件', '环境影响报告书', '报告表', '登记表'],
+            data: ['环评文件', '环境影响报告书', '报告表', '登记表', '总量'],
             textStyle: {
                 color: '#F0F8FF'
             }
         },
         toolbox: {
             show: true,
+            itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
             feature: {
                 mark: { show: true },
                 dataView: { show: true, readOnly: false },
@@ -598,9 +615,9 @@
         var tbody = tBodies[0];
         var tr = tbody.insertRow(tbody.rows.length);
         var td_1 = tr.insertCell(0);
-        td_1.innerHTML = "<div contenteditable='true'>" + data1 + "</div>";
+        td_1.innerHTML = "<div contenteditable='true' class='table_info'>" + data1 + "</div>";
         var td_2 = tr.insertCell(1);
-        td_2.innerHTML = "<div contenteditable='true'>" + data2 + "</div>";
+        td_2.innerHTML = "<div contenteditable='true' class='table_info'>" + data2 + "</div>";
     }
 
     function addRow_6_6(data) {
