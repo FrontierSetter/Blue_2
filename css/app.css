@@ -30,7 +30,7 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 	right:10px;
 	padding:10px 10px 0 10px;
 	min-height:500px;
-	background:url("../img/wrapper-bg-2.png") no-repeat;
+	background:url("../img/wrapper-bg.png") no-repeat;
 	background-size:100% 100%;
 	box-sizing:border-box;
 }
@@ -94,13 +94,13 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 	background-size:100% 100%;
 	box-sizing:border-box;
 }
-.xpanel-l-t {background-image:url("../img/panel-c-t.png");}
+/* .xpanel-l-t {background-image:url("../img/panel-c-t.png");}
 .xpanel-l-b {background-image:url("../img/panel-c-t.png");}
 .xpanel-c-b {background-image:url("../img/panel-c-t.png");}
 .xpanel-c-t {background-image:url("../img/panel-c-t.png");}
 .xpanel-r-t {background-image:url("../img/panel-c-t.png");}
 .xpanel-r-m {background-image:url("../img/panel-c-t.png");}
-.xpanel-r-b {background-image:url("../img/panel-c-t.png");}
+.xpanel-r-b {background-image:url("../img/panel-c-t.png");} */
 .xpanel .title {
 	padding-left:45px;
 	height:66px;
