@@ -2,7 +2,6 @@
 
 <html>
 	<head>
-
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -13,14 +12,11 @@
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- 弹出窗口 -->
-		<link rel="stylesheet" href="css/hover_window_2.css" />
-		<link rel="stylesheet" href="css/hover_window.css" />
-		<script type="text/javascript" src="js/hover_window_2.js"></script>
-		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -29,7 +25,6 @@
 
 		<!-- bootstrap -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 	</head>
 	
 	<body>
@@ -42,13 +37,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市服务名牌数量变化图</div>
-							<div id="container_1_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_1_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2011-2017年上海市主要餐饮服务单位变化趋势</div>
-							<div id="container_1_2" style="height: 90%"></div>
+							<div class="echart-container" id="container_1_2"></div>
 						</div>
 					</div>
 				</div>
@@ -56,13 +51,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
 							<div class="title title-long">2009-2017年上海市服务业标准化示范点数目(累计数)</div>
-							<div id="container_2_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
 							<div class="title title-long">2008-2017年上海市名牌及著名商标情况</div>
-							<div id="container_2_2" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_2"></div>
 						</div>
 					</div>
 				</div>
@@ -70,67 +65,18 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
 							<div class="title">2008-2017年地方标准立项和当年年底现行有效总数</div>
-							<div id="container_3_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
 							<div class="title">2011-2017年上海市餐饮服务单位量化监督动态等级评定情况</div>
-							<div id="container_3_2" style="height: 90%;zoom: 100%"></div>
+							<div class="echart-container" id="container_3_2"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div id="popLayer"></div>
-		<div id="popBox_1_1" class="popBox">
-			<!-- <div class="close">
-				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
-			</div> -->
-			<div class="content" style="overflow: scroll; max-height: 80%;">
-				<table id="table_1_1" class="ui definition table">
-					<thead>
-						<tr><th></th>
-						<th>Arguments</th>
-					</tr></thead>
-					<tbody>
-						<tr>
-						<td>reset rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-						<tr>
-						<td>set rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="dlg_bottom">
-				<button class="ui primary button" onclick="alert('submit success!')">
-					保存
-				</button>
-				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
-					关闭
-				</button>
-				<button class="ui button" onclick="addTableRow('_1_1')">
-					添加一行
-				</button>
-			</div>
-
-		</div>
-		<script>
-			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
-		</script>
 	</body>
 </html>
 
@@ -145,18 +91,24 @@
 <script src="data/data2.json?callback=demo"></script>
 
 <!--全局页面字体配置、颜色配置 -->
+<!--
 <script>
-    var fontSize_all_legend = 18;
-	var fontSize_axis_label = 14;
-	var echart_toolbox_size = 16;
-	//0-白色-axisLine-lineStyle-color
-	//1-淡灰蓝-legend-textStyle-color
-	//2-绿色
-	//3-黄色
-	//4-红色
-	//5-蓝色-饼状图label-color
+    // 图例字体大小
+    var fontSize_all_title = 18
+    // 图例字体大小
+    var fontSize_all_legend = 16
+    // 坐标轴字体大小
+    var fontSize_axis_label = 14
+    // 坐标轴颜色，白色
+    var color_axis = '#fff'
+    // 图例颜色，白色
+    var color_legend = '#fff'
+    // echart toolbox字体大小
+    var echart_toolbox_size = 16
+	//0-白色、1-淡灰蓝、2-绿色、3-黄色、4-红色、5-蓝色
 	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
 </script>
+-->
 
 <!--配置页面 5-1 的Echart图-->
 <script>
@@ -171,7 +123,7 @@
 	}
 	var option_5_1 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -194,10 +146,11 @@
 		},	
 		calculable: true,
 		legend: {
-            data: ["服务名牌"],
+			data: ["服务名牌"],
             textStyle: {
-                color: colors[1]
-            }
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
         },
 		xAxis: {
 			type: 'category',
@@ -205,7 +158,7 @@
 			data: xAxis_5_1,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -217,7 +170,7 @@
 			name: '数目',
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -229,13 +182,6 @@
 			data: yAxis_5_1,
 			name: '服务名牌',
 			type: 'bar',
-			markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]  
-            },
-			//color: colors[4],
 		}]
 	};
 	if (option_5_1 && typeof option_5_1 === 'object') {
@@ -265,7 +211,7 @@
 	}
 	var option_5_2 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -290,8 +236,9 @@
 		legend: {
 			data: ["食堂", "公共餐饮", "集体用餐"],
 			textStyle: {
-				color: colors[1]
-			},
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
 			type: 'category',
@@ -300,7 +247,7 @@
 			boundaryGap: false,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -313,7 +260,7 @@
 				name: '数目',
 				axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 				},
                 axisLabel: {
@@ -329,7 +276,6 @@
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[2]
 		    },
 		    {
 				name: '公共餐饮',
@@ -337,7 +283,6 @@
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[3]
 			},
 			{
 				name: '集体用餐',
@@ -345,13 +290,12 @@
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[4]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 		]
 	};  
@@ -376,7 +320,7 @@
 	}
 	var option_5_3 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -401,7 +345,8 @@
 		legend: {
 			data: ["国家级", "市级"],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -410,7 +355,7 @@
 			data: xAxis_5_3,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -423,7 +368,7 @@
                 name: '数目',
 				axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
 			    axisLabel: {
@@ -437,25 +382,23 @@
 				name: '国家级',
 			    data: yAxis_5_3a,
 				type: 'line',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-			    //color: colors[2],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 			{
 				name: '市级',
 			    data: yAxis_5_3b,
 				type: 'line',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-			    //color: colors[3],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 		]
 	};
@@ -484,7 +427,7 @@
 	}
 	var option_5_4 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -509,7 +452,8 @@
 		legend: {
 			data: ['上海财富世界五百强', '全国财富世界五百强', '上海名牌产品项', '上海市著名商标新认定', '上海市著名商标总数', '全国名牌产品项'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -518,7 +462,7 @@
 			data: xAxis_5_4,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -527,11 +471,11 @@
 		},
 		yAxis: [
 			{
-                type: 'value',
+                type: 'log',
 				name: '数目',
 				axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
                 axisLabel: {
@@ -555,45 +499,21 @@
 				name: '上海名牌产品项',
 				data: yAxis_5_4c,
 				type: 'line',
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
 		    },
 			{
 				name: '全国名牌产品项',
 				data: yAxis_5_4b,
 				type: 'line',
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
 		    },
 			{
 				name: '上海市著名商标新认定',
 			    data: [198, 116, 79, 118, 133, 158, 164, 79, 78],
 				type: 'line',
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
 		    },
 			{
 				name: '上海市著名商标总数',
 			    data: [324, 285, 256, 377, 405, 379, 497, 426, 409],
 				type: 'line',
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
 		    },
 		]
 	};
@@ -618,7 +538,7 @@
 	}
 	var option_5_5 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -643,7 +563,8 @@
 		legend: {
 			data: ['当年地方立项标准数', '当年年底现行有效地方标准数'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -652,7 +573,7 @@
 			data: xAxis_5_5,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -665,7 +586,7 @@
                 name: '数目',
                 axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
                 axisLabel: {
@@ -679,27 +600,24 @@
 				name: '当年地方立项标准数',
 				data: yAxis_5_5a,
 				type: 'bar',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[2]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 			{
 				name: '当年年底现行有效地方标准数',
 				data: yAxis_5_5b,
 				type: 'bar',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[3]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
-
 		]
 	};
 	if (option_5_5 && typeof option_5_5 === 'object') {
@@ -725,7 +643,7 @@
     //option_5_6_1-柱状图
     var option_5_6_1 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		tooltip: {
 			trigger: 'axis',
@@ -749,7 +667,8 @@
 		legend: {
 			data: ['A级', 'B级', 'C级'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -758,7 +677,7 @@
 			boundaryGap: true,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -770,7 +689,7 @@
 			type: 'value',
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -784,7 +703,6 @@
 				type: 'bar',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[2],
 				data: yAxis_5_6a
 			},
 			{
@@ -792,7 +710,6 @@
 				type: 'bar',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[3],
 				data: yAxis_5_6b
 			},
 			{
@@ -800,13 +717,12 @@
 				type: 'bar',
 				stack: '合计',
 				areaStyle: {},
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[4],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 				data: yAxis_5_6c
 			},
 		]
@@ -814,7 +730,7 @@
 	//option_5_6_2-折线图
     var option_5_6_2 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		tooltip: {
 			trigger: 'axis',
@@ -838,7 +754,8 @@
 		legend: {
 			data: ['A级', 'B级', 'C级'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -847,7 +764,7 @@
 			boundaryGap: false,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -859,7 +776,7 @@
 			type: 'value',
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -873,7 +790,6 @@
 				type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[2],
 				data: yAxis_5_6a
 			},
 			{
@@ -881,7 +797,6 @@
 				type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				//color: colors[3],
 				data: yAxis_5_6b
 			},
 			{
@@ -889,13 +804,12 @@
 				type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[4],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 				data: yAxis_5_6c
 			},
 		]
@@ -903,7 +817,7 @@
     //option_5_6-饼状图
 	var option_5_6 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		title: [
 			{
@@ -911,9 +825,9 @@
 				left: '20%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -922,9 +836,9 @@
 				left: '40%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -933,9 +847,9 @@
 				left: '60%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -944,9 +858,9 @@
 				left: '80%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -955,9 +869,9 @@
 				left: '30%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -966,9 +880,9 @@
 				left: '50%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -977,9 +891,9 @@
 				left: '70%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			}
@@ -987,7 +901,8 @@
         legend: {
 			data: ['A级', 'B级', 'C级'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		tooltip: {
@@ -1014,8 +929,9 @@
                 radius: 70,
                 center: ['20%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
 				},/*
 				itemStyle: {
@@ -1040,20 +956,11 @@
                 radius: 70,
                 center: ['40%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[1], name: 'A级'},
 					{value: yAxis_5_6b[1], name: 'B级'},
@@ -1066,20 +973,11 @@
                 radius: 70,
                 center: ['60%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[2], name: 'A级'},
 					{value: yAxis_5_6b[2], name: 'B级'},
@@ -1092,20 +990,11 @@
                 radius: 70,
                 center: ['80%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[3], name: 'A级'},
 					{value: yAxis_5_6b[3], name: 'B级'},
@@ -1118,20 +1007,11 @@
                 radius: 70,
                 center: ['30%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[4], name: 'A级'},
 					{value: yAxis_5_6b[4], name: 'B级'},
@@ -1144,20 +1024,11 @@
                 radius: 70,
                 center: ['50%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[5], name: 'A级'},
 					{value: yAxis_5_6b[5], name: 'B级'},
@@ -1170,20 +1041,11 @@
                 radius: 70,
                 center: ['70%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-                                colors[2], colors[3], colors[4]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
 				    {value: yAxis_5_6a[6], name: 'A级'},
 					{value: yAxis_5_6b[6], name: 'B级'},

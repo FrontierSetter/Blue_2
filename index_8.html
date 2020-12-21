@@ -2,7 +2,6 @@
 
 <html>
 	<head>
-
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -13,24 +12,19 @@
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- 弹出窗口 -->
-		<link rel="stylesheet" href="css/hover_window_2.css" />
-		<link rel="stylesheet" href="css/hover_window.css" />
-		<script type="text/javascript" src="js/hover_window_2.js"></script>
-		<script type="text/javascript" src="js/hover_window_2.js"></script>
-		
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 		<script type="text/javascript" src="js/color.js"></script>
-
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
 
-        <!-- bootstrap -->
+		<!-- bootstrap -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 	</head>
 	
 	<body>
@@ -43,13 +37,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2008-2017年上海市食物中毒事件发生情况</div>
-							<div id="container_1_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_1_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
 							<div class="title">2011-2017年上海市食品流通企业分类监管占比情况</div>
-							<div id="container_1_2" style="height: 90%"></div>
+							<div class="echart-container" id="container_1_2"></div>
 						</div>
 					</div>
 				</div>
@@ -57,13 +51,13 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
 							<div class="title title-long">2009-2017年上海市获得生产许可证的食品添加剂及食品相关产品</div>
-							<div id="container_2_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
 							<div class="title title-long">2009-2017年上海市食品生产经营许可证发放情况</div>
-							<div id="container_2_2" style="height: 90%"></div>
+							<div class="echart-container" id="container_2_2"></div>
 						</div>
 					</div>
 				</div>
@@ -71,67 +65,18 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
 							<div class="title">2011-2017年上海市年获证食品生产企业分布情况(按年销售)</div>
-							<div id="container_3_1" style="height: 90%"></div>
+							<div class="echart-container" id="container_3_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
-							<div class="title">22009-2017年上海市各级食品生产企业占比情况</div>
-							<div id="container_3_2" style="height: 90%"></div>
+							<div class="title">2009-2017年上海市各级食品生产企业占比情况</div>
+							<div class="echart-container" id="container_3_2"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div id="popLayer"></div>
-		<div id="popBox_1_1" class="popBox">
-			<!-- <div class="close">
-				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
-			</div> -->
-			<div class="content" style="overflow: scroll; max-height: 80%;">
-				<table id="table_1_1" class="ui definition table">
-					<thead>
-						<tr><th></th>
-						<th>Arguments</th>
-					</tr></thead>
-					<tbody>
-						<tr>
-						<td>reset rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-						<tr>
-						<td>set rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="dlg_bottom">
-				<button class="ui primary button" onclick="alert('submit success!')">
-					保存
-				</button>
-				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
-					关闭
-				</button>
-				<button class="ui button" onclick="addTableRow('_1_1')">
-					添加一行
-				</button>
-			</div>
-
-		</div>
-		<script>
-			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
-		</script>
 	</body>
 </html>
 
@@ -146,19 +91,24 @@
 <script src="data/data2.json?callback=demo"></script>
 
 <!--全局页面字体配置、颜色配置 -->
+<!--
 <script>
-    var fontSize_all_legend = 18;
-	var fontSize_axis_label = 14;
-	var echart_toolbox_size = 16;
-	//0-白色-axisLine-lineStyle-color
-	//1-淡灰蓝-legend-textStyle-color
-	//2-绿色
-	//3-黄色
-	//4-红色
-	//5-蓝色-饼状图label-color
+    // 图例字体大小
+    var fontSize_all_title = 18
+    // 图例字体大小
+    var fontSize_all_legend = 16
+    // 坐标轴字体大小
+    var fontSize_axis_label = 14
+    // 坐标轴颜色，白色
+    var color_axis = '#fff'
+    // 图例颜色，白色
+    var color_legend = '#fff'
+    // echart toolbox字体大小
+    var echart_toolbox_size = 16
+	//0-白色、1-淡灰蓝、2-绿色、3-黄色、4-红色、5-蓝色
 	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
 </script>
-
+-->
 
 <!--配置页面 8-1 的Echart图-->
 <script>
@@ -175,7 +125,7 @@
 	}
 	var option_8_1 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -200,7 +150,8 @@
         legend: {
 			data: ['中毒起数', '中毒人数'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		xAxis: {
@@ -209,7 +160,7 @@
 			data: xAxis_8_1,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -226,7 +177,7 @@
                 position: 'left',
                 axisLine: {
                     lineStyle: {
-                        //color: colors[2],
+                        color: color_axis,
                     }
                 },
                 axisLabel: {
@@ -242,7 +193,7 @@
                 position: 'right',
                 axisLine: {
                     lineStyle: {
-                        //color: colors[3],
+                        color: color_axis,
                     }
                 },
                 axisLabel: {
@@ -256,26 +207,24 @@
 			    type: 'bar',
                 yAxisIndex: 0,
 				data: yAxis_8_1a,
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
-                //color: colors[2],
+				// markPoint: {
+                //     data: [
+                //         {type: 'max', name: '最大值'},
+                //         {type: 'min', name: '最小值'}
+                //     ]  
+                // },
 		    },
             {
 			    name: '中毒人数',
 			    type: 'bar',
                 yAxisIndex: 1,
 				data: yAxis_8_1b,
-				markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]  
-                },
-                //color: colors[3],
+				// markPoint: {
+                //     data: [
+                //         {type: 'max', name: '最大值'},
+                //         {type: 'min', name: '最小值'}
+                //     ]  
+                // },
 		    },
         ]
 	};
@@ -304,7 +253,7 @@
 	}
 	var option_8_2 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		title: [
 			{
@@ -312,9 +261,9 @@
 				left: '20%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:'#5793f3',
-                    fontSize:36,
+                    fontSize:20,
 					align:"center"
                 }
 			},
@@ -323,10 +272,10 @@
 				left: '40%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			},
 			{
@@ -334,10 +283,10 @@
 				left: '60%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			},
 			{
@@ -345,10 +294,10 @@
 				left: '80%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			},
 			{
@@ -356,10 +305,10 @@
 				left: '30%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			},
 			{
@@ -367,10 +316,10 @@
 				left: '50%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			},
 			{
@@ -378,17 +327,18 @@
 				left: '70%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
-                    align:"center"
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
                 }
 			}
 		],
         legend: {
 			data: ['一类', '二类', '三类', '四类'],
 			textStyle: {
-				color: colors[1]
+				color: color_legend,
+				fontSize: fontSize_all_legend,
 			}
 		},
 		tooltip: {
@@ -414,8 +364,9 @@
                 radius: 70,
                 center: ['20%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
 				},/*
 				itemStyle: {
@@ -429,8 +380,8 @@
                     }
                 },*/
 				data: [
+				    {value: yAxis_8_2a[0], name: '一类'},
 				    {value: yAxis_8_2b[0], name: '二类'},
-					{value: yAxis_8_2a[0], name: '一类'},
 					{value: yAxis_8_2c[0], name: '三类'},
                     {value: yAxis_8_2d[0], name: '四类'},
 				]
@@ -441,23 +392,14 @@
                 radius: 70,
                 center: ['40%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+    				{value: yAxis_8_2a[1], name: '一类'},
 				    {value: yAxis_8_2b[1], name: '二类'},
-                    {value: yAxis_8_2a[1], name: '一类'},
 					{value: yAxis_8_2c[1], name: '三类'},
                     {value: yAxis_8_2d[1], name: '四类'},
 				]
@@ -468,23 +410,14 @@
                 radius: 70,
                 center: ['60%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+				    {value: yAxis_8_2a[2], name: '一类'},
 				    {value: yAxis_8_2b[2], name: '二类'},
-					{value: yAxis_8_2a[2], name: '一类'},
 					{value: yAxis_8_2c[2], name: '三类'},
                     {value: yAxis_8_2d[2], name: '四类'},
 				]
@@ -495,23 +428,14 @@
                 radius: 70,
                 center: ['80%', '30%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+				    {value: yAxis_8_2a[3], name: '一类'},
 				    {value: yAxis_8_2b[3], name: '二类'},
-                    {value: yAxis_8_2a[3], name: '一类'},
 					{value: yAxis_8_2c[3], name: '三类'},
                     {value: yAxis_8_2d[3], name: '四类'},
 				]
@@ -522,23 +446,14 @@
                 radius: 70,
                 center: ['30%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+				    {value: yAxis_8_2a[4], name: '一类'},	
 				    {value: yAxis_8_2b[4], name: '二类'},
-                    {value: yAxis_8_2a[4], name: '一类'},
 					{value: yAxis_8_2c[4], name: '三类'},
                     {value: yAxis_8_2d[4], name: '四类'},
 				]
@@ -549,23 +464,14 @@
                 radius: 70,
                 center: ['50%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+				    {value: yAxis_8_2a[5], name: '一类'},
 				    {value: yAxis_8_2b[5], name: '二类'},
-                    {value: yAxis_8_2a[5], name: '一类'},
 					{value: yAxis_8_2c[5], name: '三类'},
                     {value: yAxis_8_2d[5], name: '四类'},
 				]
@@ -576,23 +482,14 @@
                 radius: 70,
                 center: ['70%', '70%'],
 				label: {
+					// show: false,
                     formatter: '{d}%',
-					color: colors[5],
+					color: color_legend,
 					fontSize: 20,
-				},/*
-				itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var colorList = [
-							    colors[5], colors[4], colors[3], colors[2]
-                            ];
-							return colorList[params.dataIndex]
-						}
-                    }
-                },*/
+				},
 				data: [
+				    {value: yAxis_8_2a[6], name: '一类'},
 				    {value: yAxis_8_2b[6], name: '二类'},
-                    {value: yAxis_8_2a[6], name: '一类'},
 					{value: yAxis_8_2c[6], name: '三类'},
                     {value: yAxis_8_2d[6], name: '四类'},
 				]
@@ -620,7 +517,7 @@
 	}
 	var option_8_3 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -643,16 +540,11 @@
 		},
 		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '食品添加剂',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: '食品相关产品',
-                    textStyle: { color: colors[1] }
-				},
-			],
+			data: ['食品添加剂', '食品相关产品'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
 			type: 'category',
@@ -660,7 +552,7 @@
 			data: xAxis_8_3,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -674,7 +566,7 @@
 				position: 'left',
 				axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
 			    axisLabel: {
@@ -688,25 +580,23 @@
 				name: '食品添加剂',
 			    data: yAxis_8_3a,
 				type: 'line',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-			    //color: colors[2],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 			{
 				name: '食品相关产品',
 			    data: yAxis_8_3b,
 				type: 'line',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-			    //color: colors[3],
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 
 		]
@@ -738,7 +628,7 @@
 	}
 	var option_8_4 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -761,20 +651,11 @@
         },
 		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '食品生产',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: '食品流通',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: '餐饮服务',
-                    textStyle: { color: colors[1] }
-				},
-			],
+			data: ['食品流通', '食品生产', '餐饮服务'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
 			type: 'category',
@@ -783,7 +664,7 @@
 			boundaryGap: false,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -796,7 +677,7 @@
                 name: '数目',
                 axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
                 axisLabel: {
@@ -813,7 +694,6 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				//color: colors[2]
 		    },
 			{
 				name: '食品生产',
@@ -821,7 +701,6 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				//color: colors[3]
 		    },
 		    {
 				name: '餐饮服务',
@@ -829,13 +708,12 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[4]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 		]
 	};
@@ -862,7 +740,7 @@
 	}
 	var option_8_5 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -885,16 +763,11 @@
 		},
 		calculable: true,
 		legend: {
-			data: [
-				{
-					name: '2000万及以上',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: '2000万以下',
-                    textStyle: { color: colors[1] }
-				},
-			],
+			data: ['2000万及以上', '2000万以下'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
 			type: 'category',
@@ -902,7 +775,7 @@
 			data: xAxis_8_5,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -915,7 +788,7 @@
                 name: '数目',
 				axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
                 axisLabel: {
@@ -929,27 +802,24 @@
 				name: '2000万及以上',
 				data: yAxis_8_5a,
 				type: 'bar',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[2]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 			{
 				name: '2000万以下',
 				data: yAxis_8_5b,
 				type: 'bar',
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[3]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
-
 		]
 	};
 	if (option_8_5 && typeof option_8_5 === 'object') {
@@ -970,7 +840,7 @@
 	var yAxis_8_6d = [2426, 2360, 2107, 1834, 1619, 1543, 1526, 1611, 1283]
 	var option_8_6 = {
 		textStyle: {
-			fontSize: fontSize_all_legend,
+			fontSize: fontSize_all_title,
 		},
 		tooltip: {
             trigger: 'axis',
@@ -993,20 +863,11 @@
         },
 		calculable: true,
 		legend: {
-			data: [
-				{
-					name: 'A级',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: 'B级',
-                    textStyle: { color: colors[1] }
-				},
-				{
-					name: 'C级',
-                    textStyle: { color: colors[1] }
-				},
-			],
+			data: ['A级', 'B级', 'C级'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
 			type: 'category',
@@ -1015,7 +876,7 @@
 			boundaryGap: false,
 			axisLine: {
                 lineStyle: {
-                    color: colors[0]
+                    color: color_axis
                 }
 			},
 			axisLabel: {
@@ -1028,7 +889,7 @@
                 name: '数目',
                 axisLine: {
                     lineStyle: {
-                        color: colors[0]
+                        color: color_axis
                     }
 			    },
                 axisLabel: {
@@ -1044,7 +905,6 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				//color: colors[2]
 		    },
 			{
 				name: 'B级',
@@ -1052,7 +912,6 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				//color: colors[3]
 		    },
 		    {
 				name: 'C级',
@@ -1060,13 +919,12 @@
 			    type: 'line',
 				stack: '总量',
 				areaStyle: {},
-				label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-			    },
-				//color: colors[4]
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
 		    },
 		]
 	};
