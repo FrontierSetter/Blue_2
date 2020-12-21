@@ -20,6 +20,8 @@
 		<!-- echarts -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -136,9 +138,9 @@
 
 <!--全局页面字体配置 -->
 <script>
-    var fontSize_all_legend = 18
-	var fontSize_axis_label = 14
-	var echart_toolbox_size = 16
+    // var fontSize_all_title = 18
+	// var fontSize_axis_label = 14
+	// var echart_toolbox_size = 16
 
 </script>
 
@@ -160,7 +162,7 @@
 
 	var option = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		legend : {
             textStyle:{
@@ -409,7 +411,7 @@
 
 	var option2 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		legend : {
             textStyle:{
@@ -537,7 +539,7 @@
 
     var option_3_1 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		tooltip: {
 			trigger: 'axis',
@@ -620,7 +622,7 @@
 
 	var option_3 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		title: [
 			{
@@ -628,9 +630,9 @@
 				left: '10%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -639,9 +641,9 @@
 				left: '30%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -650,9 +652,9 @@
 				left: '50%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -661,20 +663,20 @@
 				left: '70%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
 			{
 				subtext: '2013',
 				left: '90%',
-				top: '70%',
+				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -683,9 +685,9 @@
 				left: '20%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -694,9 +696,9 @@
 				left: '40%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -705,9 +707,9 @@
 				left: '60%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -716,9 +718,9 @@
 				left: '80%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			}
@@ -923,7 +925,7 @@
 
 	var option4 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		toolbox: {
 			show: true,
@@ -971,7 +973,7 @@
 
 	var option5 = {
 		textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		legend : {
             textStyle:{
@@ -1011,7 +1013,7 @@
 		},
 		series: [{
 			name:'国抽',
-			data: [0.836,0.871,0.926,0.922,0.94,0.92,0.932,0.931,0.907,0.924,0.923],
+			data: [0.820,0.871,0.926,0.922,0.94,0.92,0.932,0.931,0.907,0.924,0.923],
 			type: 'line',
 			showBackground: true,
 			backgroundStyle: {
@@ -1199,9 +1201,9 @@
 				left: '20%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1210,9 +1212,9 @@
 				left: '40%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1221,9 +1223,9 @@
 				left: '60%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1232,9 +1234,9 @@
 				left: '80%',
 				top: '30%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1243,9 +1245,9 @@
 				left: '30%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1254,9 +1256,9 @@
 				left: '50%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			},
@@ -1265,9 +1267,9 @@
 				left: '70%',
 				top: '70%',
 				textAlign: 'center',
-				textStyle:{
+				subtextStyle:{
                     color:"#5793f3",
-                    fontSize:36,
+                    fontSize:20,
                     align:"center"
                 }
 			}

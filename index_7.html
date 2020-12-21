@@ -22,6 +22,8 @@
     <!-- echarts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
     <script type="text/javascript" src="js/color.js"></script>
+    <script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
 
     <!-- semantic UI -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -167,9 +169,9 @@
     function demo(res){
         alldata = res;
     }
-    var fontSize_all_legend = 18
-    var fontSize_axis_label = 14
-    var echart_toolbox_size = 16
+    // var  = 18
+    // var fontSize_axis_label = 14
+    // var echart_toolbox_size = 16
 
 </script>
 <script src="data/data2.json?callback=demo"></script>
@@ -195,7 +197,7 @@
 
     var option_1_1 = {
         textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
         tooltip: {
             trigger: 'axis'
@@ -296,7 +298,7 @@
 
     var option_1_2 = {
         textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
         //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
         tooltip: {
@@ -378,7 +380,7 @@
 
     var option_1_3 ={
         textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
 		title: [
 			{
@@ -550,7 +552,7 @@ window.onload = addRow_1_4(data_1_4);
 
     var option_1_5 = {
         textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
         tooltip: {
             trigger: 'axis'
@@ -633,7 +635,7 @@ window.onload = addRow_1_4(data_1_4);
 
     var option_1_6 = {
         textStyle: {
-            fontSize: fontSize_all_legend,
+            fontSize: fontSize_all_title,
         },
         tooltip: {
             trigger: 'axis'
