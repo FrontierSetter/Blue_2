@@ -101,6 +101,20 @@ body {margin:0 auto;min-width:375px;max-width:1920px;}
 .xpanel-r-t {background-image:url("../img/panel-c-t.png");}
 .xpanel-r-m {background-image:url("../img/panel-c-t.png");}
 .xpanel-r-b {background-image:url("../img/panel-c-t.png");} */
+.xpanel .title_link {
+	padding-left:inherit;
+	height:inherit;
+	line-height:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+	color:inherit;
+	padding: 0%;
+	/* 去除下划线 */
+	text-decoration: none;
+	text-decoration: none;
+	text-decoration: none;
+	text-decoration:none;
+}
 .xpanel .title {
 	padding-left:45px;
 	height:66px;
