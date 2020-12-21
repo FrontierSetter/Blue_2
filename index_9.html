@@ -9,6 +9,7 @@
 		<title>大屏数据可视化 - 模板</title>
 		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="css/mine.css" />
+		<link rel="stylesheet" href="css/style.css" />
 
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -83,6 +84,10 @@
 				</div>
 			</div>
 		</div>
+
+		<svg onclick="location='./index_2.html'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" id="previous" version="1.1" viewBox="0 0 32 32" xml:space="preserve">
+			<path d="M7.701,14.276l9.586-9.585c0.879-0.878,2.317-0.878,3.195,0l0.801,0.8c0.878,0.877,0.878,2.316,0,3.194  L13.968,16l7.315,7.315c0.878,0.878,0.878,2.317,0,3.194l-0.801,0.8c-0.878,0.879-2.316,0.879-3.195,0l-9.586-9.587  C7.229,17.252,7.02,16.62,7.054,16C7.02,15.38,7.229,14.748,7.701,14.276z" fill="#FFFFFF"/>
+		</svg>
 
 		<div id="popLayer"></div>
 		<div id="popBox_1_1" class="popBox">
@@ -1193,4 +1198,7 @@
 	// $('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
 	$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
 	$('#back-to-top').fadeIn();	
+
+	$("#previous").show();
+
 </script>

@@ -20,10 +20,14 @@ svg {
 
 svg#next {
   display: none;
+  filter: alpha(opacity=80);
+  opacity:0.8;
   right: 1em;
 }
 
 svg#previous {
+  filter: alpha(opacity=80);
+  opacity:0.8;
   left: 1em;
 }
 
