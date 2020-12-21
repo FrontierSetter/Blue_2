@@ -44,13 +44,13 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2008-2017年上海市在用特种设备情况<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
+							<div class="title">2008-2017年上海市在用特种设备情况<a href="./index_3.html" style="color: white;"><i class="external square alternate icon"></i></a></div>
 							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2016-2017年上海市药品监督抽查情况表<!-- a href="./index_2.html">质量大数据平台</a--></div>
+							<div class="title">2016-2017年上海市药品监督抽查情况表</div>
 							<div class="echart-container" id="container_2_2"></div>
 						</div>
 					</div>
@@ -85,6 +85,8 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- <i id="back-to-top"></i> -->
 
 		<div id="popLayer"></div>
 		<div id="popBox_1_1" class="popBox">
@@ -1252,4 +1254,7 @@ var font_test = 22;
 		this.myChart_2_5.resize();  
 		this.myChart_2_6.resize();  
 	});
+	// $('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
 </script>
