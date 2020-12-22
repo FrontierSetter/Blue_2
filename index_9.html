@@ -276,7 +276,7 @@
 
 	option_2_1_1['series'][0]['data'] = Y_2_1;
 	option_2_1_1['xAxis']['data'] = X_2_1;
-	myChart_2_1.setOption(option_2_1_1);
+	// myChart_2_1.setOption(option_2_1_1);
 
 	option_2_1_2['series'][0]['data'] = Y_2_1;
 	option_2_1_2['xAxis']['data'] = X_2_1;
@@ -329,7 +329,7 @@
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
@@ -413,7 +413,7 @@
 	// option_9_2_2['dataset']['source'] = [
 	// 	['product'].concat(X_9_2);
 	// 	['不合格数'].concat(Y_9_2_2);
-	// 	['合格数'].concat(Y_9_2_3);
+	// 	['合格数'].concat(Y_9_9_3);
 	// ];
 	// option_9_2_2['dataset']['source'].push(['product'].concat(X_9_2));
 	myChart_9_2.setOption(option_9_2_1);
@@ -441,14 +441,14 @@
 
 </script>
 
-<!--* 图 2_3 -->
+<!--* 图 9_3 -->
 <script>
 
-	var dom_2_3 = document.getElementById("container_9_3");
-	var myChart_2_3 = echarts.init(dom_2_3, 'chalk');
-	var app_2_3 = {};
+	var dom_9_3 = document.getElementById("container_9_3");
+	var myChart_9_3 = echarts.init(dom_9_3, 'chalk');
+	var app_9_3 = {};
 
-	var option_2_3_1 = {
+	var option_9_3_1 = {
 		toolbox: {
 			show: true,
 			itemSize: echart_toolbox_size, 
@@ -518,7 +518,7 @@
 		]
 	};
 
-	var option_2_3_2 = {
+	var option_9_3_2 = {
 		toolbox: {
 			show: true,
 			itemSize: echart_toolbox_size, 
@@ -547,9 +547,9 @@
 		},
 		series: [{
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
 			name: '2014',
-			center: ['25%', '30%'],
+			center: ['12.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -561,9 +561,10 @@
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2015',
-			center: ['75%', '30%'],
+			center: ['37.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -574,9 +575,10 @@
 			}
 		},{
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2016',
-			center: ['25%', '75%'],
+			center: ['62.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -588,9 +590,10 @@
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2017',
-			center: ['75%', '75%'],
+			center: ['87.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -603,48 +606,55 @@
 	};
 
 	console.log(data_1["2014-2017年上海市化妆品监督抽查情况表"])
-	var data_2_3 = data_1["2014-2017年上海市化妆品监督抽查情况表"];
+	var data_9_3 = data_1["2014-2017年上海市化妆品监督抽查情况表"];
 
-	var X_2_3 = [];
+	var X_9_3 = [];
 	// 总数
-	var Y_2_3_1 = [];
+	var Y_9_3_1 = [];
 	// 不合格数
-	var Y_2_3_2 = [];
+	var Y_9_3_2 = [];
 	// 合格数
-	var Y_2_3_3 = [];
+	var Y_9_3_3 = [];
 
 
-	for(var i = 1; i < data_2_3.length; ++i){
-		X_2_3.push(data_2_3[i][0]);
-		Y_2_3_1.push(data_2_3[i][1]);
-		Y_2_3_2.push(data_2_3[i][2]);
-		Y_2_3_3.push(data_2_3[i][1]-data_2_3[i][2]);
+	for(var i = 1; i < data_9_3.length; ++i){
+		X_9_3.push(data_9_3[i][0]);
+		Y_9_3_1.push(data_9_3[i][1]);
+		Y_9_3_2.push(data_9_3[i][2]);
+		Y_9_3_3.push(data_9_3[i][1]-data_9_3[i][2]);
 	}
 
-	console.log(option_2_3_1)
+	console.log(option_9_3_1)
 
-	option_2_3_1['series'][0]['data'] = Y_2_3_2;
-	option_2_3_1['series'][1]['data'] = Y_2_3_3;
-	option_2_3_1['xAxis'][0]['data'] = X_2_3;
+	option_9_3_1['series'][0]['data'] = Y_9_3_2;
+	option_9_3_1['series'][1]['data'] = Y_9_3_3;
+	option_9_3_1['xAxis'][0]['data'] = X_9_3;
 
-	myChart_2_3.setOption(option_2_3_2);
+	// myChart_9_3.setOption(option_9_3_1);
 
-	myChart_2_3.on('magictypechanged', function (params) {
+	myChart_9_3.on('magictypechanged', function (params) {
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
 			// o.newOption = option_2_1_2;
 		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_3_1;
+			o.newOption = option_9_3_1;
 		}
-		myChart_2_3.setOption(o.newOption, true);
+		myChart_9_3.setOption(o.newOption, true);
 	});
 
-	myChart_2_3.on('restore', function (params) {
+	myChart_9_3.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_2_3_2;
-		myChart_2_3.setOption(o.newOption, true);
+		if (curIsPie_2_4){
+			o.newOption = option_2_4_1;
+			myChart_2_4.setOption(o.newOption, true);	
+			curIsPie_2_4 = false;
+		}else{
+			o.newOption = option_2_4_2;
+			myChart_2_4.setOption(o.newOption, true);
+			curIsPie_2_4 = true;
+		}
 	});
 
 
@@ -665,7 +675,7 @@
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -746,7 +756,7 @@
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				// magicType: {show: true, type: ['bar']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -773,7 +783,8 @@
 		},
 		series: [{
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2014',
 			center: ['25%', '30%'],
 			label: {
@@ -783,11 +794,13 @@
 			encode: {
 				itemName: 'product',
 				value: '2014'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2015',
 			center: ['75%', '30%'],
 			label: {
@@ -797,10 +810,12 @@
 			encode: {
 				itemName: 'product',
 				value: '2015'
-			}
+			},
+			roseType: "radius"
 		},{
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
+			// radius: 60,
 			name: '2016',
 			center: ['25%', '75%'],
 			label: {
@@ -810,11 +825,12 @@
 			encode: {
 				itemName: 'product',
 				value: '2016'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 60,
+			radius: '40%',
 			name: '2017',
 			center: ['75%', '75%'],
 			label: {
@@ -824,7 +840,8 @@
 			encode: {
 				itemName: 'product',
 				value: '2017'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},]
 	};
@@ -866,22 +883,31 @@
 
 	myChart_9_4.setOption(option_9_4_1);
 
-	myChart_9_4.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_9_4_1;
-		}
-		myChart_9_4.setOption(o.newOption, true);
-	});
+	// myChart_9_4.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_9_4_1;
+	// 	}
+	// 	myChart_9_4.setOption(o.newOption, true);
+	// });
+
+	var curIsPie_9_4 = false;
 
 	myChart_9_4.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_9_4_2;
-		myChart_9_4.setOption(o.newOption, true);
+		if (curIsPie_9_4){
+			o.newOption = option_9_4_1;
+			myChart_9_4.setOption(o.newOption, true);	
+			curIsPie_9_4 = false;
+		}else{
+			o.newOption = option_9_4_2;
+			myChart_9_4.setOption(o.newOption, true);
+			curIsPie_9_4 = true;
+		}
 	});
 
 
@@ -944,11 +970,6 @@
 			}
 		}]
 	};
-
-	// 初始化
-	if (option_2_5_1 && typeof option_2_5_1 === 'object') {
-		myChart_2_5.setOption(option_2_5_1);
-	}
 
 	// 折线图
 	var option_2_5_2 = {
@@ -1013,7 +1034,7 @@
 
 	option_2_5_1['series'][0]['data'] = Y_2_5;
 	option_2_5_1['xAxis']['data'] = X_2_5;
-	myChart_2_5.setOption(option_2_5_1);
+	// myChart_2_5.setOption(option_2_5_1);
 
 	option_2_5_2['series'][0]['data'] = Y_2_5;
 	option_2_5_2['xAxis']['data'] = X_2_5;
@@ -1063,7 +1084,7 @@
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
@@ -1187,7 +1208,7 @@
 	// window.addEventListener("resize", () => { 
 	// 	this.myChart_2_1.resize();  
 	// 	this.myChart_9_2.resize();  
-	// 	this.myChart_2_3.resize();  
+	// 	this.myChart_9_3.resize();  
 	// 	this.myChart_9_4.resize();  
 	// 	this.myChart_2_5.resize();  
 	// 	this.myChart_9_6.resize();  

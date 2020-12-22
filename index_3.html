@@ -160,7 +160,7 @@ var dom_3_1 = document.getElementById("container_3_1");
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -260,7 +260,7 @@ var dom_3_1 = document.getElementById("container_3_1");
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				// magicType: {show: true, type: ['bar']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -310,100 +310,182 @@ var dom_3_1 = document.getElementById("container_3_1");
 		},
 		series: [{
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
+			// radius: 30,
 			name: '2011',
-			center: ['20%', '30%'],
+			center: ['12.5%', '30%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2011'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: 30,
 			name: '2012',
-			center: ['40%', '30%'],
+			center: ['37.5%', '30%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2012'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
+			// radius: 30,
 			name: '2013',
-			center: ['60%', '30%'],
+			center: ['62.5%', '30%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2013'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
+			// radius: 30,
 			name: '2014',
-			center: ['80%', '30%'],
+			center: ['87.5%', '30%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2014'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
+			// radius: 30,
 			name: '2015',
-			center: ['20%', '75%'],
+			center: ['12.5%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2015'
-			}
+			},
+			roseType: "radius"
 		},{
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
+			// radius: 30,
 			name: '2016',
-			center: ['40%', '75%'],
+			center: ['37.5%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2016'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 30,
+			radius: ['25%', '40%'],
+			// radius: '40%',
 			name: '2017',
-			center: ['60%', '75%'],
+			center: ['62.5%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2017'
-			}
+			},
+			roseType: "radius"
 		}]
 	};
 
@@ -434,24 +516,33 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// option_3_1_1['series'][1]['data'] = Y_3_1_3;
 	// option_3_1_1['xAxis'][0]['data'] = X_3_1;
 
-	myChart_3_1.setOption(option_3_1_2);
+	myChart_3_1.setOption(option_3_1_1);
 
-	myChart_3_1.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_3_1_1;
-		}
-		myChart_3_1.setOption(o.newOption, true);
-	});
+	// myChart_3_1.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_1_1;
+	// 	}
+	// 	myChart_3_1.setOption(o.newOption, true);
+	// });
+
+	var curIsPie_3_1 = false;
 
 	myChart_3_1.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_3_1_2;
-		myChart_3_1.setOption(o.newOption, true);
+		if (curIsPie_3_1){
+			o.newOption = option_3_1_1;
+			myChart_3_1.setOption(o.newOption, true);	
+			curIsPie_3_1 = false;
+		}else{
+			o.newOption = option_3_1_2;
+			myChart_3_1.setOption(o.newOption, true);
+			curIsPie_3_1 = true;
+		}
 	});
 
 
@@ -478,7 +569,7 @@ var dom_3_1 = document.getElementById("container_3_1");
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -667,7 +758,7 @@ var dom_3_1 = document.getElementById("container_3_1");
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				// magicType: {show: true, type: ['bar']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -791,143 +882,244 @@ var dom_3_1 = document.getElementById("container_3_1");
 		},
 		series: [{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2008',
 			center: ['10%', '25%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2008'
-			}
+			},
+			roseType: "radius"
+
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2009',
 			center: ['30%', '25%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2009'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2010',
 			center: ['50%', '25%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2010'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2011',
 			center: ['70%', '25%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2011'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2012',
 			center: ['90%', '25%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2012'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2013',
 			center: ['10%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2013'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2014',
 			center: ['30%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2014'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2015',
 			center: ['50%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2015'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2016',
 			center: ['70%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2016'
-			}
+			},
+			roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: 20,
+			radius: ['15%', '30%'],
 			name: '2017',
 			center: ['90%', '75%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2017'
-			}
+			},
+			roseType: "radius"
 		}]
 	};
 
@@ -966,22 +1158,31 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// option_3_2_2['dataset']['source'].push(['product'].concat(X_3_2));
 	myChart_3_2.setOption(option_3_2_1);
 
-	myChart_3_2.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_3_2_1;
-		}
-		myChart_3_2.setOption(o.newOption, true);
-	});
+	// myChart_3_2.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_2_1;
+	// 	}
+	// 	myChart_3_2.setOption(o.newOption, true);
+	// });
+
+	var curIsPie_3_2 = true;
 
 	myChart_3_2.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_3_2_2;
-		myChart_3_2.setOption(o.newOption, true);
+		if (curIsPie_3_2){
+			o.newOption = option_3_2_1;
+			myChart_3_2.setOption(o.newOption, true);	
+			curIsPie_3_2 = false;
+		}else{
+			o.newOption = option_3_2_2;
+			myChart_3_2.setOption(o.newOption, true);
+			curIsPie_3_2 = true;
+		}
 	});
 
 
@@ -1156,6 +1357,10 @@ var dom_3_4 = document.getElementById("container_3_4");
 	var option_3_4_1 = {
 		title:{
 			text:'事故数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
 		},
 		tooltip: {
 			trigger: 'axis',
@@ -1211,6 +1416,10 @@ var dom_3_4 = document.getElementById("container_3_4");
 	var option_3_4_2 = {
 		title:{
 			text:'事故数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
 		},
 		toolbox: {
 			show: true,
@@ -1265,6 +1474,10 @@ var dom_3_4 = document.getElementById("container_3_4");
 	var option_3_4_3 = {
 		title:{
 			text:'死亡人数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
 		},
 		tooltip: {
 			trigger: 'axis',
@@ -1320,6 +1533,10 @@ var dom_3_4 = document.getElementById("container_3_4");
 	var option_3_4_4 = {
 		title:{
 			text:'死亡人数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
 		},
 		toolbox: {
 			show: true,
@@ -1374,6 +1591,10 @@ var dom_3_4 = document.getElementById("container_3_4");
 	var option_3_4_5 = {
 		title:{
 			text:'万台特种设备死亡率（本市）',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
 		},
 		tooltip: {
 			trigger: 'axis',
@@ -1584,7 +1805,7 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
@@ -1727,7 +1948,7 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},

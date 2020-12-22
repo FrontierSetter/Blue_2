@@ -422,13 +422,22 @@ var font_test = 22;
 		},
 		series: [{
 			type: 'pie',
-			radius: '40%',
+			radius: ['25%', '40%'],
 			name: '2016',
 			center: ['25%', '50%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
-				color: color_axis
+				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2016'
@@ -436,13 +445,22 @@ var font_test = 22;
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: '40%',
+			radius: ['25%', '40%'],
 			name: '2017',
 			center: ['75%', '50%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2017'
@@ -522,7 +540,7 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -573,13 +591,13 @@ var font_test = 22;
 			{
 				name: '不合格数',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
 				name: '合格数',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [220, 182, 191, 234, 290, 330, 310]
 			}
 		]
@@ -592,7 +610,7 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				// magicType: {show: true, type: ['bar']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -617,7 +635,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2014',
-			center: ['25%', '30%'],
+			center: ['12.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -632,7 +650,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2015',
-			center: ['75%', '30%'],
+			center: ['37.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -640,13 +658,16 @@ var font_test = 22;
 			encode: {
 				itemName: 'product',
 				value: '2015'
+			},
+			title:{
+				text:'测试'
 			}
 		},{
 			type: 'pie',
 			radius: '40%',
 			// radius: 60,
 			name: '2016',
-			center: ['25%', '75%'],
+			center: ['62.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -661,7 +682,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2017',
-			center: ['75%', '75%'],
+			center: ['87.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -698,24 +719,41 @@ var font_test = 22;
 	option_2_3_1['series'][1]['data'] = Y_2_3_3;
 	option_2_3_1['xAxis'][0]['data'] = X_2_3;
 
-	myChart_2_3.setOption(option_2_3_2);
+	myChart_2_3.setOption(option_2_3_1);
 
-	myChart_2_3.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_3_1;
-		}
-		myChart_2_3.setOption(o.newOption, true);
-	});
+	var curIsPie_2_3 = false;
+	var curNoPieOption_2_3;
+
+	// myChart_2_3.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log('2_3 magic')
+
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_2_3_1;
+	// 	}
+	// 	o.newOption = option_2_3_1;
+	// 	myChart_2_3.setOption(o.newOption, true);
+	// });
+
+	
 
 	myChart_2_3.on('restore', function (params) {
 		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_3_2;
-		myChart_2_3.setOption(o.newOption, true);
+		console.log(params);
+		
+		if (curIsPie_2_3){
+			o.newOption = option_2_3_1;
+			myChart_2_3.setOption(o.newOption, true);	
+			curIsPie_2_3 = false;
+		}else{
+			o.newOption = option_2_3_2;
+			myChart_2_3.setOption(o.newOption, true);
+			curIsPie_2_3 = true;
+		}
+		
 	});
 
 
@@ -736,7 +774,7 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -806,7 +844,7 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				// magicType: {show: true, type: ['bar']},
 				restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -831,7 +869,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2014',
-			center: ['25%', '30%'],
+			center: ['16.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -846,7 +884,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2017',
-			center: ['75%', '30%'],
+			center: ['49.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -860,7 +898,7 @@ var font_test = 22;
 			radius: '40%',
 			// radius: 60,
 			name: '2016',
-			center: ['25%', '75%'],
+			center: ['82.5%', '50%'],
 			label: {
 				formatter: '{d}%',
 				color:color_axis
@@ -898,24 +936,33 @@ var font_test = 22;
 	option_2_4_1['series'][1]['data'] = Y_2_4_3;
 	option_2_4_1['xAxis'][0]['data'] = X_2_4;
 
-	myChart_2_4.setOption(option_2_4_2);
+	myChart_2_4.setOption(option_2_4_1);
 
-	myChart_2_4.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_4_1;
-		}
-		myChart_2_4.setOption(o.newOption, true);
-	});
+	// myChart_2_4.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_2_4_1;
+	// 	}
+	// 	myChart_2_4.setOption(o.newOption, true);
+	// });
+
+	var curIsPie_2_4 = false;
 
 	myChart_2_4.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_2_4_2;
-		myChart_2_4.setOption(o.newOption, true);
+		if (curIsPie_2_4){
+			o.newOption = option_2_4_1;
+			myChart_2_4.setOption(o.newOption, true);	
+			curIsPie_2_4 = false;
+		}else{
+			o.newOption = option_2_4_2;
+			myChart_2_4.setOption(o.newOption, true);
+			curIsPie_2_4 = true;
+		}
 	});
 
 
@@ -1182,14 +1229,23 @@ var font_test = 22;
 		},
 		series: [{
 			type: 'pie',
-			radius: '40%',
+			radius: ['25%','40%'],
 			// radius: 60,
 			name: '2014',
 			center: ['25%', '50%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2014'
@@ -1197,14 +1253,23 @@ var font_test = 22;
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
-			radius: '40%',
+			radius: ['25%','40%'],
 			// radius: 60,
 			name: '2015',
 			center: ['75%', '50%'],
 			label: {
+				show: false,
+                position: 'center',
 				formatter: '{d}%',
 				color:color_axis
 			},
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
 			encode: {
 				itemName: 'product',
 				value: '2015'
