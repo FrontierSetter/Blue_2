@@ -33,6 +33,7 @@
         ],
         "backgroundColor": "#293441",
         "textStyle": {},
+        /*
         "title": {
             "textStyle": {
                 "color": "#ffffff"
@@ -442,5 +443,6 @@
                 }
             }
         }
+        */
     });
 }));

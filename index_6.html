@@ -21,6 +21,7 @@
 
     <!-- echarts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/color.js"></script>
 
     <!-- semantic UI -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -193,7 +194,7 @@
 <!--配置页面 6-1 的Echart图-->
 <script>
     var dom_6_1 = document.getElementById("container_6_1");
-    var myChart_6_1 = echarts.init(dom_6_1);
+    var myChart_6_1 = echarts.init(dom_6_1, 'chalk');
 
     var data_6_1 = alldata["2013-2017年上海市绿化市容质量指标完成情况统计"]
 
@@ -319,7 +320,7 @@
 <!--配置页面 6-3 的Echart图-->
 <script>
     var dom_6_3 = document.getElementById("container_6_3");
-    var myChart_6_3 = echarts.init(dom_6_3);
+    var myChart_6_3 = echarts.init(dom_6_3, 'chalk');
 
     var data_6_3 = alldata["2012-2017年食品安全发现问题的数目（单位 万户次）"]
 
@@ -399,7 +400,7 @@
 <!--配置页面 6-4 的Echart图-->
 <script>
     var dom_6_4 = document.getElementById("container_6_4");
-    var myChart_6_4 = echarts.init(dom_6_4);
+    var myChart_6_4 = echarts.init(dom_6_4, 'chalk');
 
     var data_6_4 = alldata["2013-2017上海质监12365质量热线各类业务受理"]
 
@@ -510,7 +511,7 @@
 <!--配置页面 6-5 的Echart图-->
 <script>
     var dom_6_5 = document.getElementById("container_6_5");
-    var myChart_6_5 = echarts.init(dom_6_5);
+    var myChart_6_5 = echarts.init(dom_6_5, 'chalk');
 
     var data_6_5 = alldata["2009-2016年上海市两级环保部门年审批相关文件数统计"]
 
