@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <title>大屏数据可视化 - 模板</title>
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/mine.css" />
 
     <!-- JQuery -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -29,11 +30,14 @@
     <!-- bootstrap -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!-- <script src="json/data.json"></script> -->
+    <script type="text/javascript" src="js/global_config.js"></script></head>
+
 </head>
 
 <body>
     <div class="header">
-        <h1 class="header-title">质量大数据平台</h1>
+        <h1 class="header-title">上海市质量状况可视化展图</h1>
     </div>
     <div class="wrapper">
         <div class="content">
@@ -161,9 +165,8 @@
         </div>
 
     </div>
-    <script>
-			// initHoverWindowBySuffix('_6_1', submitHandler, function(){hideDialogID('_6_1')});
-    </script>
+
+
 </body>
 
 </html>
@@ -180,12 +183,11 @@
 <script src="data/data2.json?callback=demo"></script>
 
 <!--全局页面字体配置 -->
-<script>
+<!--script>
     var fontSize_all_legend = 18
     var fontSize_axis_label = 14
     var echart_toolbox_size = 16
-</script>
-
+</script-->
 
 
 <!--配置页面 6-1 的Echart图-->
@@ -631,8 +633,10 @@
 
 </script>
 
+
 <script>
 	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
 	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
 	$('#back-to-top').fadeIn();	
 </script>
+
