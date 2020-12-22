@@ -237,7 +237,6 @@
                     fontSize: fontSize_axis_label
                 },
                 type: 'value',
-                name: '建设工程“白玉兰”奖数量',
                 max: 250,
                 min: 150,
                 boundaryGap: [0.2, 0.2]
@@ -384,14 +383,17 @@
         },
 		title: [
 			{
+				subtext: '其他',
+				left: '80%',
+				top: '70%',
 				textAlign: 'center',
-				textStyle:{
-                    color:"#5793f3",
-                    fontSize:36,
+				subtextStyle:{
+                    color:"#ffffff",
+                    fontSize:30,
                     align:"center"
                 }
-			}
-		],
+            }
+        ],
         legend: {
 			data: [
 				{
@@ -426,11 +428,11 @@
 				{
 					name: '汽车及零部件',
                     textStyle: { color:"#5793f3" }
-				},
+                },
 				{
 					name: '服装',
                     textStyle: { color:"#5793f3" }
-				},
+                },
 				{
 					name: '仪电',
                     textStyle: { color:"#5793f3" }
@@ -442,11 +444,12 @@
 				{
 					name: '化学建材',
                     textStyle: { color:"#5793f3" }
-				},
+                },
 				{
 					name: '冶金有色金属',
                     textStyle: { color:"#5793f3" }
 				}
+                
 			],
 		},
 		tooltip: {
@@ -467,11 +470,27 @@
             }
         },
         series: [
+        {
+                type: 'pie',
+				name: '其他',
+                radius: 80,
+                center: ['80%', '50%'],
+				label: {
+                    formatter: '{d}%',
+					color:"#5793f3",
+                },
+				data: [
+                    {value: 3.94, name: '仪电'},
+                    {value: 2.85, name: '纺织'},
+                    {value: 2.44, name: '化学建材'},
+                    {value: 0.82, name: '冶金及有色金属'},
+				]
+            }, 
 			{
                 type: 'pie',
 				name: '2011',
-                radius: 140,
-                center: ['50%', '50%'],
+                radius: 180,
+                center: ['30%', '50%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3",
@@ -486,10 +505,11 @@
                     {value: 6.53, name: '医药'},
                     {value: 5.85, name: '汽车及零部件'},
                     {value: 4.35, name: '服装'},
-                    {value: 3.94, name: '仪电'},
-                    {value: 2.85, name: '纺织'},
-                    {value: 2.44, name: '化学建材'},
-                    {value: 0.82, name: '冶金及有色金属'},
+                    // {value: 3.94, name: '仪电'},
+                    // {value: 2.85, name: '纺织'},
+                    // {value: 2.44, name: '化学建材'},
+                    // {value: 0.82, name: '冶金及有色金属'},
+                    {value: 10.05, name: '其他'},
 				]
             }
 		]
