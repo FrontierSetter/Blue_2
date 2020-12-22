@@ -31,9 +31,9 @@
             "#d2f5a6",
             "#76f2f2"
         ],
+        /*
         "backgroundColor": "#293441",
         "textStyle": {},
-        /*
         "title": {
             "textStyle": {
                 "color": "#ffffff"
