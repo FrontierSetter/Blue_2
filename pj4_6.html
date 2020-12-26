@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">中国与世界国民经济数据</h1>
+		</div>
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">中国进出口数据-当月出口额进口额</div>
+							<div class="echart-container" id="container_1_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">中国进出口数据-当月出口额进口额同比增长环比增长</div>
+							<div class="echart-container" id="container_1_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<!--
+						<div class="xpanel xpanel-c-t">
+							<div class="title title-long">0000<a href="./index_5.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+							<div class="echart-container" id="container_2_1"></div>
+						</div>
+					    -->
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-c-b">
+							<div class="title title-long">中国与世界平均工业增加值年增长率</div>
+							<div class="echart-container" id="container_2_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">中国进出口数据-累计出口额进口额</div>
+							<div class="echart-container" id="container_3_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">中国进出口数据-累计出口额进口额同比增长</div>
+							<div class="echart-container" id="container_3_2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res){
+        alldata = res;
+    }
+</script>
+<script src="data/data4_6_2.json"></script>
+
+<!--配置页面 6-1 的Echart图-->
+<script>
+	var dom_6_1 = document.getElementById("container_1_1");
+	var myChart_6_1 = echarts.init(dom_6_1, 'chalk');
+    var data_6_1 = alldata["6-1中国进出口数据"]
+	console.log(data_6_1)
+    var xAxis_6_1 = []
+	var yAxis_6_1a = []
+	var yAxis_6_1b = []
+    for(var i = 1; i < data_6_1.length; ++i) {
+		xAxis_6_1.push(data_6_1[i][0])
+		yAxis_6_1a.push(data_6_1[i][1])
+		yAxis_6_1b.push(data_6_1[i][4])
+	}
+	var option_6_1 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["当月出口额", "当月进口额"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_1,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '金额',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 亿美元',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+			{
+			    data: yAxis_6_1a,
+			    name: '当月出口额',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_1b,
+			    name: '当月进口额',
+			    type: 'bar',
+			},
+		]
+	};
+	if (option_6_1 && typeof option_6_1 === 'object') {
+		myChart_6_1.setOption(option_6_1);
+		console.log(data_6_1)
+	}
+</script>
+
+<!--配置页面 6-2 的Echart图-->
+<script>
+	var dom_6_2 = document.getElementById("container_1_2");
+	var myChart_6_2 = echarts.init(dom_6_2, 'chalk');
+    var data_6_2 = alldata["6-1中国进出口数据"]
+	console.log(data_6_2)
+    var xAxis_6_2 = []
+	var yAxis_6_2a = []
+	var yAxis_6_2b = []
+	var yAxis_6_2c = []
+	var yAxis_6_2d = []
+    for(var i = 1; i < data_6_2.length; ++i) {
+		xAxis_6_2.push(data_6_2[i][0])
+		yAxis_6_2a.push(data_6_2[i][2])
+		yAxis_6_2b.push(data_6_2[i][3])
+		yAxis_6_2c.push(data_6_2[i][5])
+		yAxis_6_2d.push(data_6_2[i][6])
+	}
+	var option_6_2 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["当月出口额同比增长", "当月出口额环比增长", "当月进口额同比增长", "当月进口额环比增长"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_2,
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '百分比',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} %',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+			{
+			    data: yAxis_6_2a,
+			    name: '当月出口额同比增长',
+			    type: 'line',
+			},
+			{
+			    data: yAxis_6_2b,
+			    name: '当月出口额环比增长',
+			    type: 'line',
+			},
+			{
+			    data: yAxis_6_2c,
+			    name: '当月进口额同比增长',
+			    type: 'line',
+			},
+			{
+			    data: yAxis_6_2d,
+			    name: '当月进口额环比增长',
+			    type: 'line',
+			},
+		]
+	};
+	if (option_6_2 && typeof option_6_2 === 'object') {
+		myChart_6_2.setOption(option_6_2);
+		console.log(data_6_2)
+	}
+</script>
+
+<!--配置页面 6-4 的Echart图-->
+<script>
+	var dom_6_4 = document.getElementById("container_2_2");
+	var myChart_6_4 = echarts.init(dom_6_4, 'chalk');
+    var data_6_4 = alldata["6-2中国与世界平均工业增加值年增长率数据（%）"]
+	console.log(data_6_4)
+    var xAxis_6_4 = []
+	var yAxis_6_4a = []
+	var yAxis_6_4b = []
+    for(var i = 1; i < data_6_4.length; ++i) {
+		xAxis_6_4.push(data_6_4[i][0])
+		yAxis_6_4a.push(data_6_4[i][1])
+		yAxis_6_4b.push(data_6_4[i][2])
+	}
+	var option_6_4 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["中国", "世界"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_4,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '百分比',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} %',
+				fontSize: fontSize_axis_label
+			}
+		},
+		series: [
+			{
+			    data: yAxis_6_4a,
+			    name: '中国',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_4b,
+			    name: '世界',
+			    type: 'bar',
+			},
+		]
+	};
+	if (option_6_4 && typeof option_6_4 === 'object') {
+		myChart_6_4.setOption(option_6_4);
+		console.log(data_6_4)
+	}
+</script>
+
+<!--配置页面 6-5 的Echart图-->
+<script>
+	var dom_6_5 = document.getElementById("container_3_1");
+	var myChart_6_5 = echarts.init(dom_6_5, 'chalk');
+    var data_6_5 = alldata["6-1中国进出口数据"]
+	console.log(data_6_5)
+    var xAxis_6_5 = []
+	var yAxis_6_5a = []
+	var yAxis_6_5b = []
+    for(var i = 1; i < data_6_5.length; ++i) {
+		xAxis_6_5.push(data_6_5[i][0])
+		yAxis_6_5a.push(data_6_5[i][7])
+		yAxis_6_5b.push(data_6_5[i][9])
+	}
+	var option_6_5 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["累计出口额", "累计进口额"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_5,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '金额',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 亿美元',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+			{
+			    data: yAxis_6_5a,
+			    name: '累计出口额',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_5b,
+			    name: '累计进口额',
+			    type: 'bar',
+			},
+		]
+	};
+	if (option_6_5 && typeof option_6_5 === 'object') {
+		myChart_6_5.setOption(option_6_5);
+		console.log(data_6_5)
+	}
+</script>
+
+<!--配置页面 6-6 的Echart图-->
+<script>
+	var dom_6_6 = document.getElementById("container_3_2");
+	var myChart_6_6 = echarts.init(dom_6_6, 'chalk');
+    var data_6_6 = alldata["6-1中国进出口数据"]
+	console.log(data_6_6)
+    var xAxis_6_6 = []
+	var yAxis_6_6a = []
+	var yAxis_6_6b = []
+    for(var i = 1; i < data_6_6.length; ++i) {
+		xAxis_6_6.push(data_6_6[i][0])
+		yAxis_6_6a.push(data_6_6[i][8])
+		yAxis_6_6b.push(data_6_6[i][10])
+	}
+	var option_6_6 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["累计出口额同比增长", "累计进口额同比增长"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_6,
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '百分比',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} %',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+			{
+			    data: yAxis_6_6a,
+			    name: '累计出口额同比增长',
+				type: 'line',
+			},
+			{
+			    data: yAxis_6_6b,
+			    name: '累计进口额同比增长',
+				type: 'line',
+			}
+		]
+	};
+	if (option_6_6 && typeof option_6_6 === 'object') {
+		myChart_6_6.setOption(option_6_6);
+		console.log(data_6_6)
+	}
+</script>
