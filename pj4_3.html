@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 弹出窗口 -->
+		<link rel="stylesheet" href="css/hover_window_2.css" />
+		<link rel="stylesheet" href="css/hover_window.css" />
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</head>
+	
+	<body>
+		<div class="header">
+			<h1 class="header-title" style="font-size:40px">宏观经济数据</h1>
+		</div>
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">月度企业数和亏损企业数</div>
+							<div id="container_1_1" style="height: 90%"></div>
+						</div>
+						
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">采购经理指数</div>
+							<div id="container_2_1" style="height: 90%"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-t">
+							<div class="title">中小企业发展、成本、投入、效益指数</div>
+							<div id="container_1_2" style="height: 90%"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-c-b">
+							<div class="title">邮储小微企业指数</div>
+							<div id="container_2_2" style="height: 90%"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">渣打中国中小企业信心指数 <i  onclick="popBoxSuffix('_1_3')"></i></div>
+							<div id="container_1_3" style="height: 90%"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">渣打中国中小企业信心指数经营现状子指标指数</div>
+							<div id="container_2_3" style="height: 90%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="popLayer"></div>
+		<div id="popBox_1_1" class="popBox">
+			<!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+			</div> -->
+			<div class="content" style="overflow: scroll; max-height: 80%;">
+				<table id="table_1_1" class="ui definition table">
+					<thead>
+						<tr><th></th>
+						<th>Arguments</th>
+					</tr></thead>
+					<tbody>
+						<tr>
+						<td>reset rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+						<tr>
+						<td>set rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="dlg_bottom">
+				<button class="ui primary button" onclick="alert('submit success!')">
+					保存
+				</button>
+				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
+					关闭
+				</button>
+				<button class="ui button" onclick="addTableRow('_1_1')">
+					添加一行
+				</button>
+			</div>
+
+		</div>
+		<script>
+			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+		</script>
+	</body>
+</html>
+
+<!--全局页面字体配置 -->
+<script>
+    // var fontSize_all_title = 18
+	// var fontSize_axis_label = 14
+	// var echart_toolbox_size = 16
+
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+
+    function demo(res){
+        alldata = res;
+    }
+</script>
+<script src="data/data4_2.json?callback=demo"></script>
+
+<script>
+
+    var dom_1 = document.getElementById("container_1_1");
+	var myChart_1 = echarts.init(dom_1, 'chalk');
+	var data_1 = alldata["3-1企业单位数"]
+    var xAxis_1 = []
+	var yAxis_1a = []
+	var yAxis_1b = []
+	var yAxis_1c = []
+    for(var i = 1; i < data_1.length-2; i+=1) {
+		xAxis_1.push(data_1[i][0])
+		yAxis_1a.push(data_1[i][1])
+		yAxis_1b.push(data_1[i][2])
+		yAxis_1c.push(data_1[i][3])
+	}
+
+	var option1 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['企业单位数本月末(个)','亏损企业本月末(个)','亏损企业上年同期(个)']
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_1
+			// data: [0,1,2]
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+        ],
+		series: [{
+			name:'企业单位数本月末(个)',
+			data: yAxis_1a,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'亏损企业本月末(个)',
+			data: yAxis_1b,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'亏损企业上年同期(个)',
+			data: yAxis_1c,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option1 && typeof option1 === 'object') {
+		myChart_1.setOption(option1);
+	}
+
+	var dom_2 = document.getElementById("container_1_2");
+	var myChart_2 = echarts.init(dom_2, 'chalk');
+	var data_2 = alldata["3-2中国制造业采购经理指数"]
+    var xAxis_2 = []
+	var yAxis_2a = []
+	var yAxis_2b = []
+	var yAxis_2c = []
+	var yAxis_2d = []
+	var min2=999999999
+	var max2=0
+    for(var i = 1; i < data_2.length-2; i+=1) {
+		xAxis_2.push(data_2[i][0])
+		yAxis_2a.push(data_2[i][1])
+		if(data_2[i][1]>max2)
+			max2=data_2[i][1]
+		if(data_2[i][1]<min2)
+			min2=data_2[i][1]	
+		yAxis_2b.push(data_2[i][2])
+		if(data_2[i][2]>max2)
+			max2=data_2[i][2]
+		if(data_2[i][2]<min2)
+			min2=data_2[i][2]	
+		yAxis_2c.push(data_2[i][3])
+		if(data_2[i][3]>max2)
+			max2=data_2[i][3]
+		if(data_2[i][3]<min2)
+			min2=data_2[i][3]	
+		yAxis_2d.push(data_2[i][4])
+		if(data_2[i][3]>max2)
+			max2=data_2[i][3]
+		if(data_2[i][3]<min2)
+			min2=data_2[i][3]	
+	}
+
+	var option2 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['制造业','PMI大型','PMI中型','PMI小型']
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_2
+			// data: [0,1,2]
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+			min: min2*0.9,
+			max: max2*1.1,
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+        ],
+		series: [{
+			name:'制造业',
+			data: yAxis_2a,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'PMI大型',
+			data: yAxis_2b,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'PMI中型',
+			data: yAxis_2c,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'PMI小型',
+			data: yAxis_2d,
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option2 && typeof option2 === 'object') {
+		myChart_2.setOption(option2);
+	}
+
+
+
+	var dom_3 = document.getElementById("container_1_3");
+	var myChart_3 = echarts.init(dom_3, 'chalk');
+	var data_3 = alldata["3-3中国中小企业发展指数"]
+    var xAxis_3 = []
+	var yAxis_3a = []
+	var yAxis_3b = []
+	var yAxis_3c = []
+	var yAxis_3d = []
+    for(var i = 1; i < data_3.length-2; i+=1) {
+		xAxis_3.push(data_3[i][0])
+		yAxis_3a.push(data_3[i][1])
+		yAxis_3b.push(data_3[i][2])
+		yAxis_3c.push(data_3[i][3])
+		yAxis_3d.push(data_3[i][4])
+	}
+
+	var option3 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['发展指数','成本指数','投入指数','效益指数']
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_3
+			// data: [0,1,2]
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+				min:70,
+				max:105,
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+            // {
+            //     type: 'inside',
+            //     start: 94,
+            //     end: 100
+            // },
+            // {
+            //     show: true,
+            //     yAxisIndex: 0,
+            //     filterMode: 'empty',
+            //     width: 30,
+            //     height: '80%',
+            //     showDataShadow: false,
+            //     left: '93%'
+            // }
+        ],
+		series: [{
+			name:'发展指数',
+			data: yAxis_3a,
+			// data:[0.9,0.8,0.85],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'成本指数',
+			data: yAxis_3b,
+			// data:[0.9,0.7,0.85],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'投入指数',
+			data: yAxis_3c,
+			// data:[0.95,0.8,0.85],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},{
+			name:'效益指数',
+			data: yAxis_3d,
+			// data:[0.9,0.8,0.8],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option3 && typeof option3 === 'object') {
+		myChart_3.setOption(option3);
+	}
+
+
+	var dom_4 = document.getElementById("container_2_1");
+	var myChart_4 = echarts.init(dom_4, 'chalk');
+	var data_4 = alldata["3-4邮储小微企业指数"]
+    var xAxis_4 = []
+	var yAxis_4a = []
+	var min4 =999999999
+	var max4 =0
+    for(var i = 1; i < data_4.length-2; i+=1) {
+		xAxis_4.push(data_4[i][0])
+		yAxis_4a.push(data_4[i][1])
+		if(data_4[i][1]>max4)
+			max4=data_4[i][1]
+		if(data_4[i][1]<min4)
+			min4=data_4[i][1]	
+	}
+
+	var option4 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['邮储小微企业指数']
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_4
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+			min: min4*0.9,
+			max: max4*1.1,
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+        ],
+		series: [{
+			name:'邮储小微企业指数',
+			data: yAxis_4a,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option4 && typeof option4 === 'object') {
+		myChart_4.setOption(option4);
+	}
+
+	var dom_5 = document.getElementById("container_2_2");
+	var myChart_5 = echarts.init(dom_5, 'chalk');
+	var data_5 = alldata["3-5渣打中国中小企业信心指数"]
+    var xAxis_5 = []
+	var yAxis_5a = []
+	var yAxis_5b = []
+	var yAxis_5c = []
+	var yAxis_5d = []
+	var min5 =999999999
+	var max5 =0
+    for(var i = 1; i < data_5.length-2; i+=1) {
+		xAxis_5.push(data_5[i][0])
+		yAxis_5a.push(data_5[i][1])
+		if(data_5[i][1]>max5)
+			max5=data_5[i][1]
+		if(data_5[i][1]<min5)
+			min5=data_5[i][1]	
+		yAxis_5b.push(data_5[i][2])
+		if(data_5[i][2]>max5)
+			max5=data_5[i][2]
+		if(data_5[i][2]<min5)
+			min5=data_5[i][2]	
+		yAxis_5c.push(data_5[i][3])
+		if(data_5[i][3]>max5)
+			max5=data_5[i][3]
+		if(data_5[i][3]<min5)
+			min5=data_5[i][3]	
+		yAxis_5d.push(data_5[i][4])
+		if(data_5[i][3]>max5)
+			max5=data_5[i][3]
+		if(data_5[i][3]<min5)
+			min5=data_5[i][3]
+	}
+
+	var option5 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['SMEI','现状指数','预期指数','信用指数',]
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_5
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+			min: min5*0.9,
+			max: max5*1.1,
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+        ],
+		series: [{
+			name:'SMEI',
+			data: yAxis_5a,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'现状指数',
+			data: yAxis_5b,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'预期指数',
+			data: yAxis_5c,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'信用指数',
+			data: yAxis_5d,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option5 && typeof option5 === 'object') {
+		myChart_5.setOption(option5);
+	}
+
+	var dom_6 = document.getElementById("container_2_3");
+	var myChart_6 = echarts.init(dom_6, 'chalk');
+	var data_6 = alldata["3-6渣打中国中小企业经营现状子指标指数"]
+    var xAxis_6 = []
+	var yAxis_6a = []
+	var yAxis_6b = []
+	var yAxis_6c = []
+	var yAxis_6d = []
+	var yAxis_6e = []
+	var yAxis_6f = []
+	var yAxis_6g = []
+	var min6 =999999999
+	var max6 =0
+    for(var i = 1; i < data_6.length-2; i+=1) {
+		xAxis_6.push(data_6[i][0])
+		yAxis_6a.push(data_6[i][1])
+		if(data_6[i][1]>max6)
+			max6=data_6[i][1]
+		if(data_6[i][1]<min6)
+			min6=data_6[i][1]	
+		yAxis_6b.push(data_6[i][2])
+		if(data_6[i][2]>max6)
+			max6=data_6[i][2]
+		if(data_6[i][2]<min6)
+			min6=data_6[i][2]	
+		yAxis_6c.push(data_6[i][3])
+		if(data_6[i][3]>max6)
+			max6=data_6[i][3]
+		if(data_6[i][3]<min6)
+			min6=data_6[i][3]	
+		yAxis_6d.push(data_6[i][4])
+		if(data_6[i][3]>max6)
+			max6=data_6[i][4]
+		if(data_6[i][3]<min6)
+			min6=data_6[i][4]
+		
+		yAxis_6e.push(data_6[i][5])
+		if(data_6[i][5]>max6)
+			max6=data_6[i][5]
+		if(data_6[i][5]<min6)
+			min6=data_6[i][5]
+		
+		yAxis_6f.push(data_6[i][6])
+		if(data_6[i][6]>max6)
+			max6=data_6[i][6]
+		if(data_6[i][6]<min6)
+			min6=data_6[i][6]
+		
+		yAxis_6g.push(data_6[i][7])
+		if(data_6[i][7]>max6)
+			max6=data_6[i][7]
+		if(data_6[i][7]<min6)
+			min6=data_6[i][7]
+	}
+
+	var option6 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		legend : {
+            textStyle:{
+                color: '#F0F8FF'
+            },
+			data : ['生产','新订单','用工','原材料库存','产成品价格','投资','盈利']
+		},
+		tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+		xAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+			type: 'category',
+			data: xAxis_6
+		},
+		yAxis: {
+			axisLabel: {
+                    fontSize: fontSize_axis_label
+				},
+			min: min6*0.9,
+			max: max6*1.1,
+			type: 'value'
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 94,
+                end: 100
+            },
+        ],
+		series: [{
+			name:'SMEI',
+			data: yAxis_6a,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'现状指数',
+			data: yAxis_6b,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'预期指数',
+			data: yAxis_6c,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'信用指数',
+			data: yAxis_6d,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'产成品价格',
+			data: yAxis_6e,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'投资',
+			data: yAxis_6f,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		},
+		{
+			name:'盈利',
+			data: yAxis_6g,
+			type: 'line',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	if (option6 && typeof option6 === 'object') {
+		myChart_6.setOption(option6);
+	}
+</script>
+
+<script>
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>
