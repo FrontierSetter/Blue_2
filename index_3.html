@@ -161,8 +161,17 @@ var dom_3_1 = document.getElementById("container_3_1");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_3_1.setOption(option_3_1_2, true);
+						curIsPie_3_1 = true;
+					}
+				}
 			}
 		},
 		tooltip: {
@@ -261,8 +270,17 @@ var dom_3_1 = document.getElementById("container_3_1");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				// magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_3_1.setOption(option_3_1_1, true);
+						curIsPie_3_1 = false;
+					}
+				}
 			}
 		},
 		legend: {
@@ -531,19 +549,19 @@ var dom_3_1 = document.getElementById("container_3_1");
 
 	var curIsPie_3_1 = false;
 
-	myChart_3_1.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if (curIsPie_3_1){
-			o.newOption = option_3_1_1;
-			myChart_3_1.setOption(o.newOption, true);	
-			curIsPie_3_1 = false;
-		}else{
-			o.newOption = option_3_1_2;
-			myChart_3_1.setOption(o.newOption, true);
-			curIsPie_3_1 = true;
-		}
-	});
+	// myChart_3_1.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if (curIsPie_3_1){
+	// 		o.newOption = option_3_1_1;
+	// 		myChart_3_1.setOption(o.newOption, true);	
+	// 		curIsPie_3_1 = false;
+	// 	}else{
+	// 		o.newOption = option_3_1_2;
+	// 		myChart_3_1.setOption(o.newOption, true);
+	// 		curIsPie_3_1 = true;
+	// 	}
+	// });
 
 
 
@@ -561,7 +579,8 @@ var dom_3_1 = document.getElementById("container_3_1");
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
+			},
+			
 		},
 		toolbox: {
 			show: true,
@@ -570,8 +589,17 @@ var dom_3_1 = document.getElementById("container_3_1");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_3_2.setOption(option_3_2_2, true);
+						curIsPie_3_2 = true;
+					}
+				}
 			}
 		},
 		legend: {
@@ -758,9 +786,18 @@ var dom_3_1 = document.getElementById("container_3_1");
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				// magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// magicType: {show: true, type: ['line','bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_3_2.setOption(option_3_2_1, true);
+						curIsPie_3_2 = false;
+					}
+				}
 			}
 		},
 		legend: {
@@ -1161,29 +1198,31 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// myChart_3_2.on('magictypechanged', function (params) {
 	// 	let o = { ...params };
 	// 	console.log(params)
-	// 	if(params.currentType == 'line'){
-	// 		// o.newOption = option_2_1_2;
-	// 	}else if(params.currentType == 'bar'){
+	// 	if(curIsPie_3_2 == true){
 	// 		o.newOption = option_3_2_1;
+	// 		curIsPie_3_2 = false;
+	// 	}else{
+
 	// 	}
+
 	// 	myChart_3_2.setOption(o.newOption, true);
 	// });
 
 	var curIsPie_3_2 = true;
 
-	myChart_3_2.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if (curIsPie_3_2){
-			o.newOption = option_3_2_1;
-			myChart_3_2.setOption(o.newOption, true);	
-			curIsPie_3_2 = false;
-		}else{
-			o.newOption = option_3_2_2;
-			myChart_3_2.setOption(o.newOption, true);
-			curIsPie_3_2 = true;
-		}
-	});
+	// myChart_3_2.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if (curIsPie_3_2){
+	// 		o.newOption = option_3_2_1;
+	// 		myChart_3_2.setOption(o.newOption, true);	
+	// 		curIsPie_3_2 = false;
+	// 	}else{
+	// 		o.newOption = option_3_2_2;
+	// 		myChart_3_2.setOption(o.newOption, true);
+	// 		curIsPie_3_2 = true;
+	// 	}
+	// });
 
 
 
@@ -1375,8 +1414,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {
@@ -1428,8 +1477,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {
@@ -1492,8 +1551,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {
@@ -1545,8 +1614,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {
@@ -1609,8 +1688,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {
@@ -1656,8 +1745,18 @@ var dom_3_4 = document.getElementById("container_3_4");
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
 			}
 		},
 		xAxis: {

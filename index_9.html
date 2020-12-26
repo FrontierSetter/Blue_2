@@ -676,8 +676,17 @@
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_9_4.setOption(option_9_4_2, true);
+						curIsPie_9_4 = true;
+					}
+				}
 			}
 		},
 		tooltip: {
@@ -757,8 +766,17 @@
 			feature: {
 				dataView: {show: true, readOnly: false},
 				// magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_9_4.setOption(option_9_4_1, true);
+						curIsPie_9_4 = false;
+					}
+				}
 			}
 		},
 		legend: {
@@ -896,19 +914,19 @@
 
 	var curIsPie_9_4 = false;
 
-	myChart_9_4.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if (curIsPie_9_4){
-			o.newOption = option_9_4_1;
-			myChart_9_4.setOption(o.newOption, true);	
-			curIsPie_9_4 = false;
-		}else{
-			o.newOption = option_9_4_2;
-			myChart_9_4.setOption(o.newOption, true);
-			curIsPie_9_4 = true;
-		}
-	});
+	// myChart_9_4.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if (curIsPie_9_4){
+	// 		o.newOption = option_9_4_1;
+	// 		myChart_9_4.setOption(o.newOption, true);	
+	// 		curIsPie_9_4 = false;
+	// 	}else{
+	// 		o.newOption = option_9_4_2;
+	// 		myChart_9_4.setOption(o.newOption, true);
+	// 		curIsPie_9_4 = true;
+	// 	}
+	// });
 
 
 

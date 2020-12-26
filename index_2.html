@@ -336,9 +336,19 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// magicType: {show: true, type: ['bar']},
+				// restore: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_2_2.setOption(option_2_2_2, true);
+						// curIsPie_2_2 = true;
+					}
+				},
+				saveAsImage: {show: true},
+				
 			}
 		},
 		legend: {
@@ -401,7 +411,7 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
@@ -541,8 +551,17 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_2_3.setOption(option_2_3_2, true);
+						curIsPie_2_3 = true;
+					}
+				}
 			}
 		},
 		tooltip: {
@@ -611,8 +630,17 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				// magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_2_3.setOption(option_2_3_1, true);
+						curIsPie_2_3 = false;
+					}
+				}
 			}
 		},
 		legend: {
@@ -740,21 +768,21 @@ var font_test = 22;
 
 	
 
-	myChart_2_3.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params);
+	// myChart_2_3.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params);
 		
-		if (curIsPie_2_3){
-			o.newOption = option_2_3_1;
-			myChart_2_3.setOption(o.newOption, true);	
-			curIsPie_2_3 = false;
-		}else{
-			o.newOption = option_2_3_2;
-			myChart_2_3.setOption(o.newOption, true);
-			curIsPie_2_3 = true;
-		}
+	// 	if (curIsPie_2_3){
+	// 		o.newOption = option_2_3_1;
+	// 		myChart_2_3.setOption(o.newOption, true);	
+	// 		curIsPie_2_3 = false;
+	// 	}else{
+	// 		o.newOption = option_2_3_2;
+	// 		myChart_2_3.setOption(o.newOption, true);
+	// 		curIsPie_2_3 = true;
+	// 	}
 		
-	});
+	// });
 
 
 
@@ -775,8 +803,17 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_2_4.setOption(option_2_4_2, true);
+						curIsPie_2_4 = true;
+					}
+				}
 			}
 		},
 		tooltip: {
@@ -845,8 +882,17 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				// magicType: {show: true, type: ['bar']},
-				restore: {show: true},
-				saveAsImage: {show: true}
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_2_4.setOption(option_2_4_1, true);
+						curIsPie_2_4 = false;
+					}
+				}
 			}
 		},
 		legend: {
@@ -1137,8 +1183,17 @@ var font_test = 22;
             orient: 'vertical',
 			feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
+				// magicType: {show: true, type: ['bar']},
+				// restore: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_2_6.setOption(option_2_6_2, true);
+						// curIsPie_2_2 = true;
+					}
+				},
 				saveAsImage: {show: true}
 			}
 		},
@@ -1208,7 +1263,7 @@ var font_test = 22;
 			feature: {
 				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['bar']},
-				restore: {show: true},
+				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
 		},
