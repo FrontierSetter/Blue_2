@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">宏观经济数据</h1>
+		</div>
+		<div class="wrapper">
+				<div class="col">
+						<div style="height: 100%" id="container_1_1"></div>
+				</div>
+			</div>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function demo(res){
+        alldata = res;
+    }
+</script>
+<script src="data/data4_6_2.json"></script>
+
+<!--配置页面 6-1-1 的Echart图-->
+<script>
+	var dom_6_1 = document.getElementById("container_1_1");
+	var myChart_6_1 = echarts.init(dom_6_1, 'chalk');
+	var data_6_1 = alldata["6-3各国年度劳动生产率（美元每人）"]
+	var data_6_2 = alldata["6-4各国年度GDP数据（亿美元）"]
+	var data_6_3 = alldata["6-5各国年度商品出口单位价值指数（上一年= 100）"]
+    var xAxis_6_1 = [] //国家
+	var yAxis_6_1a = new Array() //劳动生产率
+	var yAxis_6_1b = new Array() //年度GDP数据
+	var yAxis_6_1c = new Array() //年度商品出口单位价值
+	var zAxis_6_1 = [] //年份
+	for(var i = 1; i < data_6_1[0].length; ++i) {
+		zAxis_6_1.push(data_6_1[0][i])
+		yAxis_6_1a[i-1] = new Array()
+		for(var j = 1; j < data_6_1.length; ++j) {
+			yAxis_6_1a[i-1].push(data_6_1[j][i])
+		}
+	}
+    for(var i = 1; i < data_6_1.length; ++i) {
+		xAxis_6_1.push(data_6_1[i][0])
+	}
+	for(var i = 1; i < data_6_1[0].length; ++i) {
+		yAxis_6_1b[i-1] = new Array()
+		for(var j = 1; j < data_6_2.length; ++j) {
+			yAxis_6_1b[i-1].push(data_6_2[j][i])
+		}
+	}
+	for(var i = 1; i < data_6_1[0].length; ++i) {
+		yAxis_6_1c[i-1] = new Array()
+		for(var j = 1; j < data_6_3.length; ++j) {
+			yAxis_6_1c[i-1].push(data_6_3[j][i])
+		}
+    }
+
+    //五维数据
+	var mydata = new Array()
+	for(var i = 0; i < zAxis_6_1.length; ++ i) {
+		mydata[i] = new Array()
+		for(var j = 0; j < xAxis_6_1.length; ++ j) {
+			mydata[i][j] = new Array()
+			mydata[i][j].push(yAxis_6_1a[i][j]) //劳动生产率
+			mydata[i][j].push(yAxis_6_1b[i][j]) //年度GDP数据
+			mydata[i][j].push(yAxis_6_1c[i][j]) //年度商品出口单位价值
+			mydata[i][j].push(xAxis_6_1[j]) //国家
+			mydata[i][j].push(zAxis_6_1[i]) //年份
+		}
+	}
+    console.log(mydata)
+
+    //三百种颜色
+    var myColor = []
+    var colorNum = 0
+    for(var i = 0; i < 300; i++) {
+        colorNum = colorNum - 0 + 100;
+        for(var len = (colorNum + "").length; len < 5; len = colorNum.length) {
+            colorNum = "0" + colorNum;
+        }
+        var colorString = '#a' + colorNum 
+        myColor.push(colorString)
+    }
+    console.log(myColor)
+    
+	var itemStyle = {
+        opacity: 0.8, //控制圆球的透明度
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowColor: 'rgba(0, 0, 0, 0.5)'
+    };
+
+    //控制圆球的大小，返回的数值根据y轴的大小范围进行变化，根据自身元素动态调整该函数
+    var sizeFunction = function (x) {
+        var y = Math.sqrt(x / 5e13) + 0.1;
+        return y * 80;
+	};
+	
+    //需要展示的数据
+    var schema = [
+        {name: '劳动生产率', index: 0, text: '劳动生产率', unit: '美元每人'},
+        {name: 'GDP数据', index: 1, text: 'GDP数据', unit: '亿美元'},
+        {name: '商品出口单位价值指数', index: 2, text: '商品出口单位价值指数', unit: ''},
+        {name: '国家', index: 3, text: '国家', unit: ''}
+	];
+
+    //设置散点图样式的全部属性设置
+    option = {
+        baseOption: {
+            //右侧时间线
+            timeline: {
+                axisType: 'category',
+                orient: 'vertical',
+                autoPlay: true,  //是否自动播放
+                inverse: true,
+                playInterval: 1000,  //更换时间线间隔时间
+                left: null,
+                right: 0,
+                top: 20,
+                bottom: 20,
+                width: 55,
+                height: null,
+                label: {
+                    fontSize: fontSize_axis_label,
+                    color: '#999'
+                },
+                symbol: 'none',
+                lineStyle: {
+                    color: '#555'
+                },
+                checkpointStyle: {
+                    color: '#bbb',
+                    borderColor: '#777',
+                    borderWidth: 2
+                },
+                controlStyle: {
+                    showNextBtn: false,
+                    showPrevBtn: false,
+                    color: '#666',
+                    borderColor: '#666'
+                },
+                emphasis: {
+                    label: {
+                        color: '#fff'
+                    },
+                    controlStyle: {
+                        color: '#aaa',
+                        borderColor: '#aaa'
+                    }
+                },
+                data: []
+            },
+            backgroundColor: '#404a59',
+            title: [{
+                text: zAxis_6_1[0],
+                textAlign: 'center',
+                left: '63%',
+                top: '55%',
+                textStyle: {
+                    fontSize: 100,
+                    color: 'rgba(255, 255, 255, 0.7)'
+                }
+            }, {
+                text: '世界国民经济数据',
+                left: 'center',
+                top: 10,
+                textStyle: {
+                    color: '#aaa',
+                    fontWeight: 'normal',
+                    fontSize: 60
+                }
+			}],
+            tooltip: {
+                padding: 5,
+                backgroundColor: '#222',
+                borderColor: '#777',
+                borderWidth: 1,
+                formatter: function (obj) {
+                    var value = obj.value;
+                    return schema[3].text + '：' + value[3] + '<br>'
+                            + schema[1].text + '：' + value[1] + schema[1].unit + '<br>'
+                            + schema[0].text + '：' + value[0] + schema[0].unit + '<br>'
+                            + schema[2].text + '：' + value[2] + '<br>';
+                },
+			},
+            grid: {
+                top: 100,
+                containLabel: true,
+                left: 30,
+                right: '110'
+            },
+            xAxis: {
+                type: 'value',
+				name: '劳动生产率',
+                nameGap: 25,
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    fontSize: 18
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                axisLabel: {
+                    fontSize: fontSize_axis_label,
+                    formatter: '{value} 美元每人'
+                }
+            },
+            yAxis: {
+                type: 'value',
+				name: 'GDP',
+                nameTextStyle: {
+                    color: '#ccc',
+                    fontSize: 18
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    fontSize: fontSize_axis_label,
+                    formatter: '{value} 亿美元'
+                }
+            },
+            //设置展示圆球的个数，颜色等
+            visualMap: [
+                {
+                    show: false,
+                    dimension: 3,
+                    categories: xAxis_6_1,
+                    calculable: true,
+                    precision: 0.1,
+                    textGap: 30,
+                    textStyle: {
+                        color: '#ccc'
+                    },
+                    inRange: {
+                        color: (function () {
+                            var colors = myColor;
+                            return colors.concat(colors);
+                        })()
+                    }
+                }
+            ],
+            //开始设置每个球的内容
+            series: [
+                {
+                    type: 'scatter',
+                    itemStyle: itemStyle,
+                    data: mydata[0],
+                    symbolSize: function(val) {
+                        return sizeFunction(val[1]);
+                    }
+                }
+            ],
+            animationDurationUpdate: 1000,
+            animationEasingUpdate: 'quinticInOut'
+        },
+        options: []
+    };
+
+    //循环时间线
+    for (var n = 0; n < zAxis_6_1.length; n++) {
+        option.baseOption.timeline.data.push(zAxis_6_1[n]);
+        option.options.push({
+            title: {
+                show: true,
+                'text': zAxis_6_1[n] + ''
+            },
+            series: {
+                name: zAxis_6_1[n],
+                type: 'scatter',
+                itemStyle: itemStyle,
+                data: mydata[n],
+                symbolSize: function(val) {
+                    return sizeFunction(val[1]);
+                }
+            }
+        });
+    }
+
+	myChart_6_1.setOption(option);	
+</script>
