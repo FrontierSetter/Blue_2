@@ -42,14 +42,14 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2012-2017年质量监督执法情况（缺2017年数据）</div>
+							<div class="title">2012-2017年质量监督执法情况</div>
 							<div id="container_1_1" style="height: 90%"></div>
 						</div>
 						
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2012-2017年食品安全执法检查次数（单位 万户次）</div>
+							<div class="title">2012-2017年食品安全执法检查次数</div>
 							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
@@ -196,36 +196,36 @@
             }
         }
     ],
-    yAxis: [ {
-		axisLabel: {
+    yAxis: [ 
+		{
+		    axisLabel: {
                     fontSize: fontSize_axis_label
-                },
-				type : 'value',
-				name : '起',
-				min : 0,
-				max : 2000,
-				position : 'left',
-				axisLine : {
-					lineStyle : {}
-				},
-				axisLabel : {
-					formatter : '{value}'
-				}
-			}, {
-				axisLabel: {
-                    fontSize: fontSize_axis_label
+            },
+			type : 'value',
+			name : '起',
+			min : 0,
+			max : 2000,
+			position : 'left',
+			axisLine : {
+				lineStyle : {}
+			},
+				 
+			}, 
+			
+			{axisLabel: {
+                    fontSize:fontSize_axis_label
                 },
 				type : 'value',
 				name : '万元',
-				min : 4000,
+				min : 0,
 				max : 40000,
 				position : 'right',
 				axisLine : {
 					lineStyle : {}
 				},
-				axisLabel : {
-					formatter : '{value}'
-				}
+				// axisLabel : {
+				// 	formatter : '{value}'
+				// }
 			} ],
     series: [
 		{
