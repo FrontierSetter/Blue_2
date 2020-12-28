@@ -257,7 +257,7 @@
                 },
                 axisLabel: {
                     fontSize: fontSize_axis_label,
-                    formatter: '{value} 亿美元'
+                    formatter: '{value} 美元'
                 }
             },
             //设置展示圆球的个数，颜色等
@@ -318,4 +318,10 @@
     }
 
 	myChart_6_1.setOption(option);	
+</script>
+
+<script>
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
 </script>
