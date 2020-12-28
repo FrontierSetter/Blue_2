@@ -52,7 +52,7 @@ if __name__=="__main__":
         data.update(xlsx2obj(wb))
         #print(data)
 
-        jsondata = "demo("
+        jsondata = "callback" + str(i + 1) + "("
         jsondata += json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
         jsondata += ")"
 
