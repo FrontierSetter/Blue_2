@@ -22,15 +22,10 @@
     }
     echarts.registerTheme('chalk', {
         "color": [
-            "#fc97af",
-            "#87f7cf",
-            "#f7f494",
-            "#72ccff",
-            "#f7c5a0",
-            "#d4a4eb",
-            "#d2f5a6",
-            "#76f2f2"
-        ],
+//            "#00ddcc","#FFFF24","#66CC00","#F8B21B","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
+            "#00ddcc","#DDDD24","#73E600","#ee6666","#F8BA35","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
+//            "#66FFFF","#00FF99","#33ff33","#ffff33","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
+        ]
         /*
         "backgroundColor": "#293441",
         "textStyle": {},
@@ -155,7 +150,7 @@
                     "borderWidth": 0.5
                 },
                 "emphasis": {
-                    "areaColor": "rgba(255,178,72,1)",
+                    "areaColor": "",
                     "borderColor": "#eb8146",
                     "borderWidth": 1
                 }
@@ -168,7 +163,7 @@
                 },
                 "emphasis": {
                     "textStyle": {
-                        "color": "rgb(137,52,72)"
+                        "color": ""
                     }
                 }
             }
@@ -181,7 +176,7 @@
                     "borderWidth": 0.5
                 },
                 "emphasis": {
-                    "areaColor": "rgba(255,178,72,1)",
+                    "areaColor": "",
                     "borderColor": "#eb8146",
                     "borderWidth": 1
                 }
@@ -194,7 +189,7 @@
                 },
                 "emphasis": {
                     "textStyle": {
-                        "color": "rgb(137,52,72)"
+                        "color": ""
                     }
                 }
             }
@@ -230,8 +225,8 @@
                 "show": false,
                 "areaStyle": {
                     "color": [
-                        "rgba(250,250,250,0.05)",
-                        "rgba(200,200,200,0.02)"
+                        "",
+                        ""
                     ]
                 }
             }
@@ -267,8 +262,8 @@
                 "show": false,
                 "areaStyle": {
                     "color": [
-                        "rgba(250,250,250,0.05)",
-                        "rgba(200,200,200,0.02)"
+                        "",
+                        ""
                     ]
                 }
             }
@@ -304,8 +299,8 @@
                 "show": false,
                 "areaStyle": {
                     "color": [
-                        "rgba(250,250,250,0.05)",
-                        "rgba(200,200,200,0.02)"
+                        "",
+                        ""
                     ]
                 }
             }
@@ -341,8 +336,8 @@
                 "show": false,
                 "areaStyle": {
                     "color": [
-                        "rgba(250,250,250,0.05)",
-                        "rgba(200,200,200,0.02)"
+                        "",
+                        ""
                     ]
                 }
             }
@@ -402,7 +397,7 @@
             },
             "checkpointStyle": {
                 "color": "#fc97af",
-                "borderColor": "rgba(252,151,175,0.3)"
+                "borderColor": ""
             },
             "label": {
                 "normal": {
@@ -424,9 +419,9 @@
             ]
         },
         "dataZoom": {
-            "backgroundColor": "rgba(255,255,255,0)",
-            "dataBackgroundColor": "rgba(114,204,255,1)",
-            "fillerColor": "rgba(114,204,255,0.2)",
+            "backgroundColor": "",
+            "dataBackgroundColor": "",
+            "fillerColor": "",
             "handleColor": "#72ccff",
             "handleSize": "100%",
             "textStyle": {
