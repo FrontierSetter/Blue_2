@@ -1,7 +1,6 @@
 import openpyxl
 import json
-import os
-import demjson
+#import demjson
 
 def xlsx2obj(wb):
     data = {}
@@ -40,32 +39,23 @@ def xlsx2obj(wb):
     return data
 
 if __name__=="__main__":
-    projectdir = "./"
-    datalist = os.listdir(projectdir)  # 列出文件夹下所有的目录与文件
-    #print(datalist)
+    wb1 = openpyxl.load_workbook('1.xlsx')
+    wb2 = openpyxl.load_workbook('2.xlsx')
 
-    for i in range(0, len(datalist)):
-        if not datalist[i].endswith('.xlsx'):
-            continue
-        wb =  openpyxl.load_workbook(os.path.join(projectdir, datalist[i]))
-        data = {}
-        data.update(xlsx2obj(wb))
-        #print(data)
-        jsondata = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-        #jsondata2 = demjson.encode(data)
-
-        with open(projectdir + "/data-" + str(i+1) + ".json", mode='w+', encoding='utf-8') as f:
-            f.write(jsondata)
-
-
-    #data.update(xlsx2obj(wb2))
+    data = {}
+    data.update(xlsx2obj(wb1))
+    data.update(xlsx2obj(wb2))
     #print(data)
+
+    jsondata = "demo("
+    jsondata = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+    jsondata += ")"
 
     #jsondata2 = json.dumps(data, sort_keys=True)
     #jsondata = demjson.encode(data)
 
-#    with open("data.json", mode='w+') as f:
-#        f.write(jsondata)
+    with open("data.json", mode='w+') as f:
+        f.write(jsondata)
     
-#    with open("data2.json", mode='w+') as f:
-#        f.write(jsondata2)
+    #with open("data2.json", mode='w+') as f:
+    #    f.write(jsondata2)
