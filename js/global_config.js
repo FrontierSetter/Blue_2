@@ -13,4 +13,4 @@ var echart_toolbox_size = 18
 // 折线图线宽
 var echart_lineStyle_width = 3
 // 折线图线宽-更宽
-var echart_lineStyle_width_large = 6
+var echart_lineStyle_width_large = 7
