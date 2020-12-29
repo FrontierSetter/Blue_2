@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/mine.css" />
+    
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/color.js"></script>
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+    <link rel="stylesheet" href="semantic-ui/semantic.min.css">
+    <script type="text/javascript" src="js/jquery3.3.1.js"></script>
+    <script type="text/javascript" src="semantic-ui/semantic.min.js"></script>
+
+    <!-- <script src="json/data.json"></script> -->
+    <script type="text/javascript" src="js/global_config.js"></script></head>
+
+<body>
+    <div class="header">
+        <h1 class="header-title" style="font-size:40px">宏观经济数据展图</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">高端消费自给率</div>
+                        
+                        <div id="container_1" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">世界品牌五百强制造企业利润率</div>
+                        
+                        <div id="container_2" style="height: 95%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">世界品牌五百强中制造企业影响力</div>
+                        
+                        <div id="container_3" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-c-b">
+                        <div class="title">各国出口产品召回通报指数比对
+                        </div>
+                        
+                        <div id="container_4" style="height: 95%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-t">
+                        <div class="title">研发投入占GDP比重</div>
+                        
+                        <div id="container_5" style="height: 95%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-r-b">
+                        <div class="title">制造业劳动生产率</div>
+                        
+                        <div id="container_6" style="height: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+			// initHoverWindowBySuffix('_1', submitHandler, function(){hideDialogID('_1')});
+    </script>
+</body>
+
+</html>
+
+
+<!--解决本地json跨域问题-->
+<script>
+    var data1 = {};
+   
+    function callback1(res) {
+        data1 = res;
+    }
+</script>
+<script src="dataproc/pj4-data/data-1.json?callback=callback1"></script>
+
+<!--配置页面 pj4_1-1 的Echart图-->
+<script>
+    var dom_1 = document.getElementById("container_1");
+    var myChart_1 = echarts.init(dom_1, 'chalk');
+
+    var data_1 = data1["1-1高端消费自给率"]
+
+    var xAxis_1 = []
+    var yAxis_1a = []
+    var yAxis_1b = []
+    var yAxis_1c = []
+    var yAxis_1d = []
+    var yAxis_1e = []
+    var yAxis_1f = []
+    var yAxis_1g = []
+    var yAxis_1h = []
+    var yAxis_1i = []
+
+    for (var i = 1; i < data_1.length; ++i) {
+        xAxis_1.push(data_1[i][0])
+        yAxis_1a.push(data_1[i][1])
+        yAxis_1b.push(data_1[i][2])
+        yAxis_1c.push(data_1[i][3])
+        yAxis_1d.push(data_1[i][4])
+        yAxis_1e.push(data_1[i][5])
+        yAxis_1f.push(data_1[i][6])
+        yAxis_1g.push(data_1[i][7])
+        yAxis_1h.push(data_1[i][8])
+        yAxis_1i.push(data_1[i][9])
+    }
+
+
+    var option_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_1,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '自给率',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+                data: yAxis_1a,
+            },
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1d,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1i,
+            },
+        ]
+    };
+
+
+
+    if (option_1 && typeof option_1 === 'object') {
+        myChart_1.setOption(option_1);
+        console.log(data_1)
+    }
+
+</script>
+
+
+<!--配置页面 pj4_1-2 的Echart图-->
+<script>
+    var dom_2 = document.getElementById("container_2");
+    var myChart_2 = echarts.init(dom_2, 'chalk');
+
+    var data_2 = data1["1-2世界品牌五百强制造企业利润率"]
+
+    var xAxis_2 = []
+    var yAxis_2a = []
+    var yAxis_2b = []
+    var yAxis_2c = []
+    var yAxis_2d = []
+    var yAxis_2e = []
+    var yAxis_2f = []
+    var yAxis_2g = []
+    var yAxis_2h = []
+    var yAxis_2i = []
+
+    for (var i = 1; i < data_2.length; ++i) {
+        xAxis_2.push(data_2[i][0])
+        yAxis_2a.push(data_2[i][1])
+        yAxis_2b.push(data_2[i][2])
+        yAxis_2c.push(data_2[i][3])
+        yAxis_2d.push(data_2[i][4])
+        yAxis_2e.push(data_2[i][5])
+        yAxis_2f.push(data_2[i][6])
+        yAxis_2g.push(data_2[i][7])
+        yAxis_2h.push(data_2[i][8])
+        yAxis_2i.push(data_2[i][9])
+    }
+
+
+    var option_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_2,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '企业利润率',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_2a,
+            },
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2d,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2i,
+            },
+        ]
+    };
+
+
+
+    if (option_2 && typeof option_2 === 'object') {
+        myChart_2.setOption(option_2);
+        console.log(data_2)
+    }
+
+</script>
+
+
+<!--配置页面 pj4_1-3 的Echart图-->
+<script>
+    var dom_3 = document.getElementById("container_3");
+    var myChart_3 = echarts.init(dom_3, 'chalk');
+
+    var data_3 = data1["1-3世界品牌五百强中制造企业影响力"]
+
+    var xAxis_3 = []
+    var yAxis_3a = []
+    var yAxis_3b = []
+    var yAxis_3c = []
+    var yAxis_3d = []
+    var yAxis_3e = []
+    var yAxis_3f = []
+    var yAxis_3g = []
+    var yAxis_3h = []
+    var yAxis_3i = []
+
+    for (var i = 1; i < data_3.length; ++i) {
+        xAxis_3.push(data_3[i][0])
+        yAxis_3a.push(data_3[i][1])
+        yAxis_3b.push(data_3[i][2])
+        yAxis_3c.push(data_3[i][3])
+        yAxis_3d.push(data_3[i][4])
+        yAxis_3e.push(data_3[i][5])
+        yAxis_3f.push(data_3[i][6])
+        yAxis_3g.push(data_3[i][7])
+        yAxis_3h.push(data_3[i][8])
+        yAxis_3i.push(data_3[i][9])
+    }
+
+
+    var option_3 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_3,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '企业影响力',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_3a,
+            },
+            {
+                name: '美国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3b,
+            },
+            {
+                name: '德国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3c,
+            },
+            {
+                name: '日本',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3d,
+            },
+            {
+                name: '英国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3e,
+            },
+            {
+                name: '法国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3f,
+            },
+            {
+                name: '韩国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3g,
+            },
+            {
+                name: '意大利',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3h,
+            },
+            {
+                name: '以色列',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_3i,
+            },
+        ]
+    };
+
+
+
+    if (option_3 && typeof option_3 === 'object') {
+        myChart_3.setOption(option_3);
+        console.log(data_3)
+    }
+
+</script>
+
+
+
+<!--配置页面 pj4_1-4 的Echart图-->
+<script>
+    var dom_4 = document.getElementById("container_4");
+    var myChart_4 = echarts.init(dom_4, 'chalk');
+
+    var data_4 = data1["1-4出口产品召回通报指数（批次 亿美元）"]
+
+    var xAxis_4 = []
+    var yAxis_4a = []
+    var yAxis_4b = []
+    var yAxis_4c = []
+    var yAxis_4d = []
+    var yAxis_4e = []
+    var yAxis_4f = []
+    var yAxis_4g = []
+    var yAxis_4h = []
+    var yAxis_4i = []
+
+    for (var i = 1; i < data_4.length; ++i) {
+        xAxis_4.push(data_4[i][0])
+        yAxis_4a.push(data_4[i][1])
+        yAxis_4b.push(data_4[i][2])
+        yAxis_4c.push(data_4[i][3])
+        yAxis_4d.push(data_4[i][4])
+        yAxis_4e.push(data_4[i][5])
+        yAxis_4f.push(data_4[i][6])
+        yAxis_4g.push(data_4[i][7])
+        yAxis_4h.push(data_4[i][8])
+        yAxis_4i.push(data_4[i][9])
+    }
+
+
+    var option_4 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['bar', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_4,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '（批次/亿美元）',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_4a,
+            },
+            {
+                name: '美国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4b,
+            },
+            {
+                name: '德国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4c,
+            },
+            {
+                name: '日本',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4d,
+            },
+            {
+                name: '英国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4e,
+            },
+            {
+                name: '法国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4f,
+            },
+            {
+                name: '韩国',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4g,
+            },
+            {
+                name: '意大利',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4h,
+            },
+            {
+                name: '以色列',
+                type: 'bar',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_4i,
+            },
+        ]
+    };
+
+
+
+    if (option_4 && typeof option_4 === 'object') {
+        myChart_4.setOption(option_4);
+        console.log(data_4)
+    }
+
+</script>
+
+
+
+<!--配置页面 pj4_1-5 的Echart图-->
+<script>
+    var dom_5 = document.getElementById("container_5");
+    var myChart_5 = echarts.init(dom_5, 'chalk');
+
+    var data_5 = data1["1-5研发投入占GDP比重"]
+
+    var xAxis_5 = []
+    var yAxis_5a = []
+    var yAxis_5b = []
+    var yAxis_5c = []
+    var yAxis_5d = []
+    var yAxis_5e = []
+    var yAxis_5f = []
+    var yAxis_5g = []
+    var yAxis_5h = []
+    var yAxis_5i = []
+
+    for (var i = 1; i < data_5.length; ++i) {
+        xAxis_5.push(data_5[i][0])
+        yAxis_5a.push(data_5[i][1])
+        yAxis_5b.push(data_5[i][2])
+        yAxis_5c.push(data_5[i][3])
+        yAxis_5d.push(data_5[i][4])
+        yAxis_5e.push(data_5[i][5])
+        yAxis_5f.push(data_5[i][6])
+        yAxis_5g.push(data_5[i][7])
+        yAxis_5h.push(data_5[i][8])
+        yAxis_5i.push(data_5[i][9])
+    }
+
+
+    var option_5 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_5,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '（%）',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_5a,
+            },
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5d,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_5i,
+            },
+        ]
+    };
+
+
+
+    if (option_5 && typeof option_5 === 'object') {
+        myChart_5.setOption(option_5);
+        console.log(data_5)
+    }
+
+</script>
+
+
+
+<!--配置页面 pj4_1-6 的Echart图-->
+<script>
+    var dom_6 = document.getElementById("container_6");
+    var myChart_6 = echarts.init(dom_6, 'chalk');
+
+    var data_6 = data1["1-6制造业劳动生产率"]
+
+    var xAxis_6 = []
+    var yAxis_6a = []
+    var yAxis_6b = []
+    var yAxis_6c = []
+    var yAxis_6d = []
+    var yAxis_6e = []
+    var yAxis_6f = []
+    var yAxis_6g = []
+    var yAxis_6h = []
+    var yAxis_6i = []
+
+    for (var i = 1; i < data_6.length; ++i) {
+        xAxis_6.push(data_6[i][0])
+        yAxis_6a.push(data_6[i][1])
+        yAxis_6b.push(data_6[i][2])
+        yAxis_6c.push(data_6[i][3])
+        yAxis_6d.push(data_6[i][4])
+        yAxis_6e.push(data_6[i][5])
+        yAxis_6f.push(data_6[i][6])
+        yAxis_6g.push(data_6[i][7])
+        yAxis_6h.push(data_6[i][8])
+        yAxis_6i.push(data_6[i][9])
+    }
+
+
+    var option_6 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_6,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '（美元/人）',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+        {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_6a,
+            },
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6d,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_6i,
+            },
+        ]
+    };
+
+
+
+    if (option_6 && typeof option_6 === 'object') {
+        myChart_6.setOption(option_6);
+        console.log(data_6)
+    }
+
+</script>
+
+
+
+<script>
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>
+
