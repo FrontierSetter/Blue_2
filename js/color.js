@@ -22,8 +22,10 @@
     }
     echarts.registerTheme('chalk', {
         "color": [
+            "#40E0D0","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#CD0000","#36648B","#8B668B","#FFFF00",
+//            "#00ddcc","#DDDD24","#6dee72","#ee6666","#d8af31","#73c0de","#3ba272","#FF69B4","#9a60b4","#ea7ccc"
+//good            "#00ddcc","#DDDD24","#73E600","#ee6666","#F8BA35","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
 //            "#00ddcc","#FFFF24","#66CC00","#F8B21B","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
-            "#00ddcc","#DDDD24","#73E600","#ee6666","#F8BA35","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
 //            "#66FFFF","#00FF99","#33ff33","#ffff33","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
         ]
         /*

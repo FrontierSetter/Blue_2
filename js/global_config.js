@@ -11,6 +11,6 @@ var color_legend = '#fff'
 // echart toolbox字体大小
 var echart_toolbox_size = 18
 // 折线图线宽
-var echart_lineStyle_width = 3
+var echart_lineStyle_width = 4
 // 折线图线宽-更宽
-var echart_lineStyle_width_large = 7
+var echart_lineStyle_width_large = 8
