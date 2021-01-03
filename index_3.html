@@ -196,12 +196,12 @@ var dom_3_1 = document.getElementById("container_3_1");
 		xAxis: [
 			{
 				type: 'category',
-				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				data: ['2011', '2012', '2013', '2014', '2015', '2016', '2017'],
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
 						fontSize: fontSize_axis_label
-					},
+					}
 				}
 			}
 		],
@@ -213,6 +213,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 						color: color_axis,
 						fontSize: fontSize_axis_label
 					},
+					formatter: function(value){
+						return (value*100).toFixed(0)+'%'
+					}
 				}
 			}
 		],
@@ -1193,7 +1196,7 @@ var dom_3_1 = document.getElementById("container_3_1");
 	// 	['合格数'].concat(Y_3_2_3);
 	// ];
 	// option_3_2_2['dataset']['source'].push(['product'].concat(X_3_2));
-	myChart_3_2.setOption(option_3_2_1);
+	myChart_3_2.setOption(option_3_2_2);
 
 	// myChart_3_2.on('magictypechanged', function (params) {
 	// 	let o = { ...params };
@@ -1267,9 +1270,9 @@ var dom_3_1 = document.getElementById("container_3_1");
 		yAxis: {
 			type: 'value',
 			min: 0,
-			max: function (value) {
-				return value.max + 20;
-			},
+			// max: function (value) {
+			// 	return value.max + 20;
+			// },
 			axisLabel:{
 				textStyle: { //图例文字的样式
 					color: color_axis,
@@ -1578,9 +1581,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 		yAxis: {
 			type: 'value',
 			min: 0,
-			max: function (value) {
-				return value.max;
-			},
+			// max: function (value) {
+			// 	return value.max;
+			// },
 			axisLabel:{
 				textStyle: { //图例文字的样式
 					color: color_axis,
@@ -1640,12 +1643,12 @@ var dom_3_4 = document.getElementById("container_3_4");
 		},
 		yAxis: {
 			type: 'value',
-			min: function (value) {
-				return value.min;
-			},
-			max: function (value) {
-				return value.max;
-			},
+			// min: function (value) {
+			// 	return value.min;
+			// },
+			// max: function (value) {
+			// 	return value.max;
+			// },
 			axisLabel:{
 				textStyle: { //图例文字的样式
 					color: color_axis,
@@ -1721,6 +1724,9 @@ var dom_3_4 = document.getElementById("container_3_4");
 					color: color_axis,
 					fontSize: fontSize_axis_label
 				},
+				formatter: function(value){
+					return (value*100).toFixed(0)+'%'
+				}
 			}
 		},
 		series: [{

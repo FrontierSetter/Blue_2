@@ -863,13 +863,15 @@ var font_test = 22;
 				name: '不合格数',
 				type: 'bar',
 				stack: '抽查情况',
-				data: [120, 132, 101, 134, 90, 230, 210]
+				data: [120, 132, 101, 134, 90, 230, 210],
+				barWidth : 90
 			},
 			{
 				name: '合格数',
 				type: 'bar',
 				stack: '抽查情况',
-				data: [220, 182, 191, 234, 290, 330, 310]
+				data: [220, 182, 191, 234, 290, 330, 310],
+				barWidth : 90
 			}
 		]
 	};
@@ -1058,8 +1060,12 @@ var font_test = 22;
 			axisLabel:{
 				textStyle: { //图例文字的样式
 					color: color_axis,
-					fontSize: fontSize_axis_label
+					fontSize: fontSize_axis_label,
+					
 				},
+				formatter: function(value){
+					return (value*100).toFixed(0)+'%'
+				}
 			}
 		},
 		series: [{
@@ -1109,6 +1115,9 @@ var font_test = 22;
 					color: color_axis,
 					fontSize: fontSize_axis_label
 				},
+				formatter: function(value){
+					return (value*100).toFixed(0)+'%'
+				}
 			}
 		},
 		series: [{

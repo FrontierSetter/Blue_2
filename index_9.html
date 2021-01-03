@@ -732,6 +732,9 @@
 						color: color_axis,
 						fontSize: fontSize_axis_label
 					},
+					formatter: function(value){
+						return (value*1).toFixed(0)+'%'
+					}
 				}
 			}
 		],
