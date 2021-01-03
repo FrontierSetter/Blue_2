@@ -192,6 +192,9 @@
 						color: color_axis,
 						fontSize: fontSize_axis_label
 					},
+					formatter: function(value){
+						return (value*100).toFixed(0)+'%'
+					}
 				}
 			}
 		],
@@ -496,7 +499,13 @@
 						color: color_axis,
 						fontSize: fontSize_axis_label
 					},
-				}
+					formatter: function(value){
+						return (value*100).toFixed(0)+'%'
+					}
+				},
+				min: 0.8,
+				max: 1,
+				splitNumber:8
 			}
 		],
 		series: [
@@ -774,7 +783,7 @@
 				textStyle: { //图例文字的样式
 					color: color_axis,
 					fontSize: fontSize_axis_label
-				},
+				}
 			}
 
 		},
@@ -787,8 +796,31 @@
 					color: color_axis,
 					fontSize: fontSize_axis_label
 				},
+				formatter: function(value){
+					return (value*1).toFixed(0)+'%'
+				}
 			}
 		},
+		// visualMap: {
+		// 	type: 'continuous',
+		// 	show:false,
+		// 	min: 85,
+		// 	max: 100,
+		// 	left: '3%',
+		// 	bottom: '5%',
+		// 	// hoverLink = true,
+		// 	// calculable: true,
+		// 	dimension: 0, 
+		// 	seriesIndex: 0,
+		// 	// seriesIndex: [0],
+		// 	inRange: {
+		// 		color: ['#00F0D8', '#299E92']
+		// 		// color: ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#ffffbf", "#fee090", "#fdae61", "#f46d43", "#d73027", "#a50026"]
+		// 	},
+		// 	textStyle: {
+		// 		color: '#24CFF4'
+		// 	}
+		// },
 		series: [{
 			data: [120, 200, 150, 80, 70, 110, 130],
 			type: 'bar',
@@ -797,7 +829,22 @@
 			barCategoryGap: '55%',
 			backgroundStyle: {
 				color: 'rgba(180, 180, 180, 0.2)'
-			}
+			},
+			itemStyle: {
+				normal: {
+					// barBorderRadius: 30,
+					color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+						offset: 0,
+						color: '#299E92'
+					}, {
+						offset: 1,
+						color: '#00F0D8'
+					}]),
+				},
+				// emphasis: {
+				// 	show: false
+				// }
+			},
 		}]
 	};
 
@@ -1213,7 +1260,7 @@
 				itemName: 'product',
 				value: '2014'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
@@ -1239,7 +1286,7 @@
 				itemName: 'product',
 				value: '2015'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 		}, {
 			type: 'pie',
 			radius: ['25%', '40%'],
@@ -1264,7 +1311,7 @@
 				itemName: 'product',
 				value: '2016'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 		},{
 			type: 'pie',
 			radius: ['25%', '40%'],
@@ -1289,7 +1336,7 @@
 				itemName: 'product',
 				value: '2017'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		}, {
 			type: 'pie',
@@ -1314,7 +1361,7 @@
 				itemName: 'product',
 				value: '2018'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},{
 			type: 'pie',
@@ -1339,7 +1386,7 @@
 				itemName: 'product',
 				value: '2019'
 			},
-			roseType: "radius"
+			// roseType: "radius"
 			// No encode specified, by default, it is '2012'.
 		},]
 	};
@@ -1387,7 +1434,7 @@
 	console.log(option_4_6_2['dataset']['source'])
 
 
-	myChart_4_6.setOption(option_4_6_1);
+	myChart_4_6.setOption(option_4_6_2);
 
 
 	var curIsPie_4_6 = true;
