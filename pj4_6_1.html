@@ -77,7 +77,10 @@
 	var data_6_1 = alldata["6-3各国年度劳动生产率（美元每人）"]
 	var data_6_2 = alldata["6-4各国年度GDP数据（亿美元）"]
     var data_6_3 = alldata["6-5各国年度商品出口单位价值指数（上一年= 100）"]
-    var country = ['美国', '中国', '日本', '卢森堡', '意大利', '英国', '德国', '法国', '巴西', '印度', '俄罗斯联邦', '加拿大', '中国澳门特别行政区', '中国香港特别行政区', '韩国共和国', '新加坡', '沙特阿拉伯', '爱尔兰', '瑞士', '南非']
+    var country = [
+        '美国', '中国', '日本', '卢森堡', '意大利', '英国', '德国', '法国', '巴西', '印度', '俄罗斯联邦', '加拿大', '中国澳门特别行政区', '中国香港特别行政区', '韩国共和国', '新加坡', '沙特阿拉伯', 
+        '爱尔兰', '瑞士', '南非', '荷兰', '西班牙', '墨西哥', '文莱达鲁萨兰国', '澳大利亚', '新西兰', '瑞典', '波多黎各', '卡塔尔', '阿根廷', '巴基斯坦', '波兰'
+    ]
     function isInArray(arr, value){
         for(var i = 0; i < arr.length; i++){
             if(value === arr[i]){
@@ -148,7 +151,7 @@
     };
     //控制圆球的大小，返回的数值根据y轴的大小范围进行变化，根据自身元素动态调整该函数
     var sizeFunction = function (x) {
-        var y = Math.sqrt(x) + 0.1;
+        var y = Math.sqrt(x) / 2 + 0.1;
         return y * 80;
 	};
     //需要展示的数据
@@ -258,7 +261,7 @@
                 },
                 axisLine: {
                     lineStyle: {
-                        color: '#ccc'
+                        color:'#ffffff'
                     }
                 },
                 axisLabel: {
@@ -275,7 +278,7 @@
                 },
                 axisLine: {
                     lineStyle: {
-                        color: '#ccc'
+                        color:'#ffffff'
                     }
                 },
                 splitLine: {
@@ -315,10 +318,20 @@
                     itemStyle: itemStyle,
                     label: {
                         color:'#ffffff',
-                        fontSize: 30,
+                        fontSize: 20,
                         show: true,
                         position: 'inside',
                         formatter:function(params){ //标签内容
+                            if(params.data[3] == '中国澳门特别行政区')
+                                return '澳门'
+                            if(params.data[3] == '中国香港特别行政区')
+                                return '香港'
+                            if(params.data[3] == '韩国共和国')
+                                return '韩国'
+                            if(params.data[3] == '俄罗斯联邦')
+                                return '俄罗斯'
+                            if(params.data[3] == '文莱达鲁萨兰国')
+                                return '文莱'
                             if(isInArray(country, params.data[3]))
                                 return params.data[3]
                             else
@@ -350,10 +363,20 @@
                 itemStyle: itemStyle,
                 label: {
                     color:'#ffffff',
-                    fontSize: 30,
+                    fontSize: 20,
                     show: true,
                     position: 'inside',
                     formatter:function(params){ //标签内容
+                        if(params.data[3] == '中国澳门特别行政区')
+                            return '澳门'
+                        if(params.data[3] == '中国香港特别行政区')
+                            return '香港'
+                        if(params.data[3] == '韩国共和国')
+                            return '韩国'
+                        if(params.data[3] == '俄罗斯联邦')
+                            return '俄罗斯'
+                        if(params.data[3] == '文莱达鲁萨兰国')
+                            return '文莱'
                         if(isInArray(country, params.data[3]))
                             return params.data[3]
                         else
@@ -437,14 +460,14 @@
 		},
 		yAxis: {
 			type: 'value',
-			name: '金额',
+			name: '美元每人',
 			axisLine: {
                 lineStyle: {
                     color: color_axis
                 }
 			},
 			axisLabel: {
-				formatter: '{value} 美元每人',
+				formatter: '{value}',
 				fontSize: fontSize_axis_label
 			}
 		},
@@ -560,7 +583,6 @@
 		xAxis: {
 			type: 'category',
 			data: xAxis_6_6,
-			boundaryGap: false,
 			axisLine: {
                 lineStyle: {
                     color: color_axis
@@ -572,14 +594,14 @@
 		},
 		yAxis: {
 			type: 'value',
-			name: '百分比',
+			name: '亿美元',
 			axisLine: {
                 lineStyle: {
                     color: color_axis
                 }
 			},
 			axisLabel: {
-				formatter: '{value} 亿美元',
+				formatter: '{value}',
 				fontSize: fontSize_axis_label
 			}
 		},
