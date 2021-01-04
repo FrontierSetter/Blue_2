@@ -475,7 +475,46 @@
                 type: 'line',
                 data: yAxis_1_3b,
             }
-        ]
+        ],
+        visualMap: {
+            top: 10,
+            right: 10,
+            pieces: [{
+                gt: 60,
+                lte: 75,
+                color: '#333300'
+            }, {
+                gt: 75,
+                lte: 80,
+                color: '#555500'
+            }, {
+                gt: 80,
+                lte: 84,
+                color: '#777700'
+            }, {
+                gt: 84,
+                lte: 88,
+                color: '#999900'
+            }, {
+                gt: 88,
+                lte: 92,
+                color: '#bbbb00'
+            }, {
+                gt: 92,
+                lte: 98,
+                color: '#dddd00'
+            }, {
+                gt: 98,
+                lte: 100,
+                color: '#eeee00'
+            }],
+            outOfRange: {
+                color: '#ffff00'
+            },
+            textStyle: {
+                color: "#ffffff"
+            }
+        },
     };
 
 

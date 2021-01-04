@@ -21,13 +21,66 @@
         return;
     }
     echarts.registerTheme('chalk', {
+        "legend": {
+            "textStyle": {
+                "color": "#eeeeee"
+            }
+        },
+        "categoryAxis": {
+            "axisLine": {
+                "show": true,
+                "lineStyle": {
+                    "color": "#ffffff"
+                }
+            },
+            "axisTick": {
+                "show": false,
+                "lineStyle": {
+                    "color": "#ffffff"
+                }
+            },
+            "axisLabel": {
+                "fontSize": "18",
+                "show": true,
+                "textStyle": {
+                    "color": "#ffffff"
+                }
+            },
+        },
+        "valueAxis": {
+            "axisLine": {
+                "show": true,
+                "lineStyle": {
+                    "color": "#ffffff"
+                }
+            },
+            "axisLabel": {
+                "show": true,
+                "textStyle": {
+                    "color": "#ffffff"
+                }
+            },
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "color": [
+                        "#666666"
+                    ]
+                }
+            },
+        },
         "color": [
-            "#40E0D0","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#CD0000","#36648B","#8B668B","#FFFF00",
+//            "#00ff00","#ffff00","#ff0000","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#CD0000","#36648B","#8B668B","#FFFF00",//吴老师prefer
+            "#40E0D0","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#CD0000","#36648B","#8B668B","#FFFF00",//版本2
+//            "#8fff00","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#CD0000","#36648B","#8B668B","#FFFF00",//版本2
 //            "#00ddcc","#DDDD24","#6dee72","#ee6666","#d8af31","#73c0de","#3ba272","#FF69B4","#9a60b4","#ea7ccc"
 //good            "#00ddcc","#DDDD24","#73E600","#ee6666","#F8BA35","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
 //            "#00ddcc","#FFFF24","#66CC00","#F8B21B","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
 //            "#66FFFF","#00FF99","#33ff33","#ffff33","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"
         ]
+    });
+}));
+
         /*
         "backgroundColor": "#293441",
         "textStyle": {},
@@ -441,5 +494,3 @@
             }
         }
         */
-    });
-}));
