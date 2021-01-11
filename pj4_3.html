@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="css/mine.css" />
 
 		<!-- JQuery -->
-		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery.min.js"></script>
 		
 		<!-- 弹出窗口 -->
 		<link rel="stylesheet" href="css/hover_window_2.css" />
@@ -163,11 +163,14 @@
 	var yAxis_1a = []
 	var yAxis_1b = []
 	var yAxis_1c = []
-    for(var i = 1; i < data_1.length-2; i+=1) {
-		xAxis_1.push(data_1[i][0])
-		yAxis_1a.push(data_1[i][1])
-		yAxis_1b.push(data_1[i][2])
-		yAxis_1c.push(data_1[i][3])
+    for(var i = data_1.length-2; i > 0; i-=1) {
+		if(data_1[i][1]){
+			xAxis_1.push(data_1[i][0])
+		    yAxis_1a.push(data_1[i][1])
+		    yAxis_1b.push(data_1[i][2])
+		    yAxis_1c.push(data_1[i][3])
+		}
+		
 	}
 
 	var option1 = {
@@ -259,7 +262,7 @@
 	var yAxis_2d = []
 	var min2=999999999
 	var max2=0
-    for(var i = 1; i < data_2.length-2; i+=1) {
+    for(var i = data_2.length-2; i > 1; i-=1) {
 		xAxis_2.push(data_2[i][0])
 		yAxis_2a.push(data_2[i][1])
 		if(data_2[i][1]>max2)
@@ -322,8 +325,8 @@
 			axisLabel: {
                     fontSize: fontSize_axis_label
 				},
-			min: min2*0.9,
-			max: max2*1.1,
+			min: 30,
+			max: 60,
 			type: 'value'
 		},
 		dataZoom: [
@@ -429,8 +432,8 @@
 			axisLabel: {
                     fontSize: fontSize_axis_label
 				},
-				min:70,
-				max:105,
+				min:50,
+				max:110,
 			type: 'value'
 		},
 		dataZoom: [
@@ -552,8 +555,8 @@
 			axisLabel: {
                     fontSize: fontSize_axis_label
 				},
-			min: min4*0.9,
-			max: max4*1.1,
+			min: 30,
+			max: 60,
 			type: 'value'
 		},
 		dataZoom: [
@@ -650,8 +653,8 @@
 			axisLabel: {
                     fontSize: fontSize_axis_label
 				},
-			min: min5*0.9,
-			max: max5*1.1,
+			min: 30,
+			max: 70,
 			type: 'value'
 		},
 		dataZoom: [
@@ -796,8 +799,8 @@
 			axisLabel: {
                     fontSize: fontSize_axis_label
 				},
-			min: min6*0.9,
-			max: max6*1.1,
+			min: 0,
+			max: 70,
 			type: 'value'
 		},
 		dataZoom: [
