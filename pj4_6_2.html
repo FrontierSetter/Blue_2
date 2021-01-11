@@ -43,10 +43,16 @@
                     </div>
                 </div>
                 <div class="col col-r">
-                    <div class="xpanel-wrapper xpanel-wrapper-90">
-						<div class="xpanel xpanel-c-t">
-							<div class="title">主要国家GDP数据</div>
-							<div class="echart-container" id="container_6_2" style="height: 100%;"></div>
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">各地区年度劳动生产率</div>
+							<div class="echart-container" id="container_3_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">各地区年度GDP</div>
+							<div class="echart-container" id="container_3_2"></div>
 						</div>
                     </div>
 				</div>
@@ -385,201 +391,274 @@
         });
     }
 	myChart_6_1.setOption(option);
+</script>
 
-    //主要国家GDP数据
-    var dom_6_2 = document.getElementById("container_6_2");
-	var myChart_6_2 = echarts.init(dom_6_2, 'chalk');
-    var xAxis_6_2 = [] //30个国家
-    var yAxis_6_2 = new Array() //年度GDP
-    var zAxis_6_2 = [] //年份
-    var myColor1 = [] //柱状图颜色数组
-
-    for(var i = 1; i < data_6_4[0].length; ++i) {
-		zAxis_6_2.push(data_6_4[0][i]) //年份
-		yAxis_6_2[i-1] = new Array()
-		for(var j = 1; j < data_6_4.length; ++j) {
-			yAxis_6_2[i-1].push(data_6_4[j][i]/1000000000000)
-		}
+<!--配置页面 6-5 的Echart图-->
+<script>
+	var dom_6_5 = document.getElementById("container_3_1");
+	var myChart_6_5 = echarts.init(dom_6_5, 'chalk');
+    var data_6_5 = alldata["6-8各洲年度劳动生产率"]
+	console.log(data_6_5)
+    var xAxis_6_5 = []  //年份
+    var yAxis_6_5a = [] //东亚与太平洋
+    var yAxis_6_5b = [] //欧洲与中亚
+    var yAxis_6_5c = [] //拉丁美洲
+    var yAxis_6_5d = [] //中东与北非
+    var yAxis_6_5e = [] //北美
+    var yAxis_6_5f = [] //撒哈拉以南非洲
+    for(var i = 1; i < data_6_5[0].length; ++i) {
+        xAxis_6_5.push(data_6_5[0][i])  //年份
+        yAxis_6_5a.push(data_6_5[1][i]) //东亚与太平洋
+        yAxis_6_5b.push(data_6_5[2][i]) //欧洲与中亚
+        yAxis_6_5c.push(data_6_5[3][i]) //拉丁美洲
+        yAxis_6_5d.push(data_6_5[4][i]) //中东与北非
+        yAxis_6_5e.push(data_6_5[5][i]) //北美
+        yAxis_6_5f.push(data_6_5[6][i]) //撒哈拉以南非洲
     }
-    for(var i = 1; i < data_6_4.length; ++i) {
-        xAxis_6_2.push(data_6_4[i][0])
-        myColor1.push(Color[data_6_4[i][21]])
-    }
-    
-    console.log(xAxis_6_2)
-    console.log(myColor1)
-    
-    // 柱状图
-	var option_6_2 = {
-        baseOption: {
-            //右侧时间线
-            timeline: {
-                show: false,
-                axisType: 'category',
-                orient: 'vertical',
-                autoPlay: true,  //是否自动播放
-                inverse: true,
-                playInterval: 1000,  //更换时间线间隔时间
-                left: null,
-                right: 0,
-                top: 20,
-                bottom: 20,
-                width: 55,
-                height: null,
-                label: {
-                    fontSize: fontSize_axis_label,
-                    color: '#999'
-                },
-                symbol: 'none',
-                lineStyle: {
-                    color: '#555'
-                },
-                checkpointStyle: {
-                    color: '#bbb',
-                    borderColor: '#777',
-                    borderWidth: 2
-                },
-                controlStyle: {
-                    showNextBtn: false,
-                    showPrevBtn: false,
-                    color: '#666',
-                    borderColor: '#666'
-                },
-                emphasis: {
-                    label: {
-                        color: '#fff'
-                    },
-                    controlStyle: {
-                        color: '#aaa',
-                        borderColor: '#aaa'
-                    }
-                },
-                data: []
-            },
-		    tooltip: {
-			    trigger: 'axis',
-			    axisPointer: {
-				    type: 'shadow'
-			    }
-            },
-            toolbox: {
-                show: true,
-                itemSize: echart_toolbox_size,
-                top: 'center',
-                orient: 'vertical',
-                feature: {
-                    dataView: {show: true, readOnly: false},
-                    saveAsImage: {show: true}
-                }
-            },
-            grid: {
-                left: '1.5%',
-                containLabel: true
-            },
-            legend: {
-                data: ["东亚与太平洋", "欧洲与中亚", "拉丁美洲", "中东与北非", "北美", "撒哈拉以南非洲", "南亚"],
-                textStyle: {
-                    color: color_legend,
-                    fontSize: fontSize_all_legend,
-                }
-            },
-            yAxis: {
-                type: 'category',
-                data: [],
-                axisLabel:{
-                    textStyle: { //图例文字的样式
-                        color: color_axis,
-                        fontSize: fontSize_axis_label
-                    }
-                }
-            },
-            xAxis: {
-                type: 'value',
-                name: '万亿美元',
-                data: [],
-                nameTextStyle: {
-                    fontSize: 12
-                },
-                axisLabel:{
-                    textStyle: { //图例文字的样式
-                        color: color_axis,
-                        fontSize: fontSize_axis_label
-                    },
-                    formatter: '{value}'
-                },
-            },
-            series: [
-                {
-                    data: [],
-                    type: 'bar',
-                },
-            ],
-            animationDurationUpdate: 1000,
-            animationEasingUpdate: 'quinticInOut',
-        },
-        options: []
-	};
-    
-    var XY_6_2 = [];
-    var X_6_2 = [];
-    var Y_6_2 = [];
-    var ColorMap = new Map();
-    for(var n = 0; n < xAxis_6_2.length; n++) {
-        ColorMap.set(xAxis_6_2[n], myColor1[n]);
-    }
-    console.log(ColorMap);
-    for (var n = 0; n < zAxis_6_2.length; n++) {
-        option_6_2.baseOption.timeline.data.push(zAxis_6_2[n]);
-        XY_6_2 = [];
-        X_6_2 = [];
-        Y_6_2 = [];
-        for(var i = 0; i < xAxis_6_2.length; ++i){
-            XY_6_2.push([xAxis_6_2[i], yAxis_6_2[n][i]]);
-        }
-        XY_6_2 = XY_6_2.sort(function (a, b) {
-            return a[1] - b[1];
-        });
-        for(var i = xAxis_6_2.length - 15; i < xAxis_6_2.length; ++i){
-            X_6_2.push(XY_6_2[i][0]);
-            Y_6_2.push(XY_6_2[i][1]);
-        }
-        option_6_2.options.push({
-            title: {
-                show: true,
-                'text': zAxis_6_2[n] + ''
-            },
-            yAxis: {
-                type: 'category',
-                data: X_6_2,
-            },
-            xAxis: {
-                type: 'value',
-                data: [],   
-            },
-            series: {
-                name: zAxis_6_2[n],
-                type: 'bar',
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            return ColorMap.get(params.name)
-                        }
-                    }
-                },
-                label: {
-                    color:'#ffffff',
-                    formatter:function(params){
-                        return params.data.toFixed(2)   
-                    },
-                    fontSize: 20,
-                    show: true,
-                    position: 'inside',
-                },
-                data: Y_6_2,
+	var option_6_5 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
             }
-        });
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["东亚与太平洋", "欧洲与中亚", "欧洲联盟", "拉丁美洲", "中东与北非", "北美", "撒哈拉以南非洲", "南亚"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_5,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '美元每人',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+            {
+			    data: yAxis_6_5a,
+			    name: '东亚与太平洋',
+                type: 'bar',
+                color: "#CD0000",
+            },
+            {
+			    data: yAxis_6_5b,
+			    name: '欧洲与中亚',
+			    type: 'bar',
+			},
+            {
+			    data: yAxis_6_5c,
+			    name: '拉丁美洲',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_5d,
+			    name: '中东与北非',
+			    type: 'bar',
+            },
+            {
+			    data: yAxis_6_5e,
+			    name: '北美',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_5f,
+			    name: '撒哈拉以南非洲',
+			    type: 'bar',
+            },
+            {
+			    name: '南亚',
+			    type: 'bar',
+            },
+		]
+	};
+	if (option_6_5 && typeof option_6_5 === 'object') {
+		myChart_6_5.setOption(option_6_5);
+		console.log(data_6_5)
+	}
+</script>
+
+<!--配置页面 6-6 的Echart图-->
+<script>
+	var dom_6_6 = document.getElementById("container_3_2");
+	var myChart_6_6 = echarts.init(dom_6_6, 'chalk');
+    var data_6_6 = alldata["6-9各洲年度GDP"]
+	console.log(data_6_6)
+    var xAxis_6_6 = []  //年份
+    var yAxis_6_6a = [] //东亚与太平洋
+    var yAxis_6_6b = [] //欧洲与中亚
+    var yAxis_6_6c = [] //拉丁美洲
+    var yAxis_6_6d = [] //中东与北非
+    var yAxis_6_6e = [] //北美
+    var yAxis_6_6f = [] //撒哈拉以南非洲
+    for(var i = 1; i < data_6_6[0].length; ++i) {
+        xAxis_6_6.push(data_6_6[0][i])            //年份
+        yAxis_6_6a.push(data_6_6[1][i]/100000000) //东亚与太平洋
+        yAxis_6_6b.push(data_6_6[2][i]/100000000) //欧洲与中亚
+        yAxis_6_6c.push(data_6_6[3][i]/100000000) //拉丁美洲
+        yAxis_6_6d.push(data_6_6[4][i]/100000000) //中东与北非
+        yAxis_6_6e.push(data_6_6[5][i]/100000000) //北美
+        yAxis_6_6f.push(data_6_6[6][i]/100000000) //撒哈拉以南非洲
     }
-	myChart_6_2.setOption(option_6_2);
+	var option_6_6 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+		legend: {
+			data: ["东亚与太平洋", "欧洲与中亚", "欧洲联盟", "拉丁美洲", "中东与北非", "北美", "撒哈拉以南非洲", "南亚"],
+            textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+        },
+		xAxis: {
+			type: 'category',
+			data: xAxis_6_6,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: {
+			type: 'value',
+			name: '亿美元',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+		dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 0,
+                end: 100
+            },
+        ],
+		series: [
+            {
+			    data: yAxis_6_6a,
+			    name: '东亚与太平洋',
+                type: 'bar',
+                color: "#CD0000",
+            },
+            {
+			    data: yAxis_6_6b,
+			    name: '欧洲与中亚',
+			    type: 'bar',
+			},
+            {
+			    data: yAxis_6_6c,
+			    name: '拉丁美洲',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_6d,
+			    name: '中东与北非',
+			    type: 'bar',
+            },
+            {
+			    data: yAxis_6_6e,
+			    name: '北美',
+			    type: 'bar',
+			},
+			{
+			    data: yAxis_6_6f,
+			    name: '撒哈拉以南非洲',
+			    type: 'bar',
+            },
+            {
+			    name: '南亚',
+			    type: 'bar',
+            },
+		]
+	};
+	if (option_6_6 && typeof option_6_6 === 'object') {
+		myChart_6_6.setOption(option_6_6);
+		console.log(data_6_6)
+	}
 </script>
 
 <script>
