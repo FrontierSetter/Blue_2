@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">宏观经济数据</h1>
+		</div>
+		<div class="wrapper">
+            <div class="content">
+                <div class="col col-ll">
+                    <div class="xpanel-wrapper">
+                        <div class="xpanel xpanel-r-t">
+                            <div class="title">世界财富100强排行榜</div>
+                            <div style="height: 100%;" id="container_1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-r">
+                    <div class="xpanel-wrapper xpanel-wrapper-90">
+						<div class="xpanel xpanel-c-t">
+							<div class="title">世界各国财富500强企业数量排行榜</div>
+							<div class="echart-container" id="container_2" style="height: 100%;"></div>
+						</div>
+                    </div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+   
+    function callback2(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj4-data/data-2-fortune.json?callback=callback2"></script>
+
+<!--配置页面 6-1 的Echart图-->
+<script>
+	var dom_1 = document.getElementById("container_1");
+	var myChart_1 = echarts.init(dom_1, 'chalk');
+
+    var companies_num = 100
+    var data_fortune = []
+    data_fortune.push(alldata["2014年世界财富500强排行榜"])
+	data_fortune.push(alldata["2015年世界财富500强排行榜"])
+	data_fortune.push(alldata["2016年世界财富500强排行榜"])
+	data_fortune.push(alldata["2017年世界财富500强排行榜"])
+	data_fortune.push(alldata["2018年世界财富500强排行榜"])
+	data_fortune.push(alldata["2019年世界财富500强排行榜"])
+    var yearAxis = [2014, 2015, 2016, 2017, 2018, 2019]
+    var companies = []
+    for(var i = 0; i < 500; ++i){
+        companies.push(data_fortune[5][i+1][3])
+    }
+    var Color = ["#CD0000", "#40E0D0","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80"]
+
+    //散点图五维数据
+	var mydata = new Array()
+	for(var i = 0; i < data_fortune.length; ++ i) {
+		mydata[i] = new Array()
+		for(var j = 0; j < companies_num; ++ j) {
+			mydata[i][j] = new Array()
+			mydata[i][j].push(data_fortune[i][j+1][7]) //营业收入（百万美元）
+			mydata[i][j].push(data_fortune[i][j+1][8])  //利润（百万美元）
+			mydata[i][j].push(data_fortune[i][j+1][9])  //资产（百万美元）
+			mydata[i][j].push(data_fortune[i][j+1][3])  //公司名称
+			mydata[i][j].push(data_fortune[i][j+1][5])  //国家
+			mydata[i][j].push(data_fortune[i][j+1][0]) //年份
+		}
+	}
+    console.log(mydata)
+    console.log(companies)
+
+    var country_config = {
+            country:[
+                '中国',
+                '美国',
+                '日本',
+                '法国',
+                '德国',
+                '韩国',
+                '英国',
+                '瑞士',
+                '加拿大',
+                '荷兰',
+                '西班牙',
+                '巴西',
+            ],
+            color:["#FF0000","#40E0D0","#7FFF00","#EEA2AD","#EE7600","#A020F0","#43CD80","#FFFACD","#36648B","#8B668B","#FFFF00", "#00ffff"]
+    }
+
+	var itemStyle = {
+        opacity: 0.8, //控制圆球的透明度
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        label: {
+            color: '#7B38F8',
+            show: true,
+            position: 'top',
+            formatter: function(val) {
+                return val[0];
+            }
+        },
+    };
+    //控制圆球的大小，返回的数值根据y轴的大小范围进行变化，根据自身元素动态调整该函数
+    var sizeFunction = function (x) {
+        var y = Math.sqrt(x) / 25 + 0.1;
+        return y;
+	};
+    //需要展示的数据
+    var schema = [
+        {name: '营业收入', index: 0, text: '营业收入', unit: '（百万美元）'},
+        {name: '利润', index: 1, text: '利润', unit: '（百万美元）'},
+        {name: '资产', index: 2, text: '资产', unit: '（百万美元）'},
+        {name: '公司名称', index: 3, text: '公司名称', unit: ''},
+        {name: '国家', index: 4, text: '国家', unit: ''}
+	];
+    //设置散点图样式的全部属性设置
+    option_1 = {
+        baseOption: {
+            //右侧时间线
+            timeline: {
+                axisType: 'category',
+                orient: 'vertical',
+                autoPlay: true,  //是否自动播放
+                inverse: true,
+                playInterval: 2000,  //更换时间线间隔时间
+                left: null,
+                right: 0,
+                top: 20,
+                bottom: 20,
+                width: 55,
+                height: null,
+                label: {
+                    fontSize: fontSize_axis_label,
+                    color: '#999'
+                },
+                symbol: 'none',
+                lineStyle: {
+                    color: '#555'
+                },
+                checkpointStyle: {
+                    color: '#bbb',
+                    borderColor: '#777',
+                    borderWidth: 2
+                },
+                controlStyle: {
+                    showNextBtn: false,
+                    showPrevBtn: false,
+                    color: '#666',
+                    borderColor: '#666'
+                },
+                emphasis: {
+                    label: {
+                        color: '#fff'
+                    },
+                    controlStyle: {
+                        color: '#aaa',
+                        borderColor: '#aaa'
+                    }
+                },
+                data: []
+            },
+            title: [
+                {
+                    text: yearAxis[0],
+                    textAlign: 'center',
+                    left: '63%',
+                    top: '25%',
+                    textStyle: {
+                        fontSize: 100,
+                        color: 'rgba(255, 255, 255, 0.7)'
+                    }
+                },/* 
+                {
+                    text: '世界国民经济数据',
+                    left: 'center',
+                    top: 10,
+                    textStyle: {
+                        color: '#aaa',
+                        fontWeight: 'normal',
+                        fontSize: 60
+                    }
+                },*/
+            ],
+            tooltip: {
+                padding: 5,
+                backgroundColor: '#000',
+                borderColor: '#777',
+                borderWidth: 1,
+                formatter: function (obj) {
+                    var value = obj.value;
+                    return schema[3].text + '：' + value[3] + '<br>'
+                            + schema[1].text + '：' + value[1] + schema[1].unit + '<br>'
+                            + schema[0].text + '：' + value[0] + schema[0].unit + '<br>'
+                            + schema[2].text + '：' + value[2] + '<br>'
+                            + schema[4].text + '：' + value[4] + '<br>';
+                },
+			},
+            grid: {
+                top: 100,
+                containLabel: true,
+                left: 30,
+                right: '110'
+            },
+            xAxis: {
+                type: 'value',
+				name: '营业收入（百万美元）',
+                nameGap: 25,
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    fontSize: 18
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color:'#ffffff'
+                    }
+                },
+                axisLabel: {
+                    fontSize: fontSize_axis_label,
+                    formatter: '{value}',
+                },
+                min: 70000,
+
+            },
+            yAxis: {
+                type: 'value',
+				name: '利润（百万美元）',
+                nameTextStyle: {
+                    fontSize: 18
+                },
+                axisLine: {
+                    lineStyle: {
+                        color:'#ffffff'
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    fontSize: fontSize_axis_label,
+                    formatter: '{value}'
+                }
+            },
+
+            //设置展示圆球的个数，颜色等
+            visualMap: [
+                {
+                    show: false,
+                    showLabel: true,
+                    dimension: 4,
+                    categories: country_config.country,
+                    calculable: true,
+                    precision: 0.1,
+                    textGap: 30,
+                    textStyle: {
+                        color: '#ccc'
+                    },
+                    inRange: {
+                        color: (function () {
+                            var colors = country_config.color;
+                            return colors.concat(colors);
+                        })()
+                    }
+                }
+            ],
+            //开始设置每个球的内容
+            series: [
+                {
+                    type: 'scatter',
+                    itemStyle: itemStyle,
+                    label: {
+                        color:'#ffff00',
+                        fontSize: 14,
+                        show: false,
+                        position: 'inside',
+                        formatter:function(params){ //标签内容
+                            return params.data[3]
+                        },
+                    },
+                    data: mydata[0],
+                    symbolSize: function(val) {
+                        return sizeFunction(val[2]);
+                    }
+                },
+            ],
+            animationDurationUpdate: 2000,
+            animationEasingUpdate: 'quinticInOut'
+        },
+        options: []
+    };
+    //循环时间线
+    for (var n = 0; n < yearAxis.length; n++) {
+        option_1.baseOption.timeline.data.push(yearAxis[n]);
+        option_1.options.push({
+            title: {
+                show: true,
+                'text': yearAxis[n] + ''
+            },
+            series: {
+                name: yearAxis[n],
+                type: 'scatter',
+                itemStyle: itemStyle,
+                label: {
+                    color:'#ffffff',
+                    fontSize: 14,
+                    show: false,
+                    position: 'inside',
+                    
+                },
+                data: mydata[n],
+                symbolSize: function(val) {
+                    return sizeFunction(val[2]);
+                }
+            }
+        });
+    }
+	myChart_1.setOption(option_1);
+
+
+
+    //500强国家排行榜
+    var dom_2 = document.getElementById("container_2");
+    var myChart_2 = echarts.init(dom_2, 'chalk');
+    
+    var country_count = []
+
+    var XY_2 = []
+    for(var i = 0; i < data_fortune.length; ++i){
+        var mycount = {}
+        for(var j = 1; j < data_fortune[i].length; ++j){
+            var key = data_fortune[i][j][5];
+            if(mycount[key]){
+                mycount[key] ++;
+            } else {
+                mycount[key] = 1
+            }
+        }
+
+        var tmpXY_2 = []
+        Object.keys(mycount).forEach((key) => {
+            tmpXY_2.push([key, mycount[key]])
+        })
+        
+        tmpXY_2 = tmpXY_2.sort(function (a, b) {
+            return a[1] - b[1];
+        });
+        XY_2.push(tmpXY_2)
+    }
+
+    
+    // 柱状图
+	var option_2 = {
+        baseOption: {
+            //右侧时间线
+            timeline: {
+                show: true,
+                axisType: 'category',
+                orient: 'vertical',
+                autoPlay: true,  //是否自动播放
+                inverse: true,
+                playInterval: 2000,  //更换时间线间隔时间
+                left: null,
+                right: 0,
+                top: 20,
+                bottom: 20,
+                width: 55,
+                height: null,
+                label: {
+                    fontSize: fontSize_axis_label,
+                    color: '#999'
+                },
+                symbol: 'none',
+                lineStyle: {
+                    color: '#555'
+                },
+                checkpointStyle: {
+                    color: '#bbb',
+                    borderColor: '#777',
+                    borderWidth: 2
+                },
+                controlStyle: {
+                    showNextBtn: false,
+                    showPrevBtn: false,
+                    color: '#666',
+                    borderColor: '#666'
+                },
+                emphasis: {
+                    label: {
+                        color: '#fff'
+                    },
+                    controlStyle: {
+                        color: '#aaa',
+                        borderColor: '#aaa'
+                    }
+                },
+                data: []
+            },
+		    tooltip: {
+			    trigger: 'axis',
+			    axisPointer: {
+				    type: 'shadow'
+			    }
+            },
+            toolbox: {
+                show: true,
+                itemSize: echart_toolbox_size,
+                top: 'center',
+                orient: 'vertical',
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    saveAsImage: {show: true}
+                }
+            },
+            grid: {
+                left: '1.5%',
+                containLabel: true
+            },
+
+            yAxis: {
+                type: 'category',
+                data: [],
+                axisLabel:{
+                    textStyle: { //图例文字的样式
+                        color: color_axis,
+                        fontSize: fontSize_axis_label
+                    }
+                }
+            },
+            xAxis: {
+                type: 'value',
+                name: '家',
+                data: [],
+                nameTextStyle: {
+                    fontSize: 12
+                },
+                axisLabel:{
+                    textStyle: { //图例文字的样式
+                        color: color_axis,
+                        fontSize: fontSize_axis_label
+                    },
+                    formatter: '{value}'
+                },
+            },
+            series: [
+                {
+                    data: [],
+                    type: 'bar',
+                },
+            ],
+            animationDurationUpdate: 1000,
+            animationEasingUpdate: 'quinticInOut',
+        },
+        options: []
+	};
+    
+    function ColorMap (country){
+        var index = country_config.country.indexOf(country)
+        if(country == '中国') console.log(country)
+        if(index>=0){
+            return country_config.color[index]
+        } else {
+            return "#ff00ff"
+        }
+    }
+
+    for (var n = 0; n < yearAxis.length; n++) {
+        option_2.baseOption.timeline.data.push(yearAxis[n]);
+
+        var X_2 = []
+        var Y_2 = []
+        console.log(XY_2[n])
+
+        for(var i = XY_2[n].length - 20; i < XY_2[n].length; ++i){
+            X_2.push(XY_2[n][i][0]);
+            Y_2.push(XY_2[n][i][1]);
+        }
+        option_2.options.push({
+            title: {
+                show: true,
+                'text': yearAxis[n] + ''
+            },
+            yAxis: {
+                type: 'category',
+                data: X_2,
+            },
+            xAxis: {
+                type: 'value',
+                data: [],   
+            },
+            series: {
+                name: yearAxis[n],
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            return ColorMap(params.name)
+                        }
+                    }
+                },
+                label: {
+                    color:'#ffffff',
+                    formatter:function(params){
+                        return params.data.toFixed(0)   
+                    },
+                    fontSize: 20,
+                    show: true,
+                    position: 'right',
+                },
+                data: Y_2,
+            }
+        });
+    }
+	myChart_2.setOption(option_2);
+</script>
+
+<script>
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>

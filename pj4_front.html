@@ -3,101 +3,108 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <title>大屏数据可视化 - 模板</title>
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="stylesheet" href="css/mine.css" />
-    
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<title>大屏数据可视化 - 模板</title>
+	<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" href="css/mine.css" />
 
-    <!-- JQuery -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- 弹出窗口 -->
-    <link rel="stylesheet" href="css/hover_window_2.css" />
-    <link rel="stylesheet" href="css/hover_window.css" />
-    <script type="text/javascript" src="js/hover_window_2.js"></script>
+	<!-- JQuery -->
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- echarts -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
-    <script src='js/echarts-wordcloud.min.js'></script>
-    <script type="text/javascript" src="js/color.js"></script>
-    
-    <!-- semantic UI -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
-    <link rel="stylesheet" href="semantic-ui/semantic.min.css">
-    <script type="text/javascript" src="js/jquery3.3.1.js"></script>
-    <script type="text/javascript" src="semantic-ui/semantic.min.js"></script>
+	<!-- 弹出窗口 -->
+	<link rel="stylesheet" href="css/hover_window_2.css" />
+	<link rel="stylesheet" href="css/hover_window.css" />
+	<script type="text/javascript" src="js/hover_window_2.js"></script>
 
-    <!-- <script src="json/data.json"></script> -->
-    <script type="text/javascript" src="js/global_config.js"></script></head>
+	<!-- echarts -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
+	<script src='js/echarts-wordcloud.min.js'></script>
+	<script type="text/javascript" src="js/color.js"></script>
+
+	<!-- semantic UI -->
+	<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+	<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+	<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+	<link rel="stylesheet" href="semantic-ui/semantic.min.css">
+	<script type="text/javascript" src="js/jquery3.3.1.js"></script>
+	<script type="text/javascript" src="semantic-ui/semantic.min.js"></script>
+
+	<!-- <script src="json/data.json"></script> -->
+	<script type="text/javascript" src="js/global_config.js"></script>
+</head>
 
 <body>
-    <div class="header">
-        <h1 class="header-title" style="font-size:40px">宏观经济数据展图</h1>
-    </div>
-    <div class="wrapper">
-        <div class="content">
-            <div class="col col-l">
-                <div class="xpanel-wrapper xpanel-wrapper-50">
-                    <div class="xpanel xpanel-l-t">
-                        <div class="title">国家优质制造水平评价数据<a href="./pj4_1.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        
-                        <div id="container_1" style="height: 95%"></div>
-                    </div>
-                </div>
-                <div class="xpanel-wrapper xpanel-wrapper-55">
-                    <div class="xpanel xpanel-l-b">
-                        <div class="title">世界500强排行榜数据<a href="./pj4_2.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        
-                        <div id="container_2" style="height: 90%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-c">
-                <div class="xpanel-wrapper xpanel-wrapper-50">
-                    <div class="xpanel xpanel-c-t">
-                        <div class="title">企业相关指数数据<a href="./pj4_3.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        
-                        <div id="container_3" style="height: 95%"></div>
-                    </div>
-                </div>
-                <div class="xpanel-wrapper xpanel-wrapper-55">
-                    <div class="xpanel xpanel-c-b">
-                        <div class="title">年度质量抽查及投诉数据<a href="./pj4_4.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a>
-                        </div>
-                        
-                        <div id="container_4" style="height: 90%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-r">
-                <div class="xpanel-wrapper xpanel-wrapper-50">
-                    <div class="xpanel xpanel-r-t">
-                        <div class="title">高端装备制造业分行业评价数据<a href="./pj4_5.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        
-                        <div id="container_5" style="height: 95%"></div>
-                    </div>
-                </div>
-                <div class="xpanel-wrapper xpanel-wrapper-55">
-                    <div class="xpanel xpanel-r-b">
-                        <div class="title">中国与世界国民经济数据<a href="./pj4_6.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        
-                        <div id="container_6" style="height: 90%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="header">
+		<h1 class="header-title" style="font-size:40px">宏观经济数据展图</h1>
+	</div>
+	<div class="wrapper">
+		<div class="content">
+			<div class="col col-l">
+				<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel xpanel-l-t">
+						<div class="title">国家优质制造水平评价数据<a href="./pj4_1.html" style="color: white;"
+								class="title_link"><i class="external square alternate icon"></i></a></div>
 
-    <script>
+						<div id="container_1" style="height: 95%"></div>
+					</div>
+				</div>
+				<div class="xpanel-wrapper xpanel-wrapper-55">
+					<div class="xpanel xpanel-l-b">
+						<div class="title">世界500强排行榜数据<a href="./pj4_2.html" style="color: white;" class="title_link"><i
+									class="external square alternate icon"></i></a></div>
+
+						<div id="container_2" style="height: 90%"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col col-c">
+				<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel xpanel-c-t">
+						<div class="title">企业相关指数数据<a href="./pj4_3.html" style="color: white;" class="title_link"><i
+									class="external square alternate icon"></i></a></div>
+
+						<div id="container_3" style="height: 95%"></div>
+					</div>
+				</div>
+				<div class="xpanel-wrapper xpanel-wrapper-55">
+					<div class="xpanel xpanel-c-b">
+						<div class="title">年度质量抽查及投诉数据<a href="./pj4_4.html" style="color: white;" class="title_link"><i
+									class="external square alternate icon"></i></a>
+						</div>
+
+						<div id="container_4" style="height: 90%"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col col-r">
+				<div class="xpanel-wrapper xpanel-wrapper-50">
+					<div class="xpanel xpanel-r-t">
+						<div class="title">高端装备制造业分行业评价数据<a href="./pj4_5.html" style="color: white;"
+								class="title_link"><i class="external square alternate icon"></i></a></div>
+
+						<div id="container_5" style="height: 95%"></div>
+					</div>
+				</div>
+				<div class="xpanel-wrapper xpanel-wrapper-55">
+					<div class="xpanel xpanel-r-b">
+						<div class="title">中国与世界国民经济数据<a href="./pj4_6.html" style="color: white;" class="title_link"><i
+									class="external square alternate icon"></i></a></div>
+
+						<div id="container_6" style="height: 90%"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
 			// initHoverWindowBySuffix('_1', submitHandler, function(){hideDialogID('_1')});
-    </script>
+	</script>
 </body>
 
 </html>
@@ -105,47 +112,47 @@
 
 <!--解决本地json跨域问题-->
 <script>
-    var data1 = {};
-    var data2 = {};
-    var data3 = {};
-    var data4 = {};
-    var data5 = {};
-    var data6 = {};
+	var data1 = {};
+	var data2 = {};
+	var data3 = {};
+	var data4 = {};
+	var data5 = {};
+	var data6 = {};
 
-    function callback1(res) {
-        data1 = res;
-    }
-    function callback2(res) {
-        data2 = res;
-    }
-    function callback3(res) {
-        data3 = res;
-    }
-    function callback4(res) {
-        data4 = res;
-    }
-    function callback5(res) {
-        data5 = res;
-    }
-    function callback6(res) {
-        data6 = res;
-    }
+	function callback1(res) {
+		data1 = res;
+	}
+	function callback2(res) {
+		data2 = res;
+	}
+	function callback3(res) {
+		data3 = res;
+	}
+	function callback4(res) {
+		data4 = res;
+	}
+	function callback5(res) {
+		data5 = res;
+	}
+	function callback6(res) {
+		data6 = res;
+	}
 </script>
 <script>
-    var data_front4 = {};
+	var data_front4 = {};
 
-    function demo_pj4_4(res){
-        data_front4 = res;
+	function demo_pj4_4(res) {
+		data_front4 = res;
 		console.log(data_front4);
-    }
+	}
 </script>
 <script src="data/data_pj4_4.json?callback=demo_pj4_4"></script>
 <script>
-    var data = {};
+	var data = {};
 
-    function demo(res){
-        data_front_6 = res;
-    }
+	function demo(res) {
+		data_front_6 = res;
+	}
 </script>
 <script src="data/data4_6_2.json"></script>
 
@@ -159,314 +166,347 @@
 
 <!--配置页面 front-1 的Echart图-->
 <script>
-    var dom_1 = document.getElementById("container_1");
-    var myChart_1 = echarts.init(dom_1, 'chalk');
+	var dom_1 = document.getElementById("container_1");
+	var myChart_1 = echarts.init(dom_1, 'chalk');
 
-    var data_1 = data1["1-国家优质制造指数"]
+	var data_1 = data1["1-国家优质制造指数"]
 
-    var xAxis_1 = []
-    var yAxis_1a = []
-    var yAxis_1b = []
-    var yAxis_1c = []
-    var yAxis_1d = []
-    var yAxis_1e = []
-    var yAxis_1f = []
-    var yAxis_1g = []
+	var xAxis_1 = []
+	var yAxis_1a = []
+	var yAxis_1b = []
+	var yAxis_1c = []
+	var yAxis_1d = []
+	var yAxis_1e = []
+	var yAxis_1f = []
+	var yAxis_1g = []
 
-    for (var i = 1; i < data_1.length; ++i) {
-        xAxis_1.push(data_1[i][0])
-        yAxis_1a.push(data_1[i][1])
-        yAxis_1b.push(data_1[i][2])
-        yAxis_1c.push(data_1[i][3])
-        yAxis_1d.push(data_1[i][4])
-        yAxis_1e.push(data_1[i][5])
-        yAxis_1f.push(data_1[i][6])
-        yAxis_1g.push(data_1[i][7])
-    }
-
-
-    var option_1 = {
-        textStyle: {
-            fontSize: fontSize_all_legend,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ["中国","美国","德国","日本","英国","法国","韩国"],
-            textStyle: {
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                dataView: { show: true, readOnly: false },
-                magicType: { show: true, type: ['line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxis_1,
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '国家优质制造指数',
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                }
-            },
-        ],
-        series: [
-            {
-                name: '美国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1b,
-            },
-            {
-                name: '德国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1c,
-            },
-            {
-                name: '日本',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1d,
-            },
-            {
-                name: '中国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width_large
-                },
-                data: yAxis_1a,
-            },
-            {
-                name: '英国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1e,
-            },
-            {
-                name: '法国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1f,
-            },
-            {
-                name: '韩国',
-                type: 'line',
-                lineStyle:{
-                    width: echart_lineStyle_width
-                },
-                data: yAxis_1g,
-            },
-        ]
-    };
+	for (var i = 1; i < data_1.length; ++i) {
+		xAxis_1.push(data_1[i][0])
+		yAxis_1a.push(data_1[i][1])
+		yAxis_1b.push(data_1[i][2])
+		yAxis_1c.push(data_1[i][3])
+		yAxis_1d.push(data_1[i][4])
+		yAxis_1e.push(data_1[i][5])
+		yAxis_1f.push(data_1[i][6])
+		yAxis_1g.push(data_1[i][7])
+	}
 
 
+	var option_1 = {
+		textStyle: {
+			fontSize: fontSize_all_legend,
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ["中国", "美国", "德国", "日本", "英国", "法国", "韩国"],
+			textStyle: {
+				color: '#F0F8FF'
+			}
+		},
+		toolbox: {
+			show: true,
+			orient: 'vertical',
+			left: 'right',
+			top: 'center',
+			feature: {
+				dataView: { show: true, readOnly: false },
+				magicType: { show: true, type: ['line', 'bar'] },
+				restore: { show: true },
+				saveAsImage: { show: true }
+			}
+		},
+		calculable: true,
+		xAxis: [
+			{
+				type: 'category',
+				data: xAxis_1,
+				axisLabel: {
+					fontSize: fontSize_axis_label
+				}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '国家优质制造指数',
+				axisLabel: {
+					fontSize: fontSize_axis_label
+				}
+			},
+		],
+		series: [
+			{
+				name: '美国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1b,
+			},
+			{
+				name: '德国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1c,
+			},
+			{
+				name: '日本',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1d,
+			},
+			{
+				name: '中国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width_large
+				},
+				data: yAxis_1a,
+			},
+			{
+				name: '英国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1e,
+			},
+			{
+				name: '法国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1f,
+			},
+			{
+				name: '韩国',
+				type: 'line',
+				lineStyle: {
+					width: echart_lineStyle_width
+				},
+				data: yAxis_1g,
+			},
+		]
+	};
 
-    if (option_1 && typeof option_1 === 'object') {
-        myChart_1.setOption(option_1);
-        console.log(data_1)
-    }
+
+
+	if (option_1 && typeof option_1 === 'object') {
+		myChart_1.setOption(option_1);
+		console.log(data_1)
+	}
 
 </script>
 
 
 <!--配置页面 front-2 的Echart图-->
 <script>
-    var dom_2 = document.getElementById("container_2");
-    //var myChart_2 = echarts.init(dom_2, 'chalk');
-    var myChart_2 = echarts.init(dom_2);
+	var dom_2 = document.getElementById("container_2");
+	//var myChart_2 = echarts.init(dom_2, 'chalk');
+	var myChart_2 = echarts.init(dom_2);
 
-    var data_2_country = [
-        {name: '美国',
-        value: 222},
-        {name: '法国',
-        value: 43},
-        {name: '英国',
-        value: 43},
-        {name: '日本',
-        value: 39},
-        {name: '中国',
-        value: 38},
-        {name: '德国',
-        value: 26},
-        {name: '瑞士',
-        value: 21},
-        {name: '意大利',
-        value: 15},
-        {name: '荷兰',
-        value: 9},
-        {name: '韩国',
-        value: 7},
-        {name: '其他',
-        value: 37},
-    ];
+	var data_2_country = [
+		{
+			name: '美国',
+			value: 222
+		},
+		{
+			name: '法国',
+			value: 43
+		},
+		{
+			name: '英国',
+			value: 43
+		},
+		{
+			name: '日本',
+			value: 39
+		},
+		{
+			name: '中国',
+			value: 38
+		},
+		{
+			name: '德国',
+			value: 26
+		},
+		{
+			name: '瑞士',
+			value: 21
+		},
+		{
+			name: '意大利',
+			value: 15
+		},
+		{
+			name: '荷兰',
+			value: 9
+		},
+		{
+			name: '韩国',
+			value: 7
+		},
+		{
+			name: '其他',
+			value: 37
+		},
+	];
 
-    var data_2_industry = [
-        {name:'汽车与零件',value: 36},
-        {name:'传媒',value: 35},
-        {name:'食品与饮料',value: 33},
-        {name:'互联网',value: 24},
-        {name:'能源',value: 23},
-        {name:'零售',value: 22},
-        {name:'计算机与通讯',value: 20},
-        {name:'日化',value: 18},
-        {name:'银行',value: 17},
-        {name:'保险',value: 16},
-        {name:'奢侈品',value: 16},
-        {name:'电信',value: 15},
-        {name:'多元金融',value: 14},
-        {name:'咨询',value: 13},
-        {name:'服装服饰',value: 11},
-        {name:'钟表与珠宝',value: 11},
-        {name:'防务与飞机制造',value: 10},
-        {name:'航空',value: 10},
-        {name:'教育',value: 10},
-        {name:'软件',value: 10},
-        {name:'制药',value: 10},
-        {name:'其他',value: 126}
-    ]
+	var data_2_industry = [
+		{ name: '汽车与零件', value: 36 },
+		{ name: '传媒', value: 35 },
+		{ name: '食品与饮料', value: 33 },
+		{ name: '互联网', value: 24 },
+		{ name: '能源', value: 23 },
+		{ name: '零售', value: 22 },
+		{ name: '计算机与通讯', value: 20 },
+		{ name: '日化', value: 18 },
+		{ name: '银行', value: 17 },
+		{ name: '保险', value: 16 },
+		{ name: '奢侈品', value: 16 },
+		{ name: '电信', value: 15 },
+		{ name: '多元金融', value: 14 },
+		{ name: '咨询', value: 13 },
+		{ name: '服装服饰', value: 11 },
+		{ name: '钟表与珠宝', value: 11 },
+		{ name: '防务与飞机制造', value: 10 },
+		{ name: '航空', value: 10 },
+		{ name: '教育', value: 10 },
+		{ name: '软件', value: 10 },
+		{ name: '制药', value: 10 },
+		{ name: '其他', value: 126 }
+	]
 
-    option_2 = {
-        title: [{
-            //text: 'Pie label alignTo'
-        }, {
-            subtext: '按国家分布',
-            left: '25%',
-            top: '75%',
-            textAlign: 'center'
-        }, {
-            subtext: '按行业分布',
-            left: '75%',
-            top: '75%',
-            textAlign: 'center'
-        }],
-        tooltip: {
-            trigger: 'item',
-            formatter: '{b} : {c} ({d}%)'
-        },
-        series: [{
-            type: 'pie',
-            radius: '45%',
-            center: ['50%', '50%'],
-            data: data_2_country,
-            animation: false,
-            label: {
-                position: 'outer',
-                //alignTo: 'labelLine',
-                bleedMargin: 5
-            },
-            left: 0,
-            right: '50%',
-            top: 0,
-            bottom: 0
-        }, {
-            type: 'pie',
-            radius: '45%',
-            center: ['50%', '50%'],
-            data: data_2_industry,
-            animation: false,
-            label: {
-                position: 'outer',
-                //alignTo: 'labelLine',
-                margin: 20
-            },
-            left: '50%',
-            right: 0,
-            top: 0,
-            bottom: 0
-        }]
-    };
+	option_2 = {
+		title: [{
+			text: '2018年世界品牌500强',
+			textStyle:{
+				fontSize: 22,
+				color: '#fff',
+			},
+			textAlign: 'auto',
+		}, {
+			subtext: '按国家分布',
+			left: '30%',
+			top: '85%',
+			subtextStyle:{
+				fontSize: 18
+			},
+			textAlign: 'center'
+		}, {
+			subtext: '按行业分布',
+			left: '70%',
+			top: '85%',
+			textAlign: 'center',
+			subtextStyle:{
+				fontSize: 18
+			},
+		}],
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b} : {c} ({d}%)'
+		},
+		series: [{
+			type: 'pie',
+			radius: '60%',
+			center: ['50%', '50%'],
+			data: data_2_country,
+			animation: false,
+			label: {
+				position: 'outer',
+				//alignTo: 'labelLine',
+				bleedMargin: 5
+			},
+			left: 0,
+			right: '40%',
+			top: 0,
+			bottom: '10%'
+		}, {
+			type: 'pie',
+			radius: '60%',
+			center: ['50%', '50%'],
+			data: data_2_industry,
+			animation: false,
+			label: {
+				position: 'outer',
+				//alignTo: 'labelLine',
+				margin: 20
+			},
+			left: '40%',
+			right: 0,
+			top: 0,
+			bottom: '10%'
+		}]
+	};
 
 
 
-    if (option_2 && typeof option_2 === 'object') {
-        myChart_2.setOption(option_2);
-        console.log(data_2)
-    }
+	if (option_2 && typeof option_2 === 'object') {
+		myChart_2.setOption(option_2);
+		console.log(data_2)
+	}
 
 </script>
 
 
 <!--配置页面 front-3 的Echart图-->
 <script>
-    var dom_3 = document.getElementById("container_3");
-    var myChart_3 = echarts.init(dom_3, 'chalk');
+	var dom_3 = document.getElementById("container_3");
+	var myChart_3 = echarts.init(dom_3, 'chalk');
 
-    var data_3 = data3["3-注册登记企业数（万户）"]
+	var data_3 = data3["3-注册登记企业数（万户）"]
 
-    var xAxis_3 = []
-    var yAxis_3a = []
+	var xAxis_3 = []
+	var yAxis_3a = []
 
-    for (var i = 1; i < data_3.length; ++i) {
-        xAxis_3.push(data_3[i][0])
-        yAxis_3a.push(data_3[i][1])
-    }
+	for (var i = 1; i < data_3.length; ++i) {
+		xAxis_3.push(data_3[i][0])
+		yAxis_3a.push(data_3[i][1])
+	}
 
-    option_3 = {
-        color: '#ff6666',
-        legend: {
-            show: true,
-            data: ['企业数']
-        },
-        grid: {
-            top: 100
-        },
-        angleAxis: {
-            type: 'category',
-            data: xAxis_3,
-            boundaryGap: true,
-            max: (data_3.length-1),
-          
-        },
-        tooltip: {
-            show: true,
-        },
-        radiusAxis: {
-        },
-        polar: {
-        },
-        series: [{
-            type: 'bar',
-            data: yAxis_3a,
-            coordinateSystem: 'polar',
-            name: '企业数'
-        }]
-    };
+	option_3 = {
+		color: '#ffff00',
+		legend: {
+			show: true,
+			data: ['企业数']
+		},
+		grid: {
+			top: 100
+		},
+		angleAxis: {
+			type: 'category',
+			data: xAxis_3,
+			boundaryGap: true,
+			max: (data_3.length - 1),
+
+		},
+		tooltip: {
+			show: true,
+		},
+		radiusAxis: {
+		},
+		polar: {
+		},
+		series: [{
+			type: 'bar',
+			data: yAxis_3a,
+			coordinateSystem: 'polar',
+			name: '企业数'
+		}]
+	};
 
 
-    if (option_3 && typeof option_3 === 'object') {
-        myChart_3.setOption(option_3);
-        console.log(data_3)
-    }
+	if (option_3 && typeof option_3 === 'object') {
+		myChart_3.setOption(option_3);
+		console.log(data_3)
+	}
 
 </script>
 
@@ -489,22 +529,22 @@
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 			},
-			
+
 		},
 		toolbox: {
 			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				dataView: { show: true, readOnly: false },
+				magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
 				// restore: {show: true},
-				saveAsImage: {show: true},
+				saveAsImage: { show: true },
 				myTool2: {
 					show: true,
 					title: '切换到饼图',
 					icon: 'image://img/shuju-data.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_2, true);
 						curIsPie_4 = true;
 					}
@@ -513,7 +553,7 @@
 					show: true,
 					title: '切换到词云',
 					icon: 'image://img/yun.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_3, true);
 						curIsPie_4 = false;
 					}
@@ -537,7 +577,7 @@
 			{
 				type: 'category',
 				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-				axisLabel:{
+				axisLabel: {
 					textStyle: { //图例文字的样式
 						color: color_axis,
 						fontSize: fontSize_axis_label
@@ -548,7 +588,7 @@
 		yAxis: [
 			{
 				type: 'value',
-				axisLabel:{
+				axisLabel: {
 					textStyle: { //图例文字的样式
 						color: color_axis,
 						fontSize: fontSize_axis_label
@@ -700,19 +740,19 @@
 	var option_4_2 = {
 		toolbox: {
 			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: { show: true, readOnly: false },
 				// magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
-				saveAsImage: {show: true},
-				
+				saveAsImage: { show: true },
+
 				myTool1: {
 					show: true,
 					title: '切换到柱状图',
 					icon: 'image://img/shuju-bar.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_1, true);
 						curIsPie_4 = false;
 					}
@@ -721,7 +761,7 @@
 					show: true,
 					title: '切换到词云',
 					icon: 'image://img/yun.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_3, true);
 						curIsPie_4 = false;
 					}
@@ -738,7 +778,7 @@
 		tooltip: {},
 		dataset: {
 			source: [
-				['product','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017'],
+				['product', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
 				[
 					"锅炉",
 					12028,
@@ -853,7 +893,7 @@
 			center: ['16.6%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -869,7 +909,7 @@
 			center: ['50%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -884,14 +924,14 @@
 			center: ['83.4%', '30%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
 				value: '2016'
 			},
 			// roseType: "radius"
-		},{
+		}, {
 			type: 'pie',
 			radius: '40%',
 			// radius: 60,
@@ -899,7 +939,7 @@
 			center: ['16.6%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -914,7 +954,7 @@
 			center: ['50%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -922,14 +962,14 @@
 			},
 			// roseType: "radius"
 			// No encode specified, by default, it is '2012'.
-		},{
+		}, {
 			type: 'pie',
 			radius: '40%',
 			name: '2019',
 			center: ['83.4%', '75%'],
 			label: {
 				formatter: '{d}%',
-				color:color_axis
+				color: color_axis
 			},
 			encode: {
 				itemName: 'product',
@@ -956,16 +996,16 @@
 		},
 		toolbox: {
 			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
-				saveAsImage: {show: true},
+				dataView: { show: true, readOnly: false },
+				saveAsImage: { show: true },
 				myTool1: {
 					show: true,
 					title: '切换到柱状图',
 					icon: 'image://img/shuju-bar.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_1, true);
 						curIsPie_4 = false;
 					}
@@ -974,7 +1014,7 @@
 					show: true,
 					title: '切换到饼图',
 					icon: 'image://img/shuju-data.png',
-					onclick: function (){
+					onclick: function () {
 						myChart_4.setOption(option_4_2, true);
 						curIsPie_4 = true;
 					}
@@ -996,7 +1036,7 @@
 			},
 			textStyle: {
 				normal: {
-					color: function() {
+					color: function () {
 						var arr = [
 							"#fc97af",
 							"#87f7cf",
@@ -1033,20 +1073,20 @@
 	var X_4 = [];
 	var Y_4 = {};
 
-	for(var i = 0; i < class_4.length; ++i){
+	for (var i = 0; i < class_4.length; ++i) {
 		Y_4[class_4[i]] = [];
 	}
 
-	for(var i = 1; i < data_4.length; ++i){
+	for (var i = 1; i < data_4.length; ++i) {
 		X_4.push(data_4[i][0].toString());
-		for(var j = 1; j < data_4[i].length; ++j){
-			Y_4[class_4[j-1]].push(data_4[i][j])
+		for (var j = 1; j < data_4[i].length; ++j) {
+			Y_4[class_4[j - 1]].push(data_4[i][j])
 		}
 	}
 
 	var series_4_1 = []
 
-	for(var i = 0; i < class_4.length; ++i){
+	for (var i = 0; i < class_4.length; ++i) {
 		series_4_1.push({
 			name: class_4[i],
 			type: 'bar',
@@ -1065,7 +1105,7 @@
 	var arr_tmp = ['product']
 	source_4_2.push(arr_tmp.concat(X_4));
 
-	for(var i = 0; i < class_4.length; ++i){
+	for (var i = 0; i < class_4.length; ++i) {
 		arr_tmp = [class_4[i]];
 		source_4_2.push(arr_tmp.concat(Y_4[class_4[i]]));
 	}
@@ -1076,7 +1116,7 @@
 
 	var data_4_3 = []
 
-	for(var i = 0; i < class_4.length; ++i){
+	for (var i = 0; i < class_4.length; ++i) {
 		data_4_3.push({
 			name: class_4[i],
 			value: Y_4[class_4[i]]
@@ -1085,23 +1125,111 @@
 
 	option_4_3.series[0].data = data_4_3;
 
-	
-	myChart_4.setOption(option_4_2);
+
+	myChart_4.setOption(option_4_3);
 	var curIsPie_4 = true;
 
 </script>
+
+
+<!--配置页面 front-5 的Echart图-->
+<script>
+	var dom_5 = document.getElementById("container_5");
+	var myChart_5 = echarts.init(dom_5, 'chalk');
+	//var myChart_5 = echarts.init(dom_5);
+
+	var data_5 = [
+		{
+			name: "工程机械",
+			value: 13
+		},
+		{
+			name: "电工电器",
+			value: 11
+		},
+		{
+			name: "机床工具",
+			value: 7
+		},
+		{
+			name: "汽车工业",
+			value: 5
+		},
+		{
+			name: "专用设备",
+			value: 4
+		},
+		{
+			name: "发电机及发电设备",
+			value: 2
+		},
+		{
+			name: "基础件",
+			value: 2
+		},
+		{
+			name: "内燃机",
+			value: 2
+		},
+		{
+			name: "重型矿山",
+			value: 2
+		},
+		{
+			name: "石化通用",
+			value: 1
+		},
+		{
+			name: "仪器仪表",
+			value: 1
+		},
+
+	]
+
+	option_5 = {
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b} : {c} ({d}%)'
+		},
+		series: [{
+			type: 'pie',
+			radius: '80%',
+			center: ['50%', '50%'],
+			data: data_5,
+			animation: false,
+			label: {
+				position: 'outer',
+				//alignTo: 'labelLine',
+				bleedMargin: 5
+			},
+			left: 0,
+			right: 0,
+			top: 0,
+			bottom: 0
+		}]
+	};
+
+
+
+	if (option_5 && typeof option_5 === 'object') {
+		myChart_5.setOption(option_5);
+		console.log(data_5)
+	}
+
+</script>
+
 
 
 <!--配置页面 front-6 的Echart图-->
 <script>
 	var dom_6 = document.getElementById("container_6");
 	var myChart_6 = echarts.init(dom_6, 'chalk');
-    var data_6 = data_front_6["6-2中国与世界平均工业增加值年增长率数据（%）"]
+	var data_6 = data_front_6["6-2中国与世界平均工业增加值年增长率数据（%）"]
 	console.log(data_6)
-    var xAxis_6 = []
+	var xAxis_6 = []
 	var yAxis_6a = []
 	var yAxis_6b = []
-    for(var i = 1; i < data_6.length; ++i) {
+	for (var i = 1; i < data_6.length; ++i) {
 		xAxis_6.push(data_6[i][0])
 		yAxis_6a.push(data_6[i][1])
 		yAxis_6b.push(data_6[i][2])
@@ -1111,51 +1239,51 @@
 			fontSize: fontSize_all_title,
 		},
 		tooltip: {
-            trigger: 'axis',
+			trigger: 'axis',
 			axisPointer: {
-                type: 'shadow'        
-            }
+				type: 'shadow'
+			}
 		},
 		toolbox: {
 			show: true,
 			itemSize: echart_toolbox_size,
 			orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-		},	
+			left: 'right',
+			top: 'center',
+			feature: {
+				dataView: { show: true, readOnly: false },
+				magicType: { show: true, type: ['line', 'bar'] },
+				restore: { show: true },
+				saveAsImage: { show: true }
+			}
+		},
 		calculable: true,
 		legend: {
 			data: ["中国", "世界"],
-            textStyle: {
+			textStyle: {
 				color: color_legend,
 				fontSize: fontSize_all_legend,
 			}
-        },
+		},
 		xAxis: {
 			type: 'category',
 			data: xAxis_6,
 			axisLine: {
-                lineStyle: {
-                    color: color_axis
-                }
+				lineStyle: {
+					color: color_axis
+				}
 			},
 			axisLabel: {
-                fontSize: fontSize_axis_label
-            }
+				fontSize: fontSize_axis_label
+			}
 		},
 		yAxis: {
 			type: 'value',
 			name: '百分比',
 			axisLine: {
-                lineStyle: {
-                    color: color_axis
-                }
+				lineStyle: {
+					color: color_axis
+				}
 			},
 			axisLabel: {
 				formatter: '{value} %',
@@ -1164,14 +1292,14 @@
 		},
 		series: [
 			{
-			    data: yAxis_6a,
-			    name: '中国',
-			    type: 'bar',
+				data: yAxis_6a,
+				name: '中国',
+				type: 'bar',
 			},
 			{
-			    data: yAxis_6b,
-			    name: '世界',
-			    type: 'bar',
+				data: yAxis_6b,
+				name: '世界',
+				type: 'bar',
 			},
 		]
 	};
