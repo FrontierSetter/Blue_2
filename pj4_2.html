@@ -37,7 +37,7 @@
                 <div class="col col-ll">
                     <div class="xpanel-wrapper">
                         <div class="xpanel xpanel-r-t">
-                            <div class="title">世界财富100强排行榜</div>
+                            <div class="title">世界财富100强企业排行榜</div>
                             <div style="height: 100%;" id="container_1"></div>
                         </div>
                     </div>
@@ -99,8 +99,8 @@
 			mydata[i][j].push(data_fortune[i][j+1][0]) //年份
 		}
 	}
-    console.log(mydata)
-    console.log(companies)
+    //console.log(mydata)
+    //console.log(companies)
 
     var country_config = {
             country:[
@@ -192,7 +192,9 @@
                         borderColor: '#aaa'
                     }
                 },
-                data: []
+                data: [],
+				fontSize: fontSize_axis_label
+				
             },
             title: [
                 {
@@ -301,25 +303,7 @@
                 }
             ],
             //开始设置每个球的内容
-            series: [
-                {
-                    type: 'scatter',
-                    itemStyle: itemStyle,
-                    label: {
-                        color:'#ffff00',
-                        fontSize: 14,
-                        show: false,
-                        position: 'inside',
-                        formatter:function(params){ //标签内容
-                            return params.data[3]
-                        },
-                    },
-                    data: mydata[0],
-                    symbolSize: function(val) {
-                        return sizeFunction(val[2]);
-                    }
-                },
-            ],
+
             animationDurationUpdate: 2000,
             animationEasingUpdate: 'quinticInOut'
         },
@@ -339,10 +323,15 @@
                 itemStyle: itemStyle,
                 label: {
                     color:'#ffffff',
-                    fontSize: 14,
-                    show: false,
+                    fontSize: 16,
+                    show: true,
                     position: 'inside',
-                    
+                    formatter:function(params){ //标签内容
+                        if(params.data[2] > 1500000) {
+                            console.log(params.data)
+                            return params.data[3]
+                        } else return ''
+                    },
                 },
                 data: mydata[n],
                 symbolSize: function(val) {
@@ -430,7 +419,9 @@
                         borderColor: '#aaa'
                     }
                 },
-                data: []
+                data: [],
+				fontSize: fontSize_axis_label
+				
             },
 		    tooltip: {
 			    trigger: 'axis',
@@ -492,7 +483,6 @@
     
     function ColorMap (country){
         var index = country_config.country.indexOf(country)
-        if(country == '中国') console.log(country)
         if(index>=0){
             return country_config.color[index]
         } else {
@@ -505,7 +495,7 @@
 
         var X_2 = []
         var Y_2 = []
-        console.log(XY_2[n])
+        //console.log(XY_2[n])
 
         for(var i = XY_2[n].length - 20; i < XY_2[n].length; ++i){
             X_2.push(XY_2[n][i][0]);
