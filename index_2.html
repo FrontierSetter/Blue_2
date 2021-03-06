@@ -22,7 +22,8 @@
 		<script type="text/javascript" src="js/hover_window_2.js"></script>
 		
 		<!-- echarts -->
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.1/echarts.js"></script>
 		<script type="text/javascript" src="js/color.js"></script>
 		
 		<!-- semantic UI -->
@@ -155,6 +156,17 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
+<script>
+    var data_2_1 = {};
+
+    function callback_3_2_1(res){
+        ori_data_2_1 = res;
+		console.log('上海市在用特种设备情况.json读取成功')
+		console.log(ori_data_2_1);
+    }
+</script>
+<script src="data/上海市在用特种设备情况.json?callback=callback_3_2_1"></script>
+
 <!--* 图 2_1 -->
 <script>
 
@@ -163,6 +175,13 @@
 	var app_2_1 = {};
 
 var font_test = 22;
+
+function view_2_1_1_change(){
+	console.log("2_1_1 change")
+	// Document.getElementById('view_2_1_1').innerHTML
+	console.log(document.getElementById('view_2_1_1').value)
+	document.getElementById('view_2_1_1').innerHTML = document.getElementById('view_2_1_1').value
+}
 
 	// 柱状图
 	var option_2_1_1 = {
@@ -177,7 +196,88 @@ var font_test = 22;
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					// optionToContent: function(opt) {
+    				// 	str = '<textarea id="view_2_2_1" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
+					// 	return str
+					// },
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_2_1_1" onchange="view_2_1_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
+						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
+						// 			+ '<td><font color="red">时间</font></td>'
+						// 			+ '<td>' + '数值' + '</td>'
+						// 			+ '</tr>';
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							// table += '<tr>'
+							// 		+ '<td>' + axisData[i] + '</td>'
+							// 		+ '<td>' + series[0].data[i] + '</td>'
+							// 		+ '</tr>';
+							table += axisData[i]+','+series[0].data[i]+'\n'
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save")
+						// console.log(opt)
+						// console.log(HTMLDomElement.firstChild)
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+						// console.log(arr_tex)
+
+						X_2_1 = [];
+						Y_2_1 = [];
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							if(cur_pair.length != 2){
+								// console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == '' || cur_pair[0] == undefined){
+								continue
+							}
+							X_2_1.push(cur_pair[0]);
+							Y_2_1.push(cur_pair[1]);
+						}
+
+						// console.log(X_2_1)
+						// console.log(Y_2_1)
+
+						option_2_1_1['series'][0]['data'] = Y_2_1;
+						option_2_1_1['xAxis']['data'] = X_2_1;
+						myChart_2_1.setOption(option_2_1_1);
+
+						option_2_1_2['series'][0]['data'] = Y_2_1;
+						option_2_1_2['xAxis']['data'] = X_2_1;
+						
+
+						var Link = document.createElement('a');
+						Link.download = "上海市在用特种设备情况.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_2_1('+JSON.stringify(option_2_1_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
 				magicType: {show: true, type: ['line', 'bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -272,15 +372,20 @@ var font_test = 22;
 	console.log(data_1["2008-2017年上海市在用特种设备情况"])
 	var data_2_1 = data_1["2008-2017年上海市在用特种设备情况"];
 
-	var X_2_1 = [];
-	var Y_2_1 = [];
+	// ori_data_2_1
 
-	for(var i = 1; i < data_2_1.length; ++i){
-		X_2_1.push(data_2_1[i][0]);
-		Y_2_1.push(data_2_1[i][1]);
-	}
+	// var X_2_1 = [];
+	// var Y_2_1 = [];
 
-	console.log(option_2_1_1)
+	// for(var i = 1; i < data_2_1.length; ++i){
+	// 	X_2_1.push(data_2_1[i][0]);
+	// 	Y_2_1.push(data_2_1[i][1]);
+	// }
+
+	// console.log(option_2_1_1)
+
+	var X_2_1 = ori_data_2_1['xAxis']['data'];
+	var Y_2_1 = ori_data_2_1['series'][0]['data'];
 
 	option_2_1_1['series'][0]['data'] = Y_2_1;
 	option_2_1_1['xAxis']['data'] = X_2_1;
