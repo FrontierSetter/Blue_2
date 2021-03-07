@@ -147,7 +147,7 @@
     //控制圆球的大小，返回的数值根据y轴的大小范围进行变化，根据自身元素动态调整该函数
     var sizeFunction = function (x) {
         var y = Math.sqrt(x) / 2 + 0.1;
-        return y * 80;
+        return y * 80 * symbolSize_bubble_circle;
 	};
     //需要展示的数据
     var schema = [
@@ -174,7 +174,7 @@
                 width: 55,
                 height: null,
                 label: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_time_axis_label,
                     color: '#999'
                 },
                 symbol: 'none',
@@ -250,7 +250,7 @@
                 nameGap: 25,
                 nameLocation: 'middle',
                 nameTextStyle: {
-                    fontSize: fontSize_all_legend
+                    fontSize: fontSize_bubble_xy_axis_label
                 },
                 splitLine: {
                     show: false
@@ -261,7 +261,7 @@
                     }
                 },
                 axisLabel: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_xy_axis_label,
                     formatter: '{value}'
                 }
             },
@@ -269,7 +269,7 @@
                 type: 'value',
 				name: 'GDP(万亿美元)',
                 nameTextStyle: {
-                    fontSize: fontSize_all_legend
+                    fontSize: fontSize_bubble_xy_axis_label
                 },
                 axisLine: {
                     lineStyle: {
@@ -280,7 +280,7 @@
                     show: false
                 },
                 axisLabel: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_xy_axis_label,
                     formatter: '{value}'
                 }
             },
@@ -313,7 +313,7 @@
                     itemStyle: itemStyle,
                     label: {
                         color:'#ffffff',
-                        fontSize: 20,
+                        fontSize: fontSize_bubble_label,
                         show: true,
                         position: 'inside',
                         formatter:function(params){ //标签内容
@@ -358,7 +358,7 @@
                 itemStyle: itemStyle,
                 label: {
                     color:'#ffffff',
-                    fontSize: 20,
+                    fontSize: fontSize_bubble_label,
                     show: true,
                     position: 'inside',
                     formatter:function(params){ //标签内容
@@ -428,7 +428,7 @@
                 width: 55,
                 height: null,
                 label: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_time_axis_label,
                     color: '#999'
                 },
                 symbol: 'none',
@@ -572,9 +572,9 @@
                     formatter:function(params){
                         return params.data.toFixed(2)   
                     },
-                    fontSize: 20,
+                    fontSize: fontSize_axis_label,
                     show: true,
-                    position: 'inside',
+                    position: 'right',
                 },
                 data: Y_6_2,
             }

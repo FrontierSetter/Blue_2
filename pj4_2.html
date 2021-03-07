@@ -138,7 +138,7 @@
     //控制圆球的大小，返回的数值根据y轴的大小范围进行变化，根据自身元素动态调整该函数
     var sizeFunction = function (x) {
         var y = Math.sqrt(x) / 25 + 0.1;
-        return y;
+        return y * symbolSize_bubble_circle;
 	};
     //需要展示的数据
     var schema = [
@@ -165,7 +165,7 @@
                 width: 55,
                 height: null,
                 label: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_time_axis_label,
                     color: '#999'
                 },
                 symbol: 'none',
@@ -244,7 +244,7 @@
                 nameGap: 25,
                 nameLocation: 'middle',
                 nameTextStyle: {
-                    fontSize: 18
+                    fontSize: fontSize_bubble_xy_axis_label
                 },
                 splitLine: {
                     show: false
@@ -255,7 +255,7 @@
                     }
                 },
                 axisLabel: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_xy_axis_label,
                     formatter: '{value}',
                 },
                 min: 70000,
@@ -265,7 +265,7 @@
                 type: 'value',
 				name: '利润（百万美元）',
                 nameTextStyle: {
-                    fontSize: 18
+                    fontSize: fontSize_bubble_xy_axis_label
                 },
                 axisLine: {
                     lineStyle: {
@@ -276,7 +276,7 @@
                     show: false
                 },
                 axisLabel: {
-                    fontSize: fontSize_axis_label,
+                    fontSize: fontSize_bubble_xy_axis_label,
                     formatter: '{value}'
                 }
             },
@@ -323,7 +323,7 @@
                 itemStyle: itemStyle,
                 label: {
                     color:'#ffffff',
-                    fontSize: 16,
+                    fontSize: fontSize_bubble_label,
                     show: true,
                     position: 'inside',
                     formatter:function(params){ //标签内容
@@ -420,7 +420,7 @@
                     }
                 },
                 data: [],
-				fontSize: fontSize_axis_label
+				fontSize: fontSize_bubble_time_axis_label
 				
             },
 		    tooltip: {
@@ -459,7 +459,7 @@
                 name: '家',
                 data: [],
                 nameTextStyle: {
-                    fontSize: 12
+                    fontSize: fontSize_all_legend
                 },
                 axisLabel:{
                     textStyle: { //图例文字的样式
@@ -529,7 +529,7 @@
                     formatter:function(params){
                         return params.data.toFixed(0)   
                     },
-                    fontSize: 20,
+                    fontSize: fontSize_axis_label,
                     show: true,
                     position: 'right',
                 },
