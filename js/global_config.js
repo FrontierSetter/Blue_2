@@ -14,3 +14,12 @@ var echart_toolbox_size = 18
 var echart_lineStyle_width = 4
 // 折线图线宽-更宽
 var echart_lineStyle_width_large = 8
+
+// 气泡图xy轴字体大小
+var fontSize_bubble_xy_axis_label = 20
+// 气泡图时间轴字体大小
+var fontSize_bubble_time_axis_label = 20
+// 气泡图圆圈大小(比例)
+var symbolSize_bubble_circle = 1
+// 气泡图圆圈字体大小
+var fontSize_bubble_label = 20
