@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+		<link rel="stylesheet" href="css/style.css" />
+
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 弹出窗口 -->
+		<link rel="stylesheet" href="css/hover_window_2.css" />
+		<link rel="stylesheet" href="css/hover_window.css" />
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		
+		<!-- echarts -->
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.1/echarts.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/menu.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.js"></script>
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.js"></script>
+
+		<!-- <script src="json/data.json"></script> -->
+		<script type="text/javascript" src="js/global_config.js"></script>
+	</head>
+
+	
+	
+	<body>
+		<div id="mySidebar" class="ui left sidebar inverted vertical accordion menu">
+			<div class="item">
+				<a class="title">
+					<i class="dropdown icon"></i>
+					<span class="sidebar_item" onclick="changeSrc('pj3_front.html')">项目3</span> 
+				</a>
+				<div class="content">
+					<div class="inverted vertical accordion">
+						<div class="item">
+							<a class="title">
+								<i class="dropdown icon"></i>
+								<span class="sidebar_item" onclick="changeSrc('index_2.html')">页面2</span> 
+							</a>
+							<div class="content">
+								<div class="inverted vertical accordion">
+									<div class="item">
+										<a class="title">
+											<!-- <i class="dropdown icon"></i> -->
+											<span class="sidebar_item" onclick="changeSrc('index_3.html')">页面3</span> 
+										</a>
+									</div>
+									<div class="item">
+										<a class="title">
+											<!-- <i class="dropdown icon"></i> -->
+											<span class="sidebar_item" onclick="changeSrc('index_10.html')">页面10</span> 
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('index_4.html')">页面4</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('index_5.html')">页面5</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<i class="dropdown icon"></i>
+								<span class="sidebar_item" onclick="changeSrc('index_6.html')">页面6</span> 
+							</a>
+							<div class="content">
+								<div class="inverted vertical accordion">
+									<div class="item">
+										<a class="title">
+											<!-- <i class="dropdown icon"></i> -->
+											<span class="sidebar_item" onclick="changeSrc('index_11.html')">页面11</span> 
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('index_7.html')">页面7</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('index_8.html')">页面8</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('index_9.html')">页面9</span> 
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="pusher" style="height: 100%; margin: 0">
+			<iframe id="myframe" src="index_2.html" style="width: 100%; height: 100%; " frameborder="no" scrolling="no" allowtransparency="yes"></iframe>
+		</div>
+	</body>
+</html>
+
+
+<script>
+	$('<i id="back-to-top" style="z-index: 999;" onclick="history.back()"></i>').appendTo($('body'));
+	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+
+	$('<i id="pop-sidebar" style="z-index: 999;" onclick="$(\'.ui.sidebar\').sidebar(\'toggle\');"></i>').appendTo($('body'));
+	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	$('#pop-sidebar').fadeIn();	
+	// $('.ui.sidebar').sidebar('setting', 'transition', 'overlay');
+
+	$("#next").show();
+
+	$('.ui.accordion').accordion();
+</script>
+
+<script>
+	function changeSrc(desSrc){
+		document.getElementById("myframe").src=desSrc;
+	}
+
+</script>

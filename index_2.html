@@ -30,6 +30,9 @@
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/menu.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.js"></script>
 
 		<!-- <script src="json/data.json"></script> -->
 		<script type="text/javascript" src="js/global_config.js"></script>
@@ -38,111 +41,121 @@
 	
 	
 	<body>
-		<div class="header">
-			<h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
+		<div id="mySidebar" class="ui left inverted vertical menu sidebar">
+			<a class="item" href="http://202.120.60.31:3000/home?token=hello">
+				监控模式
+			</a>
+			<a class="item" href="http://202.120.60.31:4000">
+				车辆大数据分析平台
+			</a>
 		</div>
-		
-		<div class="wrapper">
-			<div class="content">
-				<div class="col col-l">
-					<div class="xpanel-wrapper xpanel-wrapper-50">
-						<div class="xpanel xpanel-l-t">
-							<div class="title">2008-2017年上海市在用特种设备情况<a href="./index_3.html" style="color: white;" class="title_link" class="title_link"><i class="external square alternate icon"></i></a></div>
-							<div class="echart-container" id="container_2_1"></div>
+		<div class="pusher">
+			<div class="header">
+				<h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
+			</div>
+			
+			<div class="wrapper">
+				<div class="content">
+					<div class="col col-l">
+						<div class="xpanel-wrapper xpanel-wrapper-50">
+							<div class="xpanel xpanel-l-t">
+								<div class="title">2008-2017年上海市在用特种设备情况<a href="./index_3.html" style="color: white;" class="title_link" class="title_link"><i class="external square alternate icon"></i></a></div>
+								<div class="echart-container" id="container_2_1"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-55">
+							<div class="xpanel xpanel-l-b">
+								<div class="title">2016-2017年上海市药品监督抽查情况表</div>
+								<div class="echart-container" id="container_2_2"></div>
+							</div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-55">
-						<div class="xpanel xpanel-l-b">
-							<div class="title">2016-2017年上海市药品监督抽查情况表</div>
-							<div class="echart-container" id="container_2_2"></div>
+					<div class="col col-c">
+						<div class="xpanel-wrapper xpanel-wrapper-50">
+							<div class="xpanel xpanel-c-t">
+								<div class="title">2014-2017年上海市化妆品监督抽查情况表</div>
+								<div class="echart-container" id="container_2_3"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-55">
+							<div class="xpanel xpanel-c-b">
+								<div class="title">2015-2017年上海市医疗器械监督抽查情况表</div>
+								<div class="echart-container" id="container_2_4"></div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col col-c">
-					<div class="xpanel-wrapper xpanel-wrapper-50">
-						<div class="xpanel xpanel-c-t">
-							<div class="title">2014-2017年上海市化妆品监督抽查情况表</div>
-							<div class="echart-container" id="container_2_3"></div>
+					<div class="col col-r">
+						<div class="xpanel-wrapper xpanel-wrapper-50">
+							<div class="xpanel xpanel-r-t">
+								<div class="title">2008-2017年上海市食品安全风险监测总体合格率<a href="./index_10.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+								<div class="echart-container" id="container_2_5"></div>
+							</div>
 						</div>
-					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-55">
-						<div class="xpanel xpanel-c-b">
-							<div class="title">2015-2017年上海市医疗器械监督抽查情况表</div>
-							<div class="echart-container" id="container_2_4"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col col-r">
-					<div class="xpanel-wrapper xpanel-wrapper-50">
-						<div class="xpanel xpanel-r-t">
-							<div class="title">2008-2017年上海市食品安全风险监测总体合格率<a href="./index_10.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-							<div class="echart-container" id="container_2_5"></div>
-						</div>
-					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-55">
-						<div class="xpanel xpanel-r-b">
-							<div class="title">2014年和2015年勘察设计质量监管情况对比</div>
-							<div class="echart-container" id="container_2_6"></div>
+						<div class="xpanel-wrapper xpanel-wrapper-55">
+							<div class="xpanel xpanel-r-b">
+								<div class="title">2014年和2015年勘察设计质量监管情况对比</div>
+								<div class="echart-container" id="container_2_6"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<svg onclick="location='./index_9.html'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" id="next" version="1.1" viewBox="0 0 32 32" xml:space="preserve">
-			<path d="M24.291,14.276L14.705,4.69c-0.878-0.878-2.317-0.878-3.195,0l-0.8,0.8c-0.878,0.877-0.878,2.316,0,3.194  L18.024,16l-7.315,7.315c-0.878,0.878-0.878,2.317,0,3.194l0.8,0.8c0.878,0.879,2.317,0.879,3.195,0l9.586-9.587  c0.472-0.471,0.682-1.103,0.647-1.723C24.973,15.38,24.763,14.748,24.291,14.276z" fill="#FFFFFF"/>
-		</svg>
+			<svg onclick="location='./index_9.html'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" id="next" version="1.1" viewBox="0 0 32 32" xml:space="preserve">
+				<path d="M24.291,14.276L14.705,4.69c-0.878-0.878-2.317-0.878-3.195,0l-0.8,0.8c-0.878,0.877-0.878,2.316,0,3.194  L18.024,16l-7.315,7.315c-0.878,0.878-0.878,2.317,0,3.194l0.8,0.8c0.878,0.879,2.317,0.879,3.195,0l9.586-9.587  c0.472-0.471,0.682-1.103,0.647-1.723C24.973,15.38,24.763,14.748,24.291,14.276z" fill="#FFFFFF"/>
+			</svg>
 
-		<!-- <i id="back-to-top"></i> -->
+			<!-- <i id="back-to-top"></i> -->
 
-		<div id="popLayer"></div>
-		<div id="popBox_1_1" class="popBox">
-			<!-- <div class="close">
-				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
-			</div> -->
-			<div class="content" style="overflow: scroll; max-height: 80%;">
-				<table id="table_1_1" class="ui definition table">
-					<thead>
-						<tr><th></th>
-						<th>Arguments</th>
-					</tr></thead>
-					<tbody>
-						<tr>
-						<td>reset rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-						<tr>
-						<td>set rating</td>
-						<td>
-							<div class="ui input">
-								<input type="text" placeholder="搜索...">
-						  	</div>
-						</td>
-						</tr>
-					</tbody>
-				</table>
+			<div id="popLayer"></div>
+			<div id="popBox_1_1" class="popBox">
+				<!-- <div class="close">
+					<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+				</div> -->
+				<div class="content" style="overflow: scroll; max-height: 80%;">
+					<table id="table_1_1" class="ui definition table">
+						<thead>
+							<tr><th></th>
+							<th>Arguments</th>
+						</tr></thead>
+						<tbody>
+							<tr>
+							<td>reset rating</td>
+							<td>
+								<div class="ui input">
+									<input type="text" placeholder="搜索...">
+								</div>
+							</td>
+							</tr>
+							<tr>
+							<td>set rating</td>
+							<td>
+								<div class="ui input">
+									<input type="text" placeholder="搜索...">
+								</div>
+							</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="dlg_bottom">
+					<button class="ui primary button" onclick="alert('submit success!')">
+						保存
+					</button>
+					<button class="ui button" onclick="closeBoxSuffix('_1_1')">
+						关闭
+					</button>
+					<button class="ui button" onclick="addTableRow('_1_1')">
+						添加一行
+					</button>
+				</div>
+
 			</div>
-
-			<div class="dlg_bottom">
-				<button class="ui primary button" onclick="alert('submit success!')">
-					保存
-				</button>
-				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
-					关闭
-				</button>
-				<button class="ui button" onclick="addTableRow('_1_1')">
-					添加一行
-				</button>
-			</div>
-
+			<script>
+				// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+			</script>
 		</div>
-		<script>
-			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
-		</script>
 	</body>
 </html>
 
@@ -1542,9 +1555,14 @@ function view_2_1_1_change(){
 		this.myChart_2_5.resize();  
 		this.myChart_2_6.resize();  
 	});
-	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
-	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
-	$('#back-to-top').fadeIn();	
+	// $('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// //$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	// $('#back-to-top').fadeIn();	
+
+	// $('<i id="pop-sidebar" onclick="$(\'.ui.sidebar\').sidebar(\'toggle\');"></i>').appendTo($('body'));
+	// //$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	// $('#pop-sidebar').fadeIn();	
+	// // $('.ui.sidebar').sidebar('setting', 'transition', 'overlay');
 
 	$("#next").show();
 </script>
