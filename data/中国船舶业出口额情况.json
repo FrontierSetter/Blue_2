@@ -1,0 +1,89 @@
+callback_5_1_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["出口额（亿美元）","出口同比（%）"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "出口额（亿美元）",
+            "type": "bar",
+            "data": [
+                "388.2",
+                "290.07",
+                "250.91",
+                "278.31",
+                "221.55",
+                "227.27",
+                "250.36",
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "出口同比（%）",
+            "type": "line",
+            "data": [
+                "-11.1",
+                "-25.3",
+                "-13",
+                "10.9",
+                "-20.4",
+                "2.6",
+                "10.2",
+            ],
+        },
+    ]
+})

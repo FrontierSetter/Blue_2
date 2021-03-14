@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 弹出窗口 -->
+		<link rel="stylesheet" href="css/hover_window_2.css" />
+		<link rel="stylesheet" href="css/hover_window.css" />
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- <script src="json/data.json"></script> -->
+		<script type="text/javascript" src="js/global_config.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+			<h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
+		</div>
+		
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">2013-2018年中日韩造船完工量占全球比重情况<!-- i class="edit exchange icon" onclick="change_option_2_1()""></i><i class="edit outline icon" onclick="popBoxSuffix('_1_1')"></i--></div>
+							<div class="echart-container" id="container_1_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">2013-2018中国造船出口三大指标情况<!-- a href="./index_2.html">上海市质量状况可视化展图</a--></div>
+							<div class="echart-container" id="container_1_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-t">
+							<div class="title">2012-2018年中国船舶业出口额情况</div>
+							<div class="echart-container" id="container_1_3"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-c-b">
+							<div class="title">2008-2017年上海市特种设备安全状况</div>
+							<div class="echart-container" id="container_1_4"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">2008-2017年固定式压力容器、电梯、其中机械及场（厂）内<!--i class="edit exchange icon" onclick="change_option_3_5()""></i--></div>
+							<div class="echart-container" id="container_1_5"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">2009-2017年检测机构分布情况</div>
+							<div class="echart-container" id="container_1_6"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="popLayer"></div>
+		<div id="popBox_1_1" class="popBox">
+			<!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+			</div> -->
+			<div class="content" style="overflow: scroll; max-height: 80%;">
+				<table id="table_1_1" class="ui definition table">
+					<thead>
+						<tr><th></th>
+						<th>Arguments</th>
+					</tr></thead>
+					<tbody>
+						<tr>
+						<td>reset rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+						<tr>
+						<td>set rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="dlg_bottom">
+				<button class="ui primary button" onclick="alert('submit success!')">
+					保存
+				</button>
+				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
+					关闭
+				</button>
+				<button class="ui button" onclick="addTableRow('_1_1')">
+					添加一行
+				</button>
+			</div>
+
+		</div>
+		<script>
+			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+		</script>
+	</body>
+</html>
+
+<script>
+    var data_1 = {};
+
+    function demo(res){
+        data_1 = res;
+		console.log(data_1);
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+<!-- <script>
+    var data_1_1 = {};
+
+    function callback_3_2_1(res){
+        ori_data_1_1 = res;
+		console.log('中日韩造船完工量占全球比重情况.json读取成功')
+		console.log(ori_data_1_1);
+    }
+</script>
+<script src="data/中日韩造船完工量占全球比重情况.json?callback=callback_5_1_1"></script> -->
+
+<script>
+    var ori_data_1_2 = {};
+
+    function callback_5_1_2(res){
+        ori_data_1_2 = res;
+		console.log('中国造船出口三大指标情况.json读取成功')
+		console.log(ori_data_1_2);
+    }
+</script>
+<script src="data/中国造船出口三大指标情况.json?callback=callback_5_1_2"></script>
+
+<script>
+    var ori_data_1_3 = {};
+
+    function callback_5_1_3(res){
+        ori_data_1_3 = res;
+		console.log('中国船舶业出口额情况.json读取成功')
+		console.log(ori_data_1_3);
+    }
+</script>
+<script src="data/中国船舶业出口额情况.json?callback=callback_5_1_3"></script>
+
+<!--* 图 1_1 -->
+<!-- TODO 堆叠柱状图拆分 -->
+<script>
+
+	var dom_1_1 = document.getElementById("container_1_1");
+	var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+	var app_1_1 = {};
+
+	var option_1_1_1 = {
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_3_1.setOption(option_3_1_2, true);
+				// 		curIsPie_3_1 = true;
+				// 	}
+				// }
+				
+			}
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			data: ['2013', '2014', '2015', '2016', '2017', '2018'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				}
+			}
+		},
+		yAxis: {
+			type: 'value',
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+				formatter: function(value){
+					return (value*100).toFixed(0)+'%'
+				}
+			}
+		},
+		series: [
+			{
+				name: '中国',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [
+					0.4030,
+					0.3990,
+					0.4080,
+					0.3600,
+					0.3910,
+					0.4330,
+				]
+			},
+			{
+				name: '韩国',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [
+					0.3100,
+					0.2850,
+					0.3050,
+					0.3630,
+					0.3240,
+					0.2460,
+				]
+			},
+			{
+				name: '日本',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [
+					0.2290,
+					0.2490,
+					0.2190,
+					0.2190,
+					0.2090,
+					0.2510,
+				]
+			},
+			{
+				name: '其他',
+				type: 'bar',
+				stack: '抽查情况',
+				data: [
+					0.0580,
+					0.0670,
+					0.0680,
+					0.0580,
+					0.0760,
+					0.0700,
+				]
+			}
+		]
+	};
+
+	myChart_1_1.setOption(option_1_1_1);
+
+
+
+
+</script>
+
+<!--* 图 1_2 -->
+<script>
+
+	var dom_1_2 = document.getElementById("container_1_2");
+	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+	var app_1_2 = {};
+
+	var option_1_2_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			},
+			
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_3_2.setOption(option_3_2_2, true);
+				// 		curIsPie_3_2 = true;
+				// 	}
+				// }
+			}
+		},
+		legend: {
+			data: ['造船出口完成量','新承接出口船舶订单量','手持出口船舶订单量'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis:{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		yAxis:{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		series: [
+			{
+				name: '锅炉',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					12028,
+					11596,
+					12355,
+					12213,
+					9377,
+					8457,
+					7937,
+					7850,
+					7608,
+					6029
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					96831,
+					107986,
+					125706,
+					123542,
+					102186,
+					106608,
+					109989,
+					105420,
+					101213,
+					103377
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					687,
+					684,
+					771,
+					814,
+					820,
+					831,
+					840,
+					852,
+					860,
+					0
+				]
+			},
+		]
+	};
+
+	var X_2_1 = ori_data_1_2['xAxis']['data'];
+	var Y_2_1 = ori_data_1_2['series'];
+
+	// option_1_2_1['legend']
+	option_1_2_1['xAxis']['data'] = X_2_1;
+
+	for(var i = 0; i < Y_2_1.length; ++i){
+		option_1_2_1['series'][i]['data'] = Y_2_1[i]['data'];
+		option_1_2_1['series'][i]['name'] = Y_2_1[i]['name'];
+	}
+
+	
+	myChart_1_2.setOption(option_1_2_1);
+
+
+
+</script>
+
+<!--* 图 1_3 -->
+<script>
+
+	var dom_1_3 = document.getElementById("container_1_3");
+	var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
+	var app_1_3 = {};
+
+	var option_1_3_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
+            {
+                type: 'value',
+                name: '亿美元',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+                name: '立案案件数',
+                type: 'bar',
+                data: [1,2,3],
+                yAxisIndex: 0
+            },
+            {
+                name: '罚没款/万',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            }
+        ]
+	};
+
+	
+
+	var X_1_3 = ori_data_1_3['xAxis']['data'];
+	var Y_1_3 = ori_data_1_3['series'];
+
+	option_1_3_1['legend']['data'] = ori_data_1_3['legend']['data'];
+	option_1_3_1['xAxis']['data'] = X_1_3;
+
+	for(var i = 0; i < Y_1_3.length; ++i){
+		option_1_3_1['series'][i]['data'] = Y_1_3[i]['data'];
+		option_1_3_1['series'][i]['name'] = Y_1_3[i]['name'];
+	}
+
+	myChart_1_3.setOption(option_1_3_1);
+
+
+
+</script>
+
+<!--* 图 3_4 -->
+<script>
+
+var dom_3_4 = document.getElementById("container_3_4");
+	var myChart_3_4 = echarts.init(dom_3_4, 'chalk');
+	var app_3_4 = {};
+
+	// 事故数柱状图
+	var option_3_4_1 = {
+		title:{
+			text:'事故数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			max: function (value) {
+				return value.max;
+			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 事故数折线图
+	var option_3_4_2 = {
+		title:{
+			text:'事故数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min;
+			},
+			max: function (value) {
+				return value.max;
+			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	// 指令书柱状图
+	var option_3_4_3 = {
+		title:{
+			text:'死亡人数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			// max: function (value) {
+			// 	return value.max;
+			// },
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 指令书折线图
+	var option_3_4_4 = {
+		title:{
+			text:'死亡人数',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			// min: function (value) {
+			// 	return value.min;
+			// },
+			// max: function (value) {
+			// 	return value.max;
+			// },
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	// 罚金柱状图
+	var option_3_4_5 = {
+		title:{
+			text:'万台特种设备死亡率（本市）',
+			textStyle: { //图例文字的样式
+				color: color_axis,
+			},
+			left: "center",
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			max: 1,
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+				formatter: function(value){
+					return (value*100).toFixed(0)+'%'
+				}
+			}
+		},
+		series: [{
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}]
+	};
+
+	// 罚金折线图
+	var option_3_4_6 = {
+		title:{
+			text:'万台特种设备死亡率（本市/全国）',
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				myTool2: {
+					show: true,
+					title: '切换',
+					icon: 'image://img/zhuanhuan-transformation.png',
+					onclick: function (){
+						cur_idx = (cur_idx+1)%arr_opt.length
+						var newOption = arr_opt[cur_idx][cur_type];
+						myChart_3_4.setOption(newOption, true);
+					}
+				}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min;
+			},
+			max: function (value) {
+				return value.max;
+			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}]
+	};
+
+	console.log(data_1["2008-2017年上海市特种设备安全状况"])
+	var data_3_4 = data_1["2008-2017年上海市特种设备安全状况"];
+
+	var X_3_4 = [];
+	// 事故数
+	var Y_3_4_1 = [];
+	// 死亡人数
+	var Y_3_4_2 = [];
+	// 万台特种设备死亡率（本市
+	var Y_3_4_3 = [];
+
+	for(var i = 1; i < data_3_4.length; ++i){
+		X_3_4.push(data_3_4[i][0]);
+		Y_3_4_1.push(data_3_4[i][1]);
+		Y_3_4_2.push(data_3_4[i][2]);
+		Y_3_4_3.push(Number.parseFloat(data_3_4[i][3].split('/')[0]));
+	}
+
+	console.log(option_3_4_1)
+
+	option_3_4_1['series'][0]['data'] = Y_3_4_1;
+	option_3_4_1['xAxis']['data'] = X_3_4;
+	myChart_3_4.setOption(option_3_4_1);
+
+	option_3_4_2['series'][0]['data'] = Y_3_4_1;
+	option_3_4_2['xAxis']['data'] = X_3_4;
+
+	option_3_4_3['series'][0]['data'] = Y_3_4_2;
+	option_3_4_3['xAxis']['data'] = X_3_4;
+
+	option_3_4_4['series'][0]['data'] = Y_3_4_2;
+	option_3_4_4['xAxis']['data'] = X_3_4;
+
+	option_3_4_5['series'][0]['data'] = Y_3_4_3;
+	option_3_4_5['xAxis']['data'] = X_3_4;
+
+	option_3_4_6['series'][0]['data'] = Y_3_4_3;
+	option_3_4_6['xAxis']['data'] = X_3_4;
+
+	// var arr_option_3_4 = [option_3_4_1, option_3_4_2];
+	// var cur_option_3_4 = 0;
+
+	// console.log('arr_option_3_4')
+	// console.log(arr_option_3_4)
+
+	// function change_option_3_4(){
+	// 	console.log('exchange');
+	// 	cur_option_3_4 = (cur_option_3_4+1)%arr_option_3_4.length;
+	// 	myChart_3_4.setOption(arr_option_3_4[cur_option_3_4]);
+	// }
+
+	// 0 bar; 1 line
+	var cur_type = 0;
+	var cur_idx = 0;
+	var arr_opt = [
+		[option_3_4_1, option_3_4_2],
+		[option_3_4_3, option_3_4_4],
+		[option_3_4_5, option_3_4_6]
+	];
+
+	myChart_3_4.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			cur_type = 1;
+			o.newOption = arr_opt[cur_idx][cur_type];
+		}else if(params.currentType == 'bar'){
+			cur_type = 0;
+			o.newOption = arr_opt[cur_idx][cur_type];
+		}
+		myChart_3_4.setOption(o.newOption, true);
+	});
+
+	myChart_3_4.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		cur_idx = (cur_idx+1)%arr_opt.length
+		o.newOption = arr_opt[cur_idx][cur_type];
+		myChart_3_4.setOption(o.newOption, true);
+	});
+
+
+
+</script>
+
+<!--* 图 3_5 -->
+<script>
+
+	var dom_3_5 = document.getElementById("container_3_5");
+	var myChart_3_5 = echarts.init(dom_3_5, 'chalk');
+	var app_3_5 = {};
+
+	// 柱状图 
+	var option_3_5_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['固定式压力容器', '电梯', '起重机', '场(厂)内机动车辆'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '电梯',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '起重机',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '场(厂)内机动车辆',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
+
+
+	console.log(data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"])
+	var data_3_5 = data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"];
+
+	var X_3_5 = [];
+	// 固定式压力容器
+	var Y_3_5_1 = [];
+	// 电梯
+	var Y_3_5_2 = [];
+	// 起重机
+	var Y_3_5_3 = [];
+	// 场(厂)内机动车辆
+	var Y_3_5_4 = [];
+
+
+	for(var i = 1; i < data_3_5.length; ++i){
+		X_3_5.push(data_3_5[i][0]);
+		Y_3_5_1.push(data_3_5[i][1]);
+		Y_3_5_2.push(data_3_5[i][2]);
+		Y_3_5_3.push(data_3_5[i][3]);
+		Y_3_5_4.push(data_3_5[i][4]);
+	}
+
+	console.log(option_3_5_1)
+
+	option_3_5_1['series'][0]['data'] = Y_3_5_1;
+	option_3_5_1['series'][1]['data'] = Y_3_5_2;
+	option_3_5_1['series'][2]['data'] = Y_3_5_3;
+	option_3_5_1['series'][3]['data'] = Y_3_5_4;
+	option_3_5_1['xAxis'][0]['data'] = X_3_5;
+
+	myChart_3_5.setOption(option_3_5_1);
+
+	// myChart_3_5.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_5_1;
+	// 	}
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
+
+	// myChart_3_5.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_5_2;
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
+
+</script>
+
+<!--* 图 3_6 -->
+<script>
+
+	var dom_3_6 = document.getElementById("container_3_6");
+	var myChart_3_6 = echarts.init(dom_3_6, 'chalk');
+	var app_3_6 = {};
+
+	var option_3_6_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['1-综合检验机构', '2-综合检验机构', '3-气瓶检验机构', '4-无损检测机构', '5-安全阀校验机构'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '1-综合检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '2-综合检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '3-气瓶检验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '4-无损检测机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '5-安全阀校验机构',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
+
+
+	console.log(data_1["2009-2017年检测机构分布情况"])
+	var data_3_6 = data_1["2009-2017年检测机构分布情况"];
+
+	var X_3_6 = [];
+	// 综合检验机构
+	var Y_3_6_1 = [];
+	// 综合检验机构
+	var Y_3_6_2 = [];
+	// 气瓶检验机构
+	var Y_3_6_3 = [];
+	// 无损检测机构
+	var Y_3_6_4 = [];
+	// 安全阀校验机构
+	var Y_3_6_5 = [];
+
+	X_3_6 = data_3_6[0].slice(2);
+
+	Y_3_6_1 = data_3_6[1].slice(2);
+	Y_3_6_2 = data_3_6[2].slice(2);
+	Y_3_6_3 = data_3_6[3].slice(2);
+	Y_3_6_4 = data_3_6[4].slice(2);
+	Y_3_6_5 = data_3_6[5].slice(2);
+
+	console.log(option_3_6_1)
+
+	option_3_6_1['series'][0]['data'] = Y_3_6_1;
+	option_3_6_1['series'][1]['data'] = Y_3_6_2;
+	option_3_6_1['series'][2]['data'] = Y_3_6_3;
+	option_3_6_1['series'][3]['data'] = Y_3_6_4;
+	option_3_6_1['series'][4]['data'] = Y_3_6_5;
+	option_3_6_1['xAxis'][0]['data'] = X_3_6;
+
+	myChart_3_6.setOption(option_3_6_1);
+
+	// myChart_3_6.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_6_1;
+	// 	}
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
+
+	// myChart_3_6.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_6_2;
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
+
+</script>
+
+<script>
+	// window.addEventListener("resize", () => { 
+	// 	this.myChart_2_1.resize();  
+	// 	this.myChart_3_2.resize();  
+	// 	this.myChart_3_3.resize();  
+	// 	this.myChart_2_4.resize();  
+	// 	this.myChart_3_5.resize();  
+	// 	this.myChart_3_6.resize();  
+	// });
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>
