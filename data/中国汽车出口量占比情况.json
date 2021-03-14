@@ -1,0 +1,85 @@
+callback_5_2_6({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["出口数量","出口量占比"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['2014', '2015', '2016', '2017', '2018'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "出口数量",
+            "type": "bar",
+            "data": [
+                "90",
+                "72",
+                "73",
+                "104",
+                "115",
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "出口量占比",
+            "type": "line",
+            "data": [
+                "3.8",
+                "2.9",
+                "2.6",
+                "3.6",
+                "4.1",
+            ],
+        },
+    ]
+})

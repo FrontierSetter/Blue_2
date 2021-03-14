@@ -1,0 +1,102 @@
+callback_5_2_4({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["中国品牌","国际品牌"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012','2013', '2014', '2015', '2016', '2017', '2018'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "中国品牌",
+            "type": "line",
+            "data": [
+                "469",
+                "406",
+                "380",
+                "368",
+                "306",
+                "318",
+                "258",
+                "224",
+                "232",
+                "212",
+                "155",
+                "131",
+                "120",
+                "112",
+                "112",
+                "115",
+            ],
+        },
+        {
+            "name": "国际品牌",
+            "type": "line",
+            "data": [
+                "278",
+                "221",
+                "190",
+                "189",
+                "167",
+                "173",
+                "142",
+                "135",
+                "131",
+                "117",
+                "104",
+                "95",
+                "98",
+                "98",
+                "99",
+                "100",
+            ],
+        },
+    ]
+})

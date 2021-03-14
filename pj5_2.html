@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- 弹出窗口 -->
+		<link rel="stylesheet" href="css/hover_window_2.css" />
+		<link rel="stylesheet" href="css/hover_window.css" />
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		<script type="text/javascript" src="js/hover_window_2.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- <script src="json/data.json"></script> -->
+		<script type="text/javascript" src="js/global_config.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+			<h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
+		</div>
+		
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">2013-2018年中日韩造船完工量占全球比重情况</div>
+							<div class="echart-container" id="container_2_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">2013-2018中国造船出口三大指标情况</div>
+							<div class="echart-container" id="container_2_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-t">
+							<div class="title">2012-2018年中国船舶业出口额情况</div>
+							<div class="echart-container" id="container_2_3"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-c-b">
+							<div class="title">2014-2018年中国造船业产业集中度概况</div>
+							<div class="echart-container" id="container_2_4"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">2013-2018年船舶工业利润率和规上企业数变化情况</div>
+							<div class="echart-container" id="container_2_5"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">2009-2018年中国造船产能利用监测指数</div>
+							<div class="echart-container" id="container_2_6"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="popLayer"></div>
+		<div id="popBox_1_1" class="popBox">
+			<!-- <div class="close">
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+			</div> -->
+			<div class="content" style="overflow: scroll; max-height: 80%;">
+				<table id="table_1_1" class="ui definition table">
+					<thead>
+						<tr><th></th>
+						<th>Arguments</th>
+					</tr></thead>
+					<tbody>
+						<tr>
+						<td>reset rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+						<tr>
+						<td>set rating</td>
+						<td>
+							<div class="ui input">
+								<input type="text" placeholder="搜索...">
+						  	</div>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="dlg_bottom">
+				<button class="ui primary button" onclick="alert('submit success!')">
+					保存
+				</button>
+				<button class="ui button" onclick="closeBoxSuffix('_1_1')">
+					关闭
+				</button>
+				<button class="ui button" onclick="addTableRow('_1_1')">
+					添加一行
+				</button>
+			</div>
+
+		</div>
+		<script>
+			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
+		</script>
+	</body>
+</html>
+
+<script>
+    var data_1 = {};
+
+    function demo(res){
+        data_1 = res;
+		console.log(data_1);
+    }
+</script>
+<script src="data/data2.json?callback=demo"></script>
+
+<!-- <script>
+    var data_1_1 = {};
+
+    function callback_3_2_1(res){
+        ori_data_1_1 = res;
+		console.log('中日韩造船完工量占全球比重情况.json读取成功')
+		console.log(ori_data_1_1);
+    }
+</script>
+<script src="data/中日韩造船完工量占全球比重情况.json?callback=callback_5_1_1"></script> -->
+
+<script>
+    var ori_data_2_1 = {};
+
+    function callback_5_2_1(res){
+        ori_data_2_1 = res;
+		console.log('全球汽车销量走势.json读取成功')
+		console.log(ori_data_2_1);
+    }
+</script>
+<script src="data/全球汽车销量走势.json?callback=callback_5_2_1"></script>
+
+<script>
+    var ori_data_2_2 = {};
+
+    function callback_5_2_2(res){
+        ori_data_2_2 = res;
+		console.log('中国新能源汽车市场.json读取成功')
+		console.log(ori_data_2_2);
+    }
+</script>
+<script src="data/中国新能源汽车市场.json?callback=callback_5_2_2"></script>
+
+<script>
+    var ori_data_2_3 = {};
+
+    function callback_5_2_3(res){
+        ori_data_2_3 = res;
+		console.log('中国汽车产量及进出口等主要数据.json读取成功')
+		console.log(ori_data_2_3);
+    }
+</script>
+<script src="data/中国汽车产量及进出口等主要数据.json?callback=callback_5_1_3"></script>
+
+<script>
+    var ori_data_2_4 = {};
+
+    function callback_5_2_4(res){
+        ori_data_2_4 = res;
+		console.log('中国品牌与国际品牌新车pp100指数.json读取成功')
+		console.log(ori_data_2_4);
+    }
+</script>
+<script src="data/中国品牌与国际品牌新车pp100指数.json?callback=callback_5_2_4"></script>
+
+<script>
+    var ori_data_2_5 = {};
+
+    function callback_5_2_5(res){
+        ori_data_2_5 = res;
+		console.log('中国亏损汽车企业统计.json读取成功')
+		console.log(ori_data_2_5);
+    }
+</script>
+<script src="data/中国亏损汽车企业统计.json?callback=callback_5_2_5"></script>
+
+<script>
+    var ori_data_2_6 = {};
+
+    function callback_5_2_6(res){
+        ori_data_2_6 = res;
+		console.log('中国汽车出口量占比情况.json读取成功')
+		console.log(ori_data_2_6);
+    }
+</script>
+<script src="data/中国汽车出口量占比情况.json?callback=callback_5_2_6"></script>
+
+<!--* 图 2_1 -->
+<script>
+
+	var dom_2_1 = document.getElementById("container_2_1");
+	var myChart_2_1 = echarts.init(dom_2_1, 'chalk');
+	var app_2_1 = {};
+
+	var option_2_1_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
+            {
+                type: 'value',
+                // name: '亿美元',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+                name: '立案案件数',
+                type: 'bar',
+                data: [1,2,3],
+                yAxisIndex: 0
+            },
+            {
+                name: '罚没款/万',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            }
+        ]
+	};
+
+	
+	var X_2_1 = ori_data_2_1['xAxis']['data'];
+	var Y_2_1 = ori_data_2_1['series'];
+
+	option_2_1_1['legend']['data'] = ori_data_2_1['legend']['data'];
+	option_2_1_1['xAxis']['data'] = X_2_1;
+
+	for(var i = 0; i < Y_2_1.length; ++i){
+		option_2_1_1['series'][i]['data'] = Y_2_1[i]['data'];
+		option_2_1_1['series'][i]['name'] = Y_2_1[i]['name'];
+	}
+
+	myChart_2_1.setOption(option_2_1_1);
+
+
+
+</script>
+
+<!--* 图 2_2 -->
+<script>
+
+	var dom_2_2 = document.getElementById("container_2_2");
+	var myChart_2_2 = echarts.init(dom_2_2, 'chalk');
+	var app_2_2 = {};
+
+	var option_2_2_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
+            {
+                type: 'value',
+                name: '万辆',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+                name: '销量',
+                type: 'bar',
+                data: [1,2,3],
+                yAxisIndex: 0
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            }
+        ]
+	};
+
+	
+	var X_2_2 = ori_data_2_2['xAxis']['data'];
+	var Y_2_2 = ori_data_2_2['series'];
+
+	option_2_2_1['legend']['data'] = ori_data_2_2['legend']['data'];
+	option_2_2_1['xAxis']['data'] = X_2_2;
+
+	for(var i = 0; i < Y_2_2.length; ++i){
+		option_2_2_1['series'][i]['data'] = Y_2_2[i]['data'];
+		option_2_2_1['series'][i]['name'] = Y_2_2[i]['name'];
+	}
+
+	myChart_2_2.setOption(option_2_2_1);
+
+
+
+</script>
+
+<!--* 图 2_3 -->
+<script>
+
+	var dom_2_3 = document.getElementById("container_2_3");
+	var myChart_2_3 = echarts.init(dom_2_3, 'chalk');
+	var app_2_3 = {};
+
+	var option_2_3_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			},
+			
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_3_2.setOption(option_3_2_2, true);
+				// 		curIsPie_3_2 = true;
+				// 	}
+				// }
+			}
+		},
+		legend: {
+			data: ["汽车产量（百万辆）","出口数量（万辆）","进口数量（万辆）","出口金额（亿美元）","进口金额（十亿美元）","汽车拥有量（百万辆）"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis:{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		yAxis:{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		series: [
+			{
+				name: '锅炉',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+
+				]
+			},
+		]
+	};
+
+	var X_2_3 = ori_data_2_3['xAxis']['data'];
+	var Y_2_3 = ori_data_2_3['series'];
+
+	// option_1_2_1['legend']
+	option_2_3_1['legend']['data'] = ori_data_2_3['legend']['data'];
+	option_2_3_1['xAxis']['data'] = X_2_3;
+
+	for(var i = 0; i < Y_2_3.length; ++i){
+		option_2_3_1['series'][i]['data'] = Y_2_3[i]['data'];
+		option_2_3_1['series'][i]['name'] = Y_2_3[i]['name'];
+	}
+
+	
+	myChart_2_3.setOption(option_2_3_1);
+
+
+
+</script>
+
+<!--* 图 1_4 -->
+<script>
+
+	var dom_2_4 = document.getElementById("container_2_4");
+	var myChart_2_4 = echarts.init(dom_2_4, 'chalk');
+	var app_2_4 = {};
+
+	// 事故数柱状图
+	var option_2_4_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			},
+			
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line','bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_3_2.setOption(option_3_2_2, true);
+				// 		curIsPie_3_2 = true;
+				// 	}
+				// }
+			}
+		},
+		legend: {
+			data: ["造船完工量","新接订单量"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis:{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		yAxis:{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+		series: [
+			{
+				name: '锅炉',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [
+				]
+			},
+		]
+	};
+
+	var X_2_4 = ori_data_2_4['xAxis']['data'];
+	var Y_2_4 = ori_data_2_4['series'];
+
+	// option_1_2_1['legend']
+	option_2_4_1['legend']['data'] = ori_data_2_4['legend']['data'];
+	option_2_4_1['xAxis']['data'] = X_2_4;
+
+	for(var i = 0; i < Y_2_4.length; ++i){
+		option_2_4_1['series'][i]['data'] = Y_2_4[i]['data'];
+		option_2_4_1['series'][i]['name'] = Y_2_4[i]['name'];
+	}
+
+	
+	myChart_2_4.setOption(option_2_4_1);
+
+
+</script>
+
+<!--* 图 2_5 -->
+<script>
+
+	var dom_2_5 = document.getElementById("container_2_5");
+	var myChart_2_5 = echarts.init(dom_2_5, 'chalk');
+	var app_2_5 = {};
+
+	var option_2_5_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
+            {
+                type: 'value',
+                name: '亿元',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+                name: '销量',
+                type: 'bar',
+                data: [1,2,3],
+                yAxisIndex: 0
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            }
+        ]
+	};
+
+	
+	var X_2_5 = ori_data_2_5['xAxis']['data'];
+	var Y_2_5 = ori_data_2_5['series'];
+
+	option_2_5_1['legend']['data'] = ori_data_2_5['legend']['data'];
+	option_2_5_1['xAxis']['data'] = X_2_5;
+
+	for(var i = 0; i < Y_2_5.length; ++i){
+		option_2_5_1['series'][i]['data'] = Y_2_5[i]['data'];
+		option_2_5_1['series'][i]['name'] = Y_2_5[i]['name'];
+	}
+
+	myChart_2_5.setOption(option_2_5_1);
+
+
+
+</script>
+
+<!--* 图 2_6 -->
+<script>
+
+	var dom_2_6 = document.getElementById("container_2_6");
+	var myChart_2_6 = echarts.init(dom_2_6, 'chalk');
+	var app_2_6 = {};
+
+	var option_2_6_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
+            {
+                type: 'value',
+                name: '万辆',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+                name: '销量',
+                type: 'bar',
+                data: [1,2,3],
+                yAxisIndex: 0
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            }
+        ]
+	};
+
+	
+	var X_2_6 = ori_data_2_6['xAxis']['data'];
+	var Y_2_6 = ori_data_2_6['series'];
+
+	option_2_6_1['legend']['data'] = ori_data_2_6['legend']['data'];
+	option_2_6_1['xAxis']['data'] = X_2_6;
+
+	for(var i = 0; i < Y_2_6.length; ++i){
+		option_2_6_1['series'][i]['data'] = Y_2_6[i]['data'];
+		option_2_6_1['series'][i]['name'] = Y_2_6[i]['name'];
+	}
+
+	myChart_2_6.setOption(option_2_6_1);
+
+
+
+</script>
+
+<script>
+	// window.addEventListener("resize", () => { 
+	// 	this.myChart_2_1.resize();  
+	// 	this.myChart_3_2.resize();  
+	// 	this.myChart_3_3.resize();  
+	// 	this.myChart_2_4.resize();  
+	// 	this.myChart_3_5.resize();  
+	// 	this.myChart_3_6.resize();  
+	// });
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>
