@@ -72,7 +72,7 @@
 					-->
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
-							<div class="title title-long">世界国民经济数据<a href="./pj4_6_2.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+							<div class="title title-long">世界国民经济数据<a href="./pj4_6_1.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
 							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
@@ -590,9 +590,9 @@
 			top: 'top'
 		},
 		{
-			subtext: '2019',
-			left: 'center',
-			top: '5%',
+			subtext: '2019年世界GDP数据',
+			left: '50%',
+			top: '2%',
 			textAlign: 'center',
 			subtextStyle:{
 				color: "#ffffff",
@@ -611,12 +611,18 @@
 			}  
 		},       
 		visualMap: {  
+			show: true,
 			min: 0,  
 			max: 20,  
+			range: [0, 20],
 			text:['High','Low'],  
 			realtime: false,  
 			calculable: true,  
-			color: ['red', 'yellow', 'lightskyblue']  
+			color: ['red', 'yellow', 'lightskyblue'],
+			hoverLink: false,
+			formatter: function (value) {                 //标签的格式化工具。
+            	return '12';                    // 范围标签显示内容。
+        	}
 		},  
 		series: [  
 			{  
