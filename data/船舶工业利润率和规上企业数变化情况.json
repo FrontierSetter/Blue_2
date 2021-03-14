@@ -1,4 +1,4 @@
-callback_5_1_1({
+callback_5_1_5({
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
@@ -26,6 +26,13 @@ callback_5_1_1({
             }
         }
     },
+    "legend": {
+        "data": ["企业数量","出口同比（%）"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
     "xAxis": {
         "type": "category",
         "data": ['2013', '2014', '2015', '2016', '2017', '2018'],
@@ -48,24 +55,33 @@ callback_5_1_1({
     },
     "series": [
         {
+            "name": "企业数量",
+            "type": "bar",
             "data": [
-                "334402",
-                "368223",
-                "412519",
-                "439848",
-                "414367",
-                "441037",
-                "464093",
-                "471020",
-                "481316",
-                "49899990",
-                "123"
+                "1664",
+                "1491",
+                "1452",
+                "1459",
+                "1410",
+                "1213"
             ],
             "type": "bar",
             "showBackground": true,
             "backgroundStyle": {
                 "color": "rgba(180, 180, 180, 0.2)"
             }
-        }
+        },
+        {
+            "name": "出口同比（%）",
+            "type": "line",
+            "data": [
+                "4.20",
+                "4.10",
+                "2.30",
+                "2.10",
+                "2.40",
+                "2.45",
+            ],
+        },
     ]
 })

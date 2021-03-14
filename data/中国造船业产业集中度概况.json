@@ -1,4 +1,4 @@
-callback_5_1_1({
+callback_5_1_4({
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
@@ -26,9 +26,16 @@ callback_5_1_1({
             }
         }
     },
+    "legend": {
+        "data": ["造船完工量","新接订单量"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
     "xAxis": {
         "type": "category",
-        "data": ['2013', '2014', '2015', '2016', '2017', '2018'],
+        "data": ['2014', '2015', '2016', '2017', '2018'],
         "axisLabel": {
             "textStyle": {
                 "color": "#fff",
@@ -49,23 +56,25 @@ callback_5_1_1({
     "series": [
         {
             "data": [
-                "334402",
-                "368223",
-                "412519",
-                "439848",
-                "414367",
-                "441037",
-                "464093",
-                "471020",
-                "481316",
-                "49899990",
-                "123"
+                "0.5560",
+                "0.5240",
+                "0.5690",
+                "0.5830",
+                "0.6980"
             ],
             "type": "bar",
-            "showBackground": true,
-            "backgroundStyle": {
-                "color": "rgba(180, 180, 180, 0.2)"
-            }
+            "name": "造船完工量"
+        },
+        {
+            "data": [
+                "0.5550",
+                "0.7060",
+                "0.7470",
+                "0.7340",
+                "0.7680"
+            ],
+            "type": "bar",
+            "name": "新接订单量"
         }
     ]
 })
