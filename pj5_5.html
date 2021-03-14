@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">行业质量数据可视化展图</h1>
+		</div>
+		<div class="wrapper">
+			<div class="content">
+				<div class="col col-l">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-l-t">
+							<div class="title">2010-2018年中国金属加工机床主营业务收入与利润额</div>
+							<div class="echart-container" id="container_1_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-l-b">
+							<div class="title">2011-2017年中国不同数控机床产品的国产化率情况</div>
+							<div class="echart-container" id="container_1_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-c">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-c-t">
+							<div class="title title-long">2013-2018年中国机床进出口平均单价</div>
+							<div class="echart-container" id="container_2_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-c-b">
+							<div class="title title-long">截至2017年数控机床技术全球专利主要申请人申请专利数</div>
+							<div class="echart-container" id="container_2_2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col col-r">
+					<div class="xpanel-wrapper xpanel-wrapper-50">
+						<div class="xpanel xpanel-r-t">
+							<div class="title">2005-2018年中国机床产业销售利润率</div>
+							<div class="echart-container" id="container_3_1"></div>
+						</div>
+					</div>
+					<div class="xpanel-wrapper xpanel-wrapper-55">
+						<div class="xpanel xpanel-r-b">
+							<div class="title">2010-2018年机床产业出口额增长率和全员劳动生产率</div>
+							<div class="echart-container" id="container_3_2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback5(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-5.json?callback=callback5"></script>
+
+<!--配置页面 5-1 的Echart图-->
+<script>
+	var dom_5_1 = document.getElementById("container_1_1");
+	var myChart_5_1 = echarts.init(dom_5_1, 'chalk');
+    var data_5_1 = alldata["5-12010-2018年中国金属加工机床主营业务收入与利润额"]
+    var xAxis_5_1 = []
+	var yAxis_5_1a = []
+    var yAxis_5_1b = []
+    for(var i = 1; i < data_5_1.length; ++i) {
+		xAxis_5_1.push(data_5_1[i][0]) //年份
+		yAxis_5_1a.push(data_5_1[i][1]) //主营业务收入
+        yAxis_5_1b.push(data_5_1[i][2]) //利润额
+	}
+	var option_5_1 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		calculable: true,
+        legend: {
+			data: ['主营业务收入', '利润额'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_5_1,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: [
+            {
+                type: 'value',
+                name: '主营业务收入(亿元)',
+                data: yAxis_5_1a,
+                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: color_axis,
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+					fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '利润额(亿元)',
+                data: yAxis_5_1b,
+                position: 'right',
+                axisLine: {
+                    lineStyle: {
+                        color: color_axis,
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+		series: [
+            {
+			    name: '主营业务收入',
+			    type: 'bar',
+                yAxisIndex: 0,
+				data: yAxis_5_1a,
+				// markPoint: {
+                //     data: [
+                //         {type: 'max', name: '最大值'},
+                //         {type: 'min', name: '最小值'}
+                //     ]  
+                // },
+		    },
+            {
+			    name: '利润额',
+			    type: 'bar',
+                yAxisIndex: 1,
+				data: yAxis_5_1b,
+				// markPoint: {
+                //     data: [
+                //         {type: 'max', name: '最大值'},
+                //         {type: 'min', name: '最小值'}
+                //     ]  
+                // },
+		    },
+        ]
+	};
+	if (option_5_1 && typeof option_5_1 === 'object') {
+		myChart_5_1.setOption(option_5_1);
+		console.log(data_5_1)
+	}
+</script>
+
+<!--配置页面 5-2 的Echart图-->
+<script>
+    var dom_5_2 = document.getElementById("container_1_2");
+	var myChart_5_2 = echarts.init(dom_5_2, 'chalk');
+    var data_5_2 = alldata["5-22011-2017年中国不同数控机床产品的国产化率情况"]
+    var xAxis_5_2 = []
+	var yAxis_5_2a = [] //高档数控机床
+	var yAxis_5_2b = [] //中档数控机床
+	var yAxis_5_2c = [] //中低档(普及型)数控机床
+    for(var i = 1; i < data_5_2.length; ++i) {
+		xAxis_5_2.push(data_5_2[i][0]) 
+		yAxis_5_2a.push(data_5_2[i][1])
+		yAxis_5_2b.push(data_5_2[i][2])
+		yAxis_5_2c.push(data_5_2[i][3])
+	}
+	var option_5_2 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		title: [
+			{
+				subtext: '2011',
+				left: '40%',
+				top: '30%',
+				textAlign: 'center',
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
+                }
+			},
+			{
+				subtext: '2013',
+				left: '60%',
+				top: '30%',
+				textAlign: 'center',
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
+                }
+			},
+			{
+				subtext: '2015',
+				left: '30%',
+				top: '70%',
+				textAlign: 'center',
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
+                }
+			},
+			{
+				subtext: '2016',
+				left: '50%',
+				top: '70%',
+				textAlign: 'center',
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
+                }
+			},
+			{
+				subtext: '2017',
+				left: '70%',
+				top: '70%',
+				textAlign: 'center',
+				subtextStyle:{
+                    color:'#5793f3',
+                    fontSize:20,
+					align:"center"
+                }
+			}
+		],
+        legend: {
+			data: ['高档', '中档', '普及型'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		tooltip: {
+            trigger: 'item',
+			formatter: '{a} <br/>{b} : {d}%'
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+				dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        series: [
+			{
+                type: 'pie',
+				name: '2011',
+                radius: 70,
+                center: ['40%', '30%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},/*
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[5], colors[4], colors[3], colors[2]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
+                },*/
+				data: [
+				    {value: yAxis_5_2a[0], name: '高档'},
+				    {value: yAxis_5_2b[0], name: '中档'},
+					{value: yAxis_5_2c[0], name: '普及型'},
+				]
+            },
+			{
+                type: 'pie',
+				name: '2013',
+                radius: 70,
+                center: ['60%', '30%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_5_2a[1], name: '高档'},
+				    {value: yAxis_5_2b[1], name: '中档'},
+					{value: yAxis_5_2c[1], name: '普及型'},
+				]
+            },
+			{
+                type: 'pie',
+				name: '2015',
+                radius: 70,
+                center: ['30%', '70%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_5_2a[2], name: '高档'},	
+				    {value: yAxis_5_2b[2], name: '中档'},
+					{value: yAxis_5_2c[2], name: '普及型'},
+				]
+            }, 
+			{
+                type: 'pie',
+				name: '2016',
+                radius: 70,
+                center: ['50%', '70%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_5_2a[3], name: '高档'},
+				    {value: yAxis_5_2b[3], name: '中档'},
+					{value: yAxis_5_2c[3], name: '普及型'},
+				]
+            },
+			{
+                type: 'pie',
+				name: '2017',
+                radius: 70,
+                center: ['70%', '70%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_5_2a[4], name: '高档'},
+				    {value: yAxis_5_2b[4], name: '中档'},
+					{value: yAxis_5_2c[4], name: '普及型'},
+				]
+            }
+		]
+    };
+	if (option_5_2 && typeof option_5_2 === 'object') {
+		myChart_5_2.setOption(option_5_2);
+		console.log(data_5_2)
+	}
+</script>
+
+<!--配置页面 5-3 的Echart图-->
+<script>
+	var dom_5_3 = document.getElementById("container_2_1");
+	var myChart_5_3 = echarts.init(dom_5_3, 'chalk');
+	var data_5_3 = alldata["5-32013-2018年中国机床进出口平均单价"]
+    var xAxis_5_3 = []
+	var yAxis_5_3a = []
+	var yAxis_5_3b = []
+	for(var i = 1; i < data_5_3.length; ++i) {
+		xAxis_5_3.push(data_5_3[i][0]) //年份
+		yAxis_5_3a.push(data_5_3[i][1]) //进口单价
+	    yAxis_5_3b.push(data_5_3[i][2]) //出口单价
+	}
+	var option_5_3 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},
+		calculable: true,
+		legend: {
+			data: ['进口单价', '出口单价'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_5_3,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '进口单价',
+				position: 'left',
+				axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+			    axisLabel: {
+				    formatter: '{value} 元',
+				    fontSize: fontSize_axis_label
+			    },
+            },
+			{
+                type: 'value',
+                name: '出口单价',
+				position: 'right',
+				axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+				min: 0,
+				max: 10000,
+			    axisLabel: {
+				    formatter: '{value} 元',
+				    fontSize: fontSize_axis_label
+			    },
+            }
+		],
+		series: [
+			{
+				name: '进口单价',
+			    data: yAxis_5_3a,
+				type: 'line',
+				yAxisIndex: 0,
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+		    },
+			{
+				name: '出口单价',
+			    data: yAxis_5_3b,
+				type: 'line',
+				yAxisIndex: 1,
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+		    },
+
+		]
+	};
+	if (option_5_3 && typeof option_5_3 === 'object') {
+		myChart_5_3.setOption(option_5_3);
+		console.log(data_5_3)
+	}
+</script>
+
+<!--配置页面 5-4 的Echart图-->
+<script>
+	var dom_5_4 = document.getElementById("container_2_2");
+	var myChart_5_4 = echarts.init(dom_5_4, 'chalk');
+	var data_5_4 = alldata["5-4截至2017年数控机床技术全球专利主要申请人申请专利数"]
+    var xAxis_5_4 = []
+	var yAxis_5_4a = []
+	for(var i = 0; i < data_5_4.length; ++i) {
+		xAxis_5_4.push(data_5_4[i][0]) //公司
+		yAxis_5_4a.push(data_5_4[i][1]) //专利数
+	}
+	var option_5_4 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['bar', 'line']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		calculable: true,
+		legend: {
+			data: ['专利数'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'value',
+			data: yAxis_5_4a,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+				fontSize: fontSize_axis_label
+			}
+		},
+		yAxis: [
+			{
+                type: 'category',
+                name: '数目',
+                axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+				data: xAxis_5_4,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+            	}
+            }
+		],
+		series: [
+			{
+				name: '专利数',
+				data: yAxis_5_4a,
+			    type: 'bar',
+		    },
+		]
+	};
+	if (option_5_4 && typeof option_5_4 === 'object') {
+		myChart_5_4.setOption(option_5_4);
+		console.log(data_5_4)
+	}
+</script>
+
+<!--配置页面 5-5 的Echart图-->
+<script>
+	var dom_5_5 = document.getElementById("container_3_1");
+	var myChart_5_5 = echarts.init(dom_5_5, 'chalk');
+	var data_5_5 = alldata["5-52005-2018年中国机床产业销售利润率"]
+    var xAxis_5_5 = []
+	var yAxis_5_5a = []
+    for(var i = 1; i < data_5_5.length; ++i) {
+		xAxis_5_5.push(data_5_5[i][0])
+		yAxis_5_5a.push(data_5_5[i][1])
+	}
+	var option_5_5 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},
+		calculable: true,
+		legend: {
+			data: ['销售利润率'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_5_5,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '利润率',
+				axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+                axisLabel: {
+					formatter: '{value} %',
+					fontSize: fontSize_axis_label
+                }
+            }
+		],
+		series: [
+			{
+				name: '销售利润率',
+				data: yAxis_5_5a,
+				type: 'bar',
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+		    },
+		]
+	};
+	if (option_5_5 && typeof option_5_5 === 'object') {
+		myChart_5_5.setOption(option_5_5);
+		console.log(data_5_5)
+	}
+</script>
+
+<!--配置页面 5-6 的Echart图-->
+<script>
+	var dom_5_6 = document.getElementById("container_3_2");
+	var myChart_5_6 = echarts.init(dom_5_6, 'chalk');
+    var data_5_6 = alldata["5-62010-2018年机床产业出口额增长率和全员劳动生产率"]
+    var xAxis_5_6 = []
+	var yAxis_5_6a = []
+    var yAxis_5_6b = []
+    for(var i = 1; i < data_5_6.length; ++i) {
+		xAxis_5_6.push(data_5_6[i][0]) //年份
+		yAxis_5_6a.push(data_5_6[i][1]) //出口额增长率
+        yAxis_5_6b.push(data_5_6[i][2]) //全员劳动生产率
+	}
+	var option_5_6 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},
+		calculable: true,
+		legend: {
+			data: ['出口额增长率', '全员劳动生产率'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_5_6,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+		yAxis: [
+			{
+                type: 'value',
+                name: '增长率',
+				position: 'left',
+				axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+			    axisLabel: {
+				    formatter: '{value} %',
+				    fontSize: fontSize_axis_label
+			    },
+            },
+			{
+                type: 'value',
+                name: '劳动生产率',
+				position: 'right',
+				axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+			    },
+			    axisLabel: {
+				    formatter: '{value} 万元/人',
+				    fontSize: fontSize_axis_label
+			    },
+            }
+		],
+		series: [
+		    {
+				name: '出口额增长率',
+				data: yAxis_5_6a,
+			    type: 'line',
+				yAxisIndex: 0,
+		    },
+		    {
+				name: '全员劳动生产率',
+				data: yAxis_5_6b,
+			    type: 'line',
+				yAxisIndex: 1,
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+		    },
+		]
+	};
+	if (option_5_6 && typeof option_5_6 === 'object') {
+		myChart_5_6.setOption(option_5_6);
+		console.log(data_5_6)
+	}
+</script>
+
+<script>
+	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));
+	// $('<i id="back-to-top" onclick="location=\'./index_3.html\'"></i>').appendTo($('body'));
+	$('#back-to-top').fadeIn();	
+</script>
