@@ -1,0 +1,86 @@
+callback_5_4_1({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["市场规模（亿元）","同比增长率"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['2014', '2015', '2016', '2017', '2018'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "市场规模（亿元）",
+            "type": "bar",
+            "data": [
+                "2556",
+                "3080",
+                "3700",
+                "4425",
+                "5304"
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "同比增长率",
+            "type": "line",
+            "data": [
+                "0",
+                "20.50",
+                "20.13",
+                "19.59",
+                "19.86"
+            ],
+        },
+    ]
+})
+

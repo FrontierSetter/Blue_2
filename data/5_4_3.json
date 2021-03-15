@@ -1,0 +1,88 @@
+callback_5_4_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["研发费用（亿美元）","费用占营收比（%）"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['我国营收前20名','强生医疗','美敦力','飞利浦医疗','西门子医疗'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "研发费用（亿美元）",
+            "type": "bar",
+            "data": [
+                "3.46",
+                "15.48",
+                "22",
+                "9.48",
+                "18.46"
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "费用占营收比（%）",
+            "type": "line",
+            "data": [
+                "4.51",
+                "6.2",
+                "7.7",
+                "7.9",
+                "13"
+                
+                
+            ],
+        },
+    ]
+})
+

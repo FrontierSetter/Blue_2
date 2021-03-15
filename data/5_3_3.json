@@ -1,0 +1,91 @@
+callback_5_3_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["发射航天器数量（个）","质量小于50KG的航天器占比"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['中国', '美国', '俄罗斯', '欧洲', '印度','日本','其他'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "发射航天器数量（个）",
+            "type": "bar",
+            "data": [
+                "205",
+                "95",
+                "56",
+                "24",
+                "15",
+                "10",
+                "56"
+
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "质量小于50KG的航天器占比",
+            "type": "line",
+            "data": [
+                "71.71",
+                "36.84",
+                "53.57",
+                "16.67",
+                "46.67",
+                "20",
+                "64.29"
+            ],
+        },
+    ]
+})
+

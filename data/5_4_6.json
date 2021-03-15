@@ -1,0 +1,92 @@
+callback_5_4_6({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": ["企均研发机构数","企均有效发明专利申请数"],
+        "textStyle": { //图例文字的样式
+            "color": "color_legend",
+            "fontSize": "fontSize_all_legend"
+        },
+    },
+    "xAxis": {
+        "type": "category",
+        "data": ['2013','2014', '2015', '2016', '2017'],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 16
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "企均研发机构数",
+            "type": "bar",
+            "data": [
+                "0.349630996",
+                "0.364548495",
+                "0.39389313",
+                "0.42305038",
+                "0.465116279",
+                
+                
+                
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "企均有效发明专利申请数",
+            "type": "line",
+            "data": [
+                "3.825645756",
+                "4.423913043",
+                "6.116793893",
+                "7.494824017",
+                "7.903100775",
+                
+                
+                
+            ],
+        },
+    ]
+})
+
