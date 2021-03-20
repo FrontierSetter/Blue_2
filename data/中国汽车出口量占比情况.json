@@ -27,7 +27,7 @@ callback_5_2_6({
         }
     },
     "legend": {
-        "data": ["出口数量","出口量占比"],
+        "data": ["汽车拥有量","汽车产量","出口数量","进口数量","出口量占比"],
         "textStyle": { //图例文字的样式
             "color": "color_legend",
             "fontSize": "fontSize_all_legend"
@@ -55,21 +55,94 @@ callback_5_2_6({
     },
     "series": [
         {
-            "name": "出口数量",
+            "name": "汽车拥有量",
             "type": "bar",
             "data": [
-                "90",
-                "72",
-                "73",
-                "104",
-                "115",
+                "6280.61",
+                "7801.83",
+                "9356.32",
+                "10933.09",
+                "12670.14",
+                "14598.11",
+                "16284.5",
+                "18574.5",
+                "20906.7",
+                "23231.19",
             ],
+            "yAxisIndex": 0,
             "type": "bar",
             "showBackground": true,
             "backgroundStyle": {
                 "color": "rgba(180, 180, 180, 0.2)"
             }
         },
+        {
+            "name": "汽车产量",
+            "type": "bar",
+            "data": [
+                "1379.53",
+                "1826.53",
+                "1841.64",
+                "1927.62",
+                "2212.09",
+                "2372.52",
+                "2450.35",
+                "2811.91",
+                "2901.81",
+                "2781.9",
+            ],
+            "yAxisIndex": 0,
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "出口数量",
+            "type": "bar",
+            "data": [
+                "35",
+                "54",
+                "82",
+                "99",
+                "92",
+                "90",
+                "72",
+                "73",
+                "104",
+                "115",
+            ],
+            "yAxisIndex": 0,
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        {
+            "name": "进口数量",
+            "type": "bar",
+            "data": [
+                "42",
+                "81",
+                "104",
+                "113",
+                "119",
+                "142",
+                "110",
+                "107",
+                "124",
+                "111",
+            ],
+            "yAxisIndex": 0,
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        },
+        
         {
             "name": "出口量占比",
             "type": "line",
@@ -80,6 +153,7 @@ callback_5_2_6({
                 "3.6",
                 "4.1",
             ],
+            "yAxisIndex": 1,
         },
     ]
 })

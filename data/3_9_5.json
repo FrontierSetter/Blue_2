@@ -1,0 +1,93 @@
+callback_3_9_5({
+    "tooltip": {
+        "trigger": "item",
+        "formatter": "{a} <br/>{b} : {c}%"
+    },
+    "toolbox": {
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "readOnly": false
+            },
+            "restore": {},
+            "saveAsImage": {}
+        }
+    },
+    "legend": {
+        "data": [
+            "无中文标识",
+            "木制包装无IPPC标志",
+            "货物包装标识不符合进境检验要求",
+            "携带一般性有害生物",
+            "品质缺陷",
+            "其他",
+        ]
+    },
+    "series": [
+        {
+            "name": "上海市入境不合格原因分布情况",
+            "type": "funnel",
+            "left": "10%",
+            "top": 60,
+            "bottom": 60,
+            "width": "80%",
+            "min": 0,
+            "max": 100,
+            "minSize": "0%",
+            "maxSize": "100%",
+            "sort": "descending",
+            "gap": 2,
+            "label": {
+                "show": true,
+                "position": "inside",
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            },
+            "labelLine": {
+                "length": 10,
+                "lineStyle": {
+                    "width": 1,
+                    "type": "solid"
+                }
+            },
+            "itemStyle": {
+                "borderColor": "#fff",
+                "borderWidth": 1
+            },
+            "emphasis": {
+                "label": {
+                    "fontSize": 20
+                }
+            },
+            "data": [
+                {
+                    "value": "49",
+                    "name": "无中文标识"
+                },
+                {
+                    "value": "13",
+                    "name": "木制包装无IPPC标志"
+                },
+                {
+                    "value": "11",
+                    "name": "货物包装标识不符合进境检验要求"
+                },
+                {
+                    "value": "6",
+                    "name": "携带一般性有害生物"
+                },
+                {
+                    "value": "5",
+                    "name": "品质缺陷"
+                },
+                {
+                    "value": "16",
+                    "name": "其他"
+                },
+            ]
+        }
+    ]
+})
