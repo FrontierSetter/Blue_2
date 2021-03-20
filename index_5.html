@@ -26,7 +26,7 @@
 
 		<!-- bootstrap -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
+	</head> 
 	
 	<body>
 		<div class="header" style="padding:0px">
@@ -81,46 +81,44 @@
 	</body>
 </html>
 
-<!--解决本地json跨域问题-->
 <script>
-    var alldata = {};
-
+    var alldata = {}
     function demo(res){
-        alldata = res;
+        alldata = res
+		console.log(alldata)
     }
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
-<!--全局页面字体配置、颜色配置 -->
-<!--
 <script>
-    // 图例字体大小
-    var fontSize_all_title = 18
-    // 图例字体大小
-    var fontSize_all_legend = 16
-    // 坐标轴字体大小
-    var fontSize_axis_label = 14
-    // 坐标轴颜色，白色
-    var color_axis = '#fff'
-    // 图例颜色，白色
-    var color_legend = '#fff'
-    // echart toolbox字体大小
-    var echart_toolbox_size = 16
-	//0-白色、1-淡灰蓝、2-绿色、3-黄色、4-红色、5-蓝色
-	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
+    var ori_data_5_1 = {}
+    function callback_5_1(res){
+        ori_data_5_1 = res;
+		console.log('3_5_1.json读取成功')
+		console.log(ori_data_5_1)
+    }
 </script>
--->
+<script src="data/3_5_1.json?callback=callback_5_1"></script>
 
 <!--配置页面 5-1 的Echart图-->
 <script>
 	var dom_5_1 = document.getElementById("container_1_1");
 	var myChart_5_1 = echarts.init(dom_5_1, 'chalk');
+	/*
     var data_5_1 = alldata["2008年-2017年上海市服务名牌数量变化图"]
     var xAxis_5_1 = []
 	var yAxis_5_1 = []
     for(var i = 1; i < data_5_1.length; ++i) {
 		xAxis_5_1.push(data_5_1[i][0])
 		yAxis_5_1.push(data_5_1[i][1])
+	}
+	*/
+	var xAxis_5_1 = ori_data_5_1['xAxis']['data'] //年份
+	var yAxis_5_1 = ori_data_5_1['series'][0]['data'] //数量
+	function view_5_1_change(){
+		console.log("5_1 change")
+		//console.log(document.getElementById('view_5_1').value)
+		document.getElementById('view_5_1').innerHTML = document.getElementById('view_5_1').value
 	}
 	var option_5_1 = {
 		textStyle: {
@@ -139,7 +137,64 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_1" onchange="view_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,数量\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_1 = []
+						yAxis_5_1 = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_1.push(cur_pair[0])
+							yAxis_5_1.push(cur_pair[1])
+						}
+						console.log(xAxis_5_1)
+						console.log(yAxis_5_1)
+						option_5_1['series'][0]['data'] = yAxis_5_1;
+						option_5_1['xAxis']['data'] = xAxis_5_1;
+						myChart_5_1.setOption(option_5_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_1.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_1('+JSON.stringify(option_5_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -185,30 +240,50 @@
 			type: 'bar',
 		}]
 	};
+	option_5_1['series'][0]['data'] = yAxis_5_1
+	option_5_1['xAxis']['data'] = xAxis_5_1
 	if (option_5_1 && typeof option_5_1 === 'object') {
-		myChart_5_1.setOption(option_5_1);
-		console.log(data_5_1)
+		myChart_5_1.setOption(option_5_1)
+		console.log(ori_data_5_1)
 	}
 </script>
+
+<script>
+    var ori_data_5_2 = {}
+    function callback_5_2(res){
+        ori_data_5_2 = res;
+		console.log('3_5_2.json读取成功')
+		console.log(ori_data_5_2)
+    }
+</script>
+<script src="data/3_5_2.json?callback=callback_5_2"></script>
 
 <!--配置页面 5-2 的Echart图-->
 <script>
 	var dom_5_2 = document.getElementById("container_1_2");
 	var myChart_5_2 = echarts.init(dom_5_2, 'chalk');
+    /*
 	var data_5_2 = alldata["2011-2017年上海市主要餐饮服务单位变化趋势"]
     var xAxis_5_2 = []
 	var yAxis_5_2a = []
 	var yAxis_5_2b = []
 	var yAxis_5_2c = []
-	var yAxis_5_2d = []
-	var yAxis_5_2e = []
     for(var i = 1; i < data_5_2.length; ++i) {
 		xAxis_5_2.push(data_5_2[i][0])
-		yAxis_5_2a.push(data_5_2[i][1])
-		yAxis_5_2b.push(data_5_2[i][2])
-		yAxis_5_2c.push(data_5_2[i][3])
-		yAxis_5_2d.push(data_5_2[i][4])
-		yAxis_5_2e.push(data_5_2[i][1] + data_5_2[i][2] + data_5_2[i][3])
+		yAxis_5_2a.push(data_5_2[i][2]) //食堂
+		yAxis_5_2b.push(data_5_2[i][3]) //公共餐饮
+		yAxis_5_2c.push(data_5_2[i][1]) //集体用餐
+	}
+	*/
+	var xAxis_5_2 = ori_data_5_2['xAxis']['data'] //年份
+	var yAxis_5_2a = ori_data_5_2['series'][0]['data'] //食堂
+	var yAxis_5_2b = ori_data_5_2['series'][1]['data'] //公共餐饮
+	var yAxis_5_2c = ori_data_5_2['series'][2]['data'] //集体用餐
+    
+	function view_5_2_change(){
+		console.log("5_2 change")
+		//console.log(document.getElementById('view_5_2').value)
+		document.getElementById('view_5_2').innerHTML = document.getElementById('view_5_2').value
 	}
 	var option_5_2 = {
 		textStyle: {
@@ -227,7 +302,72 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_2" onchange="view_5_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,食堂,公共餐饮,集体用餐\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_2 = []
+						yAxis_5_2a = []
+						yAxis_5_2b = []
+						yAxis_5_2c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_2.push(cur_pair[0])
+							yAxis_5_2a.push(cur_pair[1])
+							yAxis_5_2b.push(cur_pair[2])
+							yAxis_5_2c.push(cur_pair[3])
+						}
+						console.log(xAxis_5_2)
+						console.log(yAxis_5_2a)
+						console.log(yAxis_5_2b)
+						console.log(yAxis_5_2c)
+						option_5_2['series'][0]['data'] = yAxis_5_2a;
+						option_5_2['series'][1]['data'] = yAxis_5_2b;
+						option_5_2['series'][2]['data'] = yAxis_5_2c;
+						option_5_2['xAxis']['data'] = xAxis_5_2;
+						myChart_5_2.setOption(option_5_2);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_2('+JSON.stringify(option_5_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -273,51 +413,70 @@
 		series: [
 		{
 				name: '食堂',
-				data: yAxis_5_2b,
+				data: yAxis_5_2a,
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
 		    },
 		    {
 				name: '公共餐饮',
-				data: yAxis_5_2c,
+				data: yAxis_5_2b,
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
 			},
 			{
 				name: '集体用餐',
-				data: yAxis_5_2a,
+				data: yAxis_5_2c,
 			    type: 'line',
 				stack: '合计',
 				areaStyle: {},
-				// label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-			    // },
 		    },
 		]
-	};  
+	};
+	option_5_2['series'][0]['data'] = yAxis_5_2a;
+	option_5_2['series'][1]['data'] = yAxis_5_2b;
+	option_5_2['series'][2]['data'] = yAxis_5_2c;
+	option_5_2['xAxis']['data'] = xAxis_5_2;
 	if (option_5_2 && typeof option_5_2 === 'object') {
 		myChart_5_2.setOption(option_5_2);
-		console.log(data_5_2)
+		console.log(ori_data_5_2)
 	}
 </script>
+
+<script>
+    var ori_data_5_3 = {}
+    function callback_5_3(res){
+        ori_data_5_3 = res;
+		console.log('3_5_3.json读取成功')
+		console.log(ori_data_5_3)
+    }
+</script>
+<script src="data/3_5_3.json?callback=callback_5_3"></script>
 
 <!--配置页面 5-3 的Echart图-->
 <script>
 	var dom_5_3 = document.getElementById("container_2_1");
 	var myChart_5_3 = echarts.init(dom_5_3, 'chalk');
+    /*
 	var data_5_3 = alldata["2009-2017年上海市服务业标准化示范点数目（累计数）"]
     var xAxis_5_3 = []
 	var yAxis_5_3a = []
 	var yAxis_5_3b = []
 	for(var i = 1; i < data_5_3[0].length; ++i) {
 		xAxis_5_3.push(data_5_3[0][i])
-		yAxis_5_3a.push(data_5_3[1][i])
-	    yAxis_5_3b.push(data_5_3[2][i])
+		yAxis_5_3a.push(data_5_3[1][i]) //国家级
+	    yAxis_5_3b.push(data_5_3[2][i]) //市级
+	}
+    */
+	var xAxis_5_3 = ori_data_5_3['xAxis']['data'] //年份
+	var yAxis_5_3a = ori_data_5_3['series'][0]['data'] //国家级
+	var yAxis_5_3b = ori_data_5_3['series'][1]['data'] //市级
+    
+	function view_5_3_change(){
+		console.log("5_3 change")
+		//console.log(document.getElementById('view_5_3').value)
+		document.getElementById('view_5_3').innerHTML = document.getElementById('view_5_3').value
 	}
 	var option_5_3 = {
 		textStyle: {
@@ -336,7 +495,68 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_3" onchange="view_5_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,国家级,市级\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_3 = []
+						yAxis_5_3a = []
+						yAxis_5_3b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_3.push(cur_pair[0])
+							yAxis_5_3a.push(cur_pair[1])
+							yAxis_5_3b.push(cur_pair[2])
+						}
+						console.log(xAxis_5_3)
+						console.log(yAxis_5_3a)
+						console.log(yAxis_5_3b)
+						option_5_3['series'][0]['data'] = yAxis_5_3a;
+						option_5_3['series'][1]['data'] = yAxis_5_3b;
+						option_5_3['xAxis']['data'] = xAxis_5_3;
+						myChart_5_3.setOption(option_5_3);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_3('+JSON.stringify(option_5_3)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -383,48 +603,66 @@
 				name: '国家级',
 			    data: yAxis_5_3a,
 				type: 'line',
-				// label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-			    // },
 		    },
 			{
 				name: '市级',
 			    data: yAxis_5_3b,
 				type: 'line',
-				// label: {
-                //     normal: {
-                //         show: true,
-                //         position: 'top'
-                //     }
-			    // },
 		    },
 		]
 	};
+	option_5_3['series'][0]['data'] = yAxis_5_3a;
+	option_5_3['series'][1]['data'] = yAxis_5_3b;
+	option_5_3['xAxis']['data'] = xAxis_5_3;
 	if (option_5_3 && typeof option_5_3 === 'object') {
 		myChart_5_3.setOption(option_5_3);
-		console.log(data_5_3)
+		console.log(ori_data_5_3)
 	}
 </script>
+
+<script>
+    var ori_data_5_4 = {}
+    function callback_5_4(res){
+        ori_data_5_4 = res;
+		console.log('3_5_4.json读取成功')
+		console.log(ori_data_5_4)
+    }
+</script>
+<script src="data/3_5_4.json?callback=callback_5_4"></script>
 
 <!--配置页面 5-4 的Echart图-->
 <script>
 	var dom_5_4 = document.getElementById("container_2_2");
 	var myChart_5_4 = echarts.init(dom_5_4, 'chalk');
 	var data_5_4 = alldata["2008-2017年上海市名牌及著名商标情况"]
+    /*
     var xAxis_5_4 = []
 	var yAxis_5_4a = []
 	var yAxis_5_4b = []
 	var yAxis_5_4c = []
 	var yAxis_5_4d = []
+	var yAxis_5_4e = []
+	var yAxis_5_4f = []
     for(var i = 1; i < data_5_4.length; ++i) {
 		xAxis_5_4.push(data_5_4[i][0])
-		yAxis_5_4a.push(data_5_4[i][1])
-		yAxis_5_4b.push(data_5_4[i][2])
-		yAxis_5_4c.push(data_5_4[i][3])
-		yAxis_5_4d.push(data_5_4[i][4])
+		yAxis_5_4a.push(data_5_4[i][1]) //财富世界500强
+		yAxis_5_4b.push(data_5_4[i][2]) //中国名牌产品
+		yAxis_5_4c.push(data_5_4[i][3]) //上海名牌产品
+		yAxis_5_4d.push(data_5_4[i][4]) //上海市著名商标
+	}
+    */
+    var xAxis_5_4 = ori_data_5_4['xAxis']['data'] //年份
+	var yAxis_5_4a = ori_data_5_4['series'][0]['data'] //上海财富世界200强
+	var yAxis_5_4b = ori_data_5_4['series'][1]['data'] //全国财富世界五百强
+	var yAxis_5_4c = ori_data_5_4['series'][2]['data'] //上海名牌产品项
+	var yAxis_5_4d = ori_data_5_4['series'][3]['data'] //全国名牌产品项
+	var yAxis_5_4e = ori_data_5_4['series'][4]['data'] //上海市著名商标新认定
+	var yAxis_5_4f = ori_data_5_4['series'][5]['data'] //上海市著名商标总数
+    
+	function view_5_4_change(){
+		console.log("5_4 change")
+		//console.log(document.getElementById('view_5_4').value)
+		document.getElementById('view_5_4').innerHTML = document.getElementById('view_5_4').value
 	}
 	var option_5_4 = {
 		textStyle: {
@@ -443,7 +681,84 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_4" onchange="view_5_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,上海财富世界五百强,全国财富世界五百强,上海名牌产品项,全国名牌产品项,上海市著名商标新认定,上海市著名商标总数\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + ',' + series[4].data[i] + ',' + series[5].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_4 = []
+						yAxis_5_4a = []
+						yAxis_5_4b = []
+						yAxis_5_4c = []
+						yAxis_5_4d = []
+						yAxis_5_4e = []
+						yAxis_5_4f = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 7) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_4.push(cur_pair[0])
+							yAxis_5_4a.push(cur_pair[1])
+							yAxis_5_4b.push(cur_pair[2])
+							yAxis_5_4c.push(cur_pair[3])
+							yAxis_5_4d.push(cur_pair[4])
+							yAxis_5_4e.push(cur_pair[5])
+							yAxis_5_4f.push(cur_pair[6])
+						}
+						console.log(xAxis_5_4)
+						console.log(yAxis_5_4a)
+						console.log(yAxis_5_4b)
+						console.log(yAxis_5_4c)
+						console.log(yAxis_5_4d)
+						console.log(yAxis_5_4e)
+						console.log(yAxis_5_4f)
+						option_5_4['series'][0]['data'] = yAxis_5_4a;
+						option_5_4['series'][1]['data'] = yAxis_5_4b;
+						option_5_4['series'][2]['data'] = yAxis_5_4c;
+						option_5_4['series'][3]['data'] = yAxis_5_4d;
+						option_5_4['series'][4]['data'] = yAxis_5_4e;
+						option_5_4['series'][5]['data'] = yAxis_5_4f;
+						option_5_4['xAxis']['data'] = xAxis_5_4;
+						myChart_5_4.setOption(option_5_4);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_4('+JSON.stringify(option_5_4)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -498,12 +813,12 @@
 		    },
 			{
 				name: '上海名牌产品项',
-				data: yAxis_5_4c,
+				data: [569, 666, 749, 703, 885, 911, 908, 883, 808, 735],
 				type: 'line',
 		    },
 			{
 				name: '全国名牌产品项',
-				data: yAxis_5_4b,
+				data: [49, 46, 44, 45, 45, 35, 35, 39, 37],
 				type: 'line',
 		    },
 			{
@@ -518,17 +833,35 @@
 		    },
 		]
 	};
+	option_5_4['series'][0]['data'] = yAxis_5_4a;
+	option_5_4['series'][1]['data'] = yAxis_5_4b;
+	option_5_4['series'][2]['data'] = yAxis_5_4c;
+	option_5_4['series'][3]['data'] = yAxis_5_4d;
+	option_5_4['series'][4]['data'] = yAxis_5_4e;
+	option_5_4['series'][5]['data'] = yAxis_5_4f;
+	option_5_4['xAxis']['data'] = xAxis_5_4;
 	if (option_5_4 && typeof option_5_4 === 'object') {
 		myChart_5_4.setOption(option_5_4);
-		console.log(data_5_4)
+		console.log(ori_data_5_4)
 	}
 </script>
+
+<script>
+    var ori_data_5_5 = {}
+    function callback_5_5(res){
+        ori_data_5_5 = res;
+		console.log('3_5_5.json读取成功')
+		console.log(ori_data_5_5)
+    }
+</script>
+<script src="data/3_5_5.json?callback=callback_5_5"></script>
 
 <!--配置页面 5-5 的Echart图-->
 <script>
 	var dom_5_5 = document.getElementById("container_3_1");
 	var myChart_5_5 = echarts.init(dom_5_5, 'chalk');
 	var data_5_5 = alldata["2008-2017年地方标准立项和当年年底现行有效总数"]
+    /*
     var xAxis_5_5 = []
 	var yAxis_5_5a = []
 	var yAxis_5_5b = []
@@ -536,6 +869,16 @@
 		xAxis_5_5.push(data_5_5[i][0])
 		yAxis_5_5a.push(data_5_5[i][1])
 		yAxis_5_5b.push(data_5_5[i][2])
+	}
+    */
+	var xAxis_5_5 = ori_data_5_5['xAxis']['data'] //年份
+	var yAxis_5_5a = ori_data_5_5['series'][0]['data'] //当年地方立项标准数
+	var yAxis_5_5b = ori_data_5_5['series'][1]['data'] //当年年底现行有效地方标准数
+    
+	function view_5_5_change(){
+		console.log("5_5 change")
+		//console.log(document.getElementById('view_5_5').value)
+		document.getElementById('view_5_5').innerHTML = document.getElementById('view_5_5').value
 	}
 	var option_5_5 = {
 		textStyle: {
@@ -554,7 +897,68 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_5" onchange="view_5_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,当年地方立项标准数,当年年底现行有效地方标准数\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_5 = []
+						yAxis_5_5a = []
+						yAxis_5_5b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_5.push(cur_pair[0])
+							yAxis_5_5a.push(cur_pair[1])
+							yAxis_5_5b.push(cur_pair[2])
+						}
+						console.log(xAxis_5_5)
+						console.log(yAxis_5_5a)
+						console.log(yAxis_5_5b)
+						option_5_5['series'][0]['data'] = yAxis_5_5a;
+						option_5_5['series'][1]['data'] = yAxis_5_5b;
+						option_5_5['xAxis']['data'] = xAxis_5_5;
+						myChart_5_5.setOption(option_5_5);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_5.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_5('+JSON.stringify(option_5_5)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -621,11 +1025,24 @@
 		    },
 		]
 	};
+	option_5_5['series'][0]['data'] = yAxis_5_5a;
+	option_5_5['series'][1]['data'] = yAxis_5_5b;
+	option_5_5['xAxis']['data'] = xAxis_5_5;
 	if (option_5_5 && typeof option_5_5 === 'object') {
 		myChart_5_5.setOption(option_5_5);
-		console.log(data_5_5)
+		console.log(ori_data_5_5)
 	}
 </script>
+
+<script>
+    var ori_data_5_6 = {}
+    function callback_5_6(res){
+        ori_data_5_6 = res;
+		console.log('3_5_6.json读取成功')
+		console.log(ori_data_5_6)
+    }
+</script>
+<script src="data/3_5_6.json?callback=callback_5_6"></script>
 
 <!--配置页面 5-6 的Echart图-->
 <script>
