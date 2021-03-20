@@ -71,7 +71,11 @@
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-90">
 						<div class="xpanel xpanel-c-t">
-							<div class="title">2018国家监督抽查各省市合格率<a href="./pj4_4_map/index.html" style="color: white;" class="title_link"><i class="expand arrows alternate icon"></i></a></div>
+							<!-- ? 直接用onclick没法触发，必须用href -->
+							<!-- ? https://blog.csdn.net/qq_39702981/article/details/89356457 -->
+							<div class="title">2018国家监督抽查各省市合格率<a href="javascript:link_to_heatmap();" οnclick="link_to_heatmap()" style="color: white;" class="title_link"><i class="expand arrows alternate icon"></i></a></div>
+							
+							<!-- <div class="title">2018国家监督抽查各省市合格率<a href="./pj4_4_map/index.html" style="color: white;" class="title_link"><i class="expand arrows alternate icon"></i></a></div> -->
 							<div class="echart-container" id="container_4_3" style="height: 100%;"></div>
 						</div>
 					</div>
@@ -2081,4 +2085,18 @@
 	$('#back-to-top').fadeIn();	
 
 	// $("#next").show();
+
+	
+</script>
+
+<script>
+	function link_to_heatmap(){
+		console.log("go")
+		var _parent = window.parent;
+		if(_parent){
+			_parent.location.href="./pj4_4_map/index.html";
+		}else{
+			window.location.href="./pj4_4_map/index.html";
+		}
+	}
 </script>

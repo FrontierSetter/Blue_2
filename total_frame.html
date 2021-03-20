@@ -14,6 +14,7 @@
 
 		<!-- JQuery -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery_params.js"></script>
 		
 		<!-- 弹出窗口 -->
 		<link rel="stylesheet" href="css/hover_window_2.css" />
@@ -25,6 +26,7 @@
 		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script> -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.1/echarts.js"></script>
 		<script type="text/javascript" src="js/color.js"></script>
+
 		
 		<!-- semantic UI -->
 		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
@@ -47,7 +49,7 @@
 			<div class="item">
 				<a class="title">
 					<i class="dropdown icon"></i>
-					<span class="sidebar_item" onclick="changeSrc('pj3_front.html')">项目3</span> 
+					<span class="sidebar_item" onclick="changeSrc('pj3_front.html')">上海市质量可视化展图</span> 
 				</a>
 				<div class="content">
 					<div class="inverted vertical accordion">
@@ -117,10 +119,120 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="item">
+				<a class="title">
+					<i class="dropdown icon"></i>
+					<span class="sidebar_item" onclick="changeSrc('pj4_front.html')">宏观经济数据</span> 
+				</a>
+				<div class="content">
+					<div class="inverted vertical accordion">
+						<div class="item">
+							<a class="title">
+								<!-- <i class="dropdown icon"></i> -->
+								<span class="sidebar_item" onclick="changeSrc('pj4_1.html')">国家优质制造水平评价数据</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj4_2.html')">世界500强排行榜数据</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj4_3.html')">企业相关指数数据</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<i class="dropdown icon"></i>
+								<span class="sidebar_item" onclick="changeSrc('pj4_4.html')">年度质量抽查及投诉数据</span> 
+							</a>
+							<div class="content">
+								<div class="inverted vertical accordion">
+									<div class="item">
+										<a class="title">
+											<span class="sidebar_item" onclick="link_to_heatmap()">国家监督抽查各省市情况</span> 
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj4_5.html')">高端装备制造业分行业评价数据</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<i class="dropdown icon"></i>
+								<span class="sidebar_item" onclick="changeSrc('pj4_6.html')">中国与世界国民经济数据</span> 
+							</a>
+							<div class="content">
+								<div class="inverted vertical accordion">
+									<div class="item">
+										<a class="title">
+											<span class="sidebar_item" onclick="changeSrc('pj4_6_1.html')">主要国家年度GDP</span> 
+										</a>
+									</div>
+									<div class="item">
+										<a class="title">
+											<span class="sidebar_item" onclick="changeSrc('pj4_6_2.html')">主要地区年度GDP</span> 
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="item">
+				<a class="title">
+					<i class="dropdown icon"></i>
+					<span class="sidebar_item" onclick="changeSrc('pj5_front.html')">行业质量数据</span> 
+				</a>
+				<div class="content">
+					<div class="inverted vertical accordion">
+						<div class="item">
+							<a class="title">
+								<!-- <i class="dropdown icon"></i> -->
+								<span class="sidebar_item" onclick="changeSrc('pj5_1.html')">船舶行业</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj5_2.html')">汽车行业</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj5_3.html')">航天行业</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<!-- <i class="dropdown icon"></i> -->
+								<span class="sidebar_item" onclick="changeSrc('pj5_4.html')">医械行业</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj5_5.html')">机床产业</span> 
+							</a>
+						</div>
+						<div class="item">
+							<a class="title">
+								<span class="sidebar_item" onclick="changeSrc('pj5_front.html')">海洋重工</span> 
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 		</div>
 		<div class="pusher" style="height: 100%; margin: 0">
-			<iframe id="myframe" src="index_2.html" style="width: 100%; height: 100%; " frameborder="no" scrolling="no" allowtransparency="yes"></iframe>
+			<iframe id="myframe" src="index_2.html" style="width: 100%; height: 100%; overflow: scroll;" frameborder="no" scrolling="no" allowtransparency="yes"></iframe>
 		</div>
 	</body>
 </html>
@@ -142,8 +254,42 @@
 </script>
 
 <script>
-	function changeSrc(desSrc){
+	function changeIframe(desSrc){
 		document.getElementById("myframe").src=desSrc;
 	}
 
+	function changeWeblink(desSrc){
+		window.location.href="./total_frame.html?noticeId="+desSrc;
+	}
+
+	function changeSrc(desSrc){
+		changeIframe(desSrc)
+	}
+
+</script>
+
+<script type="text/javascript">  
+	$(function(){
+		getData1();
+	});
+
+	function getData1(){
+		var noticeId = $.query.get("noticeId");
+    	if(noticeId != ''){
+			console.log(noticeId)
+			changeIframe(noticeId)
+		}
+	}
+</script>  
+
+<script>
+	function link_to_heatmap(){
+		console.log("go")
+		var _parent = window.parent;
+		if(_parent){
+			_parent.location.href="./pj4_4_map/index.html";
+		}else{
+			window.location.href="./pj4_4_map/index.html";
+		}
+	}
 </script>
