@@ -42,13 +42,13 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">2013-2018年中日韩造船完工量占全球比重情况</div>
+							<div class="title">2014-2018年全球汽车销量走势</div>
 							<div class="echart-container" id="container_2_1"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2013-2018中国造船出口三大指标情况</div>
+							<div class="title">2012-2018中国新能源汽车市场</div>
 							<div class="echart-container" id="container_2_2"></div>
 						</div>
 					</div>
@@ -56,13 +56,13 @@
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
-							<div class="title">2012-2018年中国船舶业出口额情况</div>
+							<div class="title">2009-2018年中国汽车产量及进出口等主要数据</div>
 							<div class="echart-container" id="container_2_3"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
-							<div class="title">2014-2018年中国造船业产业集中度概况</div>
+							<div class="title">中国品牌与国际品牌新车pp100指数</div>
 							<div class="echart-container" id="container_2_4"></div>
 						</div>
 					</div>
@@ -70,13 +70,13 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2013-2018年船舶工业利润率和规上企业数变化情况</div>
+							<div class="title">中国亏损汽车企业统计</div>
 							<div class="echart-container" id="container_2_5"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-b">
-							<div class="title">2009-2018年中国造船产能利用监测指数</div>
+							<div class="title">中国近5年汽车出口量占比情况</div>
 							<div class="echart-container" id="container_2_6"></div>
 						</div>
 					</div>
@@ -466,6 +466,7 @@
 			},
 		yAxis:{
 				type: 'value',
+				name: '亿美元',
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
@@ -484,38 +485,6 @@
 			},
 			{
 				name: '固定式压力容器',
-				type: 'bar',
-				// stack: '抽查情况',
-				data: [
-
-				]
-			},
-			{
-				name: '移动式电容器',
-				type: 'bar',
-				// stack: '抽查情况',
-				data: [
-
-				]
-			},
-			{
-				name: '移动式电容器',
-				type: 'bar',
-				// stack: '抽查情况',
-				data: [
-
-				]
-			},
-			{
-				name: '移动式电容器',
-				type: 'bar',
-				// stack: '抽查情况',
-				data: [
-
-				]
-			},
-			{
-				name: '移动式电容器',
 				type: 'bar',
 				// stack: '抽查情况',
 				data: [
@@ -810,6 +779,24 @@
                 type: 'line',
                 data: [],
                 yAxisIndex: 1,
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+            },
+            {
+                name: '汽车市场占比',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
             }
         ]
 	};
@@ -821,9 +808,13 @@
 	option_2_6_1['legend']['data'] = ori_data_2_6['legend']['data'];
 	option_2_6_1['xAxis']['data'] = X_2_6;
 
+	console.log(Y_2_6)
+
 	for(var i = 0; i < Y_2_6.length; ++i){
 		option_2_6_1['series'][i]['data'] = Y_2_6[i]['data'];
 		option_2_6_1['series'][i]['name'] = Y_2_6[i]['name'];
+		option_2_6_1['series'][i]['type'] = Y_2_6[i]['type'];
+		option_2_6_1['series'][i]['yAxisIndex'] = Y_2_6[i]['yAxisIndex'];
 	}
 
 	myChart_2_6.setOption(option_2_6_1);
