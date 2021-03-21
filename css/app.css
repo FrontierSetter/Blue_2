@@ -9,7 +9,7 @@ html, body {
 	overflow-x:hidden;
 	overflow-y:auto;
 }
-body {margin:0 auto;min-width:375px;max-width:1920px;}
+body {margin:0 auto;min-width:375px;max-width:192000px;}
 
 /********** Layout **********/
 .header {position:relative;height:84px;box-sizing:border-box;}

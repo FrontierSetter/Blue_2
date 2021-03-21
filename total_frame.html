@@ -39,7 +39,7 @@
 		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.js"></script>
 
 		<!-- <script src="json/data.json"></script> -->
-		<script type="text/javascript" src="js/global_config.js"></script>
+		<!-- <script type="text/javascript" src="js/global_config.js"></script> -->
 	</head>
 
 	
@@ -239,14 +239,16 @@
 
 
 <script>
-	$('<i id="back-to-top" style="z-index: 999;" onclick="history.back()"></i>').appendTo($('.pusher'));
-	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
-	$('#back-to-top').fadeIn();	
+	// $('<i id="back-to-top" style="z-index: 999;" onclick="history.back()"></i>').appendTo($('.pusher'));
+	// //$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	// $('#back-to-top').fadeIn();	
 
 	$('<i id="pop-sidebar" style="z-index: 999;" onclick="$(\'.ui.sidebar\').sidebar(\'toggle\');"></i>').appendTo($('.pusher'));
 	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
 	$('#pop-sidebar').fadeIn();	
 	// $('.ui.sidebar').sidebar('setting', 'transition', 'overlay');
+
+	
 
 	$("#next").show();
 
@@ -254,7 +256,13 @@
 </script>
 
 <script>
+	var currentFrame = 'pj3_front.html';
+	var lastFrame = 'pj3_front.html';
+
 	function changeIframe(desSrc){
+		lastFrame = currentFrame;
+		currentFrame = desSrc;
+
 		document.getElementById("myframe").src=desSrc;
 	}
 
@@ -265,6 +273,17 @@
 	function changeSrc(desSrc){
 		changeIframe(desSrc)
 	}
+
+	function refreshIframe(){
+		// document.getElementById("myframe").src=currentFrame;
+		$('#myframe').attr('src', $('#myframe').attr('src'));
+	}
+
+	function initIframe(){
+		document.getElementById("myframe").src=currentFrame;
+	}
+
+	initIframe();
 
 </script>
 

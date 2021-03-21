@@ -4,6 +4,47 @@
     font-size: large;
 }
 
+#iframe-refresh {
+    display:inline;
+    position:fixed;
+    /* bottom:30px; */
+    top:20px;
+    left:130px;
+    height:40px;
+    width:40px;
+    cursor:pointer;
+    background:#000000;
+    line-height:1em;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    background-image:url(../img/refresh.jpg);
+    background-size: contain;
+    /* background-position: 12px 16px; */
+    background-repeat:no-repeat;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    opacity:0.5;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+#iframe-refresh:hover {
+
+    background-color:#48cfad;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    opacity:0.8;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
 #pop-sidebar {
     display:none;
     position:fixed;
