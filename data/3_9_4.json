@@ -1,0 +1,111 @@
+callback_3_9_4({
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar",
+                    "stack",
+                    "tiled"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "legend": {
+        "data": [
+            "Ⅱ～Ⅲ类水质断面占比",
+            "Ⅳ～Ⅴ类断面占比",
+            "劣Ⅴ类断面占比"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                "2014",
+                "2015",
+                "2016",
+                "2017"
+            ],
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "Ⅱ～Ⅲ类水质断面占比",
+            "type": "bar",
+            "stack": "抽查情况",
+            "data": [
+                "24.7",
+                "14.7",
+                "16.2",
+                "23.2"
+            ]
+        },
+        {
+            "name": "Ⅳ～Ⅴ类断面占比",
+            "type": "bar",
+            "stack": "抽查情况",
+            "data": [
+                "26",
+                "28.9",
+                "49.8",
+                "58.7"
+            ]
+        },
+        {
+            "name": "劣Ⅴ类断面占比",
+            "type": "bar",
+            "stack": "抽查情况",
+            "data": [
+                "49.3",
+                "56.4",
+                "34",
+                "18.1"
+            ]
+        }
+    ]
+})

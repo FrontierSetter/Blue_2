@@ -278,7 +278,7 @@ var font_test = 22;
 						
 
 						var Link = document.createElement('a');
-						Link.download = "3_2_1.json";
+						Link.download = "上海市在用特种设备情况.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
 						var blob = new Blob(['callback_3_2_1('+JSON.stringify(option_2_1_1)+')']);
@@ -332,12 +332,6 @@ var font_test = 22;
 
 	// // 折线图
 	var option_2_1_2 = {
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
 		toolbox: {
 			show: true,
 			itemSize: echart_toolbox_size, 
@@ -1033,13 +1027,6 @@ var font_test = 22;
 	var myChart_2_4 = echarts.init(dom_2_4, 'chalk');
 	var app_2_4 = {};
 
-	function view_2_4_1_change(){
-		console.log("2_4_1 change")
-		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_2_4_1').value)
-		document.getElementById('view_2_4_1').innerHTML = document.getElementById('view_2_4_1').value
-	}
-
 	var option_2_4_1 = {
 		toolbox: {
 			show: true,
@@ -1307,11 +1294,59 @@ var font_test = 22;
 		}, ]
 	};
 
-	option_2_4_1['series'] = ori_data_2_4['series'];
-	option_2_4_1['legend']['data'] = ori_data_2_4['legend']['data'];
-	option_2_4_1['xAxis'][0]['data'] = ori_data_2_4['xAxis'][0]['data'];
+	console.log(data_1["2015-2017年上海市医疗器械监督抽查情况表"])
+	var data_2_4 = data_1["2015-2017年上海市医疗器械监督抽查情况表"];
 
-	myChart_2_4.setOption(option_2_4_1, true);
+	var X_2_4 = [];
+	// 总数
+	var Y_2_4_1 = [];
+	// 不合格数
+	var Y_2_4_2 = [];
+	// 合格数
+	var Y_2_4_3 = [];
+
+
+	for(var i = 1; i < data_2_4.length; ++i){
+		X_2_4.push(data_2_4[i][0]);
+		Y_2_4_1.push(data_2_4[i][1]);
+		Y_2_4_2.push(data_2_4[i][2]);
+		Y_2_4_3.push(data_2_4[i][1]-data_2_4[i][2]);
+	}
+
+	console.log(option_2_4_1)
+
+	option_2_4_1['series'][0]['data'] = Y_2_4_2;
+	option_2_4_1['series'][1]['data'] = Y_2_4_3;
+	option_2_4_1['xAxis'][0]['data'] = X_2_4;
+
+	myChart_2_4.setOption(option_2_4_1);
+
+	// myChart_2_4.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_2_1_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_2_4_1;
+	// 	}
+	// 	myChart_2_4.setOption(o.newOption, true);
+	// });
+
+	var curIsPie_2_4 = false;
+
+	myChart_2_4.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if (curIsPie_2_4){
+			o.newOption = option_2_4_1;
+			myChart_2_4.setOption(o.newOption, true);	
+			curIsPie_2_4 = false;
+		}else{
+			o.newOption = option_2_4_2;
+			myChart_2_4.setOption(o.newOption, true);
+			curIsPie_2_4 = true;
+		}
+	});
 
 
 
@@ -1319,28 +1354,10 @@ var font_test = 22;
 
 <!--* 图 2_5 -->
 <script>
-    var ori_data_2_5 = {};
-
-    function callback_3_2_5(res){
-        ori_data_2_5 = res;
-		console.log('3_2_5.json读取成功')
-		console.log(ori_data_2_5);
-    }
-</script>
-<script src="data/3_2_5.json?callback=callback_3_2_5"></script>
-
-<script>
 
 	var dom_2_5 = document.getElementById("container_2_5");
 	var myChart_2_5 = echarts.init(dom_2_5, 'chalk');
 	var app_2_5 = {};
-
-	function view_2_5_1_change(){
-		console.log("2_5_1 change")
-		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_2_5_1').value)
-		document.getElementById('view_2_5_1').innerHTML = document.getElementById('view_2_5_1').value
-	}
 
 	// 柱状图 
 	var option_2_5_1 = {
@@ -1355,88 +1372,7 @@ var font_test = 22;
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_2_5" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_2_5_1" onchange="view_2_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]+','+series[0].data[i]+'\n'
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_2_5_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						console.log(opt)
-						console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_2_5 = [];
-						Y_2_5 = [];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 2){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_2_5.push(cur_pair[0]);
-							Y_2_5.push(cur_pair[1]);
-						}
-
-						// console.log(X_2_5)
-						// console.log(Y_2_5)
-
-						option_2_5_1['series'][0]['data'] = Y_2_5;
-						option_2_5_1['xAxis']['data'] = X_2_5;
-						myChart_2_5.setOption(option_2_5_1);
-
-						option_2_5_2['series'][0]['data'] = Y_2_5;
-						option_2_5_2['xAxis']['data'] = X_2_5;
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_2_5.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_2_5('+JSON.stringify(option_2_5_1)+')']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
+				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line', 'bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -1533,8 +1469,18 @@ var font_test = 22;
 	};
 
 	// 获取数据
-	var X_2_5 = ori_data_2_5['xAxis']['data'];
-	var Y_2_5 = ori_data_2_5['series'][0]['data'];
+	console.log(data_1["2008-2017年上海市食品安全风险监测总体合格率"])
+	var data_2_5 = data_1["2008-2017年上海市食品安全风险监测总体合格率"];
+
+	var X_2_5 = [];
+	var Y_2_5 = [];
+
+	for(var i = 1; i < data_2_5[0].length; ++i){
+		X_2_5.push(data_2_5[0][i]);
+		Y_2_5.push(data_2_5[1][i]);
+	}
+
+	console.log(option_2_5_1)
 
 	option_2_5_1['series'][0]['data'] = Y_2_5;
 	option_2_5_1['xAxis']['data'] = X_2_5;
@@ -1762,7 +1708,7 @@ var font_test = 22;
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
-			// o.newOption = option_2_5_2;
+			// o.newOption = option_2_1_2;
 		}else if(params.currentType == 'bar'){
 			o.newOption = option_2_6_1;
 		}

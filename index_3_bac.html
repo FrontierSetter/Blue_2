@@ -147,28 +147,10 @@
 
 <!--* 图 3_1 -->
 <script>
-    var ori_data_3_1 = {};
 
-    function callback_3_3_1(res){
-        ori_data_3_1 = res;
-		console.log('3_3_1.json读取成功')
-		console.log(ori_data_3_1);
-    }
-</script>
-<script src="data/3_3_1.json?callback=callback_3_3_1"></script>
-
-<script>
-
-	var dom_3_1 = document.getElementById("container_3_1");
+var dom_3_1 = document.getElementById("container_3_1");
 	var myChart_3_1 = echarts.init(dom_3_1, 'chalk');
 	var app_3_1 = {};
-
-	function view_3_1_1_change(){
-		console.log("3_1_1 change")
-		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_3_1_1').value)
-		document.getElementById('view_3_1_1').innerHTML = document.getElementById('view_3_1_1').value
-	}
 
 	var option_3_1_1 = {
 		toolbox: {
@@ -176,122 +158,19 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_1_1" onchange="view_3_1_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						// table += option_9_1_1['series'][0]['name'];
-						// table += '\n';
-						table += "年份"
-						for(var i = 0; i < option_3_1_1['legend']['data'].length; ++i){
-							table += (','+option_3_1_1['legend']['data'][i]);
-						}
-						table += '\n';
-
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i];
-							for(var j = 0; j < series.length; ++j){
-								// if(series[j].data[i] == undefined){
-								// 	table += (',null'+series[j].data[i]);
-
-								// }
-								table += (','+series[j].data[i]);
-							}
-							table += '\n';
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_2_1_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 3_1")
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-
-						var legend_3_1 = arr_tex[0].split(',').slice(1);
-						var valid_num = legend_3_1.length;
-
-						var X_3_1 = [];
-						var Y_3_1 = [];
-
-						while(Y_3_1.length < valid_num){
-							Y_3_1.push([])
-						}
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							// if(cur_pair.length != valid_num){
-							// 	// console.alert('wrong data')
-							// 	continue
-							// }
-							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
-							// 	continue
-							// }
-							
-							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
-								continue;
-							}
-
-							X_3_1.push(cur_pair[0]);
-
-							for(var j = 1,k = 0; j < cur_pair.length && k < Y_3_1.length; ++j, ++k){
-								Y_3_1[k].push(cur_pair[j]);
-							}
-							// Y_9_1.push(cur_pair[1]);
-						}
-
-						option_3_1_1['legend']['data'] = legend_3_1;
-						option_3_1_1['xAxis'][0]['data'] = X_3_1;
-
-						option_3_1_1['series'] = [];
-
-						for(var i = 0; i < Y_3_1.length; ++i){
-							option_3_1_1['series'].push({
-								name: legend_3_1[i],
-								type: "bar",
-								stack: "抽查情况",
-								data: Y_3_1[i],
-							})
-						}
-						
-						myChart_3_1.setOption(option_3_1_1);
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_1.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_1('+JSON.stringify(option_3_1_1)+')']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
+				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true},
-				// myTool2: {
-				// 	show: true,
-				// 	title: '切换到饼图',
-				// 	icon: 'image://img/shuju-data.png',
-				// 	onclick: function (){
-				// 		myChart_3_1.setOption(option_3_1_2, true);
-				// 		curIsPie_3_1 = true;
-				// 	}
-				// }
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_3_1.setOption(option_3_1_2, true);
+						curIsPie_3_1 = true;
+					}
+				}
 			}
 		},
 		tooltip: {
@@ -630,34 +509,74 @@
 		}]
 	};
 
-	option_3_1_1['series'] = ori_data_3_1['series'];
-	option_3_1_1['legend']['data'] = ori_data_3_1['legend']['data'];
-	option_3_1_1['xAxis'][0]['data'] = ori_data_3_1['xAxis'][0]['data'];
+	// TODO:数据读取
 
-	myChart_3_1.setOption(option_3_1_1, true);
+	// console.log(data_1["2011-2017年上海市特种设备事故发生环节百分比"])
+	// var data_3_1 = data_1["2011-2017年上海市特种设备事故发生环节百分比"];
+
+	// var X_3_1 = [];
+	// // 安装
+	// var Y_3_1_1 = [];
+	// // 使用
+	// var Y_3_1_2 = [];
+	// // 维修
+	// var Y_3_1_3 = [];
+
+
+	// for(var i = 1; i < data_3_1.length; ++i){
+	// 	X_3_1.push(data_3_1[i][0]);
+	// 	Y_3_1_1.push(data_3_1[i][1]);
+	// 	Y_3_1_2.push(data_3_1[i][2]);
+	// 	Y_3_1_3.push(data_3_1[i][1]-data_3_1[i][2]);
+	// }
+
+	// console.log(option_3_1_1)
+
+	// option_3_1_1['series'][0]['data'] = Y_3_1_2;
+	// option_3_1_1['series'][1]['data'] = Y_3_1_3;
+	// option_3_1_1['xAxis'][0]['data'] = X_3_1;
+
+	myChart_3_1.setOption(option_3_1_1);
+
+	// myChart_3_1.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_3_3_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_1_1;
+	// 	}
+	// 	myChart_3_1.setOption(o.newOption, true);
+	// });
 
 	var curIsPie_3_1 = false;
+
+	// myChart_3_1.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if (curIsPie_3_1){
+	// 		o.newOption = option_3_1_1;
+	// 		myChart_3_1.setOption(o.newOption, true);	
+	// 		curIsPie_3_1 = false;
+	// 	}else{
+	// 		o.newOption = option_3_1_2;
+	// 		myChart_3_1.setOption(o.newOption, true);
+	// 		curIsPie_3_1 = true;
+	// 	}
+	// });
+
+
 
 </script>
 
 <!--* 图 3_2 -->
-<script>
-    var ori_data_3_2 = {};
-
-    function callback_3_3_2(res){
-        ori_data_3_2 = res;
-		console.log('3_3_2.json读取成功')
-		console.log(ori_data_3_2);
-    }
-</script>
-<script src="data/3_3_2.json?callback=callback_3_3_2"></script>
 <script>
 
 	var dom_3_2 = document.getElementById("container_3_2");
 	var myChart_3_2 = echarts.init(dom_3_2, 'chalk');
 	var app_3_2 = {};
 
-	var option_3_2_1 = {
+	var option_3_3_3 = {
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -670,122 +589,19 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_2_1" onchange="view_3_2_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						// table += option_9_1_1['series'][0]['name'];
-						// table += '\n';
-						table += "年份"
-						for(var i = 0; i < option_3_2_1['legend']['data'].length; ++i){
-							table += (','+option_3_2_1['legend']['data'][i]);
-						}
-						table += '\n';
-
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i];
-							for(var j = 0; j < series.length; ++j){
-								// if(series[j].data[i] == undefined){
-								// 	table += (',null'+series[j].data[i]);
-
-								// }
-								table += (','+series[j].data[i]);
-							}
-							table += '\n';
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_2_1_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 3_2")
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-
-						var legend_3_2 = arr_tex[0].split(',').slice(1);
-						var valid_num = legend_3_2.length;
-
-						var X_3_2 = [];
-						var Y_3_2 = [];
-
-						while(Y_3_2.length < valid_num){
-							Y_3_2.push([])
-						}
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							// if(cur_pair.length != valid_num){
-							// 	// console.alert('wrong data')
-							// 	continue
-							// }
-							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
-							// 	continue
-							// }
-							
-							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
-								continue;
-							}
-
-							X_3_2.push(cur_pair[0]);
-
-							for(var j = 1,k = 0; j < cur_pair.length && k < Y_3_2.length; ++j, ++k){
-								Y_3_2[k].push(cur_pair[j]);
-							}
-							// Y_9_1.push(cur_pair[1]);
-						}
-
-						option_3_2_1['legend']['data'] = legend_3_2;
-						option_3_2_1['xAxis'][0]['data'] = X_3_2;
-
-						option_3_2_1['series'] = [];
-
-						for(var i = 0; i < Y_3_2.length; ++i){
-							option_3_2_1['series'].push({
-								name: legend_3_2[i],
-								type: "bar",
-								stack: "抽查情况",
-								data: Y_3_2[i],
-							})
-						}
-						
-						myChart_3_2.setOption(option_3_2_1);
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_2.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_2('+JSON.stringify(option_3_2_1)+')']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
+				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true},
-				// myTool2: {
-				// 	show: true,
-				// 	title: '切换到饼图',
-				// 	icon: 'image://img/shuju-data.png',
-				// 	onclick: function (){
-				// 		myChart_3_2.setOption(option_3_2_2, true);
-				// 		curIsPie_3_2 = true;
-				// 	}
-				// }
+				myTool2: {
+					show: true,
+					title: '切换到饼图',
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+						myChart_3_2.setOption(option_3_2_2, true);
+						curIsPie_3_2 = true;
+					}
+				}
 			}
 		},
 		legend: {
@@ -804,7 +620,7 @@
 		xAxis: [
 			{
 				type: 'category',
-				data: ['2008','2009','2010','2011','2012','2013','2014','2015','2016','2017'],
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
@@ -1347,13 +1163,71 @@
 	};
 
 
-	option_3_2_1['series'] = ori_data_3_2['series'];
-	option_3_2_1['legend']['data'] = ori_data_3_2['legend']['data'];
-	option_3_2_1['xAxis'][0]['data'] = ori_data_3_2['xAxis'][0]['data'];
+	// console.log(data_1["2016-2017年上海市药品监督抽查情况表"])
+	// var data_3_2 = data_1["2016-2017年上海市药品监督抽查情况表"];
 
-	myChart_3_2.setOption(option_3_2_1, true);
+	// var X_3_2 = [];
+	// // 总数
+	// var Y_3_3_3 = [];
+	// // 不合格数
+	// var Y_3_2_2 = [];
+	// // 合格数
+	// var Y_3_2_3 = [];
+
+
+	// for(var i = 1; i < data_3_2.length; ++i){
+	// 	X_3_2.push(data_3_2[i][0]);
+	// 	Y_3_3_3.push(data_3_2[i][1]);
+	// 	Y_3_2_2.push(data_3_2[i][2]);
+	// 	Y_3_2_3.push(data_3_2[i][1]-data_3_2[i][2]);
+	// }
+
+	// console.log(option_3_3_3)
+
+	// option_3_3_3['series'][0]['data'] = Y_3_2_2;
+	// option_3_3_3['series'][1]['data'] = Y_3_2_3;
+	// option_3_3_3['xAxis'][0]['data'] = X_3_2;
+	// myChart_3_2.setOption(option_3_3_3);
+
+	// option_3_2_2['dataset']['source'] = [
+	// 	['product'].concat(X_3_2);
+	// 	['不合格数'].concat(Y_3_2_2);
+	// 	['合格数'].concat(Y_3_2_3);
+	// ];
+	// option_3_2_2['dataset']['source'].push(['product'].concat(X_3_2));
+	myChart_3_2.setOption(option_3_2_2);
+
+	// myChart_3_2.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(curIsPie_3_2 == true){
+	// 		o.newOption = option_3_3_3;
+	// 		curIsPie_3_2 = false;
+	// 	}else{
+
+	// 	}
+
+	// 	myChart_3_2.setOption(o.newOption, true);
+	// });
 
 	var curIsPie_3_2 = true;
+
+	// myChart_3_2.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if (curIsPie_3_2){
+	// 		o.newOption = option_3_3_3;
+	// 		myChart_3_2.setOption(o.newOption, true);	
+	// 		curIsPie_3_2 = false;
+	// 	}else{
+	// 		o.newOption = option_3_2_2;
+	// 		myChart_3_2.setOption(o.newOption, true);
+	// 		curIsPie_3_2 = true;
+	// 	}
+	// });
+
+
+
 
 </script>
 
@@ -2817,28 +2691,10 @@
 
 <!--* 图 3_5 -->
 <script>
-    var ori_data_3_5 = {};
-
-    function callback_3_3_5(res){
-        ori_data_3_5 = res;
-		console.log('3_3_5.json读取成功')
-		console.log(ori_data_3_5);
-    }
-</script>
-<script src="data/3_3_5.json?callback=callback_3_3_5"></script>
-
-<script>
 
 	var dom_3_5 = document.getElementById("container_3_5");
 	var myChart_3_5 = echarts.init(dom_3_5, 'chalk');
 	var app_3_5 = {};
-
-	function view_3_5_1_change(){
-		console.log("3_5_1 change")
-		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_3_5_1').value)
-		document.getElementById('view_3_5_1').innerHTML = document.getElementById('view_3_5_1').value
-	}
 
 	// 柱状图 
 	var option_3_5_1 = {
@@ -2853,110 +2709,7 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_5_1" onchange="view_3_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						// table += option_9_1_1['series'][0]['name'];
-						// table += '\n';
-						table += "年份"
-						for(var i = 0; i < option_3_5_1['legend']['data'].length; ++i){
-							table += (','+option_3_5_1['legend']['data'][i]);
-						}
-						table += '\n';
-
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i];
-							for(var j = 0; j < series.length; ++j){
-								// if(series[j].data[i] == undefined){
-								// 	table += (',null'+series[j].data[i]);
-
-								// }
-								table += (','+series[j].data[i]);
-							}
-							table += '\n';
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_2_1_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 3_5")
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-
-						var legend_3_5 = arr_tex[0].split(',').slice(1);
-						var valid_num = legend_3_5.length;
-
-						var X_3_5 = [];
-						var Y_3_5 = [];
-
-						while(Y_3_5.length < valid_num){
-							Y_3_5.push([])
-						}
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							// if(cur_pair.length != valid_num){
-							// 	// console.alert('wrong data')
-							// 	continue
-							// }
-							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
-							// 	continue
-							// }
-							
-							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
-								continue;
-							}
-
-							X_3_5.push(cur_pair[0]);
-
-							for(var j = 1,k = 0; j < cur_pair.length && k < Y_3_5.length; ++j, ++k){
-								Y_3_5[k].push(cur_pair[j]);
-							}
-							// Y_9_1.push(cur_pair[1]);
-						}
-
-						option_3_5_1['legend']['data'] = legend_3_5;
-						option_3_5_1['xAxis'][0]['data'] = X_3_5;
-
-						option_3_5_1['series'] = [];
-
-						for(var i = 0; i < Y_3_5.length; ++i){
-							option_3_5_1['series'].push({
-								name: legend_3_5[i],
-								type: "bar",
-								// stack: "抽查情况",
-								data: Y_3_5[i],
-							})
-						}
-						
-						myChart_3_5.setOption(option_3_5_1);
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_5.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_5('+JSON.stringify(option_3_5_1)+')']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
+				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -3028,38 +2781,64 @@
 	};
 
 
-	option_3_5_1['series'] = ori_data_3_5['series'];
-	option_3_5_1['legend']['data'] = ori_data_3_5['legend']['data'];
-	option_3_5_1['xAxis'][0]['data'] = ori_data_3_5['xAxis'][0]['data'];
+	console.log(data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"])
+	var data_3_5 = data_1["2008-2017年固定式压力容器、电梯、其中机械及场（厂）内"];
 
-	myChart_3_5.setOption(option_3_5_1, true);
+	var X_3_5 = [];
+	// 固定式压力容器
+	var Y_3_5_1 = [];
+	// 电梯
+	var Y_3_5_2 = [];
+	// 起重机
+	var Y_3_5_3 = [];
+	// 场(厂)内机动车辆
+	var Y_3_5_4 = [];
+
+
+	for(var i = 1; i < data_3_5.length; ++i){
+		X_3_5.push(data_3_5[i][0]);
+		Y_3_5_1.push(data_3_5[i][1]);
+		Y_3_5_2.push(data_3_5[i][2]);
+		Y_3_5_3.push(data_3_5[i][3]);
+		Y_3_5_4.push(data_3_5[i][4]);
+	}
+
+	console.log(option_3_5_1)
+
+	option_3_5_1['series'][0]['data'] = Y_3_5_1;
+	option_3_5_1['series'][1]['data'] = Y_3_5_2;
+	option_3_5_1['series'][2]['data'] = Y_3_5_3;
+	option_3_5_1['series'][3]['data'] = Y_3_5_4;
+	option_3_5_1['xAxis'][0]['data'] = X_3_5;
+
+	myChart_3_5.setOption(option_3_5_1);
+
+	// myChart_3_5.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_3_3_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_5_1;
+	// 	}
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
+
+	// myChart_3_5.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_5_2;
+	// 	myChart_3_5.setOption(o.newOption, true);
+	// });
 
 </script>
 
 <!--* 图 3_6 -->
 <script>
-    var ori_data_3_6 = {};
-
-    function callback_3_3_6(res){
-        ori_data_3_6 = res;
-		console.log('3_3_6.json读取成功')
-		console.log(ori_data_3_6);
-    }
-</script>
-<script src="data/3_3_6.json?callback=callback_3_3_6"></script>
-
-<script>
 
 	var dom_3_6 = document.getElementById("container_3_6");
 	var myChart_3_6 = echarts.init(dom_3_6, 'chalk');
 	var app_3_6 = {};
-
-	function view_3_6_1_change(){
-		console.log("3_6_1 change")
-		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_3_6_1').value)
-		document.getElementById('view_3_6_1').innerHTML = document.getElementById('view_3_6_1').value
-	}
 
 	var option_3_6_1 = {
 		tooltip: {
@@ -3073,110 +2852,7 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_6_1" onchange="view_3_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						// table += option_9_1_1['series'][0]['name'];
-						// table += '\n';
-						table += "年份"
-						for(var i = 0; i < option_3_6_1['legend']['data'].length; ++i){
-							table += (','+option_3_6_1['legend']['data'][i]);
-						}
-						table += '\n';
-
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i];
-							for(var j = 0; j < series.length; ++j){
-								// if(series[j].data[i] == undefined){
-								// 	table += (',null'+series[j].data[i]);
-
-								// }
-								table += (','+series[j].data[i]);
-							}
-							table += '\n';
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_2_1_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 3_6")
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-
-						var legend_3_6 = arr_tex[0].split(',').slice(1);
-						var valid_num = legend_3_6.length;
-
-						var X_3_6 = [];
-						var Y_3_6 = [];
-
-						while(Y_3_6.length < valid_num){
-							Y_3_6.push([])
-						}
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							// if(cur_pair.length != valid_num){
-							// 	// console.alert('wrong data')
-							// 	continue
-							// }
-							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
-							// 	continue
-							// }
-							
-							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
-								continue;
-							}
-
-							X_3_6.push(cur_pair[0]);
-
-							for(var j = 1,k = 0; j < cur_pair.length && k < Y_3_6.length; ++j, ++k){
-								Y_3_6[k].push(cur_pair[j]);
-							}
-							// Y_9_1.push(cur_pair[1]);
-						}
-
-						option_3_6_1['legend']['data'] = legend_3_6;
-						option_3_6_1['xAxis'][0]['data'] = X_3_6;
-
-						option_3_6_1['series'] = [];
-
-						for(var i = 0; i < Y_3_6.length; ++i){
-							option_3_6_1['series'].push({
-								name: legend_3_6[i],
-								type: "bar",
-								// stack: "抽查情况",
-								data: Y_3_6[i],
-							})
-						}
-						
-						myChart_3_6.setOption(option_3_6_1);
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_6.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_6('+JSON.stringify(option_3_6_1)+')']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
+				dataView: {show: true, readOnly: false},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -3254,11 +2930,57 @@
 	};
 
 
-	option_3_6_1['series'] = ori_data_3_6['series'];
-	option_3_6_1['legend']['data'] = ori_data_3_6['legend']['data'];
-	option_3_6_1['xAxis'][0]['data'] = ori_data_3_6['xAxis'][0]['data'];
+	console.log(data_1["2009-2017年检测机构分布情况"])
+	var data_3_6 = data_1["2009-2017年检测机构分布情况"];
 
-	myChart_3_6.setOption(option_3_6_1, true);
+	var X_3_6 = [];
+	// 综合检验机构
+	var Y_3_6_1 = [];
+	// 综合检验机构
+	var Y_3_6_2 = [];
+	// 气瓶检验机构
+	var Y_3_6_3 = [];
+	// 无损检测机构
+	var Y_3_6_4 = [];
+	// 安全阀校验机构
+	var Y_3_6_5 = [];
+
+	X_3_6 = data_3_6[0].slice(2);
+
+	Y_3_6_1 = data_3_6[1].slice(2);
+	Y_3_6_2 = data_3_6[2].slice(2);
+	Y_3_6_3 = data_3_6[3].slice(2);
+	Y_3_6_4 = data_3_6[4].slice(2);
+	Y_3_6_5 = data_3_6[5].slice(2);
+
+	console.log(option_3_6_1)
+
+	option_3_6_1['series'][0]['data'] = Y_3_6_1;
+	option_3_6_1['series'][1]['data'] = Y_3_6_2;
+	option_3_6_1['series'][2]['data'] = Y_3_6_3;
+	option_3_6_1['series'][3]['data'] = Y_3_6_4;
+	option_3_6_1['series'][4]['data'] = Y_3_6_5;
+	option_3_6_1['xAxis'][0]['data'] = X_3_6;
+
+	myChart_3_6.setOption(option_3_6_1);
+
+	// myChart_3_6.on('magictypechanged', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	if(params.currentType == 'line'){
+	// 		// o.newOption = option_3_3_2;
+	// 	}else if(params.currentType == 'bar'){
+	// 		o.newOption = option_3_6_1;
+	// 	}
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
+
+	// myChart_3_6.on('restore', function (params) {
+	// 	let o = { ...params };
+	// 	console.log(params)
+	// 	o.newOption = option_3_6_2;
+	// 	myChart_3_6.setOption(o.newOption, true);
+	// });
 
 </script>
 

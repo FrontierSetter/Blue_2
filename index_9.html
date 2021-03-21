@@ -342,10 +342,28 @@
 
 <!--* 图 9_2 -->
 <script>
+    var ori_data_9_2 = {};
+
+    function callback_3_9_2(res){
+        ori_data_9_2 = res;
+		console.log('3_9_2.json读取成功')
+		console.log(ori_data_9_2);
+    }
+</script>
+<script src="data/3_9_2.json?callback=callback_3_9_2"></script>
+
+<script>
 
 	var dom_9_2 = document.getElementById("container_9_2");
 	var myChart_9_2 = echarts.init(dom_9_2, 'chalk');
 	var app_9_2 = {};
+
+	function view_9_2_1_change(){
+		console.log("9_2_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_9_2_1').value)
+		document.getElementById('view_9_2_1').innerHTML = document.getElementById('view_9_2_1').value
+	}
 
 	var option_9_2_1 = {
 		tooltip: {
@@ -359,7 +377,109 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_9_2_1" onchange="view_9_2_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_9_2_1['legend']['data'].length; ++i){
+							table += (','+option_9_2_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 9_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_9_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_9_2.length;
+
+						var X_9_2 = [];
+						var Y_9_2 = [];
+
+						while(Y_9_2.length < valid_num){
+							Y_9_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_9_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_9_2.length; ++j, ++k){
+								Y_9_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_9_2_1['legend']['data'] = legend_9_2;
+						option_9_2_1['xAxis'][0]['data'] = X_9_2;
+						console.log(X_9_2)
+
+						option_9_2_1['series'] = [];
+
+						for(var i = 0; i < Y_9_2.length; ++i){
+							option_9_2_1['series'].push({
+								name: legend_9_2[i],
+								type: "bar",
+								data: Y_9_2[i],
+							})
+						}
+						
+						myChart_9_2.setOption(option_9_2_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_9_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_9_2('+JSON.stringify(option_9_2_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
 				magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -418,59 +538,12 @@
 		]
 	};
 
+	option_9_2_1['xAxis'][0]['data'] = ori_data_9_2['xAxis'][0]['data'];
+	option_9_2_1['series'] = ori_data_9_2['series'];
+	option_9_2_1['legend']['data'] = ori_data_9_2['legend']['data'];
 
-	console.log(data_1["2008-2017年上海市空气环境质量状况统计（缺2017年数"])
-	var data_9_2 = data_1["2008-2017年上海市空气环境质量状况统计（缺2017年数"];
-
-	var X_9_2 = [];
-	// AQI优良天数
-	var Y_9_2_1 = [];
-	// 颗粒物为首要污染物天数
-	var Y_9_2_2 = [];
-
-
-	for(var i = 1; i < data_9_2.length; ++i){
-		X_9_2.push(data_9_2[i][0]);
-		Y_9_2_1.push(data_9_2[i][1]);
-		Y_9_2_2.push(data_9_2[i][3]);
-	}
-
-	console.log(option_9_2_1)
-
-	option_9_2_1['series'][0]['data'] = Y_9_2_1;
-	option_9_2_1['series'][1]['data'] = Y_9_2_2;
-	option_9_2_1['xAxis'][0]['data'] = X_9_2;
-	// myChart_9_2.setOption(option_9_2_1);
-
-	// option_9_2_2['dataset']['source'] = [
-	// 	['product'].concat(X_9_2);
-	// 	['不合格数'].concat(Y_9_2_2);
-	// 	['合格数'].concat(Y_9_9_3);
-	// ];
-	// option_9_2_2['dataset']['source'].push(['product'].concat(X_9_2));
-	myChart_9_2.setOption(option_9_2_1);
-
-	// myChart_9_2.on('magictypechanged', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	if(params.currentType == 'line'){
-	// 		// o.newOption = option_2_1_2;
-	// 	}else if(params.currentType == 'bar'){
-	// 		o.newOption = option_9_2_1;
-	// 	}
-	// 	myChart_9_2.setOption(o.newOption, true);
-	// });
-
-	// myChart_9_2.on('restore', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	o.newOption = option_9_2_2;
-	// 	myChart_9_2.setOption(o.newOption, true);
-	// });
-
-
-
-
+	myChart_9_2.setOption(option_9_2_1, true);
+	
 </script>
 
 <!--* 图 9_3 -->
@@ -665,10 +738,28 @@
 
 <!--* 图 9_4 -->
 <script>
+    var ori_data_9_4 = {};
+
+    function callback_3_9_4(res){
+        ori_data_9_4 = res;
+		console.log('3_9_4.json读取成功')
+		console.log(ori_data_9_4);
+    }
+</script>
+<script src="data/3_9_4.json?callback=callback_3_9_4"></script>
+
+<script>
 
 	var dom_9_4 = document.getElementById("container_9_4");
 	var myChart_9_4 = echarts.init(dom_9_4, 'chalk');
 	var app_9_4 = {};
+
+	function view_9_4_1_change(){
+		console.log("9_4_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_9_4_1').value)
+		document.getElementById('view_9_4_1').innerHTML = document.getElementById('view_9_4_1').value
+	}
 
 	var option_9_4_1 = {
 		toolbox: {
@@ -676,19 +767,122 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_9_4_1" onchange="view_9_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_9_4_1['legend']['data'].length; ++i){
+							table += (','+option_9_4_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 9_4")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_9_4 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_9_4.length;
+
+						var X_9_4 = [];
+						var Y_9_4 = [];
+
+						while(Y_9_4.length < valid_num){
+							Y_9_4.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_9_4.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_9_4.length; ++j, ++k){
+								Y_9_4[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_9_4_1['legend']['data'] = legend_9_4;
+						option_9_4_1['xAxis'][0]['data'] = X_9_4;
+
+						option_9_4_1['series'] = [];
+
+						for(var i = 0; i < Y_9_4.length; ++i){
+							option_9_4_1['series'].push({
+								name: legend_9_4[i],
+								type: "bar",
+								stack: "抽查情况",
+								data: Y_9_4[i],
+							})
+						}
+						
+						myChart_9_4.setOption(option_9_4_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_9_4.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_9_4('+JSON.stringify(option_9_4_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换到饼图',
-					icon: 'image://img/shuju-data.png',
-					onclick: function (){
-						myChart_9_4.setOption(option_9_4_2, true);
-						curIsPie_9_4 = true;
-					}
-				}
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_9_4.setOption(option_9_4_2, true);
+				// 		curIsPie_9_4 = true;
+				// 	}
+				// }
 			}
 		},
 		tooltip: {
@@ -869,70 +1063,11 @@
 		},]
 	};
 
-	console.log(data_1["2014-2017年上海市地表水环境质量状况统计"])
-	var data_9_4 = data_1["2014-2017年上海市地表水环境质量状况统计"];
+	option_9_4_1['series'] = ori_data_9_4['series'];
+	option_9_4_1['legend']['data'] = ori_data_9_4['legend']['data'];
+	option_9_4_1['xAxis'][0]['data'] = ori_data_9_4['xAxis'][0]['data'];
 
-	var X_9_4 = [];
-	// Ⅱ～Ⅲ类水质断面占比
-	var Y_9_4_1 = [];
-	// 不Ⅳ～Ⅴ类断面占比
-	var Y_9_4_2 = [];
-	// 劣Ⅴ类断面占比
-	var Y_9_4_3 = [];
-
-
-	for(var i = 1; i < data_9_4.length; ++i){
-		X_9_4.push(data_9_4[i][0]);
-		Y_9_4_1.push(data_9_4[i][1]);
-		Y_9_4_2.push(data_9_4[i][2]);
-		Y_9_4_3.push(data_9_4[i][3]);
-	}
-
-	console.log(option_9_4_1)
-
-	option_9_4_1['series'][0]['data'] = Y_9_4_1;
-	option_9_4_1['series'][1]['data'] = Y_9_4_2;
-	option_9_4_1['series'][2]['data'] = Y_9_4_3;
-	option_9_4_1['xAxis'][0]['data'] = X_9_4;
-
-	// option_9_4_2['dataset']['source'][0] = ['product'].concat(X_9_4);
-	// option_9_4_2['dataset']['source'][1] = ['Ⅱ～Ⅲ类水质断面占比'].concat(Y_9_4_1);
-	// option_9_4_2['dataset']['source'][2] = ['Ⅳ～Ⅴ类断面占比'].concat(Y_9_4_2);
-	// option_9_4_2['dataset']['source'][3] = ['劣Ⅴ类断面占比'].concat(Y_9_4_3);
-
-	console.log('9_4_2')
-	console.log(option_9_4_2)
-
-
-	myChart_9_4.setOption(option_9_4_1);
-
-	// myChart_9_4.on('magictypechanged', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	if(params.currentType == 'line'){
-	// 		// o.newOption = option_2_1_2;
-	// 	}else if(params.currentType == 'bar'){
-	// 		o.newOption = option_9_4_1;
-	// 	}
-	// 	myChart_9_4.setOption(o.newOption, true);
-	// });
-
-	var curIsPie_9_4 = false;
-
-	// myChart_9_4.on('restore', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	if (curIsPie_9_4){
-	// 		o.newOption = option_9_4_1;
-	// 		myChart_9_4.setOption(o.newOption, true);	
-	// 		curIsPie_9_4 = false;
-	// 	}else{
-	// 		o.newOption = option_9_4_2;
-	// 		myChart_9_4.setOption(o.newOption, true);
-	// 		curIsPie_9_4 = true;
-	// 	}
-	// });
-
+	myChart_9_4.setOption(option_9_4_1, true);
 
 
 </script>
@@ -1130,10 +1265,28 @@
 
 <!--* 图 9_6 -->
 <script>
+    var ori_data_9_6 = {};
+
+    function callback_3_9_6(res){
+        ori_data_9_6 = res;
+		console.log('3_9_6.json读取成功')
+		console.log(ori_data_9_6);
+    }
+</script>
+<script src="data/3_9_6.json?callback=callback_3_9_6"></script>
+
+<script>
 
 	var dom_9_6 = document.getElementById("container_9_6");
 	var myChart_9_6 = echarts.init(dom_9_6, 'chalk');
 	var app_9_6 = {};
+
+	function view_9_6_1_change(){
+		console.log("9_6_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_9_6_1').value)
+		document.getElementById('view_9_6_1').innerHTML = document.getElementById('view_9_6_1').value
+	}
 
 	var option_9_6_1 = {
 		tooltip: {
@@ -1147,7 +1300,110 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_9_6_1" onchange="view_9_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_9_6_1['legend']['data'].length; ++i){
+							table += (','+option_9_6_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 9_6")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_9_6 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_9_6.length;
+
+						var X_9_6 = [];
+						var Y_9_6 = [];
+
+						while(Y_9_6.length < valid_num){
+							Y_9_6.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_9_6.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_9_6.length; ++j, ++k){
+								Y_9_6[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_9_6_1['legend']['data'] = legend_9_6;
+						option_9_6_1['xAxis'][0]['data'] = X_9_6;
+
+						option_9_6_1['series'] = [];
+
+						for(var i = 0; i < Y_9_6.length; ++i){
+							option_9_6_1['series'].push({
+								name: legend_9_6[i],
+								type: "bar",
+								// stack: "抽查情况",
+								data: Y_9_6[i],
+							})
+						}
+						
+						myChart_9_6.setOption(option_9_6_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_9_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_9_6('+JSON.stringify(option_9_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
 				magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
@@ -1219,53 +1475,11 @@
 	};
 
 
-	console.log(data_1[" 2008-2017年上海市噪声情况统计（缺2017年数据）"])
-	var data_9_6 = data_1[" 2008-2017年上海市噪声情况统计（缺2017年数据）"];
+	option_9_6_1['series'] = ori_data_9_6['series'];
+	option_9_6_1['legend']['data'] = ori_data_9_6['legend']['data'];
+	option_9_6_1['xAxis'][0]['data'] = ori_data_9_6['xAxis'][0]['data'];
 
-	var X_9_6 = [];
-	// AQI优良天数
-	var Y_9_6_1 = [];
-	// 颗粒物为首要污染物天数
-	var Y_9_6_2 = [];
-	var Y_9_6_3 = [];
-	var Y_9_6_4 = [];
-
-
-	for(var i = 1; i < data_9_6.length; ++i){
-		X_9_6.push(data_9_6[i][0]);
-		Y_9_6_1.push(data_9_6[i][1]);
-		Y_9_6_2.push(data_9_6[i][2]);
-		Y_9_6_3.push(data_9_6[i][3]);
-		Y_9_6_4.push(data_9_6[i][4]);
-	}
-
-	console.log(option_9_6_1)
-
-	option_9_6_1['series'][0]['data'] = Y_9_6_1;
-	option_9_6_1['series'][1]['data'] = Y_9_6_2;
-	option_9_6_1['series'][2]['data'] = Y_9_6_3;
-	option_9_6_1['series'][3]['data'] = Y_9_6_4;
-	option_9_6_1['xAxis'][0]['data'] = X_9_6;
-
-	myChart_9_6.setOption(option_9_6_1);
-
-	// myChart_9_6.on('magictypechanged', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	if(params.currentType == 'line'){
-	// 		// o.newOption = option_2_1_2;
-	// 	}else if(params.currentType == 'bar'){
-	// 		o.newOption = option_9_6_1;
-	// 	}
-	// 	myChart_9_6.setOption(o.newOption, true);
-	// });
-
-	// myChart_9_6.on('restore', function (params) {
-	// 	let o = { ...params };
-	// 	console.log(params)
-	// 	o.newOption = option_9_6_2;
-	// 	myChart_9_6.setOption(o.newOption, true);
-	// });
+	myChart_9_6.setOption(option_9_6_1, true);
 
 </script>
 

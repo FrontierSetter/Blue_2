@@ -1,0 +1,114 @@
+callback_3_9_2({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "AQI优良天数",
+            "颗粒物为首要污染物天数"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017
+            ],
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "max": 365,
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "AQI优良天数",
+            "type": "bar",
+            "data": [
+                "328",
+                "334",
+                "336",
+                "337",
+                "343",
+                "241",
+                "281",
+                "258",
+                "276",
+                "255"
+            ]
+        },
+        {
+            "name": "颗粒物为首要污染物天数",
+            "type": "bar",
+            "data": [
+                "313",
+                "344",
+                "352",
+                "356",
+                "361",
+                "87",
+                "58",
+                "67",
+                "44",
+                "undefined"
+            ]
+        }
+    ]
+})
