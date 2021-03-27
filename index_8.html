@@ -91,39 +91,41 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
-<!--全局页面字体配置、颜色配置 -->
-<!--
 <script>
-    // 图例字体大小
-    var fontSize_all_title = 18
-    // 图例字体大小
-    var fontSize_all_legend = 16
-    // 坐标轴字体大小
-    var fontSize_axis_label = 14
-    // 坐标轴颜色，白色
-    var color_axis = '#fff'
-    // 图例颜色，白色
-    var color_legend = '#fff'
-    // echart toolbox字体大小
-    var echart_toolbox_size = 16
-	//0-白色、1-淡灰蓝、2-绿色、3-黄色、4-红色、5-蓝色
-	var colors = ['#ffffff', '#F0F8FF', '#7bd9a5', '#fcce10', '#d14a61', '#5793f3'];
+    var ori_data_8_1 = {}
+    function callback_8_1(res){
+        ori_data_8_1 = res;
+		console.log('3_8_1.json读取成功')
+		console.log(ori_data_8_1)
+    }
 </script>
--->
+<script src="data/3_8_1.json?callback=callback_8_1"></script>
 
 <!--配置页面 8-1 的Echart图-->
 <script>
 	var dom_8_1 = document.getElementById("container_1_1");
 	var myChart_8_1 = echarts.init(dom_8_1, 'chalk');
-    var data_8_1 = alldata["2008-2017年上海市食物中毒事件发生情况"]
-    var xAxis_8_1 = []
-	var yAxis_8_1a = []
-    var yAxis_8_1b = []
-    for(var i = 1; i < data_8_1.length; ++i) {
-		xAxis_8_1.push(data_8_1[i][0])
-		yAxis_8_1a.push(data_8_1[i][1])
-        yAxis_8_1b.push(data_8_1[i][2])
+
+    // var data_8_1 = alldata["2008-2017年上海市食物中毒事件发生情况"]
+    // var xAxis_8_1 = []
+	// var yAxis_8_1a = []
+    // var yAxis_8_1b = []
+    // for(var i = 1; i < data_8_1.length; ++i) {
+	// 	xAxis_8_1.push(data_8_1[i][0])
+	// 	yAxis_8_1a.push(data_8_1[i][1])
+    //     yAxis_8_1b.push(data_8_1[i][2])
+	// }
+
+	var xAxis_8_1 = ori_data_8_1['xAxis']['data'] //年份
+	var yAxis_8_1a = ori_data_8_1['series'][0]['data'] //中毒起数
+	var yAxis_8_1b = ori_data_8_1['series'][1]['data'] //中毒人数
+
+	function view_8_1_change(){
+		console.log("8_1 change")
+		//console.log(document.getElementById('view_8_1').value)
+		document.getElementById('view_8_1').innerHTML = document.getElementById('view_8_1').value
 	}
+
 	var option_8_1 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -141,7 +143,68 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_1" onchange="view_8_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,中毒起数,中毒人数\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_1 = []
+						yAxis_8_1a = []
+						yAxis_8_1b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_1.push(cur_pair[0])
+							yAxis_8_1a.push(cur_pair[1])
+							yAxis_8_1b.push(cur_pair[2])
+						}
+						console.log(xAxis_8_1)
+						console.log(yAxis_8_1a)
+						console.log(yAxis_8_1b)
+						option_8_1['series'][0]['data'] = yAxis_8_1a;
+						option_8_1['series'][1]['data'] = yAxis_8_1b;
+						option_8_1['xAxis']['data'] = xAxis_8_1;
+						myChart_8_1.setOption(option_8_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_1.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_1('+JSON.stringify(option_8_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -231,29 +294,372 @@
 		    },
         ]
 	};
+	option_8_1['series'][0]['data'] = yAxis_8_1a;
+	option_8_1['series'][1]['data'] = yAxis_8_1b;
+	option_8_1['xAxis']['data'] = xAxis_8_1;
 	if (option_8_1 && typeof option_8_1 === 'object') {
 		myChart_8_1.setOption(option_8_1);
-		console.log(data_8_1)
+		console.log(ori_data_8_1)
 	}
 </script>
+
+<script>
+    var ori_data_8_2 = {}
+    function callback_8_2(res){
+        ori_data_8_2 = res;
+		console.log('3_8_2.json读取成功')
+		console.log(ori_data_8_2)
+    }
+</script>
+<script src="data/3_8_2.json?callback=callback_8_2"></script>
 
 <!--配置页面 8-2 的Echart图-->
 <script>
     var dom_8_2 = document.getElementById("container_1_2");
 	var myChart_8_2 = echarts.init(dom_8_2, 'chalk');
-    var data_8_2 = alldata["2011-2017年上海市食品流通企业分类监管占比情况"]
-    var xAxis_8_2 = []
-	var yAxis_8_2a = []
-	var yAxis_8_2b = []
-	var yAxis_8_2c = []
-	var yAxis_8_2d = []
-    for(var i = 1; i < data_8_2.length; ++i) {
-		xAxis_8_2.push(data_8_2[i][0])
-		yAxis_8_2a.push(data_8_2[i][1])
-		yAxis_8_2b.push(data_8_2[i][2])
-		yAxis_8_2c.push(data_8_2[i][3])
-		yAxis_8_2d.push(data_8_2[i][4])
+
+    // var data_8_2 = alldata["2011-2017年上海市食品流通企业分类监管占比情况"]
+    // var xAxis_8_2 = []
+	// var yAxis_8_2a = []
+	// var yAxis_8_2b = []
+	// var yAxis_8_2c = []
+	// var yAxis_8_2d = []
+    // for(var i = 1; i < data_8_2.length; ++i) {
+	// 	xAxis_8_2.push(data_8_2[i][0])
+	// 	yAxis_8_2a.push(data_8_2[i][1])
+	// 	yAxis_8_2b.push(data_8_2[i][2])
+	// 	yAxis_8_2c.push(data_8_2[i][3])
+	// 	yAxis_8_2d.push(data_8_2[i][4])
+	// }
+
+    var xAxis_8_2 = ori_data_8_2['xAxis']['data'] //年份
+	var yAxis_8_2a = ori_data_8_2['series'][0]['data'] //一类
+	var yAxis_8_2b = ori_data_8_2['series'][1]['data'] //二类
+	var yAxis_8_2c = ori_data_8_2['series'][2]['data'] //三类
+	var yAxis_8_2d = ori_data_8_2['series'][3]['data'] //四类
+    
+	function view_8_2_change(){
+		console.log("8_2 change")
+		//console.log(document.getElementById('view_8_2').value)
+		document.getElementById('view_8_2').innerHTML = document.getElementById('view_8_2').value
 	}
+
+	//option_8_2_1-柱状图
+    var option_8_2_1 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {        
+				type: 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_2" onchange="view_8_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,一类,二类,三类,四类\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_2 = []
+						yAxis_8_2a = []
+						yAxis_8_2b = []
+						yAxis_8_2c = []
+						yAxis_8_2d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_2.push(cur_pair[0])
+							yAxis_8_2a.push(cur_pair[1])
+							yAxis_8_2b.push(cur_pair[2])
+							yAxis_8_2c.push(cur_pair[3])
+							yAxis_8_2d.push(cur_pair[4])
+						}
+						console.log(xAxis_8_2)
+						console.log(yAxis_8_2a)
+						console.log(yAxis_8_2b)
+						console.log(yAxis_8_2c)
+						console.log(yAxis_8_2d)
+						option_8_2_1['series'][0]['data'] = yAxis_8_2a;
+						option_8_2_1['series'][1]['data'] = yAxis_8_2b;
+						option_8_2_1['series'][2]['data'] = yAxis_8_2c;
+						option_8_2_1['series'][3]['data'] = yAxis_8_2d;
+						option_8_2_1['xAxis']['data'] = xAxis_8_2;
+						myChart_8_2.setOption(option_8_2_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_2('+JSON.stringify(option_8_2_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+				magicType: {show: true, type: ['bar', 'line']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['一类', '二类', '三类', '四类'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			boundaryGap: true,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
+		    data: xAxis_8_2,
+		},
+		yAxis: {
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+                fontSize: fontSize_axis_label
+            }
+		},
+		series: [
+			{
+				name: '一类',
+				type: 'bar',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2a
+			},
+			{
+				name: '二类',
+				type: 'bar',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2b
+			},
+			{
+				name: '三类',
+				type: 'bar',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2c
+			},
+			{
+				name: '四类',
+				type: 'bar',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2d
+			},
+		]
+	};
+	//option_8_2_2-折线图
+    var option_8_2_2 = {
+		textStyle: {
+            fontSize: fontSize_all_title,
+        },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {        
+				type: 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_2" onchange="view_8_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,一类,二类,三类,四类\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_2 = []
+						yAxis_8_2a = []
+						yAxis_8_2b = []
+						yAxis_8_2c = []
+						yAxis_8_2d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_2.push(cur_pair[0])
+							yAxis_8_2a.push(cur_pair[1])
+							yAxis_8_2b.push(cur_pair[2])
+							yAxis_8_2c.push(cur_pair[3])
+							yAxis_8_2d.push(cur_pair[4])
+						}
+						console.log(xAxis_8_2)
+						console.log(yAxis_8_2a)
+						console.log(yAxis_8_2b)
+						console.log(yAxis_8_2c)
+						console.log(yAxis_8_2d)
+						option_8_2_2['series'][0]['data'] = yAxis_8_2a;
+						option_8_2_2['series'][1]['data'] = yAxis_8_2b;
+						option_8_2_2['series'][2]['data'] = yAxis_8_2c;
+						option_8_2_2['series'][3]['data'] = yAxis_8_2d;
+						option_8_2_2['xAxis']['data'] = xAxis_8_2;
+						myChart_8_2.setOption(option_8_2_2);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_2('+JSON.stringify(option_8_2_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+				magicType: {show: true, type: ['bar', 'line']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['一类', '二类', '三类', '四类'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
+		    data: xAxis_8_2,
+		},
+		yAxis: {
+
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} 个',
+                fontSize: fontSize_axis_label
+            }
+		},
+		series: [
+			{
+				name: '一类',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2a
+			},
+			{
+				name: '二类',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2b
+			},
+			{
+				name: '三类',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2c
+			},
+			{
+				name: '四类',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_8_2d
+			},
+		]
+	};
+
 	var option_8_2 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -356,6 +762,7 @@
             top: 'center',
             feature: {
 				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -501,23 +908,72 @@
     };
 	if (option_8_2 && typeof option_8_2 === 'object') {
 		myChart_8_2.setOption(option_8_2);
-		console.log(data_8_2)
+		console.log(ori_data_8_2)
 	}
+	myChart_8_2.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			option_8_2_2['series'][0]['data'] = yAxis_8_2a;
+			option_8_2_2['series'][1]['data'] = yAxis_8_2b;
+			option_8_2_2['series'][2]['data'] = yAxis_8_2c;
+			option_8_2_2['series'][3]['data'] = yAxis_8_2d;
+			option_8_2_2['xAxis']['data'] = xAxis_8_2;
+			o.newOption = option_8_2_2;
+		}else if(params.currentType == 'bar'){
+			option_8_2_1['series'][0]['data'] = yAxis_8_2a;
+			option_8_2_1['series'][1]['data'] = yAxis_8_2b;
+			option_8_2_1['series'][2]['data'] = yAxis_8_2c;
+			option_8_2_1['series'][3]['data'] = yAxis_8_2d;
+			option_8_2_1['xAxis']['data'] = xAxis_8_2;
+			o.newOption = option_8_2_1;
+		}
+		myChart_8_2.setOption(o.newOption, true);
+	});
+
+	myChart_8_2.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+		o.newOption = option_8_2;
+		myChart_8_2.setOption(o.newOption, true);
+	});
 </script>
+
+<script>
+    var ori_data_8_3 = {}
+    function callback_8_3(res){
+        ori_data_8_3 = res;
+		console.log('3_8_3.json读取成功')
+		console.log(ori_data_8_3)
+    }
+</script>
+<script src="data/3_8_3.json?callback=callback_8_3"></script>
 
 <!--配置页面 8-3 的Echart图-->
 <script>
 	var dom_8_3 = document.getElementById("container_2_1");
 	var myChart_8_3 = echarts.init(dom_8_3, 'chalk');
-	var data_8_3 = alldata["009-2017年上海市获得生产许可证的食品添加剂及食品相关产"]
-    var xAxis_8_3 = []
-	var yAxis_8_3a = []
-	var yAxis_8_3b = []
-	for(var i = 1; i < data_8_3.length; ++i) {
-		xAxis_8_3.push(data_8_3[i][0])
-		yAxis_8_3a.push(data_8_3[i][1])
-	    yAxis_8_3b.push(data_8_3[i][2])
+
+	// var data_8_3 = alldata["009-2017年上海市获得生产许可证的食品添加剂及食品相关产"]
+    // var xAxis_8_3 = []
+	// var yAxis_8_3a = []
+	// var yAxis_8_3b = []
+	// for(var i = 1; i < data_8_3.length; ++i) {
+	// 	xAxis_8_3.push(data_8_3[i][0])
+	// 	yAxis_8_3a.push(data_8_3[i][1])
+	//     yAxis_8_3b.push(data_8_3[i][2])
+	// }
+
+    var xAxis_8_3 = ori_data_8_3['xAxis']['data'] //年份
+	var yAxis_8_3a = ori_data_8_3['series'][0]['data'] //食品添加剂
+	var yAxis_8_3b = ori_data_8_3['series'][1]['data'] //食品相关产品
+    
+	function view_8_3_change(){
+		console.log("8_3 change")
+		//console.log(document.getElementById('view_8_3').value)
+		document.getElementById('view_8_3').innerHTML = document.getElementById('view_8_3').value
 	}
+
 	var option_8_3 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -535,7 +991,68 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_3" onchange="view_8_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,食品添加剂,食品相关产品\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_3 = []
+						yAxis_8_3a = []
+						yAxis_8_3b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_3.push(cur_pair[0])
+							yAxis_8_3a.push(cur_pair[1])
+							yAxis_8_3b.push(cur_pair[2])
+						}
+						console.log(xAxis_8_3)
+						console.log(yAxis_8_3a)
+						console.log(yAxis_8_3b)
+						option_8_3['series'][0]['data'] = yAxis_8_3a;
+						option_8_3['series'][1]['data'] = yAxis_8_3b;
+						option_8_3['xAxis']['data'] = xAxis_8_3;
+						myChart_8_3.setOption(option_8_3);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_3('+JSON.stringify(option_8_3)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -604,31 +1121,57 @@
 
 		]
 	};
+	option_8_3['series'][0]['data'] = yAxis_8_3a;
+	option_8_3['series'][1]['data'] = yAxis_8_3b;
+	option_8_3['xAxis']['data'] = xAxis_8_3;
 	if (option_8_3 && typeof option_8_3 === 'object') {
 		myChart_8_3.setOption(option_8_3);
-		console.log(data_8_3)
+		console.log(ori_data_8_3)
 	}
 </script>
+
+<script>
+    var ori_data_8_4 = {}
+    function callback_8_4(res){
+        ori_data_8_4 = res;
+		console.log('3_8_4.json读取成功')
+		console.log(ori_data_8_4)
+    }
+</script>
+<script src="data/3_8_4.json?callback=callback_8_4"></script>
 
 <!--配置页面 8-4 的Echart图-->
 <script>
 	var dom_8_4 = document.getElementById("container_2_2");
 	var myChart_8_4 = echarts.init(dom_8_4, 'chalk');
-	var data_8_4 = alldata["2009-2017年上海市食品生产经营许可证发放情况"]
-    var xAxis_8_4 = []
-	var yAxis_8_4a = []
-	var yAxis_8_4b = []
-	var yAxis_8_4c = []
-	var yAxis_8_4d = []
-	for(var i = 1; i < data_8_4[0].length; ++i) {
-		xAxis_8_4.push(data_8_4[0][i])
+
+	// var data_8_4 = alldata["2009-2017年上海市食品生产经营许可证发放情况"]
+    // var xAxis_8_4 = []
+	// var yAxis_8_4a = []
+	// var yAxis_8_4b = []
+	// var yAxis_8_4c = []
+	// var yAxis_8_4d = []
+	// for(var i = 1; i < data_8_4[0].length; ++i) {
+	// 	xAxis_8_4.push(data_8_4[0][i])
+	// }
+    // for(var i = 1; i < data_8_4[1].length; ++i) {
+	// 	yAxis_8_4a.push(data_8_4[1][i])
+	// 	yAxis_8_4b.push(data_8_4[2][i])
+	// 	yAxis_8_4c.push(data_8_4[3][i])
+	// 	yAxis_8_4d.push(data_8_4[1][i] + data_8_4[2][i] + data_8_4[3][i])
+	// }
+
+    var xAxis_8_4 = ori_data_8_4['xAxis']['data'] //年份
+	var yAxis_8_4a = ori_data_8_4['series'][0]['data'] //食品流通
+	var yAxis_8_4b = ori_data_8_4['series'][1]['data'] //食品生产
+	var yAxis_8_4c = ori_data_8_4['series'][2]['data'] //餐饮服务
+    
+	function view_8_4_change(){
+		console.log("8_4 change")
+		//console.log(document.getElementById('view_8_4').value)
+		document.getElementById('view_8_4').innerHTML = document.getElementById('view_8_4').value
 	}
-    for(var i = 1; i < data_8_4[1].length; ++i) {
-		yAxis_8_4a.push(data_8_4[1][i])
-		yAxis_8_4b.push(data_8_4[2][i])
-		yAxis_8_4c.push(data_8_4[3][i])
-		yAxis_8_4d.push(data_8_4[1][i] + data_8_4[2][i] + data_8_4[3][i])
-	}
+
 	var option_8_4 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -646,7 +1189,72 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_4" onchange="view_8_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,食品流通,食品生产,餐饮服务\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_4 = []
+						yAxis_8_4a = []
+						yAxis_8_4b = []
+						yAxis_8_4c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_4.push(cur_pair[0])
+							yAxis_8_4a.push(cur_pair[1])
+							yAxis_8_4b.push(cur_pair[2])
+							yAxis_8_4c.push(cur_pair[3])
+						}
+						console.log(xAxis_8_4)
+						console.log(yAxis_8_4a)
+						console.log(yAxis_8_4b)
+						console.log(yAxis_8_4c)
+						option_8_4['series'][0]['data'] = yAxis_8_4a;
+						option_8_4['series'][1]['data'] = yAxis_8_4b;
+						option_8_4['series'][2]['data'] = yAxis_8_4c;
+						option_8_4['xAxis']['data'] = xAxis_8_4;
+						myChart_8_4.setOption(option_8_4);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_4('+JSON.stringify(option_8_4)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -720,27 +1328,53 @@
 		    },
 		]
 	};
+	option_8_4['series'][0]['data'] = yAxis_8_4a;
+	option_8_4['series'][1]['data'] = yAxis_8_4b;
+	option_8_4['series'][2]['data'] = yAxis_8_4c;
+	option_8_4['xAxis']['data'] = xAxis_8_4;
 	if (option_8_4 && typeof option_8_4 === 'object') {
 		myChart_8_4.setOption(option_8_4);
-		console.log(data_8_4)
+		console.log(ori_data_8_4)
 	}
 </script>
+
+<script>
+    var ori_data_8_5 = {}
+    function callback_8_5(res){
+        ori_data_8_5 = res;
+		console.log('3_8_5.json读取成功')
+		console.log(ori_data_8_5)
+    }
+</script>
+<script src="data/3_8_5.json?callback=callback_8_5"></script>
 
 <!--配置页面 8-5 的Echart图-->
 <script>
 	var dom_8_5 = document.getElementById("container_3_1");
 	var myChart_8_5 = echarts.init(dom_8_5, 'chalk');
-	var data_8_5 = alldata["2011-2017年上海市年获证食品生产企业分布情况（按年销售"]
-    var xAxis_8_5 = []
-	var yAxis_8_5a = []
-	var yAxis_8_5b = []
-    for(var i = 1; i < data_8_5[0].length; ++i) {
-		xAxis_8_5.push(data_8_5[0][i])
+
+	// var data_8_5 = alldata["2011-2017年上海市年获证食品生产企业分布情况（按年销售"]
+    // var xAxis_8_5 = []
+	// var yAxis_8_5a = []
+	// var yAxis_8_5b = []
+    // for(var i = 1; i < data_8_5[0].length; ++i) {
+	// 	xAxis_8_5.push(data_8_5[0][i])
+	// }
+    // for(var i = 1; i < data_8_5[1].length; ++i) {
+	// 	yAxis_8_5a.push(data_8_5[1][i])
+	// 	yAxis_8_5b.push(data_8_5[2][i])
+	// }
+
+	var xAxis_8_5 = ori_data_8_5['xAxis']['data'] //年份
+	var yAxis_8_5a = ori_data_8_5['series'][0]['data'] //2000万以上
+	var yAxis_8_5b = ori_data_8_5['series'][1]['data'] //2000万以下
+    
+	function view_8_5_change(){
+		console.log("8_5 change")
+		//console.log(document.getElementById('view_8_5').value)
+		document.getElementById('view_8_5').innerHTML = document.getElementById('view_8_5').value
 	}
-    for(var i = 1; i < data_8_5[1].length; ++i) {
-		yAxis_8_5a.push(data_8_5[1][i])
-		yAxis_8_5b.push(data_8_5[2][i])
-	}
+
 	var option_8_5 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -758,7 +1392,68 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_5" onchange="view_8_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,2000万及以上,2000万以下\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_5 = []
+						yAxis_8_5a = []
+						yAxis_8_5b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_5.push(cur_pair[0])
+							yAxis_8_5a.push(cur_pair[1])
+							yAxis_8_5b.push(cur_pair[2])
+						}
+						console.log(xAxis_8_5)
+						console.log(yAxis_8_5a)
+						console.log(yAxis_8_5b)
+						option_8_5['series'][0]['data'] = yAxis_8_5a;
+						option_8_5['series'][1]['data'] = yAxis_8_5b;
+						option_8_5['xAxis']['data'] = xAxis_8_5;
+						myChart_8_5.setOption(option_8_5);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_5.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_5('+JSON.stringify(option_8_5)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -825,22 +1520,48 @@
 		    },
 		]
 	};
+	option_8_5['series'][0]['data'] = yAxis_8_5a;
+	option_8_5['series'][1]['data'] = yAxis_8_5b;
+	option_8_5['xAxis']['data'] = xAxis_8_5;
 	if (option_8_5 && typeof option_8_5 === 'object') {
 		myChart_8_5.setOption(option_8_5);
-		console.log(data_8_5)
+		console.log(ori_data_8_5)
 	}
 </script>
+
+<script>
+    var ori_data_8_6 = {}
+    function callback_8_6(res){
+        ori_data_8_6 = res;
+		console.log('3_8_6.json读取成功')
+		console.log(ori_data_8_6)
+    }
+</script>
+<script src="data/3_8_6.json?callback=callback_8_6"></script>
 
 <!--配置页面 8-6 的Echart图-->
 <script>
 	var dom_8_6 = document.getElementById("container_3_2");
 	var myChart_8_6 = echarts.init(dom_8_6, 'chalk');
-	var data_8_6 = alldata["2009-2017年上海市各级食品生产企业占比情况"]
-    var xAxis_8_6 = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
-	var yAxis_8_6a = [510, 409, 343, 326, 312, 353, 340, 482, 670]
-	var yAxis_8_6b = [1479, 1506, 1210, 1102, 986, 921, 925, 942, 534]
-	var yAxis_8_6c = [437, 445, 554, 406, 321, 269, 261, 187, 79]
-	var yAxis_8_6d = [2426, 2360, 2107, 1834, 1619, 1543, 1526, 1611, 1283]
+
+	// var data_8_6 = alldata["2009-2017年上海市各级食品生产企业占比情况"]
+    // var xAxis_8_6 = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
+	// var yAxis_8_6a = [510, 409, 343, 326, 312, 353, 340, 482, 670]
+	// var yAxis_8_6b = [1479, 1506, 1210, 1102, 986, 921, 925, 942, 534]
+	// var yAxis_8_6c = [437, 445, 554, 406, 321, 269, 261, 187, 79]
+	// var yAxis_8_6d = [2426, 2360, 2107, 1834, 1619, 1543, 1526, 1611, 1283]
+
+    var xAxis_8_6 = ori_data_8_6['xAxis']['data'] //年份
+	var yAxis_8_6a = ori_data_8_6['series'][0]['data'] //A级
+	var yAxis_8_6b = ori_data_8_6['series'][1]['data'] //B级
+	var yAxis_8_6c = ori_data_8_6['series'][2]['data'] //C级
+    
+	function view_8_6_change(){
+		console.log("8_6 change")
+		//console.log(document.getElementById('view_8_6').value)
+		document.getElementById('view_8_6').innerHTML = document.getElementById('view_8_6').value
+	}
+
 	var option_8_6 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
@@ -858,7 +1579,72 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_8_6" onchange="view_8_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,A级,B级,C级\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_8_6 = []
+						yAxis_8_6a = []
+						yAxis_8_6b = []
+						yAxis_8_6c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_8_6.push(cur_pair[0])
+							yAxis_8_6a.push(cur_pair[1])
+							yAxis_8_6b.push(cur_pair[2])
+							yAxis_8_6c.push(cur_pair[3])
+						}
+						console.log(xAxis_8_6)
+						console.log(yAxis_8_6a)
+						console.log(yAxis_8_6b)
+						console.log(yAxis_8_6c)
+						option_8_6['series'][0]['data'] = yAxis_8_6a;
+						option_8_6['series'][1]['data'] = yAxis_8_6b;
+						option_8_6['series'][2]['data'] = yAxis_8_6c;
+						option_8_6['xAxis']['data'] = xAxis_8_6;
+						myChart_8_6.setOption(option_8_6);
+
+						var Link = document.createElement('a')
+						Link.download = "3_8_6.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_8_6('+JSON.stringify(option_8_6)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -931,6 +1717,10 @@
 		    },
 		]
 	};
+	option_8_6['series'][0]['data'] = yAxis_8_6a;
+	option_8_6['series'][1]['data'] = yAxis_8_6b;
+	option_8_6['series'][2]['data'] = yAxis_8_6c;
+	option_8_6['xAxis']['data'] = xAxis_8_6;
 	if (option_8_6 && typeof option_8_6 === 'object') {
 		myChart_8_6.setOption(option_8_6);
 		console.log(data_8_6)
