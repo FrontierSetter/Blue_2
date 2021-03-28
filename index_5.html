@@ -1048,16 +1048,29 @@
 <script>
     var dom_5_6 = document.getElementById("container_3_2");
 	var myChart_5_6 = echarts.init(dom_5_6, 'chalk');
-	var data_5_6 = alldata["2011-2017年上海市餐饮服务单位量化监督动态等级评定情况"]
-    var xAxis_5_6 = [2011, 2012, 2013, 2014, 2015, 2016, 2017]
-	var yAxis_5_6a = []
-	var yAxis_5_6b = []
-	var yAxis_5_6c = []
-    for(var i = 1; i < data_5_6[1].length; i+=2) {
-		yAxis_5_6a.push(data_5_6[1][i])
-		yAxis_5_6b.push(data_5_6[2][i])
-		yAxis_5_6c.push(data_5_6[3][i])
+
+	// var data_5_6 = alldata["2011-2017年上海市餐饮服务单位量化监督动态等级评定情况"]
+    // var xAxis_5_6 = [2011, 2012, 2013, 2014, 2015, 2016, 2017]
+	// var yAxis_5_6a = []
+	// var yAxis_5_6b = []
+	// var yAxis_5_6c = []
+    // for(var i = 1; i < data_5_6[1].length; i+=2) {
+	// 	yAxis_5_6a.push(data_5_6[1][i])
+	// 	yAxis_5_6b.push(data_5_6[2][i])
+	// 	yAxis_5_6c.push(data_5_6[3][i])
+	// }
+
+	var xAxis_5_6 = ori_data_5_6['xAxis']['data'] //年份
+	var yAxis_5_6a = ori_data_5_6['series'][0]['data'] //A级
+	var yAxis_5_6b = ori_data_5_6['series'][1]['data'] //B级
+	var yAxis_5_6c = ori_data_5_6['series'][2]['data'] //C级
+    
+	function view_5_6_change(){
+		console.log("5_6 change")
+		//console.log(document.getElementById('view_5_6').value)
+		document.getElementById('view_5_6').innerHTML = document.getElementById('view_5_6').value
 	}
+	
     //option_5_6_1-柱状图
     var option_5_6_1 = {
 		textStyle: {
@@ -1076,7 +1089,72 @@
             left: 'right',
             top: 'center',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_6" onchange="view_5_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,A级,B级,C级\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_6 = []
+						yAxis_5_6a = []
+						yAxis_5_6b = []
+						yAxis_5_6c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_6.push(cur_pair[0])
+							yAxis_5_6a.push(cur_pair[1])
+							yAxis_5_6b.push(cur_pair[2])
+							yAxis_5_6c.push(cur_pair[3])
+						}
+						console.log(xAxis_5_6)
+						console.log(yAxis_5_6a)
+						console.log(yAxis_5_6b)
+						console.log(yAxis_5_6c)
+						option_5_6_1['series'][0]['data'] = yAxis_5_6a;
+						option_5_6_1['series'][1]['data'] = yAxis_5_6b;
+						option_5_6_1['series'][2]['data'] = yAxis_5_6c;
+						option_5_6_1['xAxis']['data'] = xAxis_5_6;
+						myChart_5_6.setOption(option_5_6_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_6.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_6('+JSON.stringify(option_5_6_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
 				magicType: {show: true, type: ['bar', 'line']},
 				restore: {show: true},
 				saveAsImage: {show: true}
@@ -1163,7 +1241,72 @@
             left: 'right',
             top: 'center',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_6" onchange="view_5_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,A级,B级,C级\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_6 = []
+						yAxis_5_6a = []
+						yAxis_5_6b = []
+						yAxis_5_6c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_6.push(cur_pair[0])
+							yAxis_5_6a.push(cur_pair[1])
+							yAxis_5_6b.push(cur_pair[2])
+							yAxis_5_6c.push(cur_pair[3])
+						}
+						console.log(xAxis_5_6)
+						console.log(yAxis_5_6a)
+						console.log(yAxis_5_6b)
+						console.log(yAxis_5_6c)
+						option_5_6_2['series'][0]['data'] = yAxis_5_6a;
+						option_5_6_2['series'][1]['data'] = yAxis_5_6b;
+						option_5_6_2['series'][2]['data'] = yAxis_5_6c;
+						option_5_6_2['xAxis']['data'] = xAxis_5_6;
+						myChart_5_6.setOption(option_5_6_2);
+
+						var Link = document.createElement('a')
+						Link.download = "3_5_6.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_6('+JSON.stringify(option_5_6_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
 				magicType: {show: true, type: ['bar', 'line']},
 				restore: {show: true},
 				saveAsImage: {show: true}
@@ -1475,14 +1618,22 @@
 	//option之间切换，默认饼状图
 	if (option_5_6 && typeof option_5_6 === 'object') {
 		myChart_5_6.setOption(option_5_6);
-		console.log(data_5_6)
+		console.log(ori_data_5_6)
 	}
 	myChart_5_6.on('magictypechanged', function (params) {
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
+			option_5_6_2['series'][0]['data'] = yAxis_5_6a;
+			option_5_6_2['series'][1]['data'] = yAxis_5_6b;
+			option_5_6_2['series'][2]['data'] = yAxis_5_6c;
+			option_5_6_2['xAxis']['data'] = xAxis_5_6;
 			o.newOption = option_5_6_2;
 		}else if(params.currentType == 'bar'){
+			option_5_6_1['series'][0]['data'] = yAxis_5_6a;
+			option_5_6_1['series'][1]['data'] = yAxis_5_6b;
+			option_5_6_1['series'][2]['data'] = yAxis_5_6c;
+			option_5_6_1['xAxis']['data'] = xAxis_5_6;
 			o.newOption = option_5_6_1;
 		}
 		myChart_5_6.setOption(o.newOption, true);
