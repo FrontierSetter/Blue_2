@@ -1,0 +1,153 @@
+callback_6_1_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "德国",
+            "美国",
+            "日本",
+            "中国"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019"
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "德国",
+            "type": "line",
+            "data": [
+                "50",
+                "50",
+                "47",
+                "48",
+                "50",
+                "59",
+                "59",
+                "56",
+                "55",
+                "59"
+            ]
+        },
+        {
+            "name": "美国",
+            "type": "line",
+            "data": [
+                "257",
+                "264",
+                "266",
+                "268",
+                "247",
+                "268",
+                "279",
+                "266",
+                "256",
+                "244"
+            ]
+        },
+        {
+            "name": "日本",
+            "type": "line",
+            "data": [
+                "91",
+                "91",
+                "97",
+                "86",
+                "88",
+                "104",
+                "91",
+                "90",
+                "101",
+                "96"
+            ]
+        },
+        {
+            "name": "中国",
+            "type": "line",
+            "data": [
+                "21",
+                "20",
+                "20",
+                "19",
+                "16",
+                "27",
+                "30",
+                "33",
+                "41",
+                "47"
+            ]
+        },
+        {
+            "name": "移动式电容器",
+            "type": "line",
+            "data": []
+        },
+        {
+            "name": "移动式电容器",
+            "type": "line",
+            "data": []
+        }
+    ]
+})
