@@ -1,0 +1,138 @@
+callback_6_1_4({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "德国",
+            "美国",
+            "日本",
+            "中国"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": [
+        {
+            "type": "value",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "德国",
+            "type": "bar",
+            "data": [
+                "56",
+                "57",
+                "53",
+                "49",
+                "50",
+                "62",
+                "56",
+                "54",
+                "55",
+                "61",
+                
+                
+            ],
+        },
+        {
+            "name": "美国",
+            "type": "line",
+            "data": [
+                "270",
+                "273",
+                "276",
+                "255",
+                "255",
+                "258",
+                "279",
+                "266",
+                "242",
+                "256",
+                
+                
+            ],
+        },
+        {
+            "name": "日本",
+            "type": "bar",
+            "data": [
+                "95",
+                "96",
+                "99",
+                "81",
+                "88",
+                "106",
+                "95",
+                "88",
+                "86",
+                "103",
+                
+                
+            ],
+        },
+        {
+            "name": "中国",
+            "type": "line",
+            "data": [
+                "19",
+                "18",
+                "19",
+                "18",
+                "16",
+                "29",
+                "33",
+                "32",
+                "37",
+                "46",
+                
+                
+            ],
+        }
+    ]
+})
