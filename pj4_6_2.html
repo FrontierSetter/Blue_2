@@ -64,11 +64,11 @@
 <!--解决本地json跨域问题-->
 <script>
     var alldata = {};
-    function demo(res){
+    function callback_gdp(res){
         alldata = res;
     }
 </script>
-<script src="data/data4_6_2.json"></script>
+<script src="data/gdp/gdp2.json"></script>
 
 <!--配置页面 6-1 的Echart图-->
 <script>
@@ -107,7 +107,7 @@
 	}
     for(var i = 1; i < data_6_1.length; ++i) {
         xAxis_6_1.push(data_6_1[i][0])
-        myColor.push(Color[data_6_2[i][21]])
+        myColor.push(Color[data_6_2[i][data_6_1[0].length]])
 	}
 	for(var i = 1; i < data_6_1[0].length; ++i) {
 		yAxis_6_1b[i-1] = new Array()
@@ -393,29 +393,55 @@
 	myChart_6_1.setOption(option);
 </script>
 
-<!--配置页面 6-5 的Echart图-->
 <script>
-	var dom_6_5 = document.getElementById("container_3_1");
-	var myChart_6_5 = echarts.init(dom_6_5, 'chalk');
-    var data_6_5 = alldata["6-8各洲年度劳动生产率"]
-	console.log(data_6_5)
-    var xAxis_6_5 = []  //年份
-    var yAxis_6_5a = [] //东亚与太平洋
-    var yAxis_6_5b = [] //欧洲与中亚
-    var yAxis_6_5c = [] //拉丁美洲
-    var yAxis_6_5d = [] //中东与北非
-    var yAxis_6_5e = [] //北美
-    var yAxis_6_5f = [] //撒哈拉以南非洲
-    for(var i = 1; i < data_6_5[0].length; ++i) {
-        xAxis_6_5.push(data_6_5[0][i])  //年份
-        yAxis_6_5a.push(data_6_5[1][i]) //东亚与太平洋
-        yAxis_6_5b.push(data_6_5[2][i]) //欧洲与中亚
-        yAxis_6_5c.push(data_6_5[3][i]) //拉丁美洲
-        yAxis_6_5d.push(data_6_5[4][i]) //中东与北非
-        yAxis_6_5e.push(data_6_5[5][i]) //北美
-        yAxis_6_5f.push(data_6_5[6][i]) //撒哈拉以南非洲
+    var ori_data_6_7 = {}
+    function callback_6_7(res){
+        ori_data_6_7 = res;
+		console.log('4_6_7.json读取成功')
+		console.log(ori_data_6_7)
     }
-	var option_6_5 = {
+</script>
+<script src="data/4_6_7.json?callback=callback_6_7"></script>
+
+<!--配置页面 6-7 的Echart图-->
+<script>
+	var dom_6_7 = document.getElementById("container_3_1");
+	var myChart_6_7 = echarts.init(dom_6_7, 'chalk');
+
+    // var data_6_7 = alldata["6-8各洲年度劳动生产率"]
+	// console.log(data_6_7)
+    // var xAxis_6_7 = []  //年份
+    // var yAxis_6_7a = [] //东亚与太平洋
+    // var yAxis_6_7b = [] //欧洲与中亚
+    // var yAxis_6_7c = [] //拉丁美洲
+    // var yAxis_6_7d = [] //中东与北非
+    // var yAxis_6_7e = [] //北美
+    // var yAxis_6_7f = [] //撒哈拉以南非洲
+    // for(var i = 1; i < data_6_7[0].length; ++i) {
+    //     xAxis_6_7.push(data_6_7[0][i])  //年份
+    //     yAxis_6_7a.push(data_6_7[1][i]) //东亚与太平洋
+    //     yAxis_6_7b.push(data_6_7[2][i]) //欧洲与中亚
+    //     yAxis_6_7c.push(data_6_7[3][i]) //拉丁美洲
+    //     yAxis_6_7d.push(data_6_7[4][i]) //中东与北非
+    //     yAxis_6_7e.push(data_6_7[5][i]) //北美
+    //     yAxis_6_7f.push(data_6_7[6][i]) //撒哈拉以南非洲
+    // }
+
+    var xAxis_6_7 = ori_data_6_7['xAxis']['data'] 
+	var yAxis_6_7a = ori_data_6_7['series'][0]['data'] 
+	var yAxis_6_7b = ori_data_6_7['series'][1]['data'] 
+	var yAxis_6_7c = ori_data_6_7['series'][2]['data'] 
+	var yAxis_6_7d = ori_data_6_7['series'][3]['data'] 
+	var yAxis_6_7e = ori_data_6_7['series'][4]['data'] 
+	var yAxis_6_7f = ori_data_6_7['series'][5]['data'] 
+    
+	function view_6_7_change(){
+		console.log("6_7 change")
+		//console.log(document.getElementById('view_6_7').value)
+		document.getElementById('view_6_7').innerHTML = document.getElementById('view_6_7').value
+	}
+
+	var option_6_7 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
 		},
@@ -432,7 +458,84 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_6_7" onchange="view_6_7_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,东亚与太平洋,欧洲与中亚,拉丁美洲,中东与北非,北美,撒哈拉以南非洲\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + ',' + series[4].data[i] + ',' + series[5].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_6_7 = []
+						yAxis_6_7a = []
+						yAxis_6_7b = []
+						yAxis_6_7c = []
+						yAxis_6_7d = []
+						yAxis_6_7e = []
+						yAxis_6_7f = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 7) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_6_7.push(cur_pair[0])
+							yAxis_6_7a.push(cur_pair[1])
+							yAxis_6_7b.push(cur_pair[2])
+							yAxis_6_7c.push(cur_pair[3])
+							yAxis_6_7d.push(cur_pair[4])
+							yAxis_6_7e.push(cur_pair[5])
+							yAxis_6_7f.push(cur_pair[6])
+						}
+						console.log(xAxis_6_7)
+						console.log(yAxis_6_7a)
+						console.log(yAxis_6_7b)
+						console.log(yAxis_6_7c)
+						console.log(yAxis_6_7d)
+						console.log(yAxis_6_7e)
+						console.log(yAxis_6_7f)
+						option_6_7['series'][0]['data'] = yAxis_6_7a;
+						option_6_7['series'][1]['data'] = yAxis_6_7b;
+						option_6_7['series'][2]['data'] = yAxis_6_7c;
+						option_6_7['series'][3]['data'] = yAxis_6_7d;
+						option_6_7['series'][4]['data'] = yAxis_6_7e;
+						option_6_7['series'][5]['data'] = yAxis_6_7f;
+						option_6_7['xAxis']['data'] = xAxis_6_7;
+						myChart_6_7.setOption(option_6_7);
+
+						var Link = document.createElement('a')
+						Link.download = "4_6_7.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_6_7('+JSON.stringify(option_6_7)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -448,7 +551,7 @@
         },
 		xAxis: {
 			type: 'category',
-			data: xAxis_6_5,
+			data: xAxis_6_7,
 			axisLine: {
                 lineStyle: {
                     color: color_axis
@@ -485,33 +588,33 @@
         ],
 		series: [
             {
-			    data: yAxis_6_5a,
+			    data: yAxis_6_7a,
 			    name: '东亚与太平洋',
                 type: 'bar',
                 color: "#CD0000",
             },
             {
-			    data: yAxis_6_5b,
+			    data: yAxis_6_7b,
 			    name: '欧洲与中亚',
 			    type: 'bar',
 			},
             {
-			    data: yAxis_6_5c,
+			    data: yAxis_6_7c,
 			    name: '拉丁美洲',
 			    type: 'bar',
 			},
 			{
-			    data: yAxis_6_5d,
+			    data: yAxis_6_7d,
 			    name: '中东与北非',
 			    type: 'bar',
             },
             {
-			    data: yAxis_6_5e,
+			    data: yAxis_6_7e,
 			    name: '北美',
 			    type: 'bar',
 			},
 			{
-			    data: yAxis_6_5f,
+			    data: yAxis_6_7f,
 			    name: '撒哈拉以南非洲',
 			    type: 'bar',
             },
@@ -521,35 +624,68 @@
             },
 		]
 	};
-	if (option_6_5 && typeof option_6_5 === 'object') {
-		myChart_6_5.setOption(option_6_5);
-		console.log(data_6_5)
+    option_6_7['series'][0]['data'] = yAxis_6_7a;
+	option_6_7['series'][1]['data'] = yAxis_6_7b;
+	option_6_7['series'][2]['data'] = yAxis_6_7c;
+	option_6_7['series'][3]['data'] = yAxis_6_7d;
+	option_6_7['series'][4]['data'] = yAxis_6_7e;
+	option_6_7['series'][5]['data'] = yAxis_6_7f;
+	option_6_7['xAxis']['data'] = xAxis_6_7;
+	if (option_6_7 && typeof option_6_7 === 'object') {
+		myChart_6_7.setOption(option_6_7);
+		console.log(ori_data_6_7)
 	}
 </script>
 
-<!--配置页面 6-6 的Echart图-->
 <script>
-	var dom_6_6 = document.getElementById("container_3_2");
-	var myChart_6_6 = echarts.init(dom_6_6, 'chalk');
-    var data_6_6 = alldata["6-9各洲年度GDP"]
-	console.log(data_6_6)
-    var xAxis_6_6 = []  //年份
-    var yAxis_6_6a = [] //东亚与太平洋
-    var yAxis_6_6b = [] //欧洲与中亚
-    var yAxis_6_6c = [] //拉丁美洲
-    var yAxis_6_6d = [] //中东与北非
-    var yAxis_6_6e = [] //北美
-    var yAxis_6_6f = [] //撒哈拉以南非洲
-    for(var i = 1; i < data_6_6[0].length; ++i) {
-        xAxis_6_6.push(data_6_6[0][i])            //年份
-        yAxis_6_6a.push(data_6_6[1][i]/100000000) //东亚与太平洋
-        yAxis_6_6b.push(data_6_6[2][i]/100000000) //欧洲与中亚
-        yAxis_6_6c.push(data_6_6[3][i]/100000000) //拉丁美洲
-        yAxis_6_6d.push(data_6_6[4][i]/100000000) //中东与北非
-        yAxis_6_6e.push(data_6_6[5][i]/100000000) //北美
-        yAxis_6_6f.push(data_6_6[6][i]/100000000) //撒哈拉以南非洲
+    var ori_data_6_8 = {}
+    function callback_6_8(res){
+        ori_data_6_8 = res;
+		console.log('4_6_8.json读取成功')
+		console.log(ori_data_6_8)
     }
-	var option_6_6 = {
+</script>
+<script src="data/4_6_8.json?callback=callback_6_8"></script>
+
+<!--配置页面 6-8 的Echart图-->
+<script>
+	var dom_6_8 = document.getElementById("container_3_2");
+	var myChart_6_8 = echarts.init(dom_6_8, 'chalk');
+
+    // var data_6_8 = alldata["6-9各洲年度GDP"]
+	// console.log(data_6_8)
+    // var xAxis_6_8 = []  //年份
+    // var yAxis_6_8a = [] //东亚与太平洋
+    // var yAxis_6_8b = [] //欧洲与中亚
+    // var yAxis_6_8c = [] //拉丁美洲
+    // var yAxis_6_8d = [] //中东与北非
+    // var yAxis_6_8e = [] //北美
+    // var yAxis_6_8f = [] //撒哈拉以南非洲
+    // for(var i = 1; i < data_6_8[0].length; ++i) {
+    //     xAxis_6_8.push(data_6_8[0][i])            //年份
+    //     yAxis_6_8a.push(data_6_8[1][i]/100000000) //东亚与太平洋
+    //     yAxis_6_8b.push(data_6_8[2][i]/100000000) //欧洲与中亚
+    //     yAxis_6_8c.push(data_6_8[3][i]/100000000) //拉丁美洲
+    //     yAxis_6_8d.push(data_6_8[4][i]/100000000) //中东与北非
+    //     yAxis_6_8e.push(data_6_8[5][i]/100000000) //北美
+    //     yAxis_6_8f.push(data_6_8[6][i]/100000000) //撒哈拉以南非洲
+    // }
+
+    var xAxis_6_8 = ori_data_6_8['xAxis']['data'] //年份
+	var yAxis_6_8a = ori_data_6_8['series'][0]['data'] //东亚与太平洋
+	var yAxis_6_8b = ori_data_6_8['series'][1]['data'] //欧洲与中亚
+	var yAxis_6_8c = ori_data_6_8['series'][2]['data'] //拉丁美洲
+	var yAxis_6_8d = ori_data_6_8['series'][3]['data'] //中东与北非
+	var yAxis_6_8e = ori_data_6_8['series'][4]['data'] //北美
+	var yAxis_6_8f = ori_data_6_8['series'][5]['data'] //撒哈拉以南非洲
+    
+	function view_6_8_change(){
+		console.log("6_8 change")
+		//console.log(document.getElementById('view_6_8').value)
+		document.getElementById('view_6_8').innerHTML = document.getElementById('view_6_8').value
+	}
+
+	var option_6_8 = {
 		textStyle: {
 			fontSize: fontSize_all_title,
 		},
@@ -566,7 +702,84 @@
             left: 'right',
             top: 'center',
             feature: {
-                dataView: {show: true, readOnly: false},
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_6_8" onchange="view_6_8_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,东亚与太平洋,欧洲与中亚,拉丁美洲,中东与北非,北美,撒哈拉以南非洲\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + ',' + series[4].data[i] + ',' + series[5].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_6_8 = []
+						yAxis_6_8a = []
+						yAxis_6_8b = []
+						yAxis_6_8c = []
+						yAxis_6_8d = []
+						yAxis_6_8e = []
+						yAxis_6_8f = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 7) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_6_8.push(cur_pair[0])
+							yAxis_6_8a.push(cur_pair[1])
+							yAxis_6_8b.push(cur_pair[2])
+							yAxis_6_8c.push(cur_pair[3])
+							yAxis_6_8d.push(cur_pair[4])
+							yAxis_6_8e.push(cur_pair[5])
+							yAxis_6_8f.push(cur_pair[6])
+						}
+						console.log(xAxis_6_8)
+						console.log(yAxis_6_8a)
+						console.log(yAxis_6_8b)
+						console.log(yAxis_6_8c)
+						console.log(yAxis_6_8d)
+						console.log(yAxis_6_8e)
+						console.log(yAxis_6_8f)
+						option_6_8['series'][0]['data'] = yAxis_6_8a;
+						option_6_8['series'][1]['data'] = yAxis_6_8b;
+						option_6_8['series'][2]['data'] = yAxis_6_8c;
+						option_6_8['series'][3]['data'] = yAxis_6_8d;
+						option_6_8['series'][4]['data'] = yAxis_6_8e;
+						option_6_8['series'][5]['data'] = yAxis_6_8f;
+						option_6_8['xAxis']['data'] = xAxis_6_8;
+						myChart_6_8.setOption(option_6_8);
+
+						var Link = document.createElement('a')
+						Link.download = "4_6_8.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_6_8('+JSON.stringify(option_6_8)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
                 magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
@@ -582,7 +795,7 @@
         },
 		xAxis: {
 			type: 'category',
-			data: xAxis_6_6,
+			data: xAxis_6_8,
 			axisLine: {
                 lineStyle: {
                     color: color_axis
@@ -619,33 +832,33 @@
         ],
 		series: [
             {
-			    data: yAxis_6_6a,
+			    data: yAxis_6_8a,
 			    name: '东亚与太平洋',
                 type: 'bar',
                 color: "#CD0000",
             },
             {
-			    data: yAxis_6_6b,
+			    data: yAxis_6_8b,
 			    name: '欧洲与中亚',
 			    type: 'bar',
 			},
             {
-			    data: yAxis_6_6c,
+			    data: yAxis_6_8c,
 			    name: '拉丁美洲',
 			    type: 'bar',
 			},
 			{
-			    data: yAxis_6_6d,
+			    data: yAxis_6_8d,
 			    name: '中东与北非',
 			    type: 'bar',
             },
             {
-			    data: yAxis_6_6e,
+			    data: yAxis_6_8e,
 			    name: '北美',
 			    type: 'bar',
 			},
 			{
-			    data: yAxis_6_6f,
+			    data: yAxis_6_8f,
 			    name: '撒哈拉以南非洲',
 			    type: 'bar',
             },
@@ -655,9 +868,16 @@
             },
 		]
 	};
-	if (option_6_6 && typeof option_6_6 === 'object') {
-		myChart_6_6.setOption(option_6_6);
-		console.log(data_6_6)
+    option_6_8['series'][0]['data'] = yAxis_6_8a;
+	option_6_8['series'][1]['data'] = yAxis_6_8b;
+	option_6_8['series'][2]['data'] = yAxis_6_8c;
+	option_6_8['series'][3]['data'] = yAxis_6_8d;
+	option_6_8['series'][4]['data'] = yAxis_6_8e;
+	option_6_8['series'][5]['data'] = yAxis_6_8f;
+	option_6_8['xAxis']['data'] = xAxis_6_8;
+	if (option_6_8 && typeof option_6_8 === 'object') {
+		myChart_6_8.setOption(option_6_8);
+		console.log(ori_data_6_8)
 	}
 </script>
 

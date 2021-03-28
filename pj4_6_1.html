@@ -58,11 +58,11 @@
 <!--解决本地json跨域问题-->
 <script>
     var alldata = {};
-    function demo(res){
+    function callback_gdp(res){
         alldata = res;
     }
 </script>
-<script src="data/data4_6_2.json"></script>
+<script src="data/gdp/gdp2.json"></script>
 
 <!--配置页面 6-1 的Echart图-->
 <script>
@@ -101,7 +101,7 @@
 	}
     for(var i = 1; i < data_6_1.length; ++i) {
         xAxis_6_1.push(data_6_1[i][0])
-        myColor.push(Color[data_6_2[i][21]])
+        myColor.push(Color[data_6_2[i][data_6_1[0].length]])
 	}
 	for(var i = 1; i < data_6_1[0].length; ++i) {
 		yAxis_6_1b[i-1] = new Array()
@@ -404,7 +404,7 @@
     }
     for(var i = 1; i < data_6_4.length; ++i) {
         xAxis_6_2.push(data_6_4[i][0])
-        myColor1.push(Color[data_6_4[i][21]])
+        myColor1.push(Color[data_6_4[i][data_6_4[0].length]])
     }
     
     console.log(xAxis_6_2)
@@ -462,16 +462,6 @@
 			    axisPointer: {
 				    type: 'shadow'
 			    }
-            },
-            toolbox: {
-                show: true,
-                itemSize: echart_toolbox_size,
-                top: 'center',
-                orient: 'vertical',
-                feature: {
-                    dataView: {show: true, readOnly: false},
-                    saveAsImage: {show: true}
-                }
             },
             grid: {
                 left: '1.5%',
