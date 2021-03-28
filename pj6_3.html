@@ -659,10 +659,10 @@
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_3_3_3['legend']['data'] = legend_3_3;
-						option_3_3_3['xAxis'][0]['data'] = X_3_3;
+						option_3_3_1['legend']['data'] = legend_3_3;
+						option_3_3_1['xAxis'][0]['data'] = X_3_3;
 
-						option_3_3_3['series'] = [];
+						option_3_3_1['series'] = [];
 
 						// for(var i = 0; i < Y_3_3.length; ++i){
 						// 	option_3_3_3['series'].push({
@@ -672,14 +672,14 @@
 						// 	})
 						// }
 
-						option_3_3_3['series'].push({
+						option_3_3_1['series'].push({
 							name: legend_3_3[0],
 							type: "bar",
 							yAxisIndex: 0,
 							data: Y_3_3[0],
 						})
 
-						option_3_3_3['series'].push({
+						option_3_3_1['series'].push({
 							name: legend_3_3[1],
 							type: "line",
 							yAxisIndex: 1,
@@ -741,6 +741,7 @@
                 name: '%',
                 boundaryGap: [0.2, 0.2],
                 axisLabel: {
+					color: color_axis,
                     fontSize: fontSize_axis_label
                 }
             }
@@ -764,43 +765,21 @@
 	option_3_3_1['xAxis'][0]['data'] = X_3_3;
 	myChart_3_3.setOption(option_3_3_1);
 
-	console.log(option_3_3_1)
+	// console.log(option_3_3_1)
 
 </script>
 
 <!--* 图 3_4 -->
 <script>
-    var ori_data_3_4_1 = {};
+    var ori_data_3_4 = {};
 
-    function callback_3_3_4_1(res){
-        ori_data_3_4_1 = res;
-		console.log('3_3_4_1.json读取成功')
-		console.log(ori_data_3_4_1);
+    function callback_6_3_4(res){
+        ori_data_3_4 = res;
+		console.log('6_3_4.json读取成功')
+		console.log(ori_data_3_4);
     }
 </script>
-<script src="data/3_3_4.json?callback=callback_3_3_4_1"></script>
-
-<script>
-    var ori_data_3_4_3 = {};
-
-    function callback_3_3_4_3(res){
-        ori_data_3_4_3 = res;
-		console.log('3_3_4_3.json读取成功')
-		console.log(ori_data_3_4_3);
-    }
-</script>
-<script src="data/3_3_4.json?callback=callback_3_3_4_3"></script>
-
-<script>
-    var ori_data_3_4_5 = {};
-
-    function callback_3_3_4_5(res){
-        ori_data_3_4_5 = res;
-		console.log('3_3_4_5.json读取成功')
-		console.log(ori_data_3_4_5);
-    }
-</script>
-<script src="data/3_3_4.json?callback=callback_3_3_4_5"></script>
+<script src="data/6_3_4.json?callback=callback_6_3_4"></script>
 
 <script>
 
@@ -810,20 +789,13 @@
 
 	function view_3_4_1_change(){
 		console.log("3_4_1 change")
-		// Document.getElementById('view_3_4_1').innerHTML
+		// Document.getElementById('view_2_1_1').innerHTML
 		console.log(document.getElementById('view_3_4_1').value)
 		document.getElementById('view_3_4_1').innerHTML = document.getElementById('view_3_4_1').value
 	}
 
-	// 事故数柱状图
+	// 柱状图 
 	var option_3_4_1 = {
-		title:{
-			text:'事故数',
-			textStyle: { //图例文字的样式
-				color: color_axis,
-			},
-			left: "center",
-		},
 		tooltip: {
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -838,10 +810,6 @@
 				dataView: {
 					show: true, 
 					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
 					optionToContent: function(opt) {
 						// console.log(opt)
 						var axisData = opt['xAxis'][0]['data'];
@@ -849,82 +817,91 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
+						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_4_1['legend']['data'].length; ++i){
+							table += (','+option_3_4_1['legend']['data'][i]);
+						}
+						table += '\n';
+
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
 						}
 						table += '</textarea>'
 						// table += '</tbody></table></div>';
 						// console.log(table)
 						return table;
-						// return option_3_4_1['xAxis']['data']
+						// return option_2_1_1['xAxis']['data']
 					},
 					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
+						console.log("start save 3_4")
 
 						var plain_tex = HTMLDomElement.firstChild.innerHTML;
 						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
 
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
+						var legend_3_4 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_3_4.length;
+
+						var X_3_4 = [];
+						var Y_3_4 = [];
+
+						while(Y_3_4.length < valid_num){
+							Y_3_4.push([])
+						}
 
 						for(var i = 1; i < arr_tex.length; ++i){
 							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
 							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
+
 							X_3_4.push(cur_pair[0]);
 
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_3_4.length; ++j, ++k){
+								Y_3_4[k].push(cur_pair[j]);
 							}
+							// Y_9_1.push(cur_pair[1]);
 						}
 
-						console.log(Y_3_4)
+						option_3_4_1['legend']['data'] = legend_3_4;
+						option_3_4_1['xAxis'][0]['data'] = X_3_4;
 
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
+						option_3_4_1['series'] = [];
+
+						for(var i = 0; i < Y_3_4.length; ++i){
+							option_3_4_1['series'].push({
+								name: legend_3_4[i],
+								type: "bar",
+								// stack: "抽查情况",
+								data: Y_3_4[i],
+							})
+						}
+						
 						myChart_3_4.setOption(option_3_4_1);
 
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						
-
 						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
+						Link.download = "6_3_4.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
+						var blob = new Blob(['callback_6_3_4('+JSON.stringify(option_3_4_1)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -934,963 +911,83 @@
 						return opt
 					},
 				},
-				magicType: {show: true, type: ['line', 'bar']},
+				magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
-				}
+				saveAsImage: {show: true}
 			}
 		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			min: 0,
-			max: function (value) {
-				return value.max;
-			},
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		series: [{
-			data: [120, 200, 150, 80, 70, 110, 130],
-			type: 'bar',
-			showBackground: true,
-			backgroundStyle: {
-				color: 'rgba(180, 180, 180, 0.2)'
-			}
-		}]
-	};
-
-	// 事故数折线图
-	var option_3_4_2 = {
-		title:{
-			text:'事故数',
+		legend: {
+			data: ['固定式压力容器', '电梯', '起重机', '场(厂)内机动车辆'],
 			textStyle: { //图例文字的样式
-				color: color_axis,
+				color: color_legend,
+				fontSize: fontSize_all_legend
 			},
-			left: "center",
 		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
 		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_3_4_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_3_4.push(cur_pair[0]);
-
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
-							}
-						}
-
-						// console.log(X_3_4)
-						// console.log(Y_3_4)
-
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
-
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-						myChart_3_4.setOption(option_3_4_2);
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
 				},
-				magicType: {show: true, type: ['line', 'bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '%',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
 				}
+				// max: 365,
 			}
-		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			min: function (value) {
-				return value.min;
+		],
+		series: [
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
 			},
-			max: function (value) {
-				return value.max;
+			{
+				name: '电梯',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
 			},
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		series: [{
-			markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-			data: [820, 932, 901, 934, 1290, 1330, 1320],
-			type: 'line',
-			smooth: true
-		}]
-	};
-
-	// 指令书柱状图
-	var option_3_4_3 = {
-		title:{
-			text:'死亡人数',
-			textStyle: { //图例文字的样式
-				color: color_axis,
+			{
+				name: '起重机',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
 			},
-			left: "center",
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			{
+				name: '场(厂)内机动车辆',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
 			}
-		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_3_4_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_3_4.push(cur_pair[0]);
-
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
-							}
-						}
-
-						// console.log(X_3_4)
-						// console.log(Y_3_4)
-
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
-
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-						myChart_3_4.setOption(option_3_4_3);
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
-				magicType: {show: true, type: ['line', 'bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
-				}
-			}
-		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			min: 0,
-			// max: function (value) {
-			// 	return value.max;
-			// },
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		series: [{
-			data: [120, 200, 150, 80, 70, 110, 130],
-			type: 'bar',
-			showBackground: true,
-			backgroundStyle: {
-				color: 'rgba(180, 180, 180, 0.2)'
-			}
-		}]
-	};
-
-	// 指令书折线图
-	var option_3_4_4 = {
-		title:{
-			text:'死亡人数',
-			textStyle: { //图例文字的样式
-				color: color_axis,
-			},
-			left: "center",
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_3_4_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_3_4.push(cur_pair[0]);
-
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
-							}
-						}
-
-						// console.log(X_3_4)
-						// console.log(Y_3_4)
-
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
-
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-						myChart_3_4.setOption(option_3_4_4);
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
-				magicType: {show: true, type: ['line', 'bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
-				}
-			}
-		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			// min: function (value) {
-			// 	return value.min;
-			// },
-			// max: function (value) {
-			// 	return value.max;
-			// },
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		series: [{
-			markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-			data: [820, 932, 901, 934, 1290, 1330, 1320],
-			type: 'line',
-			smooth: true
-		}]
-	};
-
-	// 罚金柱状图
-	var option_3_4_5 = {
-		title:{
-			text:'万台特种设备死亡率（本市）',
-			textStyle: { //图例文字的样式
-				color: color_axis,
-			},
-			left: "center",
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_3_4_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_3_4.push(cur_pair[0]);
-
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
-							}
-						}
-
-						// console.log(X_3_4)
-						// console.log(Y_3_4)
-
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
-
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-						myChart_3_4.setOption(option_3_4_5);
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
-				magicType: {show: true, type: ['line', 'bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
-				}
-			}
-		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			min: 0,
-			max: 1,
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-				formatter: function(value){
-					return (value*100).toFixed(0)+'%'
-				}
-			}
-		},
-		series: [{
-			data: [120, 200, 150, 80, 70, 110, 130],
-			type: 'bar',
-			showBackground: true,
-			backgroundStyle: {
-				color: 'rgba(180, 180, 180, 0.2)'
-			}
-		}]
-	};
-
-	// 罚金折线图
-	var option_3_4_6 = {
-		title:{
-			text:'万台特种设备死亡率（本市/全国）',
-			textStyle: { //图例文字的样式
-				color: color_axis,
-			},
-			left: "center",
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {
-					show: true, 
-					readOnly: false,
-					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_3_4" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
-					// 	return str
-					// },
-					optionToContent: function(opt) {
-						// console.log(opt)
-						var axisData = opt['xAxis'][0]['data'];
-						var series = opt['series'];
-						console.log("start show")
-						// console.log(axisData)
-						// console.log(series)
-						var table = '<textarea id="view_3_4_1" onchange="view_3_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,事故数,死亡人数,万台特种设备死亡率（本市）\n';
-						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
-						// 			+ '<td><font color="red">时间</font></td>'
-						// 			+ '<td>' + '数值' + '</td>'
-						// 			+ '</tr>';
-						for (var i = 0, l = axisData.length; i < l; i++) {
-							// table += '<tr>'
-							// 		+ '<td>' + axisData[i] + '</td>'
-							// 		+ '<td>' + series[0].data[i] + '</td>'
-							// 		+ '</tr>';
-							table += axisData[i]
-							table += (','+option_3_4_1['series'][0].data[i])
-							table += (','+option_3_4_3['series'][0].data[i])
-							table += (','+option_3_4_5['series'][0].data[i]+'\n')
-						}
-						table += '</textarea>'
-						// table += '</tbody></table></div>';
-						// console.log(table)
-						return table;
-						// return option_3_4_1['xAxis']['data']
-					},
-					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save")
-						// console.log(opt)
-						// console.log(HTMLDomElement.firstChild)
-
-						var plain_tex = HTMLDomElement.firstChild.innerHTML;
-						var arr_tex = plain_tex.split('\n')
-						// console.log(arr_tex)
-
-						X_3_4 = [];
-						Y_3_4 = [[],[],[]];
-
-						for(var i = 1; i < arr_tex.length; ++i){
-							cur_pair = arr_tex[i].split(',');
-							if(cur_pair.length != 4){
-								// console.alert('wrong data')
-								continue
-							}
-							if(cur_pair[0] == '' || cur_pair[0] == undefined){
-								continue
-							}
-							X_3_4.push(cur_pair[0]);
-
-							for(var j = 1; j < cur_pair.length; ++j){
-								Y_3_4[j-1].push(cur_pair[j]);
-							}
-						}
-
-
-						// console.log(X_3_4)
-						// console.log(Y_3_4)
-
-						option_3_4_1['series'][0]['data'] = Y_3_4[0];
-						option_3_4_1['xAxis']['data'] = X_3_4;
-
-						option_3_4_2['series'][0]['data'] = Y_3_4[0];
-						option_3_4_2['xAxis']['data'] = X_3_4;
-
-						option_3_4_3['series'][0]['data'] = Y_3_4[1];
-						option_3_4_3['xAxis']['data'] = X_3_4;
-
-						option_3_4_4['series'][0]['data'] = Y_3_4[1];
-						option_3_4_4['xAxis']['data'] = X_3_4;
-
-						option_3_4_5['series'][0]['data'] = Y_3_4[2];
-						option_3_4_5['xAxis']['data'] = X_3_4;
-
-						option_3_4_6['series'][0]['data'] = Y_3_4[2];
-						option_3_4_6['xAxis']['data'] = X_3_4;
-						myChart_3_4.setOption(option_3_4_6);
-						
-
-						var Link = document.createElement('a');
-						Link.download = "3_3_4.json";
-						Link.style.display = 'none';
-						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_4_1('+JSON.stringify(option_3_4_1)+')\n'+'callback_3_3_4_3('+JSON.stringify(option_3_4_3)+')\n'+'callback_3_3_4_5('+JSON.stringify(option_3_4_5)+')\n']);
-						Link.href = URL.createObjectURL(blob);
-						// 触发点击 	
-						document.body.appendChild(Link);
-						Link.click();
-						// 然后移除
-						document.body.removeChild(Link);
-						return opt
-					},
-				},
-				magicType: {show: true, type: ['line', 'bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换',
-					icon: 'image://img/zhuanhuan-transformation.png',
-					onclick: function (){
-						cur_idx = (cur_idx+1)%arr_opt.length
-						var newOption = arr_opt[cur_idx][cur_type];
-						myChart_3_4.setOption(newOption, true);
-					}
-				}
-			}
-		},
-		xAxis: {
-			type: 'category',
-			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		yAxis: {
-			type: 'value',
-			min: function (value) {
-				return value.min;
-			},
-			max: function (value) {
-				return value.max;
-			},
-			axisLabel:{
-				textStyle: { //图例文字的样式
-					color: color_axis,
-					fontSize: fontSize_axis_label
-				},
-			}
-		},
-		series: [{
-			markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-			data: [820, 932, 901, 934, 1290, 1330, 1320],
-			type: 'line',
-			smooth: true
-		}]
+		]
 	};
 
 
-	option_3_4_1['series'][0]['data'] = ori_data_3_4_1['series'][0]['data'];
-	option_3_4_1['xAxis']['data'] = ori_data_3_4_1['xAxis']['data'];
-	myChart_3_4.setOption(option_3_4_1);
+	option_3_4_1['series'] = ori_data_3_4['series'];
+	option_3_4_1['legend']['data'] = ori_data_3_4['legend']['data'];
+	option_3_4_1['xAxis'][0]['data'] = ori_data_3_4['xAxis'][0]['data'];
 
-	option_3_4_2['series'][0]['data'] = ori_data_3_4_1['series'][0]['data'];
-	option_3_4_2['xAxis']['data'] = ori_data_3_4_1['xAxis']['data'];
-
-	option_3_4_3['series'][0]['data'] = ori_data_3_4_3['series'][0]['data'];
-	option_3_4_3['xAxis']['data'] = ori_data_3_4_3['xAxis']['data'];
-
-	option_3_4_4['series'][0]['data'] = ori_data_3_4_3['series'][0]['data'];
-	option_3_4_4['xAxis']['data'] = ori_data_3_4_3['xAxis']['data'];
-
-	option_3_4_5['series'][0]['data'] = ori_data_3_4_5['series'][0]['data'];
-	option_3_4_5['xAxis']['data'] = ori_data_3_4_5['xAxis']['data'];
-
-	option_3_4_6['series'][0]['data'] = ori_data_3_4_5['series'][0]['data'];
-	option_3_4_6['xAxis']['data'] = ori_data_3_4_5['xAxis']['data'];
-
-
-	// 0 bar; 1 line
-	var cur_type = 0;
-	var cur_idx = 0;
-	var arr_opt = [
-		[option_3_4_1, option_3_4_2],
-		[option_3_4_3, option_3_4_4],
-		[option_3_4_5, option_3_4_6]
-	];
-
-	myChart_3_4.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			cur_type = 1;
-			o.newOption = arr_opt[cur_idx][cur_type];
-		}else if(params.currentType == 'bar'){
-			cur_type = 0;
-			o.newOption = arr_opt[cur_idx][cur_type];
-		}
-		myChart_3_4.setOption(o.newOption, true);
-	});
-
-	myChart_3_4.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		cur_idx = (cur_idx+1)%arr_opt.length
-		o.newOption = arr_opt[cur_idx][cur_type];
-		myChart_3_4.setOption(o.newOption, true);
-	});
-
-
+	myChart_3_4.setOption(option_3_4_1, true);
 
 </script>
 
@@ -1898,13 +995,13 @@
 <script>
     var ori_data_3_5 = {};
 
-    function callback_3_3_5(res){
+    function callback_6_3_5(res){
         ori_data_3_5 = res;
-		console.log('3_3_5.json读取成功')
+		console.log('6_3_5.json读取成功')
 		console.log(ori_data_3_5);
     }
 </script>
-<script src="data/3_3_5.json?callback=callback_3_3_5"></script>
+<script src="data/6_3_5.json?callback=callback_6_3_5"></script>
 
 <script>
 
@@ -2023,10 +1120,10 @@
 						myChart_3_5.setOption(option_3_5_1);
 
 						var Link = document.createElement('a');
-						Link.download = "3_3_5.json";
+						Link.download = "6_3_5.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_5('+JSON.stringify(option_3_5_1)+')']);
+						var blob = new Blob(['callback_6_3_5('+JSON.stringify(option_3_5_1)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -2036,7 +1133,7 @@
 						return opt
 					},
 				},
-				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -2069,6 +1166,7 @@
 		yAxis: [
 			{
 				type: 'value',
+				name: '%',
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
@@ -2119,13 +1217,13 @@
 <script>
     var ori_data_3_6 = {};
 
-    function callback_3_3_6(res){
+    function callback_6_3_6(res){
         ori_data_3_6 = res;
-		console.log('3_3_6.json读取成功')
+		console.log('6_3_6.json读取成功')
 		console.log(ori_data_3_6);
     }
 </script>
-<script src="data/3_3_6.json?callback=callback_3_3_6"></script>
+<script src="data/6_3_6.json?callback=callback_6_3_6"></script>
 
 <script>
 
@@ -2243,10 +1341,10 @@
 						myChart_3_6.setOption(option_3_6_1);
 
 						var Link = document.createElement('a');
-						Link.download = "3_3_6.json";
+						Link.download = "6_3_6.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_3_6('+JSON.stringify(option_3_6_1)+')']);
+						var blob = new Blob(['callback_6_3_6('+JSON.stringify(option_3_6_1)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -2256,7 +1354,7 @@
 						return opt
 					},
 				},
-				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				magicType: {show: true, type: ['line','bar']},
 				// restore: {show: true},
 				saveAsImage: {show: true}
 			}
@@ -2289,6 +1387,7 @@
 		yAxis: [
 			{
 				type: 'value',
+				name: '亿元',
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
