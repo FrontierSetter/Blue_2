@@ -159,197 +159,543 @@
 </script>
 <script src="data/data2.json?callback=demo"></script>
 
+<script>
+    var ori_data_1_1 = {};
+
+    function callback_3_10_1(res){
+        ori_data_1_1 = res;
+		console.log('航天制造业主营业务收入与利润.json读取成功')
+		console.log(ori_data_1_1);
+    }
+</script>
+<script src="data/3_10_1.json?callback=callback_3_10_1"></script>
+
+<script>
+    var ori_data_1_2 = {};
+
+    function callback_3_10_2(res){
+        ori_data_1_2 = res;
+		console.log('各主要国家运载火箭发射情况.json读取成功')
+		console.log(ori_data_1_2);
+    }
+</script>
+<script src="data/3_10_2.json?callback=callback_3_10_2"></script>
+
+
+
+<script>
+    var ori_data_1_4 = {};
+
+    function callback_3_10_4(res){
+        ori_data_1_4 = res;
+		console.log('中国航天业R&D经费情况和申请专利数.json读取成功')
+		console.log(ori_data_1_4);
+    }
+</script>
+<script src="data/3_10_4.json?callback=callback_3_10_4"></script>
+
+<script>
+    var ori_data_1_5 = {};
+
+    function callback_3_10_5(res){
+        ori_data_1_5 = res;
+		console.log('航天院所宇航领域人才流失人数.json读取成功')
+		console.log(ori_data_1_5);
+    }
+</script>
+<script src="data/3_10_5.json?callback=callback_3_10_5"></script>
+
+<script>
+    var ori_data_1_6 = {};
+
+    function callback_3_10_6(res){
+        ori_data_1_6 = res;
+		console.log('各航天主要国家商业航天发射次数.json读取成功')
+		console.log(ori_data_1_6);
+    }
+</script>
+<script src="data/3_10_6.json?callback=callback_3_10_6"></script>
+
 
 <!--配置页面 1-1 的Echart图-->
 <script>
+    // var dom_1_1 = document.getElementById("container_1_1");
+    // var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+
+    // var data_1_1 = alldata["2012-2017年上海市地产蔬菜合格率"]
+    
+    // var xAxis_1_1 = [] 
+    // var yAxis_1_1a = []
+    
+    // for(var i = 1; i < data_1_1.length; ++i){
+    //     xAxis_1_1.push(data_1_1[i][0])
+    //     yAxis_1_1a.push(data_1_1[i][1])
+    // }
+
+
+    // var option_1_1 = {
+    //     textStyle: {
+    //         fontSize: fontSize_all_title,
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     legend: {
+    //         data: ['地产蔬菜合格率'],
+    //         textStyle:{
+    //             color: '#F0F8FF'
+    //         }
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         orient: 'vertical',
+    //         left: 'right',
+    //         top: 'center',
+    //         itemSize: echart_toolbox_size, 
+    //         feature: {
+    //             dataView: {show: true, readOnly: false},
+    //             magicType: {show: true, type: ['line', 'bar']},
+    //             restore: {show: true},
+    //             saveAsImage: {show: true}
+    //         }
+    //     },
+    //     calculable: true,
+    //     xAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'category',
+    //             data: xAxis_1_1
+    //         }
+    //     ],
+    //     yAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'value',
+    //             name: '地产蔬菜合格率',
+    //             max: 1,
+    //             min: 0.9995,
+    //             boundaryGap: [0.2, 0.2]
+    //         }
+    //     ],
+    //     series: [
+    //         {
+    //             name: '地产蔬菜合格率',
+    //             type: 'bar',
+    //             data: yAxis_1_1a,
+    //             yAxisIndex: 0
+    //         }
+    //     ]
+    // };
+
+
+
+    // if (option_1_1 && typeof option_1_1 === 'object') {
+    //     myChart_1_1.setOption(option_1_1);
+    //     console.log(data_1_1)
+    // }
     var dom_1_1 = document.getElementById("container_1_1");
-    var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+	var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+	var app_1_1 = {};
 
-    var data_1_1 = alldata["2012-2017年上海市地产蔬菜合格率"]
-    
-    var xAxis_1_1 = [] 
-    var yAxis_1_1a = []
-    
-    for(var i = 1; i < data_1_1.length; ++i){
-        xAxis_1_1.push(data_1_1[i][0])
-        yAxis_1_1a.push(data_1_1[i][1])
-    }
+	function view_1_1_change(){
+		console.log("3_1 change")
+		//console.log(document.getElementById('view_1_1').value)
+		document.getElementById('view_1_1').innerHTML = document.getElementById('view_1_1').value
+	}
 
-
-    var option_1_1 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['地产蔬菜合格率'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
+	var option_1_1_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
             left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
+			feature: {
+				dataView: {
+                    show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_1_1" onchange="view_1_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,地产蔬菜合格率\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_1 = []
+						yAxis_1_1a = []
+                       
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_1.push(cur_pair[0])
+							yAxis_1_1a.push(cur_pair[1])
+                           
+						}
+						console.log(xAxis_1_1)
+						console.log(yAxis_1_1a)
+                      
+						option_1_1_1['series'][0]['data'] = yAxis_1_1a;
+                      
+						option_1_1_1['xAxis']['data'] = xAxis_1_1;
+						myChart_1_1.setOption(option_1_1_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_10_1.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_1('+JSON.stringify(option_1_1_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
                 },
-                type: 'category',
-                data: xAxis_1_1
-            }
-        ],
-        yAxis: [
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国', '日本', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
             {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
                 type: 'value',
-                name: '地产蔬菜合格率',
+                // name: '亿美元',
                 max: 1,
-                min: 0.9995,
-                boundaryGap: [0.2, 0.2]
+                min: 0.998,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
-        series: [
+		series: [
             {
-                name: '地产蔬菜合格率',
-                type: 'bar',
-                data: yAxis_1_1a,
-                yAxisIndex: 0
+                name: '立案案件数',
+                type: 'line',
+                data: [1,2,3],
             }
         ]
-    };
+	};
 
+	
+	var X_3_1 = ori_data_1_1['xAxis']['data'];
+	var Y_3_1 = ori_data_1_1['series'];
 
+	option_1_1_1['legend']['data'] = ori_data_1_1['legend']['data'];
+	option_1_1_1['xAxis']['data'] = X_3_1;
 
-    if (option_1_1 && typeof option_1_1 === 'object') {
-        myChart_1_1.setOption(option_1_1);
-        console.log(data_1_1)
-    }
+	for(var i = 0; i < Y_3_1.length; ++i){
+		option_1_1_1['series'][i]['data'] = Y_3_1[i]['data'];
+		option_1_1_1['series'][i]['name'] = Y_3_1[i]['name'];
+	}
 
+	myChart_1_1.setOption(option_1_1_1);
 </script>
 
 
 <!--配置页面 1-2 的Echart图-->
 <script>
+    // var dom_1_2 = document.getElementById("container_1_2");
+    // var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+
+    // var data_1_2 = alldata["2015-2017年上海市农业标准化示范试点立项"]
+    
+    // var xAxis_1_2 = [] 
+    // var yAxis_1_2a = []
+    // var yAxis_1_2b = []
+    
+    // for(var i = 1; i < data_1_2.length; ++i){
+    //     xAxis_1_2.push(data_1_2[i][0])
+    //     yAxis_1_2a.push(data_1_2[i][1])
+    //     yAxis_1_2b.push(data_1_2[i][2])
+    // }
+
+    // var labelOption = {
+    //     show: true,
+    //     position: 'insideBottom',
+    //     distance: 15,
+    //     align: 'left',
+    //     verticalAlign: 'middle',
+    //     rotate: 90,
+    //     formatter: '{c}  {name|{a}}',
+    //     fontSize: 16,
+    //     rich: {
+    //         name: {
+    //             textBorderColor: '#fff'
+    //         }
+    //     }
+    // };
+
+    // var option_1_2 = {
+    //     textStyle: {
+    //         fontSize: fontSize_all_title,
+    //     },
+    //     //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
+    //     tooltip: {
+    //         trigger: 'axis',
+    //         axisPointer: {
+    //             type: 'shadow'
+    //         }
+    //     },
+    //     legend: {
+    //         data: ['国家级', '市级'],
+    //         textStyle:{
+    //             color: '#F0F8FF'
+    //         }
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         orient: 'vertical',
+    //         left: 'right',
+    //         top: 'center',
+    //         itemSize: echart_toolbox_size, 
+    //         feature: {
+    //             mark: {show: true},
+    //             dataView: {show: true, readOnly: false},
+    //             magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+    //             restore: {show: true},
+    //             saveAsImage: {show: true}
+    //         }
+    //     },
+    //     xAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'category',
+    //             axisTick: {show: false},
+    //             data: xAxis_1_2
+    //         }
+    //     ],
+    //     yAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'value'
+    //         }
+    //     ],
+    //     series: [
+    //         {
+    //             name: '国家级',
+    //             type: 'bar',
+    //             barGap: 0,
+    //             //label: labelOption,
+    //             data: yAxis_1_2a
+    //         },
+    //         {
+    //             name: '市级',
+    //             type: 'bar',
+    //             //label: labelOption,
+    //             data: yAxis_1_2b
+    //         }
+    //     ]
+    // };
+
+
+
+    // if (option_1_2 && typeof option_1_2 === 'object') {
+    //     myChart_1_2.setOption(option_1_2);
+    //     console.log(data_1_2)
+    // }
     var dom_1_2 = document.getElementById("container_1_2");
-    var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+	var app_1_2 = {};
 
-    var data_1_2 = alldata["2015-2017年上海市农业标准化示范试点立项"]
-    
-    var xAxis_1_2 = [] 
-    var yAxis_1_2a = []
-    var yAxis_1_2b = []
-    
-    for(var i = 1; i < data_1_2.length; ++i){
-        xAxis_1_2.push(data_1_2[i][0])
-        yAxis_1_2a.push(data_1_2[i][1])
-        yAxis_1_2b.push(data_1_2[i][2])
-    }
+	function view_1_2_change(){
+		console.log("3_2 change")
+		//console.log(document.getElementById('view_1_2').value)
+		document.getElementById('view_1_2').innerHTML = document.getElementById('view_1_2').value
+	}
 
-    var labelOption = {
-        show: true,
-        position: 'insideBottom',
-        distance: 15,
-        align: 'left',
-        verticalAlign: 'middle',
-        rotate: 90,
-        formatter: '{c}  {name|{a}}',
-        fontSize: 16,
-        rich: {
-            name: {
-                textBorderColor: '#fff'
-            }
-        }
-    };
-
-    var option_1_2 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        legend: {
-            data: ['国家级', '市级'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
+	var option_1_2_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
             left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                mark: {show: true},
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        xAxis: [
+			feature: {
+				dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_1_2" onchange="view_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,国家级,市级\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+ '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_2 = []
+						yAxis_1_2a = []
+                        yAxis_1_2b = []
+					
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_2.push(cur_pair[0])
+							yAxis_1_2a.push(cur_pair[1])
+                            yAxis_1_2b.push(cur_pair[2])
+					
+						}
+						console.log(xAxis_1_2)
+						console.log(yAxis_1_2a)
+                        console.log(yAxis_1_2b)
+						
+						option_1_2_1['series'][0]['data'] = yAxis_1_2a;
+                        option_1_2_1['series'][1]['data'] = yAxis_1_2b;
+			
+						option_1_2_1['xAxis']['data'] = xAxis_1_2;
+						myChart_1_2.setOption(option_1_2_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_10_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_2('+JSON.stringify(option_1_2_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
             {
+                type: 'value',
                 axisLabel: {
                     fontSize: fontSize_axis_label
-                },
-                type: 'category',
-                axisTick: {show: false},
-                data: xAxis_1_2
+                }
             }
         ],
-        yAxis: [
+		series: [
             {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                type: 'value'
-            }
-        ],
-        series: [
-            {
-                name: '国家级',
+                name: '销量',
                 type: 'bar',
-                barGap: 0,
-                //label: labelOption,
-                data: yAxis_1_2a
+                data: [1,2,3],
             },
             {
-                name: '市级',
+                name: '汽车市场占比',
                 type: 'bar',
-                //label: labelOption,
-                data: yAxis_1_2b
+                data: [],
             }
         ]
-    };
+	};
 
+	
+	var X_3_2 = ori_data_1_2['xAxis']['data'];
+	var Y_3_2 = ori_data_1_2['series'];
 
+	option_1_2_1['legend']['data'] = ori_data_1_2['legend']['data'];
+	option_1_2_1['xAxis']['data'] = X_3_2;
 
-    if (option_1_2 && typeof option_1_2 === 'object') {
-        myChart_1_2.setOption(option_1_2);
-        console.log(data_1_2)
-    }
+	for(var i = 0; i < Y_3_2.length; ++i){
+		option_1_2_1['series'][i]['data'] = Y_3_2[i]['data'];
+		option_1_2_1['series'][i]['name'] = Y_3_2[i]['name'];
+	}
 
+	myChart_1_2.setOption(option_1_2_1);
 </script> 
 
 
@@ -452,251 +798,724 @@
         myChart_1_3.setOption(option_1_3);
         console.log(data_1_3)
     }
-
+    
 </script>
 
 
 <!--配置页面 1-4 的Echart图-->
 <script>
+    // var dom_1_4 = document.getElementById("container_1_4");
+    // var myChart_1_4 = echarts.init(dom_1_4, 'chalk');
+
+    // var data_1_4 = alldata["2012-2017上海市“三品”认证变化率趋势"]
+    
+    // var xAxis_1_4 = [] 
+    // var yAxis_1_4a = []
+    
+    // for(var i = 1; i < data_1_4.length; ++i){
+    //     xAxis_1_4.push(data_1_4[i][0])
+    //     yAxis_1_4a.push(data_1_4[i][1])
+    // }
+
+
+    // var option_1_4 = {
+    //     textStyle: {
+    //         fontSize: fontSize_all_title,
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     legend: {
+    //         data: ['“三品”认证率'],
+    //         textStyle:{
+    //             color: '#F0F8FF'
+    //         }
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         orient: 'vertical',
+    //         left: 'right',
+    //         top: 'center',
+    //         itemSize: echart_toolbox_size, 
+    //         feature: {
+    //             dataView: {show: true, readOnly: false},
+    //             magicType: {show: true, type: ['line', 'bar']},
+    //             restore: {show: true},
+    //             saveAsImage: {show: true}
+    //         }
+    //     },
+    //     calculable: true,
+    //     xAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'category',
+    //             data: xAxis_1_4
+    //         }
+    //     ],
+    //     yAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'value',
+    //             name: '“三品”认证率'
+    //         }
+    //     ],
+    //     series: [
+    //         {
+    //             name: '“三品”认证率',
+    //             type: 'line',
+    //             data: yAxis_1_4a,
+    //         }
+    //     ]
+    // };
+
+
+
+    // if (option_1_4 && typeof option_1_4 === 'object') {
+    //     myChart_1_4.setOption(option_1_4);
+    //     console.log(data_1_4)
+    // }
     var dom_1_4 = document.getElementById("container_1_4");
-    var myChart_1_4 = echarts.init(dom_1_4, 'chalk');
+	var myChart_1_4 = echarts.init(dom_1_4, 'chalk');
+	var app_1_4 = {};
 
-    var data_1_4 = alldata["2012-2017上海市“三品”认证变化率趋势"]
-    
-    var xAxis_1_4 = [] 
-    var yAxis_1_4a = []
-    
-    for(var i = 1; i < data_1_4.length; ++i){
-        xAxis_1_4.push(data_1_4[i][0])
-        yAxis_1_4a.push(data_1_4[i][1])
-    }
+	function view_1_4_change(){
+		console.log("3_4 change")
+		//console.log(document.getElementById('view_1_4').value)
+		document.getElementById('view_1_4').innerHTML = document.getElementById('view_1_4').value
+	}
 
-
-    var option_1_4 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['“三品”认证率'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
+	// 事故数柱状图
+	var option_1_4_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			},
+			
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
             left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
+			feature: {
+				dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_1_4" onchange="view_1_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,”三品“认证率\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_2 = []
+						yAxis_1_2a = []
+                      
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_2.push(cur_pair[0])
+							yAxis_1_2a.push(cur_pair[1])
+                           
+						}
+						console.log(xAxis_1_2)
+						console.log(yAxis_1_2a)
+                    
+						option_1_4_1['series'][0]['data'] = yAxis_1_2a;
+                    
+						option_1_4_1['xAxis']['data'] = xAxis_1_2;
+						myChart_1_4.setOption(option_1_4_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_10_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_4('+JSON.stringify(option_1_4_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
                 },
-                type: 'category',
-                data: xAxis_1_4
-            }
-        ],
-        yAxis: [
+				magicType: {show: true, type: ['line','bar']},
+				restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_1_2.setOption(option_1_2_2, true);
+				// 		curIsPie_3_2 = true;
+				// 	}
+				// }
+			}
+		},
+		legend: {
+			data: ["造船完工量","新接订单量"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis:{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			},
+			yAxis: [
             {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
                 type: 'value',
-                name: '“三品”认证率'
+                // name: '亿美元',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
             }
         ],
-        series: [
-            {
-                name: '“三品”认证率',
-                type: 'line',
-                data: yAxis_1_4a,
-            }
-        ]
-    };
+		series: [
+			{
+				name: '锅炉',
+				type: 'bar',
 
+				// stack: '抽查情况',
+				data: [
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
 
+				// stack: '抽查情况',
+				data: [
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
 
-    if (option_1_4 && typeof option_1_4 === 'object') {
-        myChart_1_4.setOption(option_1_4);
-        console.log(data_1_4)
-    }
+				// stack: '抽查情况',
+				data: [
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				data: [
+				]
+			},
+		]
+	};
 
+	var X_3_4 = ori_data_1_4['xAxis']['data'];
+	var Y_3_4 = ori_data_1_4['series'];
+
+	// option_1_2_1['legend']
+	option_1_4_1['legend']['data'] = ori_data_1_4['legend']['data'];
+	option_1_4_1['xAxis']['data'] = X_3_4;
+
+	for(var i = 0; i < Y_3_4.length; ++i){
+		option_1_4_1['series'][i]['data'] = Y_3_4[i]['data'];
+		option_1_4_1['series'][i]['name'] = Y_3_4[i]['name'];
+	}
+
+	
+	myChart_1_4.setOption(option_1_4_1);
 </script>
 
 
 <!--配置页面 1-5 的Echart图-->
 <script>
+    // var dom_1_5 = document.getElementById("container_1_5");
+    // var myChart_1_5 = echarts.init(dom_1_5, 'chalk');
+
+    // var data_1_5 = alldata["2015-2017年上海市食用菌等农药残留和畜药残留合格率"]
+    
+    // var xAxis_1_5 = [] 
+    // var yAxis_1_5a = []
+    // var yAxis_1_5b = []
+    
+    // for(var i = 1; i < data_1_5.length; ++i){
+    //     xAxis_1_5.push(data_1_5[i][0])
+    //     yAxis_1_5a.push(data_1_5[i][1])
+    //     yAxis_1_5b.push(data_1_5[i][2])
+    // }
+
+
+    // var option_1_5 = {
+    //     textStyle: {
+    //         fontSize: fontSize_all_title,
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     legend: {
+    //         data: ['水果、食用菌等农药残留','畜药残留'],
+    //         textStyle:{
+    //             color: '#F0F8FF'
+    //         }
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         orient: 'vertical',
+    //         left: 'right',
+    //         top: 'center',
+    //         itemSize: echart_toolbox_size, 
+    //         feature: {
+    //             dataView: {show: true, readOnly: false},
+    //             magicType: {show: true, type: ['line', 'bar']},
+    //             restore: {show: true},
+    //             saveAsImage: {show: true}
+    //         }
+    //     },
+    //     calculable: true,
+    //     xAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'category',
+    //             data: xAxis_1_5
+    //         }
+    //     ],
+    //     yAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'value',
+    //             min: 0.985,
+    //             max: 1
+    //         }
+    //     ],
+    //     series: [
+    //         {
+    //             name: '水果、食用菌等农药残留',
+    //             type: 'line',
+    //             data: yAxis_1_5a,
+    //         },
+    //         {
+    //             name: '畜药残留',
+    //             type: 'line',
+    //             data: yAxis_1_5b,
+    //         }
+    //     ]
+    // };
+
+    // if (option_1_5 && typeof option_1_5 === 'object') {
+    //     myChart_1_5.setOption(option_1_5);
+    //     console.log(data_1_5)
+    // }
     var dom_1_5 = document.getElementById("container_1_5");
-    var myChart_1_5 = echarts.init(dom_1_5, 'chalk');
+	var myChart_1_5 = echarts.init(dom_1_5, 'chalk');
+	var app_1_5 = {};
 
-    var data_1_5 = alldata["2015-2017年上海市食用菌等农药残留和畜药残留合格率"]
-    
-    var xAxis_1_5 = [] 
-    var yAxis_1_5a = []
-    var yAxis_1_5b = []
-    
-    for(var i = 1; i < data_1_5.length; ++i){
-        xAxis_1_5.push(data_1_5[i][0])
-        yAxis_1_5a.push(data_1_5[i][1])
-        yAxis_1_5b.push(data_1_5[i][2])
-    }
-
-
-    var option_1_5 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['水果、食用菌等农药残留','畜药残留'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
+	function view_1_5_change(){
+		console.log("3_5 change")
+		//console.log(document.getElementById('view_1_5').value)
+		document.getElementById('view_1_5').innerHTML = document.getElementById('view_1_5').value
+	}
+	var option_1_5_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
             left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
+			feature: {
+				dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_1_5" onchange="view_1_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,水果、食用菌等农药残留,畜药残留\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_2 = []
+						yAxis_1_2a = []
+                        yAxis_1_2b = []
+				
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_2.push(cur_pair[0])
+							yAxis_1_2a.push(cur_pair[1])
+                            yAxis_1_2b.push(cur_pair[2])
+						
+						}
+						console.log(xAxis_1_2)
+						console.log(yAxis_1_2a)
+                        console.log(yAxis_1_2b)
+					
+						option_1_5_1['series'][0]['data'] = yAxis_1_2a;
+                        option_1_5_1['series'][1]['data'] = yAxis_1_2b;
+	
+						option_1_5_1['xAxis']['data'] = xAxis_1_2;
+						myChart_1_5.setOption(option_1_5_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_10_5.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_5('+JSON.stringify(option_1_5_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
                 },
-                type: 'category',
-                data: xAxis_1_5
-            }
-        ],
-        yAxis: [
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '韩国'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
             {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
                 type: 'value',
-                min: 0.985,
-                max: 1
+
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                },
+                min:0.99,
+                max:1
             }
         ],
-        series: [
+		series: [
             {
-                name: '水果、食用菌等农药残留',
+                name: '销量',
                 type: 'line',
-                data: yAxis_1_5a,
+                data: [1,2,3],
+
             },
             {
-                name: '畜药残留',
+                name: '汽车市场占比',
                 type: 'line',
-                data: yAxis_1_5b,
+                data: [],
+
             }
         ]
-    };
+	};
 
-    if (option_1_5 && typeof option_1_5 === 'object') {
-        myChart_1_5.setOption(option_1_5);
-        console.log(data_1_5)
-    }
+	
+	var X_3_5 = ori_data_1_5['xAxis']['data'];
+	var Y_3_5 = ori_data_1_5['series'];
+
+	option_1_5_1['legend']['data'] = ori_data_1_5['legend']['data'];
+	option_1_5_1['xAxis']['data'] = X_3_5;
+
+	for(var i = 0; i < Y_3_5.length; ++i){
+		option_1_5_1['series'][i]['data'] = Y_3_5[i]['data'];
+		option_1_5_1['series'][i]['name'] = Y_3_5[i]['name'];
+	}
+
+	myChart_1_5.setOption(option_1_5_1);
 
 </script>
 
 
 <!--配置页面 1-5 的Echart图-->
 <script>
-    var dom_1_6 = document.getElementById("container_1_6");
-    var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
+    // var dom_1_6 = document.getElementById("container_1_6");
+    // var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
 
-    var data_1_6 = alldata[" 2016年不同产业“三品”认证率分布情况"]
+    // var data_1_6 = alldata[" 2016年不同产业“三品”认证率分布情况"]
     
-    var xAxis_1_6 = [] 
-    var yAxis_1_6a = []
+    // var xAxis_1_6 = [] 
+    // var yAxis_1_6a = []
 
-    for(var i = 1; i < data_1_6.length; ++i){
-        xAxis_1_6.push(data_1_6[i][0])
-        yAxis_1_6a.push(data_1_6[i][1])
-    }
+    // for(var i = 1; i < data_1_6.length; ++i){
+    //     xAxis_1_6.push(data_1_6[i][0])
+    //     yAxis_1_6a.push(data_1_6[i][1])
+    // }
 
 
-    var option_1_6 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['“三品”认证率'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
+    // var option_1_6 = {
+    //     textStyle: {
+    //         fontSize: fontSize_all_title,
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis'
+    //     },
+    //     legend: {
+    //         data: ['“三品”认证率'],
+    //         textStyle:{
+    //             color: '#F0F8FF'
+    //         }
+    //     },
+    //     toolbox: {
+    //         show: true,
+    //         orient: 'vertical',
+    //         left: 'right',
+    //         top: 'center',
+    //         itemSize: echart_toolbox_size, 
+    //         feature: {
+    //             dataView: {show: true, readOnly: false},
+    //             magicType: {show: true, type: ['line', 'bar']},
+    //             restore: {show: true},
+    //             saveAsImage: {show: true}
+    //         }
+    //     },
+    //     xAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             type: 'category',
+    //             boundaryGap: true,
+    //             data: xAxis_1_6
+    //         }
+    //     ],
+    //     yAxis: [
+    //         {
+    //             axisLabel: {
+    //                 fontSize: fontSize_axis_label
+    //             },
+    //             name: '“三品”认证率',
+    //             type: 'value'
+    //         }
+    //     ],
+    //     series: [
+    //     {
+    //         name: '“三品”认证率',
+    //             type: 'bar',
+    //             data: yAxis_1_6a,
+    //         }
+    //     ]
+    // };
+
+    // if (option_1_6 && typeof option_1_6 === 'object') {
+    //     myChart_1_6.setOption(option_1_6);
+    //     console.log(data_1_6)
+    // }
+    var dom_1_6 = document.getElementById("container_1_6");
+	var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
+	var app_1_6 = {};
+
+	function view_1_6_change(){
+		console.log("3_6 change")
+		//console.log(document.getElementById('view_1_6').value)
+		document.getElementById('view_1_6').innerHTML = document.getElementById('view_1_6').value
+	}
+	var option_1_6_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+			orient: 'vertical',
             left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        xAxis: [
+			feature: {
+				dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_1_6" onchange="view_1_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">产业,”三品“认证率\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_2 = []
+						yAxis_1_2a = []
+						
+                        
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_2.push(cur_pair[0])
+							yAxis_1_2a.push(cur_pair[1])
+						
+
+						}
+						console.log(xAxis_1_2)
+						console.log(yAxis_1_2a)
+				
+      
+						option_1_6_1['series'][0]['data'] = yAxis_1_2a;
+				
+
+						option_1_6_1['xAxis']['data'] = xAxis_1_2;
+						myChart_1_6.setOption(option_1_6_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_10_6.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_6('+JSON.stringify(option_1_6_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: [
             {
+                type: 'value',
                 axisLabel: {
                     fontSize: fontSize_axis_label
-                },
-                type: 'category',
-                boundaryGap: true,
-                data: xAxis_1_6
+                }
             }
         ],
-        yAxis: [
+		series: [
             {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                name: '“三品”认证率',
-                type: 'value'
-            }
-        ],
-        series: [
-        {
-            name: '“三品”认证率',
+                name: '销量',
                 type: 'bar',
-                data: yAxis_1_6a,
+                data: [1,2,3],
             }
+            
         ]
-    };
+	};
 
-    if (option_1_6 && typeof option_1_6 === 'object') {
-        myChart_1_6.setOption(option_1_6);
-        console.log(data_1_6)
-    }
+	
+	var X_3_6 = ori_data_1_6['xAxis']['data'];
+	var Y_3_6 = ori_data_1_6['series'];
 
+	option_1_6_1['legend']['data'] = ori_data_1_6['legend']['data'];
+	option_1_6_1['xAxis']['data'] = X_3_6;
+
+	for(var i = 0; i < Y_3_6.length; ++i){
+		option_1_6_1['series'][i]['data'] = Y_3_6[i]['data'];
+		option_1_6_1['series'][i]['name'] = Y_3_6[i]['name'];
+	}
+
+	myChart_1_6.setOption(option_1_6_1);
 </script>
 
 
