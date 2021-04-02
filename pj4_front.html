@@ -165,7 +165,7 @@
 
 
 <!--配置页面 front-1 的Echart图-->
-<script>
+<!-- <script>
 	var dom_1 = document.getElementById("container_1");
 	var myChart_1 = echarts.init(dom_1, 'chalk');
 
@@ -303,7 +303,251 @@
 		console.log(data_1)
 	}
 
+</script> -->
+<script>
+    var ori_data_1_1 = {};
+
+    function callback_4_0_1(res){
+        ori_data_1_1 = res;
+		console.log('4_0_1.json读取成功')
+		console.log(ori_data_1_1);
+    }
 </script>
+<script src="data/4_0_1.json?callback=callback_4_0_1"></script>
+
+<script>
+
+	var dom_1_1 = document.getElementById("container_1");
+	var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+	var app_1_1 = {};
+
+	function view_4_0_1_change(){
+		console.log("4_0_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_4_0_1').value)
+		document.getElementById('view_4_0_1').innerHTML = document.getElementById('view_4_0_1').value
+	}
+
+	//折线图
+	var option_4_0_1 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_0_1" onchange="view_4_0_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_0_1['legend']['data'].length; ++i){
+							table += (','+option_4_0_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 1_1")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_1_1 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_1_1.length;
+
+						var X_1_1 = [];
+						var Y_1_1 = [];
+
+						while(Y_1_1.length < valid_num){
+							Y_1_1.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_1_1.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_1.length; ++j, ++k){
+								Y_1_1[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_0_1['legend']['data'] = legend_1_1;
+						option_4_0_1['xAxis'][0]['data'] = X_1_1;
+
+						option_4_0_1['series'] = [];
+
+						for(var i = 0; i < Y_1_1.length; ++i){
+							option_4_0_1['series'].push({
+								name: legend_1_1[i],
+								type: "line",//折线图
+								// stack: "抽查情况",
+								data: Y_1_1[i],
+							})
+						}
+						
+						myChart_1_1.setOption(option_4_0_1);
+
+						var Link = document.createElement('a');
+						Link.download = "4_0_1.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_0_1('+JSON.stringify(option_4_0_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["中国", "美国", "德国", "日本", "英国", "法国", "韩国"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '国家优质制造指数',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '美国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '德国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '日本',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '中国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '英国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '法国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '韩国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+
+		]
+	};
+
+
+	option_4_0_1['series'] = ori_data_1_1['series'];
+	option_4_0_1['legend']['data'] = ori_data_1_1['legend']['data'];
+	option_4_0_1['xAxis'][0]['data'] = ori_data_1_1['xAxis'][0]['data'];
+
+	myChart_1_1.setOption(option_4_0_1, true);
+
+</script>
+
 
 
 <!--配置页面 front-2 的Echart图-->
@@ -1214,7 +1458,7 @@
 
 
 <!--配置页面 front-6 的Echart图-->
-<script>
+<!-- <script>
 	var dom_6 = document.getElementById("container_6");
 	var myChart_6 = echarts.init(dom_6, 'chalk');
 	var data_6 = data_front_6["6-2中国与世界平均工业增加值年增长率数据（%）"]
@@ -1300,4 +1544,216 @@
 		myChart_6.setOption(option_6);
 		console.log(data_6)
 	}
+</script> -->
+<script>
+    var ori_data_1_6 = {};
+
+    function callback_4_0_6(res){
+        ori_data_1_6 = res;
+		console.log('4_0_6.json读取成功')
+		console.log(ori_data_1_6);
+    }
 </script>
+<script src="data/4_0_6.json?callback=callback_4_0_6"></script>
+
+<script>
+
+	var dom_1_6 = document.getElementById("container_6");
+	var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
+	var app_1_6 = {};
+
+	function view_1_6_1_change(){
+		console.log("1_6_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_1_6_1').value)
+		document.getElementById('view_1_6_1').innerHTML = document.getElementById('view_1_6_1').value
+	}
+
+	// 柱状图 
+	var option_1_6_1 = {
+		textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_1_6_1" onchange="view_1_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_1_6_1['legend']['data'].length; ++i){
+							table += (','+option_1_6_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 1_6")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_1_6 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_1_6.length;
+
+						var X_1_6 = [];
+						var Y_1_6 = [];
+
+						while(Y_1_6.length < valid_num){
+							Y_1_6.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_1_6.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_6.length; ++j, ++k){
+								Y_1_6[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_1_6_1['legend']['data'] = legend_1_6;
+						option_1_6_1['xAxis'][0]['data'] = X_1_6;
+
+						option_1_6_1['series'] = [];
+
+						for(var i = 0; i < Y_1_6.length; ++i){
+							option_1_6_1['series'].push({
+								name: legend_1_6[i],
+								type: "bar",
+								// stack: "抽查情况",
+								data: Y_1_6[i],
+							})
+						}
+						
+						myChart_1_6.setOption(option_1_6_1);
+
+						var Link = document.createElement('a');
+						Link.download = "4_0_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_0_6('+JSON.stringify(option_1_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['中国', '世界'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '百分比',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '中国',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '世界',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
+
+
+	option_1_6_1['series'] = ori_data_1_6['series'];
+	option_1_6_1['legend']['data'] = ori_data_1_6['legend']['data'];
+	option_1_6_1['xAxis'][0]['data'] = ori_data_1_6['xAxis'][0]['data'];
+
+	myChart_1_6.setOption(option_1_6_1, true);
+
+</script>
+

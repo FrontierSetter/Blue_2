@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/mine.css" />
+    
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/color.js"></script>
+    <script type="text/javascript" src="js/global_config.js"></script>
+    <script src="js/china.js"></script>
+	<script src="js/world.js"></script>
+    <link rel="stylesheet" href="css/mine.css" />
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+    <link rel="stylesheet" href="semantic-ui/semantic.min.css">
+    <script type="text/javascript" src="js/jquery3.3.1.js"></script>
+    <script type="text/javascript" src="semantic-ui/semantic.min.js"></script>
+
+    <!-- <script src="json/data.json"></script> -->
+    <script type="text/javascript" src="js/global_config.js"></script></head>
+
+    <!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<body>
+    <div class="header">
+        <h1 class="header-title" style="font-size:40px">CNAS数据（2010-2020年CNAS认可的检验机构数量变化图）</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">我国2010-2020年CNAS认可的检验机构数量变化图</div>
+                        
+                        <div id="container_1" style="height: 85%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">CNAS暂停、撤销与注销机构认可资格统计信息</div>
+                        
+                        <div id="container_2" style="height: 95%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-90">
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">CNAS认可的检验机构 和检测校准实验室数</div>
+                        <div class="echart-container" id="container_3" style="height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-90">
+                    <div class="xpanel xpanel-r-t">
+                        <div class="title title-long">CNAS检查机构数量宏观数据 </div>
+                        
+                        <div id="container_5" class="echart-container" ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+			// initHoverWindowBySuffix('_1', submitHandler, function(){hideDialogID('_1')});
+    </script>
+</body>
+
+</html>
+
+
+<!--解决本地json跨域问题-->
+<script>
+    var data1 = {};
+   
+    function callback1(res) {
+        data1 = res;
+    }
+</script>
+<script src="dataproc/pj4-data/data-1.json?callback=callback1"></script>
+
+<!--配置页面 pj4_1-1 的Echart图-->
+<!-- <script>
+    var dom_1 = document.getElementById("container_1");
+    var myChart_1 = echarts.init(dom_1, 'chalk');
+
+    var data_1 = data1["1-1高端消费自给率"]
+
+    var xAxis_1 = []
+    var yAxis_1a = []
+    var yAxis_1b = []
+    var yAxis_1c = []
+    var yAxis_1d = []
+    var yAxis_1e = []
+    var yAxis_1f = []
+    var yAxis_1g = []
+    var yAxis_1h = []
+    var yAxis_1i = []
+
+    for (var i = 1; i < data_1.length; ++i) {
+        xAxis_1.push(data_1[i][0])
+        yAxis_1a.push(data_1[i][1])
+        yAxis_1b.push(data_1[i][2])
+        yAxis_1c.push(data_1[i][3])
+        yAxis_1d.push(data_1[i][4])
+        yAxis_1e.push(data_1[i][5])
+        yAxis_1f.push(data_1[i][6])
+        yAxis_1g.push(data_1[i][7])
+        yAxis_1h.push(data_1[i][8])
+        yAxis_1i.push(data_1[i][9])
+    }
+
+
+    var option_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_1,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '自给率',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1d,
+            },
+            {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+                data: yAxis_1a,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_1i,
+            },
+        ]
+    };
+
+
+
+    if (option_1 && typeof option_1 === 'object') {
+        myChart_1.setOption(option_1);
+        console.log(data_1)
+    }
+
+</script> -->
+<script>
+    var ori_data_7_1 = {};
+
+    function callback_4_7_1(res){
+        ori_data_7_1 = res;
+		console.log('4_7_1.json读取成功')
+		console.log(ori_data_7_1);
+    }
+</script>
+<script src="data/4_7_1.json?callback=callback_4_7_1"></script>
+
+<script>
+
+	var dom_7_1 = document.getElementById("container_1");
+	var myChart_7_1 = echarts.init(dom_7_1, 'chalk');
+	var app_7_1 = {};
+
+	function view_4_7_1_change(){
+		console.log("4_7_1 change")
+		// Document.getElementById('view_2_7_1').innerHTML
+		console.log(document.getElementById('view_4_7_1').value)
+		document.getElementById('view_4_7_1').innerHTML = document.getElementById('view_4_7_1').value
+	}
+
+	//折线图
+	var option_4_7_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_7_1" onchange="view_4_7_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_7_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_7_1['legend']['data'].length; ++i){
+							table += (','+option_4_7_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_7_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 7_1")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_7_1 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_7_1.length;
+
+						var X_7_1 = [];
+						var Y_7_1 = [];
+
+						while(Y_7_1.length < valid_num){
+							Y_7_1.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_7_1.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_7_1.length; ++j, ++k){
+								Y_7_1[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_7_1['legend']['data'] = legend_7_1;
+						option_4_7_1['xAxis'][0]['data'] = X_7_1;
+
+						option_4_7_1['series'] = [];
+
+						for(var i = 0; i < Y_7_1.length; ++i){
+							option_4_7_1['series'].push({
+								name: legend_7_1[i],
+								type: "line",//折线图
+								// stack: "抽查情况",
+								data: Y_7_1[i],
+							})
+						}
+						
+						myChart_7_1.setOption(option_4_7_1);
+
+						var Link = document.createElement('a');
+						Link.download = "4_7_1.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_7_1('+JSON.stringify(option_4_7_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: [ "数量"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '数量',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		"series": [
+        {
+            "name": "数量",
+            "type": "line",
+            "data": [
+                "270",
+                "322",
+                "330",
+                "349",
+                "407",
+                "396",
+                "455",
+                "493",
+                "561",
+                "606",
+                "630"
+            ]
+        }
+    ]
+	};
+
+
+	option_4_7_1['series'] = ori_data_7_1['series'];
+	option_4_7_1['legend']['data'] = ori_data_7_1['legend']['data'];
+	option_4_7_1['xAxis'][0]['data'] = ori_data_7_1['xAxis'][0]['data'];
+
+	myChart_7_1.setOption(option_4_7_1, true);
+
+</script>
+
+<!--配置页面 pj4_1-2 的Echart图-->
+<!-- <script>
+    var dom_2 = document.getElementById("container_2");
+    var myChart_2 = echarts.init(dom_2, 'chalk');
+
+    var data_2 = data1["1-2世界品牌五百强制造企业利润率"]
+
+    var xAxis_2 = []
+    var yAxis_2a = []
+    var yAxis_2b = []
+    var yAxis_2c = []
+    var yAxis_2d = []
+    var yAxis_2e = []
+    var yAxis_2f = []
+    var yAxis_2g = []
+    var yAxis_2h = []
+    var yAxis_2i = []
+
+    for (var i = 1; i < data_2.length; ++i) {
+        xAxis_2.push(data_2[i][0])
+        yAxis_2a.push(data_2[i][1])
+        yAxis_2b.push(data_2[i][2])
+        yAxis_2c.push(data_2[i][3])
+        yAxis_2d.push(data_2[i][4])
+        yAxis_2e.push(data_2[i][5])
+        yAxis_2f.push(data_2[i][6])
+        yAxis_2g.push(data_2[i][7])
+        yAxis_2h.push(data_2[i][8])
+        yAxis_2i.push(data_2[i][9])
+    }
+
+
+    var option_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxis_2,
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '企业利润率',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+            {
+                name: '美国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2b,
+            },
+            {
+                name: '德国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2c,
+            },
+            {
+                name: '日本',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2d,
+            },
+        {
+                name: '中国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width_large
+                },
+               data: yAxis_2a,
+            },
+            {
+                name: '英国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2e,
+            },
+            {
+                name: '法国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2f,
+            },
+            {
+                name: '韩国',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2g,
+            },
+            {
+                name: '意大利',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2h,
+            },
+            {
+                name: '以色列',
+                type: 'line',
+                lineStyle:{
+                    width: echart_lineStyle_width
+                },
+                data: yAxis_2i,
+            },
+        ]
+    };
+
+
+
+    if (option_2 && typeof option_2 === 'object') {
+        myChart_2.setOption(option_2);
+        console.log(data_2)
+    }
+
+</script> -->
+
+<!-- <script>
+    var ori_data_1_2 = {};
+
+    function callback_4_1_2(res){
+        ori_data_1_2 = res;
+		console.log('4_1_2.json读取成功')
+		console.log(ori_data_1_2);
+    }
+</script>
+<script src="data/4_1_2.json?callback=callback_4_1_2"></script>
+
+<script>
+
+	var dom_1_2 = document.getElementById("container_2");
+	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+	var app_1_2 = {};
+
+	function view_4_1_2_change(){
+		console.log("4_1_2 change")
+		// Document.getElementById('view_2_1_2').innerHTML
+		console.log(document.getElementById('view_4_1_2').value)
+		document.getElementById('view_4_1_2').innerHTML = document.getElementById('view_4_1_2').value
+	}
+
+	//折线图
+	var option_4_1_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_1_2" onchange="view_4_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_1_2_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_1_2['legend']['data'].length; ++i){
+							table += (','+option_4_1_2['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_2['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 1_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_1_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_1_2.length;
+
+						var X_1_2 = [];
+						var Y_1_2 = [];
+
+						while(Y_1_2.length < valid_num){
+							Y_1_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_1_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_2.length; ++j, ++k){
+								Y_1_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_1_2['legend']['data'] = legend_1_2;
+						option_4_1_2['xAxis'][0]['data'] = X_1_2;
+
+						option_4_1_2['series'] = [];
+
+						for(var i = 0; i < Y_1_2.length; ++i){
+							option_4_1_2['series'].push({
+								name: legend_1_2[i],
+								type: "line",//折线图
+								// stack: "抽查情况",
+								data: Y_1_2[i],
+							})
+						}
+						
+						myChart_1_2.setOption(option_4_1_2);
+
+						var Link = document.createElement('a');
+						Link.download = "4_1_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_1_2('+JSON.stringify(option_4_1_2)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: [ "中国","美国","德国","日本","英国","法国","韩国","意大利","以色列"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '企业利润率',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '美国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '德国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '日本',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '中国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '英国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '法国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '韩国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '意大利',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+				name: '以色列',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+		]
+	};
+
+
+	option_4_1_2['series'] = ori_data_1_2['series'];
+	option_4_1_2['legend']['data'] = ori_data_1_2['legend']['data'];
+	option_4_1_2['xAxis'][0]['data'] = ori_data_1_2['xAxis'][0]['data'];
+
+	myChart_1_2.setOption(option_4_1_2, true);
+
+</script> -->
+
+<!-- <script>
+    var ori_data_1_2 = {};
+
+    function callback_4_7_2(res){
+        ori_data_1_2 = res;
+		console.log('4_7_2.json读取成功')
+		console.log(ori_data_1_2);
+    }
+</script>
+<script src="data/4_7_2.json?callback=callback_4_7_2"></script>
+
+<script>
+
+	var dom_1_2 = document.getElementById("container_2");
+	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+	var app_1_2 = {};
+
+	function view_4_7_2_change(){
+		console.log("4_7_2 change")
+		// Document.getElementById('view_2_1_2').innerHTML
+		console.log(document.getElementById('view_4_7_2').value)
+		document.getElementById('view_4_7_2').innerHTML = document.getElementById('view_4_7_2').value
+	}
+
+	//折线图
+	var option_4_7_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_7_2" onchange="view_4_7_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_1_2_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_7_2['legend']['data'].length; ++i){
+							table += (','+option_4_7_2['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_2['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 1_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_1_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_1_2.length;
+
+						var X_1_2 = [];
+						var Y_1_2 = [];
+
+						while(Y_1_2.length < valid_num){
+							Y_1_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_1_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_2.length; ++j, ++k){
+								Y_1_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_7_2['legend']['data'] = legend_1_2;
+						option_4_7_2['xAxis'][0]['data'] = X_1_2;
+
+						option_4_7_2['series'] = [];
+
+						for(var i = 0; i < Y_1_2.length; ++i){
+							option_4_7_2['series'].push({
+								name: legend_1_2[i],
+								type: "bar",//折线图
+								// stack: "抽查情况",
+								data: Y_1_2[i],
+							})
+						}
+						
+						myChart_1_2.setOption(option_4_7_2);
+
+						var Link = document.createElement('a');
+						Link.download = "4_7_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_7_2('+JSON.stringify(option_4_7_2)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["暂停","撤销","注销"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+                name: '机构',
+				type: 'category',
+				data: ["认证机构","实验室","检验机构","总计"],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '数量',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		"series": [
+        {
+            "name": "暂停",
+            "type": "bar",
+            "data": [
+                "62",
+                "2206",
+                "69",
+                "2337"
+            ]
+        },
+        {
+            "name": "撤销",
+            "type": "bar",
+            "data": [
+                "27",
+                "842",
+                "72",
+                "941"
+            ]
+        },
+        {
+            "name": "注销",
+            "type": "bar",
+            "data": [
+                "34",
+                "1003",
+                "57",
+                "1094"
+            ]
+        }
+    ]
+	};
+
+
+	option_4_7_2['series'] = ori_data_1_2['series'];
+	option_4_7_2['legend']['data'] = ori_data_1_2['legend']['data'];
+	option_4_7_2['xAxis'][0]['data'] = ori_data_1_2['xAxis'][0]['data'];
+
+	myChart_1_2.setOption(option_4_7_2, true);
+
+</script> -->
+
+<script>
+    var ori_data_7_2 = {};
+
+    function callback_4_7_2(res){
+        ori_data_7_2 = res;
+		console.log('4_7_2.json读取成功')
+		console.log(ori_data_7_2);
+    }
+</script>
+<script src="data/4_7_2.json?callback=callback_4_7_2"></script>
+
+<script>
+
+	var dom_7_2 = document.getElementById("container_2");
+	var myChart_7_2 = echarts.init(dom_7_2, 'chalk');
+	var app_7_2 = {};
+
+	function view_4_7_2_change(){
+		console.log("4_7_2 change")
+		// Document.getElementById('view_2_7_2').innerHTML
+		console.log(document.getElementById('view_4_7_2').value)
+		document.getElementById('view_4_7_2').innerHTML = document.getElementById('view_4_7_2').value
+	}
+
+	//折线图
+	var option_4_7_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_7_2" onchange="view_4_7_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_7_2_9['series'][0]['name'];
+						// table += '\n';
+						table += "机构"
+						for(var i = 0; i < option_4_7_2['legend']['data'].length; ++i){
+							table += (','+option_4_7_2['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_7_2['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 7_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_7_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_7_2.length;
+
+						var X_7_2 = [];
+						var Y_7_2 = [];
+
+						while(Y_7_2.length < valid_num){
+							Y_7_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_7_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_7_2.length; ++j, ++k){
+								Y_7_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_7_2['legend']['data'] = legend_7_2;
+						option_4_7_2['xAxis'][0]['data'] = X_7_2;
+
+						option_4_7_2['series'] = [];
+
+						for(var i = 0; i < Y_7_2.length; ++i){
+							if(i!=3)
+							{
+								option_4_7_2['series'].push({
+								name: legend_7_2[i],
+								type: "bar",
+                                areaStyle: {},//阴影情况
+                                stack: '总量',
+								data: Y_7_2[i],
+							})
+							}else{
+								option_4_7_2['series'].push({
+								name: legend_7_2[i],
+								type: "line",//折线图
+								data: Y_7_2[i],
+							})
+
+						}
+					}
+						
+						myChart_7_2.setOption(option_4_7_2);
+
+						var Link = document.createElement('a');
+						Link.download = "4_7_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_7_2('+JSON.stringify(option_4_7_2)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["认证机构","实验室","检验机构","总计"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ["暂停","撤销","注销"],
+                boundaryGap: true,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		"series": [
+        {
+            "name": "认证机构",
+            "type": "bar",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "62",
+                "27",
+                "34"
+            ]
+        },
+        {
+            "name": "实验室",
+            "type": "bar",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "2206",
+                "842",
+                "1003"
+            ]
+        },
+        {
+            "name": "检验机构",
+            "type": "bar",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "69",
+                "72",
+                "57"
+            ]
+        },
+        {
+            "name": "总计",
+            "type": "line",
+            "data": [
+                "2337",
+                "941",
+                "1094"
+            ]
+        }
+    ]
+	};
+
+
+	option_4_7_2['series'] = ori_data_7_2['series'];
+	option_4_7_2['legend']['data'] = ori_data_7_2['legend']['data'];
+	option_4_7_2['xAxis'][0]['data'] = ori_data_7_2['xAxis'][0]['data'];
+
+	myChart_7_2.setOption(option_4_7_2, true);
+
+</script>
+
+
+
+<!--配置页面 pj4_1-3 的Echart图-->
+<script>
+    var ori_data_7_6 = {};
+
+    function callback_4_7_6(res){
+        ori_data_7_6 = res;
+		console.log('4_7_6.json读取成功')
+		console.log(ori_data_7_6);
+    }
+</script>
+<script src="data/4_7_6.json?callback=callback_4_7_6"></script>
+
+<script>
+
+	var dom_7_6 = document.getElementById("container_3");
+	var myChart_7_6 = echarts.init(dom_7_6, 'chalk');
+	var app_7_6 = {};
+
+	function view_4_7_6_change(){
+		console.log("4_7_6 change")
+		// Document.getElementById('view_2_7_6').innerHTML
+		console.log(document.getElementById('view_4_7_6').value)
+		document.getElementById('view_4_7_6').innerHTML = document.getElementById('view_4_7_6').value
+	}
+
+	//折线图
+	var option_4_7_6 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_7_6" onchange="view_4_7_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_7_6_9['series'][0]['name'];
+						// table += '\n';
+						table += "行业"
+						for(var i = 0; i < option_4_7_6['legend']['data'].length; ++i){
+							table += (','+option_4_7_6['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_7_6['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 7_6")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_7_6 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_7_6.length;
+
+						var X_7_6 = [];
+						var Y_7_6 = [];
+
+						while(Y_7_6.length < valid_num){
+							Y_7_6.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_7_6.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_7_6.length; ++j, ++k){
+								Y_7_6[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_7_6['legend']['data'] = legend_7_6;
+						option_4_7_6['xAxis'][0]['data'] = X_7_6;
+
+						option_4_7_6['series'] = [];
+
+						for(var i = 0; i < Y_7_6.length; ++i){
+							option_4_7_6['series'].push({
+								name: legend_7_6[i],
+								type: "bar",//折线图
+								// stack: "抽查情况",
+								data: Y_7_6[i],
+							})
+						}
+						
+						myChart_7_6.setOption(option_4_7_6);
+
+						var Link = document.createElement('a');
+						Link.download = "4_7_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_7_6('+JSON.stringify(option_4_7_6)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["CNAS认可的检验机构数量","CNAS认可的检测校准实验室 "],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+                name: '行业',
+				type: 'category',
+				data: ["机床","车辆","轴承","船舶","医疗"],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '数量',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		"series": [
+        {
+            "name": "CNAS认可的检验机构数量",
+            "type": "bar",
+            "data": [
+                "9",
+                "65",
+                "5",
+                "64",
+                "4"
+            ]
+        },
+        {
+            "name": "CNAS认可的检测校准实验室 ",
+            "type": "bar",
+            "data": [
+                "7",
+                "39",
+                "20",
+                "54",
+                "52"
+            ]
+        }
+    ]
+	};
+
+
+	option_4_7_6['series'] = ori_data_7_6['series'];
+	option_4_7_6['legend']['data'] = ori_data_7_6['legend']['data'];
+	option_4_7_6['xAxis'][0]['data'] = ori_data_7_6['xAxis'][0]['data'];
+
+	myChart_7_6.setOption(option_4_7_6, true);
+
+</script>
+
+
+<!--配置页面 pj4_1-4 的Echart图-->
+
+<!--配置页面 pj4_1-5 的Echart图-->
+
+<!--配置页面 pj4_1-6 的Echart图-->
+
+
+
+
+<script>
+    var ori_data_7_3 = {}
+    function callback_7_3(res){
+        ori_data_7_3 = res;
+		console.log('4_7_3.json读取成功')
+		console.log(ori_data_7_3)
+    }
+</script>
+<script src="data/4_7_3.json?callback=callback_7_3"></script>
+
+<script>
+    var ori_data_7_4 = {}
+    function callback_7_4(res){
+        ori_data_7_4 = res;
+		console.log('4_7_4.json读取成功')
+		console.log(ori_data_7_4)
+    }
+</script>
+<script src="data/4_7_4.json?callback=callback_7_4"></script>
+
+<!--配置页面 5-1 的Echart图-->
+<script>
+	var dom_7_4 = document.getElementById("container_5");
+	var myChart_7_4 = echarts.init(dom_7_4, 'chalk');
+
+	
+    var XYs_1 = ori_data_7_4['series'][0]['data']
+	var XYs_2 = ori_data_7_3['series'][0]['data']
+
+    function view_7_4_change(){
+		console.log("7_4 change")
+		//console.log(document.getElementById('view_7_4').value)
+		document.getElementById('view_7_4').innerHTML = document.getElementById('view_7_4').value
+	}
+ 
+    option_7_4 = {
+        title: [
+            {
+                subtext: '2010-2020年各地区新增CNAS认可的检查机构数量',
+                left: '50%',
+                top: '2%',
+                textAlign: 'center',
+                subtextStyle:{
+                    color: "#ffffff",
+                    fontSize: fontSize_all_title,
+                    align: "center"
+                }
+            },
+		],
+        visualMap: {  
+            type: 'continuous',
+			show: true,
+            min: 0,  
+			max: 20,  
+			range: [0, 20],
+			text:['High','Low'],    
+			calculable: true,  
+			color: ['red', 'yellow', 'lightskyblue'],
+            //color: ['#5475f5', '#9feaa5', '#3FA7FF','#66E0E3', '#FFDC5E', '#9fb5ea'],
+			formatter: function (value) {
+            	return value;
+        	},
+		},
+        tooltip : {
+            trigger: 'item'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var series = opt['series']
+						console.log("start show")
+						console.log(series)
+						var table = '<textarea id="view_7_4" onchange="view_7_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">地区,数量\n'
+						for (var i = 0, l = series[0].data.length; i < l; i++) {
+							table += series[0].data[i].name + ',' + series[0].data[i].value + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						XYs_1 = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							XYs_1.push({'name':cur_pair[0], 'value':cur_pair[1]})
+						}
+						console.log(XYs_1)
+						option_7_4['series'][0]['data'] = XYs_1;
+						myChart_7_4.setOption(option_7_4);
+
+						var Link = document.createElement('a')
+						Link.download = "4_7_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_7_4('+JSON.stringify(option_7_4)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+				myTool1: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_7_4['series'][0]['data'] = XYs_1;
+						myChart_7_4.setOption(option_7_4, true);
+					}
+				},
+                myTool2: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_7_3['series'][0]['data'] = XYs_2;
+						myChart_7_4.setOption(option_7_3, true);
+					}
+				},
+                saveAsImage: {show: true}
+            }
+		},
+        series : [
+            {
+                name: '机构数量',
+                type: 'map',
+                mapType: 'china',
+                itemStyle:{
+                    emphasis:{
+                        label:{
+                            show: true
+                        },
+                    }
+                },
+                data: XYs_1
+            },
+        ]
+    };
+
+
+    option_7_3 = {
+    title: [
+        {
+            subtext: '各地区2020年CNAS机构数量',
+            left: '50%',
+            top: '2%',
+            textAlign: 'center',
+            subtextStyle:{
+                color: "#ffffff",
+                fontSize: fontSize_all_title,
+                align: "center"
+            }
+        },
+    ],
+    visualMap: {  
+        type: 'continuous',
+        show: true,
+        min: 0,  
+        max: 20,  
+        range: [0, 20],
+        text:['High','Low'],    
+        calculable: true,  
+        color: ['red', 'yellow', 'lightskyblue'],
+        //color: ['#5475f5', '#9feaa5', '#3FA7FF','#66E0E3', '#FFDC5E', '#9fb5ea'],
+        formatter: function (value) {
+            return 'aaaa' + value;
+        },
+    },
+    tooltip : {
+        trigger: 'item'
+    },
+    toolbox: {
+        show: true,
+        itemSize: echart_toolbox_size,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            dataView: {
+                show: true, 
+                readOnly: false,
+                optionToContent: function(opt) {
+                    console.log(opt)
+                    var series = opt['series']
+                    console.log("start show")
+                    console.log(series)
+                    var table = '<textarea id="view_7_4" onchange="view_7_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">地区,数量\n'
+                    for (var i = 0, l = series[0].data.length; i < l; i++) {
+                        table += series[0].data[i].name + ',' + series[0].data[i].value + '\n'
+                    }
+                    table += '</textarea>'
+                    return table;
+                },
+                contentToOption: function(HTMLDomElement, opt) {
+                    console.log('start save')
+                    console.log(opt)
+                    console.log(HTMLDomElement.firstChild)
+                    var plain_tex = HTMLDomElement.firstChild.innerHTML
+                    var arr_tex = plain_tex.split('\n')
+                    console.log(arr_tex)
+                    XYs_2 = []
+                    for(var i = 1; i < arr_tex.length; i++) {
+                        cur_pair = arr_tex[i].split(',')
+                        if(cur_pair.length != 2) {
+                            //console.alert('wrong data')
+                            continue
+                        }
+                        if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+                            continue
+                        }
+                        XYs_2.push({'name':cur_pair[0], 'value':cur_pair[1]})
+                    }
+                    console.log(XYs_2)
+                    option_7_3['series'][0]['data'] = XYs_2;
+                    myChart_7_4.setOption(option_7_3);
+
+                    var Link = document.createElement('a')
+                    Link.download = "4_7_3.json"
+                    Link.style.display = 'none'
+                    //字符内容转变成blob地址
+                    var blob = new Blob(['callback_7_3('+JSON.stringify(option_7_3)+')'])
+                    Link.href = URL.createObjectURL(blob)
+                    //触发点击
+                    document.body.appendChild(Link)
+                    Link.click()
+                    //然后移除
+                    document.body.removeChild(Link)
+                    return opt
+                }
+            },
+            myTool1: {
+                show: true,
+                icon: 'image://img/shuju-data.png',
+                onclick: function (){
+                    option_7_4['series'][0]['data'] = XYs_1;
+                    myChart_7_4.setOption(option_7_4, true);
+                }
+            },
+            myTool2: {
+                show: true,
+                icon: 'image://img/shuju-data.png',
+                onclick: function (){
+                    option_7_3['series'][0]['data'] = XYs_2;
+                    myChart_7_4.setOption(option_7_3, true);
+                }
+            },
+            saveAsImage: {show: true}
+        }
+    },
+    series : [
+        {
+            name: '数量',
+            type: 'map',
+            mapType: 'china',
+            itemStyle:{
+                emphasis:{
+                    label:{
+                        show: true
+                    },
+                }
+            },
+            data: XYs_2
+        },
+    ]
+};
+
+
+
+    if (option_7_4 && typeof option_7_4 === 'object') {
+        option_7_4['series'][0]['data'] = XYs_1;
+		myChart_7_4.setOption(option_7_4);
+		console.log(ori_data_7_4)
+	}
+    myChart_7_4.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			option_7_3['series'][0]['data'] = XYs_2;
+			o.newOption = option_7_3;
+		}
+		myChart_7_4.setOption(o.newOption, true);
+	});
+
+	myChart_7_4.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+        option_7_4['series'][0]['data'] = XYs_1;
+		o.newOption = option_7_4;
+		myChart_7_4.setOption(o.newOption, true);
+	});
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="js/left_top_but.js"></script>
+
