@@ -109,7 +109,15 @@
 
 </html>
 
+<script>
+    var data_1 = {};
 
+    function demo_pj4_4(res){
+        data_1 = res;
+		console.log(data_1);
+    }
+</script>
+<script src="data/data_pj4_4.json?callback=demo_pj4_4"></script>
 <!--解决本地json跨域问题-->
 <script>
 	var data1 = {};
@@ -750,7 +758,7 @@
 
 
 <!--配置页面 front-4 的Echart图-->
-<script>
+<!-- <script>
 
 	var dom_4 = document.getElementById("container_4");
 	var myChart_4 = echarts.init(dom_4, 'chalk');
@@ -1366,8 +1374,879 @@
 	myChart_4.setOption(option_4_3);
 	var curIsPie_4 = true;
 
-</script>
+</script> -->
 
+<script>
+    var ori_data_4_5 = {};
+
+    function callback_4_4_5(res){
+        ori_data_4_5 = res;
+		console.log('4_4_5.json读取成功')
+		console.log(ori_data_4_5);
+    }
+</script>
+<script src="data/4_4_5.json?callback=callback_4_4_5"></script>
+
+<script>
+
+	var dom_4_5 = document.getElementById("container_4");
+	var myChart_4_5 = echarts.init(dom_4_5, 'chalk');
+	var app_4_5 = {};
+
+	function view_4_5_1_change(){
+		console.log("4_5_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_4_5_1').value)
+		document.getElementById('view_4_5_1').innerHTML = document.getElementById('view_4_5_1').value
+	}
+
+	function view_4_5_3_change(){
+		console.log("4_5_3 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_4_5_3').value)
+		document.getElementById('view_4_5_3').innerHTML = document.getElementById('view_4_5_3').value
+	}
+
+	console.log(data_1["4-1投诉问题类别数量分布（件）"])
+	var data_4_5 = data_1["4-1投诉问题类别数量分布（件）"];
+	var class_4_5 = data_4_5[0];
+
+	var option_4_5_1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			},
+			
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_5_1" onchange="view_4_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_5_1['legend']['data'].length; ++i){
+							table += (','+option_4_5_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 4_5")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_4_5 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_4_5.length;
+
+						var X_4_5 = [];
+						var Y_4_5 = [];
+
+						while(Y_4_5.length < valid_num){
+							Y_4_5.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_4_5.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_4_5.length; ++j, ++k){
+								Y_4_5[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_5_1['legend']['data'] = legend_4_5;
+						option_4_5_1['xAxis'][0]['data'] = X_4_5;
+
+						option_4_5_1['series'] = [];
+
+						for(var i = 0; i < Y_4_5.length; ++i){
+							option_4_5_1['series'].push({
+								name: legend_4_5[i],
+								type: "bar",
+								// stack: "抽查情况",
+								data: Y_4_5[i],
+							})
+						}
+						
+						myChart_4_5.setOption(option_4_5_1);
+
+						var Link = document.createElement('a');
+						Link.download = "4_4_5.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_4_5('+JSON.stringify(option_4_5_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_4_5.setOption(option_4_5_2, true);
+				// 		curIsPie_4_5 = true;
+				// 	}
+				// },
+				myTool3: {
+					show: true,
+					title: '切换到词云',
+					icon: 'image://img/yun.png',
+					onclick: function (){
+						myChart_4_5.setOption(option_4_5_3, true);
+						curIsPie_4_5 = false;
+					}
+				},
+			}
+		},
+		legend: {
+			data: class_4_5,
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+			}
+		],
+		series: [
+			{
+				name: '锅炉',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					12028,
+					11596,
+					12355,
+					12213,
+					9377,
+					8457,
+					7937,
+					7850,
+					7608,
+					6029
+				]
+			},
+			{
+				name: '固定式压力容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					96831,
+					107986,
+					125706,
+					123542,
+					102186,
+					106608,
+					109989,
+					105420,
+					101213,
+					103377
+				]
+			},
+			{
+				name: '移动式电容器',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					687,
+					684,
+					771,
+					814,
+					820,
+					831,
+					840,
+					852,
+					860,
+					0
+				]
+			},
+			{
+				name: '电梯',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					107632,
+					118447,
+					133397,
+					149147,
+					157528,
+					171802,
+					184543,
+					201925,
+					222103,
+					238664
+				]
+			},
+			{
+				name: '起重机械',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					102437,
+					111691,
+					96244,
+					101251,
+					89661,
+					93972,
+					96611,
+					88921,
+					80216,
+					75868
+				]
+			},
+			{
+				name: '场(厂)内机动车辆',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					14491,
+					17494,
+					43707,
+					52554,
+					55302,
+					59883,
+					64701,
+					67329,
+					69870,
+					73238
+				]
+			},
+			{
+				name: '大型游乐设施',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					294,
+					323,
+					338,
+					308,
+					312,
+					314,
+					311,
+					308,
+					305,
+					303
+				]
+			},
+			{
+				name: '客运索道',
+				type: 'bar',
+				// stack: '抽查情况',
+				data: [
+					2,
+					2,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			}
+		]
+	};
+
+	// var 20 = 25
+	var option_4_5_2 = {
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {show: true, readOnly: false},
+				// magicType: {show: true, type: ['line','bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true},
+				
+				myTool1: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_4_5.setOption(option_4_5_1, true);
+						curIsPie_4_5 = false;
+					}
+				},
+				myTool3: {
+					show: true,
+					title: '切换到词云',
+					icon: 'image://img/yun.png',
+					onclick: function (){
+						myChart_4_5.setOption(option_4_5_3, true);
+						curIsPie_4_5 = false;
+					}
+				},
+			}
+		},
+		legend: {
+			data: class_4_5,
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		tooltip: {},
+		dataset: {
+			source: [
+				['product','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017'],
+				[
+					"锅炉",
+					12028,
+					11596,
+					12355,
+					12213,
+					9377,
+					8457,
+					7937,
+					7850,
+					7608,
+					6029
+				],
+				[
+					"固定式压力容器",
+					96831,
+					107986,
+					125706,
+					123542,
+					102186,
+					106608,
+					109989,
+					105420,
+					101213,
+					103377
+				],
+				[
+					"移动式电容器",
+					687,
+					684,
+					771,
+					814,
+					820,
+					831,
+					840,
+					852,
+					860,
+					0
+				],
+				[
+					"电梯",
+					107632,
+					118447,
+					133397,
+					149147,
+					157528,
+					171802,
+					184543,
+					201925,
+					222103,
+					238664
+				],
+				[
+					"起重机械",
+					102437,
+					111691,
+					96244,
+					101251,
+					89661,
+					93972,
+					96611,
+					88921,
+					80216,
+					75868
+				],
+				[
+					"场(厂)内机动车辆",
+					14491,
+					17494,
+					43707,
+					52554,
+					55302,
+					59883,
+					64701,
+					67329,
+					69870,
+					73238
+				],
+				[
+					"大型游乐设施",
+					294,
+					323,
+					338,
+					308,
+					312,
+					314,
+					311,
+					308,
+					305,
+					303
+				],
+				[
+					"客运索道",
+					2,
+					2,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			]
+		},
+		series: [{
+			type: 'pie',
+			radius: '40%',
+			// radius: 60,
+			name: '2014',
+			center: ['16.6%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2014'
+			},
+			// roseType: "radius"
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: '40%',
+			// radius: 60,
+			name: '2015',
+			center: ['50%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2015'
+			},
+			// roseType: "radius"
+		}, {
+			type: 'pie',
+			radius: '40%',
+			// radius: 60,
+			name: '2016',
+			center: ['83.4%', '30%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2016'
+			},
+			// roseType: "radius"
+		},{
+			type: 'pie',
+			radius: '40%',
+			// radius: 60,
+			name: '2017',
+			center: ['16.6%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2017'
+			},
+			// roseType: "radius"
+			// No encode specified, by default, it is '2012'.
+		}, {
+			type: 'pie',
+			radius: '40%',
+			name: '2018',
+			center: ['50%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2018'
+			},
+			// roseType: "radius"
+			// No encode specified, by default, it is '2012'.
+		},{
+			type: 'pie',
+			radius: '40%',
+			name: '2019',
+			center: ['83.4%', '75%'],
+			label: {
+				formatter: '{d}%',
+				color:color_axis
+			},
+			encode: {
+				itemName: 'product',
+				value: '2019'
+			},
+			// roseType: "radius"
+			// No encode specified, by default, it is '2012'.
+		},]
+	};
+
+	option_4_5_3 = {
+		// title: {
+		// 	text: '热点分析',
+		// 	link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+		// 	x: 'center',
+		// 	textStyle: {
+		// 		fontSize: 23
+		// 	}
+
+		// },
+		// backgroundColor: '#F7F7F7',
+		tooltip: {
+			show: true
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = option_4_5_1['xAxis'][0]['data'];
+						var series = option_4_5_1['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_4_5_3" onchange="view_4_5_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_4_5_1['legend']['data'].length; ++i){
+							table += (','+option_4_5_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 4_5")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_4_5 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_4_5.length;
+
+						var X_4_5 = [];
+						var Y_4_5 = [];
+
+						while(Y_4_5.length < valid_num){
+							Y_4_5.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_4_5.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_4_5.length; ++j, ++k){
+								Y_4_5[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_4_5_1['legend']['data'] = legend_4_5;
+						option_4_5_1['xAxis'][0]['data'] = X_4_5;
+
+						option_4_5_1['series'] = [];
+
+						for(var i = 0; i < Y_4_5.length; ++i){
+							option_4_5_1['series'].push({
+								name: legend_4_5[i],
+								type: "bar",
+								// stack: "抽查情况",
+								data: Y_4_5[i],
+							})
+						}
+						
+						// myChart_4_5.setOption(option_4_5_1);
+
+						var Link = document.createElement('a');
+						Link.download = "4_4_5.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_4_4_5('+JSON.stringify(option_4_5_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				saveAsImage: {show: true},
+				myTool1: {
+					show: true,
+					title: '切换到柱状图',
+					icon: 'image://img/shuju-bar.png',
+					onclick: function (){
+						myChart_4_5.setOption(option_4_5_1, true);
+						curIsPie_4_5 = false;
+					}
+				},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_4_5.setOption(option_4_5_2, true);
+				// 		curIsPie_4_5 = true;
+				// 	}
+				// }
+			}
+		},
+		series: [{
+			name: '投诉问题类别数量分布',
+			type: 'wordCloud',
+			// size: ['9%', '99%'],
+			sizeRange: [40, 120],
+			//textRotation: [0, 45, 90, -45],
+			rotationRange: [-45, 90],
+			//shape: 'circle',
+			textPadding: 0,
+			autoSize: {
+				enable: false,
+				minSize: 30
+			},
+			textStyle: {
+				normal: {
+					color: function() {
+						var arr = [
+							"#fc97af",
+							"#87f7cf",
+							"#f7f494",
+							"#72ccff",
+							"#f7c5a0",
+							"#d4a4eb",
+							"#d2f5a6",
+							"#76f2f2"
+						];
+						return arr[Math.round(Math.random() * arr.length)];
+						// return 'rgb(' + [
+						// 	Math.round(Math.random() * 160),
+						// 	Math.round(Math.random() * 160),
+						// 	Math.round(Math.random() * 160)
+						// ].join(',') + ')';
+					}
+				},
+				emphasis: {
+					shadowBlur: 10,
+					shadowColor: '#333'
+				}
+			},
+			data: [{
+				name: "Jayfee",
+				value: 666
+			}, {
+				name: "Nancy",
+				value: 520
+			}]
+		}]
+	};
+
+	option_4_5_1['series'] = ori_data_4_5['series'];
+	option_4_5_1['legend']['data'] = ori_data_4_5['legend']['data'];
+	option_4_5_1['xAxis'][0]['data'] = ori_data_4_5['xAxis'][0]['data'];
+
+	var data_4_5_3 = []
+
+	for(var i = 0; i < ori_data_4_5['series'].length; ++i){
+		var cur_value = 0;
+		for(var j = 0; j < ori_data_4_5['series'][i]['data'].length; ++j){
+			cur_value += parseInt(ori_data_4_5['series'][i]['data'][j]);
+		}
+		data_4_5_3.push({
+			name: ori_data_4_5['series'][i]['name'],
+			value: cur_value
+		})
+	}
+
+	// console.log(data_4_5_3)
+
+	option_4_5_3.series[0].data = data_4_5_3;
+
+	myChart_4_5.setOption(option_4_5_3, true);
+
+	// var X_4_5 = [];
+	// var Y_4_5 = {};
+
+	// for(var i = 0; i < class_4_5.length; ++i){
+	// 	Y_4_5[class_4_5[i]] = [];
+	// }
+
+	// for(var i = 1; i < data_4_5.length; ++i){
+	// 	X_4_5.push(data_4_5[i][0].toString());
+	// 	for(var j = 1; j < data_4_5[i].length; ++j){
+	// 		Y_4_5[class_4_5[j-1]].push(data_4_5[i][j])
+	// 	}
+	// }
+
+	// var series_4_5_1 = []
+
+	// for(var i = 0; i < class_4_5.length; ++i){
+	// 	series_4_5_1.push({
+	// 		name: class_4_5[i],
+	// 		type: 'bar',
+	// 		// stack: '抽查情况',
+	// 		data: Y_4_5[class_4_5[i]]
+	// 	})
+	// }
+
+	// option_4_5_1['xAxis'][0]['data'] = X_4_5;
+	// option_4_5_1['series'] = series_4_5_1;
+	// console.log(option_4_5_1['series'])
+
+
+	// var source_4_5_2 = []
+
+	// var arr_tmp = ['product']
+	// source_4_5_2.push(arr_tmp.concat(X_4_5));
+
+	// for(var i = 0; i < class_4_5.length; ++i){
+	// 	arr_tmp = [class_4_5[i]];
+	// 	source_4_5_2.push(arr_tmp.concat(Y_4_5[class_4_5[i]]));
+	// }
+	// option_4_5_2['dataset']['source'] = source_4_5_2;
+	// console.log(option_4_5_2['dataset']['source'])
+
+
+
+	// var data_4_5_3 = []
+
+	// for(var i = 0; i < class_4_5.length; ++i){
+	// 	data_4_5_3.push({
+	// 		name: class_4_5[i],
+	// 		value: Y_4_5[class_4_5[i]]
+	// 	})
+	// }
+
+	// option_4_5_3.series[0].data = data_4_5_3;
+
+	
+	// myChart_4_5.setOption(option_4_5_1);
+	// var curIsPie_4_5 = true;
+
+</script>
 
 <!--配置页面 front-5 的Echart图-->
 <script>
