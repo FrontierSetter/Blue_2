@@ -1388,10 +1388,28 @@
 
 <!--* 图 1_6 -->
 <script>
+    var ori_data_1_6 = {};
+
+    function callback_5_1_6(res){
+        ori_data_1_6 = res;
+		console.log('5_1_6.json读取成功')
+		console.log(ori_data_1_6);
+    }
+</script>
+<script src="data/5_1_6.json?callback=callback_5_1_6"></script>
+
+<script>
 
 	var dom_1_6 = document.getElementById("container_1_6");
 	var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
 	var app_1_6 = {};
+
+	function view_1_6_1_change(){
+		console.log("5_1_6 change")
+		// Document.getElementById('view_1_6_1').innerHTML
+		console.log(document.getElementById('view_1_6_1').value)
+		document.getElementById('view_1_6_1').innerHTML = document.getElementById('view_1_6_1').value
+	}
 
 	// 事故数柱状图
 	var option_1_6_1 = {
@@ -1407,7 +1425,84 @@
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+					show: true, 
+					readOnly: false,
+					// optionToContent: function(opt) {
+    				// 	str = '<textarea id="view_2_3_3" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
+					// 	return str
+					// },
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_1_6_1" onchange="view_1_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
+						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
+						// 			+ '<td><font color="red">时间</font></td>'
+						// 			+ '<td>' + '数值' + '</td>'
+						// 			+ '</tr>';
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							// table += '<tr>'
+							// 		+ '<td>' + axisData[i] + '</td>'
+							// 		+ '<td>' + series[0].data[i] + '</td>'
+							// 		+ '</tr>';
+							table += axisData[i]+','+series[0].data[i]+'\n'
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_5_1_6['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save")
+						// console.log(opt)
+						// console.log(HTMLDomElement.firstChild)
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+						// console.log(arr_tex)
+
+						X_1_6 = [];
+						Y_1_6 = [];
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							if(cur_pair.length != 2){
+								// console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == '' || cur_pair[0] == undefined){
+								continue
+							}
+							X_1_6.push(cur_pair[0]);
+							Y_1_6.push(cur_pair[1]);
+						}
+
+						// console.log(X_1_6)
+						// console.log(Y_1_6)
+
+						option_1_6_1['series'][0]['data'] = Y_1_6;
+						option_1_6_1['xAxis']['data'] = X_1_6;
+						
+
+						var Link = document.createElement('a');
+						Link.download = "5_1_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_5_1_6('+JSON.stringify(option_1_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
 				magicType: {show: true, type: ['line','bar','stack','tiled']},
 				// restore: {show: true},
 				saveAsImage: {show: true},
