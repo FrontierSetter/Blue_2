@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>大屏数据可视化 - 模板</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/mine.css" />
+    
+
+    <!-- JQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 弹出窗口 -->
+    <link rel="stylesheet" href="css/hover_window_2.css" />
+    <link rel="stylesheet" href="css/hover_window.css" />
+    <script type="text/javascript" src="js/hover_window_2.js"></script>
+
+    <!-- echarts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/color.js"></script>
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+    <link rel="stylesheet" href="semantic-ui/semantic.min.css">
+    <script type="text/javascript" src="js/jquery3.3.1.js"></script>
+    <script type="text/javascript" src="semantic-ui/semantic.min.js"></script>
+
+    <!-- <script src="json/data.json"></script> -->
+    <script type="text/javascript" src="js/global_config.js"></script></head>
+
+<body>
+    <div class="header">
+        <h1 class="header-title" style="font-size:40px">行业质量数据可视化展图</h1>
+    </div>
+    <div class="wrapper">
+        <div class="content">
+            <div class="col col-l">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-l-t">
+                        <div class="title">品牌实验室<a href="./pj6_1.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+                        <h1 class="subtitle">2013-2018年中国船舶产业优质制造评价</h1>
+                        <div id="container_1_1" style="height: 85%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">CNAS数据<a href="./pj6_2.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+                        <h1 class="subtitle">2013-2017年中国汽车产业优质制造评价</h1>
+                        <div id="container_1_2" style="height: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-c">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-c-t">
+                        <div class="title">质量竞争力数据<a href="./pj6_3.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+                        <h1 class="subtitle">2012-2018年中国航天产业优质制造评价</h1>
+                        <div id="container_1_3" style="height: 85%"></div>
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-c-b">
+                        <div class="title">制造业发展状况<a href="./pj6_5.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+                        <h1 class="subtitle">2013-2017年中国医械产业优质制造评价</h1>
+                        <div id="container_1_4" style="height: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-r">
+                <div class="xpanel-wrapper xpanel-wrapper-50">
+                    <div class="xpanel xpanel-r-t">
+                        <!-- <div class="title">机床产业<a href="./pj5_5.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+                        <h1 class="subtitle">2005-2018年中国机床产业优质制造评价</h1>
+                        <div id="container_1_5" style="height: 85%"></div> -->
+                    </div>
+                </div>
+                <div class="xpanel-wrapper xpanel-wrapper-55">
+                    <div class="xpanel xpanel-r-b">
+                        <!-- <div class="title">海洋重工</div>
+                        <h1 class="subtitle">2012-2018年中国海洋工程建筑业和装备制造业发展状况</h1>
+                        <div id="container_1_6" style="height: 90%"></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var alldata = {};
+    function callback1(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-1.json?callback=callback1"></script>
+<script>
+    var ori_data_0_1 = {}
+    function callback_0_1(res){
+        ori_data_0_1 = res;
+		console.log('5_0_1.json读取成功')
+		console.log(ori_data_0_1)
+    }
+</script>
+<script src="data/5_0_1.json?callback=callback_0_1"></script>
+
+<!--配置页面 1-1 的Echart图-->
+<script>
+    var dom_1_1 = document.getElementById("container_1_1");
+    var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+    /*
+    var data_1_1 = alldata["1-2013-2018年中国船舶产业优质制造评价"]
+    var xAxis_1_1 = [] //年份
+    var yAxis_1_1a = [] //质量效益
+    var yAxis_1_1b = [] //质量形象
+    var yAxis_1_1c = [] //发展潜力
+    var yAxis_1_1d = [] //优质制造评价
+    for (var i = 1; i < data_1_1.length; ++i) {
+        xAxis_1_1.push(data_1_1[i][0])
+        yAxis_1_1a.push(data_1_1[i][1])
+        yAxis_1_1b.push(data_1_1[i][2])
+        yAxis_1_1c.push(data_1_1[i][3])
+        yAxis_1_1d.push(data_1_1[i][4])
+    }
+    */
+    var xAxis_1_1 = ori_data_0_1['xAxis']['data'] //年份
+	var yAxis_1_1a = ori_data_0_1['series'][0]['data'] //质量效益
+    var yAxis_1_1b = ori_data_0_1['series'][1]['data'] //质量形象
+    var yAxis_1_1c = ori_data_0_1['series'][2]['data'] //发展潜力
+    var yAxis_1_1d = ori_data_0_1['series'][3]['data'] //优质制造评价
+    
+	function view_0_1_change(){
+		console.log("0_1 change")
+		//console.log(document.getElementById('view_0_1').value)
+		document.getElementById('view_0_1').innerHTML = document.getElementById('view_0_1').value
+	}
+    var option_1_1 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_1" onchange="view_0_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,质量效益,质量形象,发展潜力,优质制造评价\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_1 = []
+						yAxis_1_1a = []
+                        yAxis_1_1b = []
+                        yAxis_1_1c = []
+                        yAxis_1_1d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_1.push(cur_pair[0])
+							yAxis_1_1a.push(cur_pair[1])
+                            yAxis_1_1b.push(cur_pair[2])
+                            yAxis_1_1c.push(cur_pair[3])
+                            yAxis_1_1d.push(cur_pair[4])
+						}
+						console.log(xAxis_1_1)
+						console.log(yAxis_1_1a)
+                        console.log(yAxis_1_1b)
+                        console.log(yAxis_1_1c)
+                        console.log(yAxis_1_1d)
+						option_1_1['series'][0]['data'] = yAxis_1_1a;
+                        option_1_1['series'][1]['data'] = yAxis_1_1b;
+                        option_1_1['series'][2]['data'] = yAxis_1_1c;
+                        option_1_1['series'][3]['data'] = yAxis_1_1d;
+						option_1_1['xAxis']['data'] = xAxis_1_1;
+						myChart_1_1.setOption(option_1_1);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_1.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_1('+JSON.stringify(option_1_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['质量效益', '质量形象', '发展潜力', '优质制造评价'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_1,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: {
+			type: 'value',
+			name: '评分',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+        series: [
+            {
+                name: '优质制造评价',
+                type: 'bar',
+                data: yAxis_1_1d,
+            },
+            {
+                name: '质量效益',
+                type: 'line',
+                data: yAxis_1_1a,
+            },
+            {
+                name: '质量形象',
+                type: 'line',
+                data: yAxis_1_1b,
+            },
+            {
+                name: '发展潜力',
+                type: 'line',
+                data: yAxis_1_1c,
+            },
+        ],
+    };
+    option_1_1['series'][0]['data'] = yAxis_1_1a;
+	option_1_1['series'][1]['data'] = yAxis_1_1b;
+	option_1_1['series'][2]['data'] = yAxis_1_1c;
+    option_1_1['series'][3]['data'] = yAxis_1_1d;
+	option_1_1['xAxis']['data'] = xAxis_1_1;
+    if (option_1_1 && typeof option_1_1 === 'object') {
+        myChart_1_1.setOption(option_1_1);
+        console.log(ori_data_0_1)
+    }
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback2(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-2.json?callback=callback2"></script>
+<script>
+    var ori_data_0_2 = {}
+    function callback_0_2(res){
+        ori_data_0_2 = res;
+		console.log('5_0_2.json读取成功')
+		console.log(ori_data_0_2)
+    }
+</script>
+<script src="data/5_0_2.json?callback=callback_0_2"></script>
+
+<!--配置页面 1-2 的Echart图-->
+<script>
+    var dom_1_2 = document.getElementById("container_1_2");
+    var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
+    var data_1_2 = alldata["2-2013-2017年中国汽车产业优质制造评价"]
+    /*
+    var xAxis_1_2 = [] //年份
+    var yAxis_1_2a = [] //质量效益
+    var yAxis_1_2b = [] //质量形象
+    var yAxis_1_2c = [] //发展潜力
+    var yAxis_1_2d = [] //优质制造评价
+    for (var i = 1; i < data_1_2.length; ++i) {
+        xAxis_1_2.push(data_1_2[i][0])
+        yAxis_1_2a.push(data_1_2[i][1])
+        yAxis_1_2b.push(data_1_2[i][2])
+        yAxis_1_2c.push(data_1_2[i][3])
+        yAxis_1_2d.push(data_1_2[i][4])
+    }
+    */
+    var xAxis_1_2 = ori_data_0_2['xAxis']['data'] //年份
+	var yAxis_1_2a = ori_data_0_2['series'][0]['data'] //质量效益
+    var yAxis_1_2b = ori_data_0_2['series'][1]['data'] //质量形象
+    var yAxis_1_2c = ori_data_0_2['series'][2]['data'] //发展潜力
+    var yAxis_1_2d = ori_data_0_2['series'][3]['data'] //优质制造评价
+    
+	function view_0_2_change(){
+		console.log("0_2 change")
+		//console.log(document.getElementById('view_0_2').value)
+		document.getElementById('view_0_2').innerHTML = document.getElementById('view_0_2').value
+	}
+    var option_1_2 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_2" onchange="view_0_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,质量效益,质量形象,发展潜力,优质制造评价\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_2 = []
+						yAxis_1_2a = []
+                        yAxis_1_2b = []
+                        yAxis_1_2c = []
+                        yAxis_1_2d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_2.push(cur_pair[0])
+							yAxis_1_2a.push(cur_pair[1])
+                            yAxis_1_2b.push(cur_pair[2])
+                            yAxis_1_2c.push(cur_pair[3])
+                            yAxis_1_2d.push(cur_pair[4])
+						}
+						console.log(xAxis_1_2)
+						console.log(yAxis_1_2a)
+                        console.log(yAxis_1_2b)
+                        console.log(yAxis_1_2c)
+                        console.log(yAxis_1_2d)
+						option_1_2['series'][0]['data'] = yAxis_1_2a;
+                        option_1_2['series'][1]['data'] = yAxis_1_2b;
+                        option_1_2['series'][2]['data'] = yAxis_1_2c;
+                        option_1_2['series'][3]['data'] = yAxis_1_2d;
+						option_1_2['xAxis']['data'] = xAxis_1_2;
+						myChart_1_2.setOption(option_1_2);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_2('+JSON.stringify(option_1_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['质量效益', '质量形象', '发展潜力', '优质制造评价'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_2,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: {
+			type: 'value',
+			name: '评分',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+        series: [
+            {
+                name: '优质制造评价',
+                type: 'bar',
+                data: yAxis_1_2d,
+            },
+            {
+                name: '质量效益',
+                type: 'line',
+                data: yAxis_1_2a,
+            },
+            {
+                name: '质量形象',
+                type: 'line',
+                data: yAxis_1_2b,
+            },
+            {
+                name: '发展潜力',
+                type: 'line',
+                data: yAxis_1_2c,
+            },
+        ]
+    };
+    option_1_2['series'][0]['data'] = yAxis_1_2a;
+	option_1_2['series'][1]['data'] = yAxis_1_2b;
+	option_1_2['series'][2]['data'] = yAxis_1_2c;
+    option_1_2['series'][3]['data'] = yAxis_1_2d;
+	option_1_2['xAxis']['data'] = xAxis_1_2;
+    if (option_1_2 && typeof option_1_2 === 'object') {
+        myChart_1_2.setOption(option_1_2);
+        console.log(ori_data_0_2)
+    }
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback3(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-3.json?callback=callback3"></script>
+<script>
+    var ori_data_0_3 = {}
+    function callback_0_3(res){
+        ori_data_0_3 = res;
+		console.log('5_0_3.json读取成功')
+		console.log(ori_data_0_3)
+    }
+</script>
+<script src="data/5_0_3.json?callback=callback_0_3"></script>
+
+<!--配置页面 1-3 的Echart图-->
+<script>
+    var dom_1_3 = document.getElementById("container_1_3");
+    var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
+    /*
+    var data_1_3 = alldata["3-2012-2018年中国航天产业优质制造评价"]
+    var xAxis_1_3 = [] //年份
+    var yAxis_1_3a = [] //质量效益
+    var yAxis_1_3b = [] //质量形象
+    var yAxis_1_3c = [] //发展潜力
+    var yAxis_1_3d = [] //优质制造评价
+    for (var i = 1; i < data_1_3.length; ++i) {
+        xAxis_1_3.push(data_1_3[i][0])
+        yAxis_1_3a.push(data_1_3[i][1])
+        yAxis_1_3b.push(data_1_3[i][2])
+        yAxis_1_3c.push(data_1_3[i][3])
+        yAxis_1_3d.push(data_1_3[i][4])
+    }
+    */
+    var xAxis_1_3 = ori_data_0_3['xAxis']['data'] //年份
+	var yAxis_1_3a = ori_data_0_3['series'][0]['data'] //质量效益
+    var yAxis_1_3b = ori_data_0_3['series'][1]['data'] //质量形象
+    var yAxis_1_3c = ori_data_0_3['series'][2]['data'] //发展潜力
+    var yAxis_1_3d = ori_data_0_3['series'][3]['data'] //优质制造评价
+    
+    function view_0_3_change(){
+		console.log("0_3 change")
+		//console.log(document.getElementById('view_0_3').value)
+		document.getElementById('view_0_3').innerHTML = document.getElementById('view_0_3').value
+	}
+    var option_1_3 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_3" onchange="view_0_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,质量效益,质量形象,发展潜力,优质制造评价\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_3 = []
+						yAxis_1_3a = []
+                        yAxis_1_3b = []
+                        yAxis_1_3c = []
+                        yAxis_1_3d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_3.push(cur_pair[0])
+							yAxis_1_3a.push(cur_pair[1])
+                            yAxis_1_3b.push(cur_pair[2])
+                            yAxis_1_3c.push(cur_pair[3])
+                            yAxis_1_3d.push(cur_pair[4])
+						}
+						console.log(xAxis_1_3)
+						console.log(yAxis_1_3a)
+                        console.log(yAxis_1_3b)
+                        console.log(yAxis_1_3c)
+                        console.log(yAxis_1_3d)
+						option_1_3['series'][0]['data'] = yAxis_1_3a;
+                        option_1_3['series'][1]['data'] = yAxis_1_3b;
+                        option_1_3['series'][2]['data'] = yAxis_1_3c;
+                        option_1_3['series'][3]['data'] = yAxis_1_3d;
+						option_1_3['xAxis']['data'] = xAxis_1_3;
+						myChart_1_3.setOption(option_1_3);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_3('+JSON.stringify(option_1_3)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['质量效益', '质量形象', '发展潜力', '优质制造评价'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_3,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: {
+			type: 'value',
+			name: '评分',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+        series: [
+            {
+                name: '优质制造评价',
+                type: 'bar',
+                data: yAxis_1_3d,
+            },
+            {
+                name: '质量效益',
+                type: 'line',
+                data: yAxis_1_3a,
+            },
+            {
+                name: '质量形象',
+                type: 'line',
+                data: yAxis_1_3b,
+            },
+            {
+                name: '发展潜力',
+                type: 'line',
+                data: yAxis_1_3c,
+            },
+        ]
+    };
+    option_1_3['series'][0]['data'] = yAxis_1_3a;
+	option_1_3['series'][1]['data'] = yAxis_1_3b;
+	option_1_3['series'][2]['data'] = yAxis_1_3c;
+    option_1_3['series'][3]['data'] = yAxis_1_3d;
+	option_1_3['xAxis']['data'] = xAxis_1_3;
+    if (option_1_3 && typeof option_1_3 === 'object') {
+        myChart_1_3.setOption(option_1_3);
+        console.log(ori_data_1_3)
+    }
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback4(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-4.json?callback=callback4"></script>
+<script>
+    var ori_data_0_4 = {}
+    function callback_0_4(res){
+        ori_data_0_4 = res;
+		console.log('5_0_4.json读取成功')
+		console.log(ori_data_0_4)
+    }
+</script>
+<script src="data/5_0_4.json?callback=callback_0_4"></script>
+
+
+<!--配置页面 1-4 的Echart图-->
+<script>
+    var dom_1_4 = document.getElementById("container_1_4");
+    var myChart_1_4 = echarts.init(dom_1_4, 'chalk');
+    /*
+    var data_1_4 = alldata["4-2013-2017年中国医械产业优质制造评价"]
+    var xAxis_1_4 = [] //年份
+    var yAxis_1_4a = [] //质量效益
+    var yAxis_1_4b = [] //质量形象
+    var yAxis_1_4c = [] //发展潜力
+    var yAxis_1_4d = [] //优质制造评价
+    for (var i = 1; i < data_1_4.length; ++i) {
+        xAxis_1_4.push(data_1_4[i][0])
+        yAxis_1_4a.push(data_1_4[i][1])
+        yAxis_1_4b.push(data_1_4[i][2])
+        yAxis_1_4c.push(data_1_4[i][3])
+        yAxis_1_4d.push(data_1_4[i][4])
+    }
+    */
+    var xAxis_1_4 = ori_data_0_4['xAxis']['data'] //年份
+	var yAxis_1_4a = ori_data_0_4['series'][0]['data'] //质量效益
+    var yAxis_1_4b = ori_data_0_4['series'][1]['data'] //质量形象
+    var yAxis_1_4c = ori_data_0_4['series'][2]['data'] //发展潜力
+    var yAxis_1_4d = ori_data_0_4['series'][3]['data'] //优质制造评价
+    
+    function view_0_4_change(){
+		console.log("0_4 change")
+		//console.log(document.getElementById('view_0_4').value)
+		document.getElementById('view_0_4').innerHTML = document.getElementById('view_0_4').value
+	}
+    var option_1_4 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_4" onchange="view_0_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,质量效益,质量形象,发展潜力,优质制造评价\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_4 = []
+						yAxis_1_4a = []
+                        yAxis_1_4b = []
+                        yAxis_1_4c = []
+                        yAxis_1_4d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_4.push(cur_pair[0])
+							yAxis_1_4a.push(cur_pair[1])
+                            yAxis_1_4b.push(cur_pair[2])
+                            yAxis_1_4c.push(cur_pair[3])
+                            yAxis_1_4d.push(cur_pair[4])
+						}
+						console.log(xAxis_1_4)
+						console.log(yAxis_1_4a)
+                        console.log(yAxis_1_4b)
+                        console.log(yAxis_1_4c)
+                        console.log(yAxis_1_4d)
+						option_1_4['series'][0]['data'] = yAxis_1_4a;
+                        option_1_4['series'][1]['data'] = yAxis_1_4b;
+                        option_1_4['series'][2]['data'] = yAxis_1_4c;
+                        option_1_4['series'][3]['data'] = yAxis_1_4d;
+						option_1_4['xAxis']['data'] = xAxis_1_4;
+						myChart_1_4.setOption(option_1_4);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_4('+JSON.stringify(option_1_4)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['质量效益', '质量形象', '发展潜力', '优质制造评价'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_4,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: {
+			type: 'value',
+			name: '评分',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+        series: [
+            {
+                name: '优质制造评价',
+                type: 'bar',
+                data: yAxis_1_4d,
+            },
+            {
+                name: '质量效益',
+                type: 'line',
+                data: yAxis_1_4a,
+            },
+            {
+                name: '质量形象',
+                type: 'line',
+                data: yAxis_1_4b,
+            },
+            {
+                name: '发展潜力',
+                type: 'line',
+                data: yAxis_1_4c,
+            },
+        ]
+    };
+    option_1_4['series'][0]['data'] = yAxis_1_4a;
+	option_1_4['series'][1]['data'] = yAxis_1_4b;
+	option_1_4['series'][2]['data'] = yAxis_1_4c;
+    option_1_4['series'][3]['data'] = yAxis_1_4d;
+	option_1_4['xAxis']['data'] = xAxis_1_4;
+    if (option_1_4 && typeof option_1_4 === 'object') {
+        myChart_1_4.setOption(option_1_4);
+        console.log(ori_data_1_4)
+    }
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback5(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-5.json?callback=callback5"></script>
+<script>
+    var ori_data_0_5 = {}
+    function callback_0_5(res){
+        ori_data_0_5 = res;
+		console.log('5_0_5.json读取成功')
+		console.log(ori_data_0_5)
+    }
+</script>
+<script src="data/5_0_5.json?callback=callback_0_5"></script>
+
+<!--配置页面 1-5 的Echart图-->
+<script>
+    var dom_1_5 = document.getElementById("container_1_5");
+    var myChart_1_5 = echarts.init(dom_1_5, 'chalk');
+    /*
+    var data_1_5 = alldata["5-2005-2018年中国机床产业优质制造评价"]
+    var xAxis_1_5 = [] //年份
+    var yAxis_1_5a = [] //质量效益
+    var yAxis_1_5b = [] //质量形象
+    var yAxis_1_5c = [] //发展潜力
+    var yAxis_1_5d = [] //优质制造评价
+    for (var i = 1; i < data_1_5.length; ++i) {
+        xAxis_1_5.push(data_1_5[i][0])
+        yAxis_1_5a.push(data_1_5[i][1])
+        yAxis_1_5b.push(data_1_5[i][2])
+        yAxis_1_5c.push(data_1_5[i][3])
+        yAxis_1_5d.push(data_1_5[i][4])
+    }
+    */
+    var xAxis_1_5 = ori_data_0_5['xAxis']['data'] //年份
+	var yAxis_1_5a = ori_data_0_5['series'][0]['data'] //质量效益
+    var yAxis_1_5b = ori_data_0_5['series'][1]['data'] //质量形象
+    var yAxis_1_5c = ori_data_0_5['series'][2]['data'] //发展潜力
+    var yAxis_1_5d = ori_data_0_5['series'][3]['data'] //优质制造评价
+    
+    function view_0_5_change(){
+		console.log("0_5 change")
+		//console.log(document.getElementById('view_0_5').value)
+		document.getElementById('view_0_5').innerHTML = document.getElementById('view_0_5').value
+	}
+    var option_1_5 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_5" onchange="view_0_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,质量效益,质量形象,发展潜力,优质制造评价\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + ',' + series[3].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_5 = []
+						yAxis_1_5a = []
+                        yAxis_1_5b = []
+                        yAxis_1_5c = []
+                        yAxis_1_5d = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 5) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_5.push(cur_pair[0])
+							yAxis_1_5a.push(cur_pair[1])
+                            yAxis_1_5b.push(cur_pair[2])
+                            yAxis_1_5c.push(cur_pair[3])
+                            yAxis_1_5d.push(cur_pair[4])
+						}
+						console.log(xAxis_1_5)
+						console.log(yAxis_1_5a)
+                        console.log(yAxis_1_5b)
+                        console.log(yAxis_1_5c)
+                        console.log(yAxis_1_5d)
+						option_1_5['series'][0]['data'] = yAxis_1_5a;
+                        option_1_5['series'][1]['data'] = yAxis_1_5b;
+                        option_1_5['series'][2]['data'] = yAxis_1_5c;
+                        option_1_5['series'][3]['data'] = yAxis_1_5d;
+						option_1_5['xAxis']['data'] = xAxis_1_5;
+						myChart_1_5.setOption(option_1_5);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_5.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_5('+JSON.stringify(option_1_5)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['质量效益', '质量形象', '发展潜力', '优质制造评价'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_5,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: {
+			type: 'value',
+			name: '评分',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+				fontSize: fontSize_axis_label
+			}
+		},
+        series: [
+            {
+                name: '优质制造评价',
+                type: 'bar',
+                data: yAxis_1_5d,
+            },
+            {
+                name: '质量效益',
+                type: 'line',
+                data: yAxis_1_5a,
+            },
+            {
+                name: '质量形象',
+                type: 'line',
+                data: yAxis_1_5b,
+            },
+            {
+                name: '发展潜力',
+                type: 'line',
+                data: yAxis_1_5c,
+            },
+        ]
+    };
+    option_1_5['series'][0]['data'] = yAxis_1_5a;
+	option_1_5['series'][1]['data'] = yAxis_1_5b;
+	option_1_5['series'][2]['data'] = yAxis_1_5c;
+    option_1_5['series'][3]['data'] = yAxis_1_5d;
+	option_1_5['xAxis']['data'] = xAxis_1_5;
+    if (option_1_5 && typeof option_1_5 === 'object') {
+        myChart_1_5.setOption(option_1_5);
+        console.log(data_1_5)
+    }
+</script>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback6(res) {
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj5-data/data-6.json?callback=callback6"></script>
+<script>
+    var ori_data_0_6 = {}
+    function callback_0_6(res){
+        ori_data_0_6 = res;
+		console.log('5_0_6.json读取成功')
+		console.log(ori_data_0_6)
+    }
+</script>
+<script src="data/5_0_6.json?callback=callback_0_6"></script>
+
+<!--配置页面 1-6 的Echart图-->
+<script>
+    var dom_1_6 = document.getElementById("container_1_6");
+    var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
+    /*
+    var data_1_6 = alldata["6-2012-2018中国海洋工程建筑业和装备制造业发展状况"]
+    var xAxis_1_6 = [] //年份
+    var yAxis_1_6a = [] //海洋工程装备制造业订单规模全球占比
+    var yAxis_1_6b = [] //海洋工程建筑业生产总值（亿元）
+    for (var i = 1; i < data_1_6.length; ++i) {
+        xAxis_1_6.push(data_1_6[i][0])
+        yAxis_1_6a.push(data_1_6[i][1] * 100) //海洋工程装备制造业订单规模全球占比
+        yAxis_1_6b.push(data_1_6[i][2]) //海洋工程建筑业生产总值(亿元)
+    }
+    */
+    var xAxis_1_6 = ori_data_0_6['xAxis']['data'] //年份
+	var yAxis_1_6a = ori_data_0_6['series'][0]['data'] //海洋工程装备制造业订单规模全球占比
+    var yAxis_1_6b = ori_data_0_6['series'][1]['data'] //海洋工程建筑业生产总值（亿元）
+    
+    function view_0_6_change(){
+		console.log("0_6 change")
+		//console.log(document.getElementById('view_0_6').value)
+		document.getElementById('view_0_6').innerHTML = document.getElementById('view_0_6').value
+	}
+    var option_1_6 = {
+        textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'        
+            }
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_0_6" onchange="view_0_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,全球占比,生产总值\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_1_6 = []
+						yAxis_1_6a = []
+                        yAxis_1_6b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_1_6.push(cur_pair[0])
+							yAxis_1_6a.push(cur_pair[1])
+                            yAxis_1_6b.push(cur_pair[2])
+						}
+						console.log(xAxis_1_6)
+						console.log(yAxis_1_6a)
+                        console.log(yAxis_1_6b)
+						option_1_6['series'][0]['data'] = yAxis_1_6a;
+                        option_1_6['series'][1]['data'] = yAxis_1_6b;
+						option_1_6['xAxis']['data'] = xAxis_1_6;
+						myChart_1_6.setOption(option_1_6);
+
+						var Link = document.createElement('a')
+						Link.download = "5_0_6.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_0_6('+JSON.stringify(option_1_6)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+		},	
+		calculable: true,
+        legend: {
+            data: ['订单规模全球占比', '生产总值'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+        xAxis: {
+			type: 'category',
+			name: '年份',
+			data: xAxis_1_6,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            }
+		},
+        yAxis: [
+            {
+                type: 'value',
+                name: '全球占比(%)',
+                axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    fontSize: fontSize_axis_label
+                }
+            },
+            {
+                type: 'value',
+                name: '生产总值(亿元)',
+                axisLine: {
+                    lineStyle: {
+                        color: color_axis
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    fontSize: fontSize_axis_label
+                }
+            },
+        ],
+        series: [
+            {
+                name: '订单规模全球占比',
+                type: 'bar',
+                data: yAxis_1_6a,
+                yAxisIndex: 0
+            },
+            {
+                name: '生产总值',
+                type: 'line',
+                data: yAxis_1_6b,
+                yAxisIndex: 1
+            },
+        ],
+    };
+    option_1_6['series'][0]['data'] = yAxis_1_6a;
+	option_1_6['series'][1]['data'] = yAxis_1_6b;
+	option_1_6['xAxis']['data'] = xAxis_1_6;
+    if (option_1_6 && typeof option_1_6 === 'object') {
+        myChart_1_6.setOption(option_1_6);
+        console.log(data_1_6) 
+    }
+</script>
+
+<script type="text/javascript" src="js/left_top_but.js"></script>
