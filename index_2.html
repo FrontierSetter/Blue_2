@@ -101,7 +101,7 @@
 				</div>
 			</div>
 
-			<svg onclick="location='./index_9.html'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" id="next" version="1.1" viewBox="0 0 32 32" xml:space="preserve">
+			<svg onclick="location='./index_9.html'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" id="next" version="1.1" viewBox="0 0 32 32" xml:space="preserve" style="z-index: 0;">
 				<path d="M24.291,14.276L14.705,4.69c-0.878-0.878-2.317-0.878-3.195,0l-0.8,0.8c-0.878,0.877-0.878,2.316,0,3.194  L18.024,16l-7.315,7.315c-0.878,0.878-0.878,2.317,0,3.194l0.8,0.8c0.878,0.879,2.317,0.879,3.195,0l9.586-9.587  c0.472-0.471,0.682-1.103,0.647-1.723C24.973,15.38,24.763,14.748,24.291,14.276z" fill="#FFFFFF"/>
 			</svg>
 
@@ -445,10 +445,28 @@ var font_test = 22;
 
 <!--* 图 2_2 -->
 <script>
+    var ori_data_2_2 = {};
+
+    function callback_3_2_2(res){
+        ori_data_2_2 = res;
+		console.log('3_2_2.json读取成功')
+		console.log(ori_data_2_2);
+    }
+</script>
+<script src="data/3_2_2.json?callback=callback_3_2_2"></script>
+
+<script>
 
 	var dom_2_2 = document.getElementById("container_2_2");
 	var myChart_2_2 = echarts.init(dom_2_2, 'chalk');
 	var app_2_2 = {};
+
+	function view_2_2_1_change(){
+		console.log("2_2_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_2_2_1').value)
+		document.getElementById('view_2_2_1').innerHTML = document.getElementById('view_2_2_1').value
+	}
 
 	var option_2_2_1 = {
 		tooltip: {
@@ -462,18 +480,120 @@ var font_test = 22;
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
-				// magicType: {show: true, type: ['bar']},
-				// restore: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换到饼图',
-					icon: 'image://img/shuju-data.png',
-					onclick: function (){
-						myChart_2_2.setOption(option_2_2_2, true);
-						// curIsPie_2_2 = true;
-					}
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_2_2_1" onchange="view_2_2_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_2_2_1['legend']['data'].length; ++i){
+							table += (','+option_2_2_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 2_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_2_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_2_2.length;
+
+						var X_2_2 = [];
+						var Y_2_2 = [];
+
+						while(Y_2_2.length < valid_num){
+							Y_2_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_2_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_2_2.length; ++j, ++k){
+								Y_2_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_2_2_1['legend']['data'] = legend_2_2;
+						option_2_2_1['xAxis'][0]['data'] = X_2_2;
+
+						option_2_2_1['series'] = [];
+
+						for(var i = 0; i < Y_2_2.length; ++i){
+							option_2_2_1['series'].push({
+								name: legend_2_2[i],
+								type: "bar",
+								data: Y_2_2[i],
+							})
+						}
+						
+						myChart_2_2.setOption(option_2_2_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_2_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_2_2('+JSON.stringify(option_2_2_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
 				},
+				magicType: {show: true, type: ['line','bar','tiled','stack']},
+				// restore: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_2_2.setOption(option_2_2_2, true);
+				// 		// curIsPie_2_2 = true;
+				// 	}
+				// },
 				saveAsImage: {show: true},
 				
 			}
@@ -518,184 +638,23 @@ var font_test = 22;
 			{
 				name: '不合格数',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
 				name: '合格数',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [220, 182, 191, 234, 290, 330, 310]
 			}
 		]
 	};
 
-	var option_2_2_2 = {
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-            orient: 'vertical',
-			feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-				// restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		legend: {
-			data: ['不合格数', '合格数'],
-			textStyle: { //图例文字的样式
-				color: color_legend,
-				fontSize: fontSize_all_legend
-			},
-		},
-		tooltip: {},
-		dataset: {
-			source: [
-				['product', '2016', '2017'],
-				['不合格数', 230, 193],
-				['合格数', 11229-230, 11950-193],
-			]
-		},
-		graphic:[{
-			type:"text",
-			// id: 'text1',
-			left:'10%',
-			top:"30%",
-			style:{
-				text:"2016",
-				textAlign:"center",
-				fill:color_axis,
-				fontSize:20,
-				fontWeight:700,
-				color:color_axis,
-				textAlign: 'center',
-				textVerticalAlign: 'middle'
-			}
+	option_2_2_1['series'] = ori_data_2_2['series'];
+	option_2_2_1['legend']['data'] = ori_data_2_2['legend']['data'];
+	option_2_2_1['xAxis'][0]['data'] = ori_data_2_2['xAxis'][0]['data'];
 
-		},
-		{
-			type:"text",
-			// id: 'text1',
-			left:'60%',
-			top:"30%",
-			style:{
-				text:"2017",
-				textAlign:"center",
-				fill:color_axis,
-				fontSize:20,
-				fontWeight:700,
-				color:color_axis,
-				textAlign: 'center',
-				textVerticalAlign: 'middle'
-			}
-
-		}
-		],
-		series: [{
-			type: 'pie',
-			radius: ['25%', '40%'],
-			name: '2016',
-			center: ['25%', '50%'],
-			label: {
-				show: false,
-                position: 'center',
-				fontSize: '30',
-				fontWeight: 'bold',
-				color:color_axis
-			},
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '30',
-					fontWeight: 'bold',
-					formatter: '{d}%',
-                }
-            },
-			encode: {
-				itemName: 'product',
-				value: '2016'
-			}
-			// No encode specified, by default, it is '2012'.
-		}, {
-			type: 'pie',
-			radius: ['25%', '40%'],
-			name: '2017',
-			center: ['75%', '50%'],
-			label: {
-				show: false,
-                position: 'center',
-				fontSize: '30',
-				fontWeight: 'bold',
-				color:color_axis
-			},
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: '30',
-					fontWeight: 'bold',
-					formatter: '{d}%',
-                }
-            },
-			encode: {
-				itemName: 'product',
-				value: '2017'
-			}
-		}]
-	};
-
-
-	console.log(data_1["2016-2017年上海市药品监督抽查情况表"])
-	var data_2_2 = data_1["2016-2017年上海市药品监督抽查情况表"];
-
-	var X_2_2 = [];
-	// 总数
-	var Y_2_2_1 = [];
-	// 不合格数
-	var Y_2_2_2 = [];
-	// 合格数
-	var Y_2_2_3 = [];
-
-
-	for(var i = 1; i < data_2_2.length; ++i){
-		X_2_2.push(data_2_2[i][0]);
-		Y_2_2_1.push(data_2_2[i][1]);
-		Y_2_2_2.push(data_2_2[i][2]);
-		Y_2_2_3.push(data_2_2[i][1]-data_2_2[i][2]);
-	}
-
-	console.log(option_2_2_1)
-
-	option_2_2_1['series'][0]['data'] = Y_2_2_2;
-	option_2_2_1['series'][1]['data'] = Y_2_2_3;
-	option_2_2_1['xAxis'][0]['data'] = X_2_2;
-	// myChart_2_2.setOption(option_2_2_1);
-
-	// option_2_2_2['dataset']['source'] = [
-	// 	['product'].concat(X_2_2);
-	// 	['不合格数'].concat(Y_2_2_2);
-	// 	['合格数'].concat(Y_2_2_3);
-	// ];
-	// option_2_2_2['dataset']['source'].push(['product'].concat(X_2_2));
-	myChart_2_2.setOption(option_2_2_2);
-
-	myChart_2_2.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_2_1;
-		}
-		myChart_2_2.setOption(o.newOption, true);
-	});
-
-	myChart_2_2.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_2_2;
-		myChart_2_2.setOption(o.newOption, true);
-	});
+	myChart_2_2.setOption(option_2_2_1, true);
 
 
 
@@ -720,14 +679,14 @@ var font_test = 22;
 	var myChart_2_3 = echarts.init(dom_2_3, 'chalk');
 	var app_2_3 = {};
 
-	function view_2_3_1_change(){
-		console.log("2_3_1 change")
+	function view_2_2_2_change(){
+		console.log("2_2_2 change")
 		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_2_3_1').value)
-		document.getElementById('view_2_3_1').innerHTML = document.getElementById('view_2_3_1').value
+		console.log(document.getElementById('view_2_2_2').value)
+		document.getElementById('view_2_2_2').innerHTML = document.getElementById('view_2_2_2').value
 	}
 
-	var option_2_3_1 = {
+	var option_2_2_2 = {
 		toolbox: {
 			show: true,
 			itemSize: echart_toolbox_size, 
@@ -743,12 +702,12 @@ var font_test = 22;
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_2_3_1" onchange="view_2_3_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						var table = '<textarea id="view_2_2_2" onchange="view_2_2_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
 						// table += option_9_1_1['series'][0]['name'];
 						// table += '\n';
 						table += "年份"
-						for(var i = 0; i < option_2_3_1['legend']['data'].length; ++i){
-							table += (','+option_2_3_1['legend']['data'][i]);
+						for(var i = 0; i < option_2_2_2['legend']['data'].length; ++i){
+							table += (','+option_2_2_2['legend']['data'][i]);
 						}
 						table += '\n';
 
@@ -807,13 +766,13 @@ var font_test = 22;
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_2_3_1['legend']['data'] = legend_2_3;
-						option_2_3_1['xAxis'][0]['data'] = X_2_3;
+						option_2_2_2['legend']['data'] = legend_2_3;
+						option_2_2_2['xAxis'][0]['data'] = X_2_3;
 
-						option_2_3_1['series'] = [];
+						option_2_2_2['series'] = [];
 
 						for(var i = 0; i < Y_2_3.length; ++i){
-							option_2_3_1['series'].push({
+							option_2_2_2['series'].push({
 								name: legend_2_3[i],
 								type: "bar",
 								// stack: "抽查情况",
@@ -821,13 +780,13 @@ var font_test = 22;
 							})
 						}
 						
-						myChart_2_3.setOption(option_2_3_1);
+						myChart_2_3.setOption(option_2_2_2);
 
 						var Link = document.createElement('a');
 						Link.download = "3_2_3.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_3_2_3('+JSON.stringify(option_2_3_1)+')']);
+						var blob = new Blob(['callback_3_2_3('+JSON.stringify(option_2_2_2)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -924,7 +883,7 @@ var font_test = 22;
 					title: '切换到柱状图',
 					icon: 'image://img/shuju-bar.png',
 					onclick: function (){
-						myChart_2_3.setOption(option_2_3_1, true);
+						myChart_2_3.setOption(option_2_2_2, true);
 						curIsPie_2_3 = false;
 					}
 				}
@@ -1009,11 +968,11 @@ var font_test = 22;
 		}]
 	};
 
-	option_2_3_1['series'] = ori_data_2_3['series'];
-	option_2_3_1['legend']['data'] = ori_data_2_3['legend']['data'];
-	option_2_3_1['xAxis'][0]['data'] = ori_data_2_3['xAxis'][0]['data'];
+	option_2_2_2['series'] = ori_data_2_3['series'];
+	option_2_2_2['legend']['data'] = ori_data_2_3['legend']['data'];
+	option_2_2_2['xAxis'][0]['data'] = ori_data_2_3['xAxis'][0]['data'];
 
-	myChart_2_3.setOption(option_2_3_1, true);
+	myChart_2_3.setOption(option_2_2_2, true);
 
 
 </script>
@@ -1362,17 +1321,19 @@ var font_test = 22;
 					show: true, 
 					readOnly: false,
 					// optionToContent: function(opt) {
-    				// 	str = '<textarea id="view_2_2_5" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
+    				// 	str = '<textarea id="view_2_5_1" style="z-index: 999; width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
 					// 	return str
 					// },
 					optionToContent: function(opt) {
 						// console.log(opt)
+						// $("#next").hide();
+
 						var axisData = opt['xAxis'][0]['data'];
 						var series = opt['series'];
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_2_5_1" onchange="view_2_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
+						var table = '<textarea id="view_2_5_1" onchange="view_2_5_1_change()" style="z-index: 999; width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
 						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
 						// 			+ '<td><font color="red">时间</font></td>'
 						// 			+ '<td>' + '数值' + '</td>'
@@ -1437,6 +1398,7 @@ var font_test = 22;
 						Link.click();
 						// 然后移除
 						document.body.removeChild(Link);
+						$("#next").show();
 						return opt
 					},
 				},
@@ -1572,10 +1534,28 @@ var font_test = 22;
 
 <!--* 图 2_6 -->
 <script>
+    var ori_data_2_6 = {};
+
+    function callback_3_2_6(res){
+        ori_data_2_6 = res;
+		console.log('3_2_6.json读取成功')
+		console.log(ori_data_2_6);
+    }
+</script>
+<script src="data/3_2_6.json?callback=callback_3_2_6"></script>
+
+<script>
 
 	var dom_2_6 = document.getElementById("container_2_6");
 	var myChart_2_6 = echarts.init(dom_2_6, 'chalk');
 	var app_2_6 = {};
+
+	function view_2_6_1_change(){
+		console.log("2_6_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_2_6_1').value)
+		document.getElementById('view_2_6_1').innerHTML = document.getElementById('view_2_6_1').value
+	}
 
 	var option_2_6_1 = {
 		toolbox: {
@@ -1583,18 +1563,120 @@ var font_test = 22;
 			itemSize: echart_toolbox_size, 
             orient: 'vertical',
 			feature: {
-				dataView: {show: true, readOnly: false},
-				// magicType: {show: true, type: ['bar']},
-				// restore: {show: true},
-				myTool2: {
-					show: true,
-					title: '切换到饼图',
-					icon: 'image://img/shuju-data.png',
-					onclick: function (){
-						myChart_2_6.setOption(option_2_6_2, true);
-						// curIsPie_2_2 = true;
-					}
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_2_6_1" onchange="view_2_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_2_6_1['legend']['data'].length; ++i){
+							table += (','+option_2_6_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_1_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 2_6")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_2_6 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_2_6.length;
+
+						var X_2_6 = [];
+						var Y_2_6 = [];
+
+						while(Y_2_6.length < valid_num){
+							Y_2_6.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_2_6.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_2_6.length; ++j, ++k){
+								Y_2_6[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_2_6_1['legend']['data'] = legend_2_6;
+						option_2_6_1['xAxis'][0]['data'] = X_2_6;
+
+						option_2_6_1['series'] = [];
+
+						for(var i = 0; i < Y_2_6.length; ++i){
+							option_2_6_1['series'].push({
+								name: legend_2_6[i],
+								type: "bar",
+								data: Y_2_6[i],
+							})
+						}
+						
+						myChart_2_6.setOption(option_2_6_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_2_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_2_6('+JSON.stringify(option_2_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
 				},
+				magicType: {show: true, type: ['line','bar','tiled','stack']},
+				// restore: {show: true},
+				// myTool2: {
+				// 	show: true,
+				// 	title: '切换到饼图',
+				// 	icon: 'image://img/shuju-data.png',
+				// 	onclick: function (){
+				// 		myChart_2_6.setOption(option_2_6_2, true);
+				// 		// curIsPie_2_2 = true;
+				// 	}
+				// },
 				saveAsImage: {show: true}
 			}
 		},
@@ -1644,13 +1726,13 @@ var font_test = 22;
 			{
 				name: '开具整改通知单',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
 			{
 				name: '未开具整改通知单',
 				type: 'bar',
-				stack: '抽查情况',
+				// stack: '抽查情况',
 				data: [220, 182, 191, 234, 290, 330, 310]
 			}
 		]
@@ -1734,50 +1816,11 @@ var font_test = 22;
 	};
 
 
-	console.log(data_1["2014年和2015年勘察设计质量监管情况对比"])
-	var data_2_6 = data_1["2014年和2015年勘察设计质量监管情况对比"];
+	option_2_6_1['series'] = ori_data_2_6['series'];
+	option_2_6_1['legend']['data'] = ori_data_2_6['legend']['data'];
+	option_2_6_1['xAxis'][0]['data'] = ori_data_2_6['xAxis'][0]['data'];
 
-	var X_2_6 = [];
-	// 总数
-	var Y_2_6_1 = [];
-	// 开具整改通知单
-	var Y_2_6_2 = [];
-	// 未开具整改通知单
-	var Y_2_6_3 = [];
-
-
-	for(var i = 1; i < data_2_6[0].length; ++i){
-		X_2_6.push(data_2_6[0][i]);
-		Y_2_6_1.push(data_2_6[1][i]);
-		Y_2_6_2.push(data_2_6[2][i]);
-		Y_2_6_3.push(data_2_6[1][i]-data_2_6[2][i]);
-	}
-
-	console.log(option_2_6_1)
-
-	option_2_6_1['series'][0]['data'] = Y_2_6_2;
-	option_2_6_1['series'][1]['data'] = Y_2_6_3;
-	option_2_6_1['xAxis'][0]['data'] = X_2_6;
-
-	myChart_2_6.setOption(option_2_6_2);
-
-	myChart_2_6.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_5_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_2_6_1;
-		}
-		myChart_2_6.setOption(o.newOption, true);
-	});
-
-	myChart_2_6.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_2_6_2;
-		myChart_2_6.setOption(o.newOption, true);
-	});
+	myChart_2_6.setOption(option_2_6_1, true);
 
 </script>
 
