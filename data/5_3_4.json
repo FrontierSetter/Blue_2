@@ -1,1 +1,136 @@
-callback_5_3_4({"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"}},"toolbox":{"show":true,"itemSize":18,"orient":"vertical","feature":{"dataView":{"show":true,"readOnly":false},"magicType":{"show":true,"type":["line","bar"]},"saveAsImage":{"show":true}}},"legend":{"data":["R&D经费内部支出（万元）","R&D经费外部支出（万元）","专利申请数（件）"],"textStyle":{"color":"#fff","fontSize":20}},"grid":{"left":"3%","right":"4%","bottom":"3%","containLabel":true},"xAxis":{"type":"category","data":["2009","2010","2011","2012","2013","2014","2015","2016","2017","2018"],"axisLabel":{"textStyle":{"color":"#fff","fontSize":22}}},"yAxis":[{"type":"value","axisLabel":{"fontSize":22}},{"type":"value","axisLabel":{"fontSize":22}}],"series":[{"name":"R&D经费内部支出（万元）","type":"line","yAxisIndex":0,"data":["139222","75096","182217","247273","220058","266271","220204","256885","299325","329634"]},{"name":"R&D经费外部支出（万元）","type":"line","yAxisIndex":0,"data":["95992","105561","121350","136206","44855","113357","120146","117889","185581.5","204373.08"]},{"name":"专利申请数（件）","type":"line","yAxisIndex":1,"data":["119","158","308","422","592","602","716","835","852","1007"]}]})
+callback_5_3_4({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "R&D经费内部支出（万元）",
+            "R&D经费外部支出（万元）",
+            "专利申请数（件）"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "2009",
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018"
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": [
+        {
+            "type": "value",
+            "name":"万元",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        },
+        {
+            "type": "value",
+            "name":"件",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "R&D经费内部支出（万元）",
+            "type": "line",
+            "yAxisIndex": 0,
+            "data": [
+                "139222",
+                "75096",
+                "182217",
+                "247273",
+                "220058",
+                "266271",
+                "220204",
+                "256885",
+                "299325",
+                "329634"
+            ]
+        },
+        {
+            "name": "R&D经费外部支出（万元）",
+            "type": "line",
+            "yAxisIndex": 0,
+            "data": [
+                "95992",
+                "105561",
+                "121350",
+                "136206",
+                "44855",
+                "113357",
+                "120146",
+                "117889",
+                "185581.5",
+                "204373.08"
+            ]
+        },
+        {
+            "name": "专利申请数（件）",
+            "type": "line",
+            "yAxisIndex": 1,
+            "data": [
+                "119",
+                "158",
+                "308",
+                "422",
+                "592",
+                "602",
+                "716",
+                "835",
+                "852",
+                "1007"
+            ]
+        }
+    ]
+})

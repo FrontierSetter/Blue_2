@@ -668,15 +668,26 @@
 					},
 				}
 			},
-		yAxis:{
-				type: 'value',
+		yAxis:
+			[
+            {
+                type: 'value',
+				name: '个',
 				axisLabel:{
 					textStyle: { //图例文字的样式
 						color: color_axis,
 						fontSize: fontSize_axis_label
 					},
 				}
-			},
+            },
+            {
+                type: 'value',
+				name: '%',
+                axisLabel: {
+                    fontSize: fontSize_axis_label
+                }
+            }
+        ],
 		series: [
 			{
 				name: '锅炉',
@@ -883,13 +894,14 @@
 			yAxis: [
             {
                 type: 'value',
-                // name: '亿美元',
+                name: '万元',
                 axisLabel: {
                     fontSize: fontSize_axis_label
                 }
             },
             {
                 type: 'value',
+				name: '件',
                 axisLabel: {
                     fontSize: fontSize_axis_label
                 }

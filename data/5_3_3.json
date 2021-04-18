@@ -1,1 +1,109 @@
-callback_5_3_3({"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"}},"toolbox":{"show":true,"itemSize":18,"orient":"vertical","feature":{"dataView":{"show":true,"readOnly":false},"magicType":{"show":true,"type":["line","bar"]},"saveAsImage":{"show":true}}},"legend":{"data":["发射航天器数量（个）","质量小于50KG的航天器占比"],"textStyle":{"color":"#fff","fontSize":20}},"grid":{"left":"3%","right":"4%","bottom":"3%","containLabel":true},"xAxis":{"type":"category","data":["中国","美国","俄罗斯","欧洲","印度","日本","其他"],"axisLabel":{"textStyle":{"color":"#fff","fontSize":22}}},"yAxis":{"type":"value","axisLabel":{"textStyle":{"color":"#fff","fontSize":22}}},"series":[{"name":"发射航天器数量（个）","type":"bar","data":["205","95","56","24","15","10","56"]},{"name":"质量小于50KG的航天器占比","type":"bar","data":["71.71","36.84","53.57","16.67","46.67","20","64.29"]},{"name":"移动式电容器","type":"bar","data":[]},{"name":"移动式电容器","type":"bar","data":[]},{"name":"移动式电容器","type":"bar","data":[]},{"name":"移动式电容器","type":"bar","data":[]}]})
+callback_5_3_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "发射航天器数量（个）",
+            "质量小于50KG的航天器占比"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "中国",
+            "美国",
+            "俄罗斯",
+            "欧洲",
+            "印度",
+            "日本",
+            "其他"
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": [
+        {
+            "type": "value",
+            "name":"个",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        },
+        {
+            "type": "value",
+            "name":"%",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "发射航天器数量（个）",
+            "type": "bar",
+            "yAxisIndex": 0,
+            "data": [
+                "205",
+                "95",
+                "56",
+                "24",
+                "15",
+                "10",
+                "56"
+            ]
+        },
+        {
+            "name": "质量小于50KG的航天器占比",
+            "type": "bar",
+            "yAxisIndex": 1,
+            "data": [
+                "71.71",
+                "36.84",
+                "53.57",
+                "16.67",
+                "46.67",
+                "20",
+                "64.29"
+            ]
+        }
+    ]
+})
