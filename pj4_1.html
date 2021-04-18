@@ -1102,25 +1102,24 @@
 
 </script> -->
 <script>
-    var ori_data_1_1 = {};
+    var ori_data_1_3 = {};
 
     function callback_4_1_3(res){
-        ori_data_1_1 = res;
+        ori_data_1_3 = res;
 		console.log('4_1_3.json读取成功')
-		console.log(ori_data_1_1);
+		console.log(ori_data_1_3);
     }
 </script>
 <script src="data/4_1_3.json?callback=callback_4_1_3"></script>
 
 <script>
 
-	var dom_1_1 = document.getElementById("container_3");
-	var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
-	var app_1_1 = {};
+	var dom_1_3 = document.getElementById("container_3");
+	var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
+	var app_1_3 = {};
 
 	function view_4_1_3_change(){
 		console.log("4_1_3 change")
-		// Document.getElementById('view_2_1_1').innerHTML
 		console.log(document.getElementById('view_4_1_3').value)
 		document.getElementById('view_4_1_3').innerHTML = document.getElementById('view_4_1_3').value
 	}
@@ -1152,7 +1151,6 @@
 						// console.log(axisData)
 						// console.log(series)
 						var table = '<textarea id="view_4_1_3" onchange="view_4_1_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						// table += option_1_1_9['series'][0]['name'];
 						// table += '\n';
 						table += "年份"
 						for(var i = 0; i < option_4_1_3['legend']['data'].length; ++i){
@@ -1175,22 +1173,21 @@
 						// table += '</tbody></table></div>';
 						// console.log(table)
 						return table;
-						// return option_2_1_1['xAxis']['data']
 					},
 					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 1_1")
+						console.log("start save 1_3")
 
 						var plain_tex = HTMLDomElement.firstChild.innerHTML;
 						var arr_tex = plain_tex.split('\n')
 
-						var legend_1_1 = arr_tex[0].split(',').slice(1);
-						var valid_num = legend_1_1.length;
+						var legend_1_3 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_1_3.length;
 
-						var X_1_1 = [];
-						var Y_1_1 = [];
+						var X_1_3 = [];
+						var Y_1_3 = [];
 
-						while(Y_1_1.length < valid_num){
-							Y_1_1.push([])
+						while(Y_1_3.length < valid_num){
+							Y_1_3.push([])
 						}
 
 						for(var i = 1; i < arr_tex.length; ++i){
@@ -1207,29 +1204,29 @@
 								continue;
 							}
 
-							X_1_1.push(cur_pair[0]);
+							X_1_3.push(cur_pair[0]);
 
-							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_1.length; ++j, ++k){
-								Y_1_1[k].push(cur_pair[j]);
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_1_3.length; ++j, ++k){
+								Y_1_3[k].push(cur_pair[j]);
 							}
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_4_1_3['legend']['data'] = legend_1_1;
-						option_4_1_3['xAxis'][0]['data'] = X_1_1;
+						option_4_1_3['legend']['data'] = legend_1_3;
+						option_4_1_3['xAxis'][0]['data'] = X_1_3;
 
 						option_4_1_3['series'] = [];
 
-						for(var i = 0; i < Y_1_1.length; ++i){
+						for(var i = 0; i < Y_1_3.length; ++i){
 							option_4_1_3['series'].push({
-								name: legend_1_1[i],
+								name: legend_1_3[i],
 								type: "bar",//折线图
 								// stack: "抽查情况",
-								data: Y_1_1[i],
+								data: Y_1_3[i],
 							})
 						}
 						
-						myChart_1_1.setOption(option_4_1_3);
+						myChart_1_3.setOption(option_4_1_3);
 
 						var Link = document.createElement('a');
 						Link.download = "4_1_3.json";
@@ -1348,11 +1345,11 @@
 	};
 
 
-	option_4_1_3['series'] = ori_data_1_1['series'];
-	option_4_1_3['legend']['data'] = ori_data_1_1['legend']['data'];
-	option_4_1_3['xAxis'][0]['data'] = ori_data_1_1['xAxis'][0]['data'];
+	option_4_1_3['series'] = ori_data_1_3['series'];
+	option_4_1_3['legend']['data'] = ori_data_1_3['legend']['data'];
+	option_4_1_3['xAxis'][0]['data'] = ori_data_1_3['xAxis'][0]['data'];
 
-	myChart_1_1.setOption(option_4_1_3, true);
+	myChart_1_3.setOption(option_4_1_3, true);
 
 </script>
 
