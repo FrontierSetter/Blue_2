@@ -61,6 +61,7 @@ body {margin:0 auto;min-width:375px;max-width:192000px;}
 .col-c {-webkit-flex:10;-ms-flex:2;flex:98;}
 .col-r {-webkit-flex:9;-ms-flex:2;flex:96;margin-right:-10px;padding-left:8px}
 .col-ll {-webkit-flex:9;-ms-flex:2;flex:194;margin-left: -10px;padding-right:8px}
+.col-lll {-webkit-flex:9;-ms-flex:2;flex:290;margin-left: -10px;padding-right:8px}
 
 /* PC */
 @media (max-width:1919px) {
