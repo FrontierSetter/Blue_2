@@ -39,7 +39,7 @@
                     <div class="xpanel-wrapper xpanel-wrapper-90">
                         <div class="xpanel xpanel-r-t">
                             <div class="title">各地区竞争力数据
-								<a href="./pj6_5_2.html" style="color: white;" class="title_link" ><i class="hand point right outline icon"></i></a>
+								<a href="./pj6_5.html" style="color: white;" class="title_link" ><i class="hand point right outline icon"></i></a>
 							</div>
                             <div class="echart-container" style="height: 100%;" id="container_1_1"></div>
                         </div>
@@ -540,20 +540,20 @@
         ]
     };
     
-    if (option_5_1 && typeof option_5_1 === 'object') {
-        option_5_1['series'][0]['data'] = XYs_1;
-		myChart_5_1.setOption(option_5_1);
-		console.log(ori_data_5_1)
+    if (option_5_4 && typeof option_5_4 === 'object') {
+        option_5_4['series'][0]['data'] = XYs_3;
+		myChart_5_1.setOption(option_5_4);
+		console.log(ori_data_5_4)
 	}
     myChart_5_1.on('magictypechanged', function (params) {
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
+			option_5_1['series'][0]['data'] = XYs_1;
+			o.newOption = option_5_1;
+		}else if(params.currentType == 'bar'){
 			option_5_3['series'][0]['data'] = XYs_2;
 			o.newOption = option_5_3;
-		}else if(params.currentType == 'bar'){
-			option_5_4['series'][0]['data'] = XYs_3;
-			o.newOption = option_5_4;
 		}
 		myChart_5_1.setOption(o.newOption, true);
 	});
@@ -561,8 +561,8 @@
 	myChart_5_1.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-        option_5_1['series'][0]['data'] = XYs_1;
-		o.newOption = option_5_1;
+        option_5_4['series'][0]['data'] = XYs_3;
+		o.newOption = option_5_4;
 		myChart_5_1.setOption(o.newOption, true);
 	});
 

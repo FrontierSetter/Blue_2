@@ -75,7 +75,8 @@
             <div class="col col-r">
                 <div class="xpanel-wrapper xpanel-wrapper-90">
                     <div class="xpanel xpanel-r-t">
-                        <div class="title title-long">CNAS检查机构数量宏观数据 </div>
+                        <div class="title title-long">CNAS检查机构数量宏观数据 <a href="./pj6_4_2.html" style="color: white;" class="title_link" ><i
+							class="hand point right outline icon"></i></a></div>
                         
                         <div id="container_5" class="echart-container" ></div>
                     </div>
@@ -265,13 +266,13 @@
 <script>
     var ori_data_7_1 = {};
 
-    function callback_4_7_1(res){
+    function callback_6_4_1(res){
         ori_data_7_1 = res;
-		console.log('4_7_1.json读取成功')
+		console.log('6_4_1.json读取成功')
 		console.log(ori_data_7_1);
     }
 </script>
-<script src="data/4_7_1.json?callback=callback_4_7_1"></script>
+<script src="data/6_4_1.json?callback=callback_6_4_1"></script>
 
 <script>
 
@@ -279,15 +280,15 @@
 	var myChart_7_1 = echarts.init(dom_7_1, 'chalk');
 	var app_7_1 = {};
 
-	function view_4_7_1_change(){
-		console.log("4_7_1 change")
+	function view_6_4_1_change(){
+		console.log("6_4_1 change")
 		// Document.getElementById('view_2_7_1').innerHTML
-		console.log(document.getElementById('view_4_7_1').value)
-		document.getElementById('view_4_7_1').innerHTML = document.getElementById('view_4_7_1').value
+		console.log(document.getElementById('view_6_4_1').value)
+		document.getElementById('view_6_4_1').innerHTML = document.getElementById('view_6_4_1').value
 	}
 
 	//折线图
-	var option_4_7_1 = {
+	var option_6_4_1 = {
         textStyle: {
             fontSize: fontSize_all_legend,
         },
@@ -312,12 +313,12 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_4_7_1" onchange="view_4_7_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						var table = '<textarea id="view_6_4_1" onchange="view_6_4_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
 						// table += option_9_7_1['series'][0]['name'];
 						// table += '\n';
 						table += "年份"
-						for(var i = 0; i < option_4_7_1['legend']['data'].length; ++i){
-							table += (','+option_4_7_1['legend']['data'][i]);
+						for(var i = 0; i < option_6_4_1['legend']['data'].length; ++i){
+							table += (','+option_6_4_1['legend']['data'][i]);
 						}
 						table += '\n';
 
@@ -376,13 +377,13 @@
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_4_7_1['legend']['data'] = legend_7_1;
-						option_4_7_1['xAxis'][0]['data'] = X_7_1;
+						option_6_4_1['legend']['data'] = legend_7_1;
+						option_6_4_1['xAxis'][0]['data'] = X_7_1;
 
-						option_4_7_1['series'] = [];
+						option_6_4_1['series'] = [];
 
 						for(var i = 0; i < Y_7_1.length; ++i){
-							option_4_7_1['series'].push({
+							option_6_4_1['series'].push({
 								name: legend_7_1[i],
 								type: "line",//折线图
 								// stack: "抽查情况",
@@ -390,13 +391,13 @@
 							})
 						}
 						
-						myChart_7_1.setOption(option_4_7_1);
+						myChart_7_1.setOption(option_6_4_1);
 
 						var Link = document.createElement('a');
-						Link.download = "4_7_1.json";
+						Link.download = "6_4_1.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_4_7_1('+JSON.stringify(option_4_7_1)+')']);
+						var blob = new Blob(['callback_6_4_1('+JSON.stringify(option_6_4_1)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -471,11 +472,11 @@
 	};
 
 
-	option_4_7_1['series'] = ori_data_7_1['series'];
-	option_4_7_1['legend']['data'] = ori_data_7_1['legend']['data'];
-	option_4_7_1['xAxis'][0]['data'] = ori_data_7_1['xAxis'][0]['data'];
+	option_6_4_1['series'] = ori_data_7_1['series'];
+	option_6_4_1['legend']['data'] = ori_data_7_1['legend']['data'];
+	option_6_4_1['xAxis'][0]['data'] = ori_data_7_1['xAxis'][0]['data'];
 
-	myChart_7_1.setOption(option_4_7_1, true);
+	myChart_7_1.setOption(option_6_4_1, true);
 
 </script>
 
@@ -898,13 +899,13 @@
 <!-- <script>
     var ori_data_1_2 = {};
 
-    function callback_4_7_2(res){
+    function callback_6_4_2(res){
         ori_data_1_2 = res;
-		console.log('4_7_2.json读取成功')
+		console.log('6_4_2.json读取成功')
 		console.log(ori_data_1_2);
     }
 </script>
-<script src="data/4_7_2.json?callback=callback_4_7_2"></script>
+<script src="data/6_4_2.json?callback=callback_6_4_2"></script>
 
 <script>
 
@@ -912,15 +913,15 @@
 	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
 	var app_1_2 = {};
 
-	function view_4_7_2_change(){
-		console.log("4_7_2 change")
+	function view_6_4_2_change(){
+		console.log("6_4_2 change")
 		// Document.getElementById('view_2_1_2').innerHTML
-		console.log(document.getElementById('view_4_7_2').value)
-		document.getElementById('view_4_7_2').innerHTML = document.getElementById('view_4_7_2').value
+		console.log(document.getElementById('view_6_4_2').value)
+		document.getElementById('view_6_4_2').innerHTML = document.getElementById('view_6_4_2').value
 	}
 
 	//折线图
-	var option_4_7_2 = {
+	var option_6_4_2 = {
         textStyle: {
             fontSize: fontSize_all_legend,
         },
@@ -945,12 +946,12 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_4_7_2" onchange="view_4_7_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						var table = '<textarea id="view_6_4_2" onchange="view_6_4_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
 						// table += option_1_2_9['series'][0]['name'];
 						// table += '\n';
 						table += "年份"
-						for(var i = 0; i < option_4_7_2['legend']['data'].length; ++i){
-							table += (','+option_4_7_2['legend']['data'][i]);
+						for(var i = 0; i < option_6_4_2['legend']['data'].length; ++i){
+							table += (','+option_6_4_2['legend']['data'][i]);
 						}
 						table += '\n';
 
@@ -1009,13 +1010,13 @@
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_4_7_2['legend']['data'] = legend_1_2;
-						option_4_7_2['xAxis'][0]['data'] = X_1_2;
+						option_6_4_2['legend']['data'] = legend_1_2;
+						option_6_4_2['xAxis'][0]['data'] = X_1_2;
 
-						option_4_7_2['series'] = [];
+						option_6_4_2['series'] = [];
 
 						for(var i = 0; i < Y_1_2.length; ++i){
-							option_4_7_2['series'].push({
+							option_6_4_2['series'].push({
 								name: legend_1_2[i],
 								type: "bar",//折线图
 								// stack: "抽查情况",
@@ -1023,13 +1024,13 @@
 							})
 						}
 						
-						myChart_1_2.setOption(option_4_7_2);
+						myChart_1_2.setOption(option_6_4_2);
 
 						var Link = document.createElement('a');
-						Link.download = "4_7_2.json";
+						Link.download = "6_4_2.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_4_7_2('+JSON.stringify(option_4_7_2)+')']);
+						var blob = new Blob(['callback_6_4_2('+JSON.stringify(option_6_4_2)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -1118,24 +1119,24 @@
 	};
 
 
-	option_4_7_2['series'] = ori_data_1_2['series'];
-	option_4_7_2['legend']['data'] = ori_data_1_2['legend']['data'];
-	option_4_7_2['xAxis'][0]['data'] = ori_data_1_2['xAxis'][0]['data'];
+	option_6_4_2['series'] = ori_data_1_2['series'];
+	option_6_4_2['legend']['data'] = ori_data_1_2['legend']['data'];
+	option_6_4_2['xAxis'][0]['data'] = ori_data_1_2['xAxis'][0]['data'];
 
-	myChart_1_2.setOption(option_4_7_2, true);
+	myChart_1_2.setOption(option_6_4_2, true);
 
 </script> -->
 
 <script>
     var ori_data_7_2 = {};
 
-    function callback_4_7_2(res){
+    function callback_6_4_2(res){
         ori_data_7_2 = res;
-		console.log('4_7_2.json读取成功')
+		console.log('6_4_2.json读取成功')
 		console.log(ori_data_7_2);
     }
 </script>
-<script src="data/4_7_2.json?callback=callback_4_7_2"></script>
+<script src="data/6_4_2.json?callback=callback_6_4_2"></script>
 
 <script>
 
@@ -1143,15 +1144,15 @@
 	var myChart_7_2 = echarts.init(dom_7_2, 'chalk');
 	var app_7_2 = {};
 
-	function view_4_7_2_change(){
-		console.log("4_7_2 change")
+	function view_6_4_2_change(){
+		console.log("6_4_2 change")
 		// Document.getElementById('view_2_7_2').innerHTML
-		console.log(document.getElementById('view_4_7_2').value)
-		document.getElementById('view_4_7_2').innerHTML = document.getElementById('view_4_7_2').value
+		console.log(document.getElementById('view_6_4_2').value)
+		document.getElementById('view_6_4_2').innerHTML = document.getElementById('view_6_4_2').value
 	}
 
 	//折线图
-	var option_4_7_2 = {
+	var option_6_4_2 = {
         textStyle: {
             fontSize: fontSize_all_legend,
         },
@@ -1176,12 +1177,12 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_4_7_2" onchange="view_4_7_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						var table = '<textarea id="view_6_4_2" onchange="view_6_4_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
 						// table += option_7_2_9['series'][0]['name'];
 						// table += '\n';
 						table += "机构"
-						for(var i = 0; i < option_4_7_2['legend']['data'].length; ++i){
-							table += (','+option_4_7_2['legend']['data'][i]);
+						for(var i = 0; i < option_6_4_2['legend']['data'].length; ++i){
+							table += (','+option_6_4_2['legend']['data'][i]);
 						}
 						table += '\n';
 
@@ -1240,15 +1241,15 @@
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_4_7_2['legend']['data'] = legend_7_2;
-						option_4_7_2['xAxis'][0]['data'] = X_7_2;
+						option_6_4_2['legend']['data'] = legend_7_2;
+						option_6_4_2['xAxis'][0]['data'] = X_7_2;
 
-						option_4_7_2['series'] = [];
+						option_6_4_2['series'] = [];
 
 						for(var i = 0; i < Y_7_2.length; ++i){
 							if(i!=3)
 							{
-								option_4_7_2['series'].push({
+								option_6_4_2['series'].push({
 								name: legend_7_2[i],
 								type: "bar",
                                 areaStyle: {},//阴影情况
@@ -1256,7 +1257,7 @@
 								data: Y_7_2[i],
 							})
 							}else{
-								option_4_7_2['series'].push({
+								option_6_4_2['series'].push({
 								name: legend_7_2[i],
 								type: "line",//折线图
 								data: Y_7_2[i],
@@ -1265,13 +1266,13 @@
 						}
 					}
 						
-						myChart_7_2.setOption(option_4_7_2);
+						myChart_7_2.setOption(option_6_4_2);
 
 						var Link = document.createElement('a');
-						Link.download = "4_7_2.json";
+						Link.download = "6_4_2.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_4_7_2('+JSON.stringify(option_4_7_2)+')']);
+						var blob = new Blob(['callback_6_4_2('+JSON.stringify(option_6_4_2)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -1371,11 +1372,11 @@
 	};
 
 
-	option_4_7_2['series'] = ori_data_7_2['series'];
-	option_4_7_2['legend']['data'] = ori_data_7_2['legend']['data'];
-	option_4_7_2['xAxis'][0]['data'] = ori_data_7_2['xAxis'][0]['data'];
+	option_6_4_2['series'] = ori_data_7_2['series'];
+	option_6_4_2['legend']['data'] = ori_data_7_2['legend']['data'];
+	option_6_4_2['xAxis'][0]['data'] = ori_data_7_2['xAxis'][0]['data'];
 
-	myChart_7_2.setOption(option_4_7_2, true);
+	myChart_7_2.setOption(option_6_4_2, true);
 
 </script>
 
@@ -1385,13 +1386,13 @@
 <script>
     var ori_data_7_6 = {};
 
-    function callback_4_7_6(res){
+    function callback_6_4_6(res){
         ori_data_7_6 = res;
-		console.log('4_7_6.json读取成功')
+		console.log('6_4_6.json读取成功')
 		console.log(ori_data_7_6);
     }
 </script>
-<script src="data/4_7_6.json?callback=callback_4_7_6"></script>
+<script src="data/6_4_6.json?callback=callback_6_4_6"></script>
 
 <script>
 
@@ -1399,15 +1400,15 @@
 	var myChart_7_6 = echarts.init(dom_7_6, 'chalk');
 	var app_7_6 = {};
 
-	function view_4_7_6_change(){
-		console.log("4_7_6 change")
+	function view_6_4_6_change(){
+		console.log("6_4_6 change")
 		// Document.getElementById('view_2_7_6').innerHTML
-		console.log(document.getElementById('view_4_7_6').value)
-		document.getElementById('view_4_7_6').innerHTML = document.getElementById('view_4_7_6').value
+		console.log(document.getElementById('view_6_4_6').value)
+		document.getElementById('view_6_4_6').innerHTML = document.getElementById('view_6_4_6').value
 	}
 
 	//折线图
-	var option_4_7_6 = {
+	var option_6_4_6 = {
         textStyle: {
             fontSize: fontSize_all_legend,
         },
@@ -1432,12 +1433,12 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_4_7_6" onchange="view_4_7_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						var table = '<textarea id="view_6_4_6" onchange="view_6_4_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
 						// table += option_7_6_9['series'][0]['name'];
 						// table += '\n';
 						table += "行业"
-						for(var i = 0; i < option_4_7_6['legend']['data'].length; ++i){
-							table += (','+option_4_7_6['legend']['data'][i]);
+						for(var i = 0; i < option_6_4_6['legend']['data'].length; ++i){
+							table += (','+option_6_4_6['legend']['data'][i]);
 						}
 						table += '\n';
 
@@ -1496,13 +1497,13 @@
 							// Y_9_1.push(cur_pair[1]);
 						}
 
-						option_4_7_6['legend']['data'] = legend_7_6;
-						option_4_7_6['xAxis'][0]['data'] = X_7_6;
+						option_6_4_6['legend']['data'] = legend_7_6;
+						option_6_4_6['xAxis'][0]['data'] = X_7_6;
 
-						option_4_7_6['series'] = [];
+						option_6_4_6['series'] = [];
 
 						for(var i = 0; i < Y_7_6.length; ++i){
-							option_4_7_6['series'].push({
+							option_6_4_6['series'].push({
 								name: legend_7_6[i],
 								type: "bar",//折线图
 								// stack: "抽查情况",
@@ -1510,13 +1511,13 @@
 							})
 						}
 						
-						myChart_7_6.setOption(option_4_7_6);
+						myChart_7_6.setOption(option_6_4_6);
 
 						var Link = document.createElement('a');
-						Link.download = "4_7_6.json";
+						Link.download = "6_4_6.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_4_7_6('+JSON.stringify(option_4_7_6)+')']);
+						var blob = new Blob(['callback_6_4_6('+JSON.stringify(option_6_4_6)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -1597,11 +1598,11 @@
 	};
 
 
-	option_4_7_6['series'] = ori_data_7_6['series'];
-	option_4_7_6['legend']['data'] = ori_data_7_6['legend']['data'];
-	option_4_7_6['xAxis'][0]['data'] = ori_data_7_6['xAxis'][0]['data'];
+	option_6_4_6['series'] = ori_data_7_6['series'];
+	option_6_4_6['legend']['data'] = ori_data_7_6['legend']['data'];
+	option_6_4_6['xAxis'][0]['data'] = ori_data_7_6['xAxis'][0]['data'];
 
-	myChart_7_6.setOption(option_4_7_6, true);
+	myChart_7_6.setOption(option_6_4_6, true);
 
 </script>
 
@@ -1619,21 +1620,21 @@
     var ori_data_7_3 = {}
     function callback_7_3(res){
         ori_data_7_3 = res;
-		console.log('4_7_3.json读取成功')
+		console.log('6_4_3.json读取成功')
 		console.log(ori_data_7_3)
     }
 </script>
-<script src="data/4_7_3.json?callback=callback_7_3"></script>
+<script src="data/6_4_3.json?callback=callback_7_3"></script>
 
 <script>
     var ori_data_7_4 = {}
     function callback_7_4(res){
         ori_data_7_4 = res;
-		console.log('4_7_4.json读取成功')
+		console.log('6_4_4.json读取成功')
 		console.log(ori_data_7_4)
     }
 </script>
-<script src="data/4_7_4.json?callback=callback_7_4"></script>
+<script src="data/6_4_4.json?callback=callback_7_4"></script>
 
 <!--配置页面 5-1 的Echart图-->
 <script>
@@ -1727,7 +1728,7 @@
 						myChart_7_4.setOption(option_7_4);
 
 						var Link = document.createElement('a')
-						Link.download = "4_7_4.json"
+						Link.download = "6_4_4.json"
 						Link.style.display = 'none'
 						//字符内容转变成blob地址
 						var blob = new Blob(['callback_7_4('+JSON.stringify(option_7_4)+')'])
@@ -1854,7 +1855,7 @@
                     myChart_7_4.setOption(option_7_3);
 
                     var Link = document.createElement('a')
-                    Link.download = "4_7_3.json"
+                    Link.download = "6_4_3.json"
                     Link.style.display = 'none'
                     //字符内容转变成blob地址
                     var blob = new Blob(['callback_7_3('+JSON.stringify(option_7_3)+')'])
