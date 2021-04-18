@@ -246,11 +246,12 @@
             },
             xAxis: {
                 type: 'value',
-				name: '劳动生产率(美元每人)',
+				name: '劳动生产率 (美元每人)',
                 nameGap: 25,
                 nameLocation: 'middle',
                 nameTextStyle: {
-                    fontSize: fontSize_bubble_xy_axis_label
+                    fontSize: fontSize_bubble_xy_axis_label,
+                    padding: [10, 10, 10, 10]
                 },
                 splitLine: {
                     show: false
@@ -267,9 +268,11 @@
             },
             yAxis: {
                 type: 'value',
-				name: 'GDP(万亿美元)',
+				name: 'GDP (万亿美元)',
+                nameLocation: 'center',
                 nameTextStyle: {
-                    fontSize: fontSize_bubble_xy_axis_label
+                    fontSize: fontSize_bubble_xy_axis_label,
+                    padding: [10, 10, 10, 10]
                 },
                 axisLine: {
                     lineStyle: {

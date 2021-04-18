@@ -466,7 +466,7 @@
                 }
 			},
 			axisLabel: {
-				formatter: '{value} 个',
+				formatter: '{value}',
                 fontSize: fontSize_axis_label
             }
 		},
@@ -624,7 +624,7 @@
                 }
 			},
 			axisLabel: {
-				formatter: '{value} 个',
+				formatter: '{value}',
                 fontSize: fontSize_axis_label
             }
 		},
@@ -906,8 +906,12 @@
             }
 		]
     };
-	if (option_8_2 && typeof option_8_2 === 'object') {
-		myChart_8_2.setOption(option_8_2);
+	// if (option_8_2 && typeof option_8_2 === 'object') {
+	// 	myChart_8_2.setOption(option_8_2);
+	// 	console.log(ori_data_8_2)
+	// }
+	if (option_8_2_1 && typeof option_8_2_1 === 'object') {
+		myChart_8_2.setOption(option_8_2_1);
 		console.log(ori_data_8_2)
 	}
 	myChart_8_2.on('magictypechanged', function (params) {
@@ -934,7 +938,7 @@
 	myChart_8_2.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_8_2;
+		o.newOption = option_8_2_1;
 		myChart_8_2.setOption(o.newOption, true);
 	});
 </script>

@@ -1616,8 +1616,12 @@
 		]
 	};
 	//option之间切换，默认饼状图
-	if (option_5_6 && typeof option_5_6 === 'object') {
-		myChart_5_6.setOption(option_5_6);
+	// if (option_5_6 && typeof option_5_6 === 'object') {
+	// 	myChart_5_6.setOption(option_5_6);
+	// 	console.log(ori_data_5_6)
+	// }
+	if (option_5_6_1 && typeof option_5_6_1 === 'object') {
+		myChart_5_6.setOption(option_5_6_1);
 		console.log(ori_data_5_6)
 	}
 	myChart_5_6.on('magictypechanged', function (params) {
@@ -1642,7 +1646,7 @@
 	myChart_5_6.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_5_6;
+		o.newOption = option_5_6_1;
 		myChart_5_6.setOption(o.newOption, true);
 	});
 </script>
