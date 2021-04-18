@@ -36,6 +36,20 @@
 
 </head>
 
+<style type="text/css"> 
+	.flip_card_side{
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	.flip_card{
+		position: relative;
+	}
+</style> 
+
 <body>
     <div class="header">
         <h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
@@ -52,21 +66,27 @@
                 <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-l-b">
                         <div class="title">上海市近年与环保规划相关的政策文件</div>
-                        <div id="container_6_2" style="height: 90%">
-                            <div class="container_table">
-                                <table class="pure-table pure-table-horizontal" id="table_6_2">
-                                    <thead>
-                                        <tr>
-                                            <th>出台年份</th>
-                                            <th>文件名称</th>
-                                        </tr>
-                                    </thead>
+						<div class="flip_card" style="position: relative; height: 90%;">
+							<div id="container_6_2" class="flip_card_side" style="position: absolute;">
+								
+							</div>
+							<!-- ?如果右边的按钮点不到，就修改right值调整挡在前面的表格的边距 -->
+							<div class="flip_card_side" style="position: absolute; z-index: 10; right: 8%; bottom: 5%;">
+								<div class="container_table" style="overflow: scroll;">
+									<table class="pure-table pure-table-horizontal" id="table_6_2">
+										<thead>
+											<tr>
+												<th>出台年份</th>
+												<th>文件名称</th>
+											</tr>
+										</thead>
 
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -98,21 +118,26 @@
                 <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
                         <div class="title">上海市近年开展的环保科研项目和标准化文件</div>
-                        <div id="container_6_6" style="height: 90%">
-                            <div class="container_table">
-                                <table class="pure-table pure-table-horizontal" id="table_6_6">
-                                    <thead>
-                                        <tr>
-                                            <th>出台年份</th>
-                                            <th>项目或标准化文件名称</th>
-                                        </tr>
-                                    </thead>
+						<div class="flip_card" style="position: relative; height: 90%;">
+							<div id="container_6_6" class="flip_card_side" style="position: absolute;">
+								
+							</div>
+							<div class="flip_card_side" style="position: absolute; z-index: 10; right: 8%; bottom: 5%;">
+								<div class="container_table" style="overflow: scroll;">
+									<table class="pure-table pure-table-horizontal" id="table_6_6">
+										<thead>
+											<tr>
+												<th>出台年份</th>
+												<th>文件名称</th>
+											</tr>
+										</thead>
 
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -525,7 +550,154 @@
 
 <!--配置页面 6-2 的表格-->
 <script>
-    var data_6_2 = alldata["上海市近年与环保规划相关的政策文件"]
+    var ori_data_2_1 = {};
+
+    function callback_3_6_2(res){
+        ori_data_2_1 = res;
+		console.log('3_6_2.json读取成功')
+		console.log(ori_data_2_1);
+    }
+</script>
+<script src="data/3_6_2.json?callback=callback_3_6_2"></script>
+
+<script>
+	var dom_6_2 = document.getElementById("container_6_2");
+	var myChart_6_2 = echarts.init(dom_6_2, 'chalk');
+	var app_6_2 = {};
+
+	function view_6_2_1_change(){
+		console.log("6_2_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_6_2_1').value)
+		document.getElementById('view_6_2_1').innerHTML = document.getElementById('view_6_2_1').value
+	}
+
+	//折线图
+	var option_3_6_2 = {
+        tooltip: {
+			show:false,
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					optionToContent: function(opt) {
+						document.getElementById("container_6_2").style.zIndex=20;
+						var table = '<textarea id="view_6_2_1" onchange="view_6_2_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						// table += "年份,文件\n"
+
+						// console.log(data_6_2)
+
+						for (var i = 0; i < data_6_2.length; ++i) {
+							// console.log(data_6_2[i])
+							table += data_6_2[i][0] + ',' + data_6_2[i][1] + '\n';
+						}
+						
+						table += '</textarea>'
+
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt){
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var result_data = {'data':[]};
+
+						for(var i = 0; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							
+							if(cur_pair.length != 2){
+								continue;
+							}
+
+							result_data['data'].push(cur_pair)
+						}
+
+						console.log(result_data);
+
+						var Link = document.createElement('a');
+						Link.download = "3_6_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_6_2('+JSON.stringify(result_data)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+
+						document.getElementById("container_6_2").style.zIndex=0;
+						return opt
+					},
+					show: true, 
+					readOnly: false,
+				},
+				// magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// // restore: {show: true},
+				// saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			show:false,
+            data: ['建成区绿化覆盖率', '森林覆盖率', '生活垃圾无害化处理率', '人均生活垃圾处理减量率'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				show: false,
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				show: false,
+				type: 'value',
+                name: '百分比%',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+		
+		]
+	};
+
+	myChart_6_2.setOption(option_3_6_2, true);
+
+
+    // var data_6_2 = alldata["上海市近年与环保规划相关的政策文件"]
+    var data_6_2 = ori_data_2_1["data"]
 
     function addRow_6_2_once(data1, data2) {
         var oTable = document.getElementById("table_6_2");
@@ -1288,10 +1460,8 @@
 
 	//折线图
 	var option_3_6_5 = {
-        textStyle: {
-            fontSize: fontSize_all_legend,
-        },
         tooltip: {
+			show:false,
 			trigger: 'axis',
 			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
 				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
@@ -1411,6 +1581,7 @@
 			}
 		},
 		legend: {
+			show: false,
             data: ['环评文件', '环境影响报告书', '报告表', '登记表', '总量'],
 			textStyle: { //图例文字的样式
 				color: color_legend,
@@ -1488,7 +1659,154 @@
 
 <!--配置页面 6-6 的Echart图-->
 <script>
-    var data_6_6 = alldata["上海市近年开展的环保科研项目和标准化文件"]
+    var ori_data_6_1 = {};
+
+    function callback_3_6_6(res){
+        ori_data_6_1 = res;
+		console.log('3_6_6.json读取成功')
+		console.log(ori_data_6_1);
+    }
+</script>
+<script src="data/3_6_6.json?callback=callback_3_6_6"></script>
+
+<script>
+	var dom_6_6 = document.getElementById("container_6_6");
+	var myChart_6_6 = echarts.init(dom_6_6, 'chalk');
+	var app_6_6 = {};
+
+	function view_6_6_1_change(){
+		console.log("6_6_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_6_6_1').value)
+		document.getElementById('view_6_6_1').innerHTML = document.getElementById('view_6_6_1').value
+	}
+
+	//折线图
+	var option_3_6_6 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					optionToContent: function(opt) {
+						document.getElementById("container_6_6").style.zIndex=20;
+						var table = '<textarea id="view_6_6_1" onchange="view_6_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						// table += "年份,文件\n"
+
+						// console.log(data_6_6)
+
+						for (var i = 0; i < data_6_6.length; ++i) {
+							// console.log(data_6_6[i])
+							table += data_6_6[i][0] + ',' + data_6_6[i][1] + '\n';
+						}
+						
+						table += '</textarea>'
+
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt){
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var result_data = {'data':[]};
+
+						for(var i = 0; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							
+							if(cur_pair.length != 2){
+								continue;
+							}
+							
+							result_data['data'].push(cur_pair)
+						}
+
+						console.log(result_data);
+
+						var Link = document.createElement('a');
+						Link.download = "3_6_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_6_6('+JSON.stringify(result_data)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+
+						document.getElementById("container_6_6").style.zIndex=0;
+						return opt
+					},
+					show: true, 
+					readOnly: false,
+				},
+				// magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// // restore: {show: true},
+				// saveAsImage: {show: true}
+			}
+		},
+		legend: {
+            data: ['建成区绿化覆盖率', '森林覆盖率', '生活垃圾无害化处理率', '人均生活垃圾处理减量率'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				show: false,
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				show: false,
+				type: 'value',
+                name: '百分比%',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+		
+		]
+	};
+
+	myChart_6_6.setOption(option_3_6_6, true);
+
+    // var data_6_6 = alldata["上海市近年开展的环保科研项目和标准化文件"]
+    var data_6_6 = ori_data_6_1["data"]
 
     function addRow_6_6_once(data1, data2) {
         var oTable = document.getElementById("table_6_6");
