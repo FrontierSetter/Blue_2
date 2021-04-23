@@ -31,14 +31,16 @@
 	
 	<body>
 		<div class="header" style="padding:0px">
-			<h1 class="header-title" style="font-size:40px">优质制造数据</h1>
+			<h1 class="header-title" style="font-size:40px">优质制造数据展图</h1>
 		</div>
 		<div class="wrapper">
             <div class="content">
                 <div class="col col-ll">
                     <div class="xpanel-wrapper xpanel-wrapper-90">
                         <div class="xpanel xpanel-r-t">
-                            <div class="title">各地区竞争力数据</div>
+                            <div class="title">各地区竞争力数据
+								<a href="./pj6_5_2.html" style="color: white;" class="title_link" ><i class="hand point right outline icon"></i></a>
+							</div>
                             <div class="echart-container" style="height: 100%;" id="container_1_1"></div>
                         </div>
                     </div>
@@ -588,7 +590,7 @@
     // var yAxis_5_2b = [] //17竞争力指数
     // for(var i = 1; i < data_5_5.length; ++i) {
 	// 	xAxis_5_2.push(data_5_5[i][0])
-	// 	yAxis_5_2a.push(data_5_5[i][1])
+	// 	yAxis_5_2a.push(data_5_5[i][1]*100)
     //     yAxis_5_2b.push(data_5_6[i][1])
 	// }
 
@@ -702,7 +704,7 @@
                 position: 'bottom',
                 axisLine: {
                     lineStyle: {
-                        color: color_axis
+                        color: '#7FFF00'
                     }
                 },
                 axisLabel: {
@@ -717,7 +719,7 @@
                 position: 'top',
                 axisLine: {
                     lineStyle: {
-                        color: color_axis
+                        color: '#40E0D0'
                     }
                 },
                 axisLabel: {

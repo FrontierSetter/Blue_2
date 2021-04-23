@@ -30,7 +30,7 @@
 	
 	<body>
 		<div class="header" style="padding:0px">
-			<h1 class="header-title" style="font-size:40px">行业质量数据可视化展图</h1>
+			<h1 class="header-title" style="font-size:40px">行业质量数据展图</h1>
 		</div>
 		<div class="wrapper">
 			<div class="content">
@@ -694,8 +694,8 @@
 	// var yAxis_5_3b = []
 	// for(var i = 1; i < data_5_3.length; ++i) {
 	// 	xAxis_5_3.push(data_5_3[i][0]) //年份
-	// 	yAxis_5_3a.push(data_5_3[i][1]) //进口单价
-	//     yAxis_5_3b.push(data_5_3[i][2]) //出口单价
+	// 	yAxis_5_3a.push(data_5_3[i][1]/10000) //进口单价
+	//     yAxis_5_3b.push(data_5_3[i][2]/10000) //出口单价
 	// }
 
 	var xAxis_5_3 = ori_data_5_3['xAxis']['data'] //年份
@@ -816,7 +816,7 @@
 		yAxis: [
 			{
                 type: 'value',
-                name: '进口单价',
+                name: '进口单价(万元)',
 				position: 'left',
 				axisLine: {
                     lineStyle: {
@@ -824,13 +824,13 @@
                     }
 			    },
 			    axisLabel: {
-				    formatter: '{value} 元',
+				    formatter: '{value}',
 				    fontSize: fontSize_axis_label
 			    },
             },
 			{
                 type: 'value',
-                name: '出口单价',
+                name: '出口单价(万元)',
 				position: 'right',
 				axisLine: {
                     lineStyle: {
@@ -838,9 +838,9 @@
                     }
 			    },
 				min: 0,
-				max: 10000,
+				max: 1,
 			    axisLabel: {
-				    formatter: '{value} 元',
+				    formatter: '{value}',
 				    fontSize: fontSize_axis_label
 			    },
             }
@@ -1365,7 +1365,7 @@
 		yAxis: [
 			{
                 type: 'value',
-                name: '增长率',
+                name: '增长率(%)',
 				position: 'left',
 				axisLine: {
                     lineStyle: {
@@ -1373,13 +1373,13 @@
                     }
 			    },
 			    axisLabel: {
-				    formatter: '{value} %',
+				    formatter: '{value}',
 				    fontSize: fontSize_axis_label
 			    },
             },
 			{
                 type: 'value',
-                name: '劳动生产率',
+                name: '(万元/人)',
 				position: 'right',
 				axisLine: {
                     lineStyle: {
@@ -1387,7 +1387,7 @@
                     }
 			    },
 			    axisLabel: {
-				    formatter: '{value} 万元/人',
+				    formatter: '{value}',
 				    fontSize: fontSize_axis_label
 			    },
             }

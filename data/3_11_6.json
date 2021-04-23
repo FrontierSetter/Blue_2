@@ -1,0 +1,80 @@
+callback_3_11_6({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "2012",
+            "2013",
+            "2014",
+            "2014",
+            "2015",
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "min": 0,
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "吊销营业执照数量",
+            "data": [
+                "9793",
+                "13192",
+                "7405",
+                "6571",
+                "7240"
+            ],
+            "type": "bar",
+            "showBackground": true,
+            "backgroundStyle": {
+                "color": "rgba(180, 180, 180, 0.2)"
+            }
+        }
+    ],
+    "legend": {
+        "data": [
+            "吊销营业执照数量"
+        ],
+        "textStyle": {
+            "color": "#F0F8FF"
+        }
+    }
+})

@@ -161,7 +161,7 @@
 
 
 <!--配置页面 11-1 的Echart图-->
-<script>
+<!-- <script>
     var dom_11_1 = document.getElementById("container_11_1");
     var myChart_11_1 = echarts.init(dom_11_1, 'chalk');
 
@@ -257,11 +257,234 @@
         console.log(data_11_1)
     }
 
+</script> -->
+<script>
+    var ori_data_11_1 = {};
+
+    function callback_3_11_1(res){
+        ori_data_11_1 = res;
+		console.log('3_11_1.json读取成功')
+		console.log(ori_data_11_1);
+    }
+</script>
+<script src="data/3_11_1.json?callback=callback_3_11_1"></script>
+
+<script>
+
+	var dom_11_1 = document.getElementById("container_11_1");
+	var myChart_11_1 = echarts.init(dom_11_1, 'chalk');
+	var app_11_1 = {};
+
+	function view_3_11_1_change(){
+		console.log("3_11_1 change")
+		// Document.getElementById('view_2_11_1').innerHTML
+		console.log(document.getElementById('view_3_11_1').value)
+		document.getElementById('view_3_11_1').innerHTML = document.getElementById('view_3_11_1').value
+	}
+
+	//折线图
+	var option_3_11_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_1" onchange="view_3_11_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_1_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_1['legend']['data'].length; ++i){
+							table += (','+option_3_11_1['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_1")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_1 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_1.length;
+
+						var X_11_1 = [];
+						var Y_11_1 = [];
+
+						while(Y_11_1.length < valid_num){
+							Y_11_1.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_1.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_1.length; ++j, ++k){
+								Y_11_1[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_1['legend']['data'] = legend_11_1;
+						option_3_11_1['xAxis'][0]['data'] = X_11_1;
+
+						option_3_11_1['series'] = [];
+
+						for(var i = 0; i < Y_11_1.length; ++i){
+							option_3_11_1['series'].push({
+								name: legend_11_1[i],
+								type: "line",//折线图
+								// stack: "抽查情况",
+								data: Y_11_1[i],
+							})
+						}
+						
+						myChart_11_1.setOption(option_3_11_1);
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_1.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_1('+JSON.stringify(option_3_11_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['电子秤计量不准', '加油机计量不准', '民用三表', '其他'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '数量（件）',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+				name: '电子秤计量不准',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '加油机计量不准',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '民用三表',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '其他',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
+
+
+	option_3_11_1['series'] = ori_data_11_1['series'];
+	option_3_11_1['legend']['data'] = ori_data_11_1['legend']['data'];
+	option_3_11_1['xAxis'][0]['data'] = ori_data_11_1['xAxis'][0]['data'];
+
+	myChart_11_1.setOption(option_3_11_1, true);
+
 </script>
 
-
 <!--配置页面 11-2 的表格-->
-<script>
+<!-- <script>
     var dom_11_2 = document.getElementById("container_11_2");
     var myChart_11_2 = echarts.init(dom_11_2, 'chalk');
 
@@ -430,11 +653,298 @@
         console.log(data_11_2)
     }
 
+</script> -->
+
+<script>
+    var ori_data_11_2 = {};
+
+    function callback_3_11_2(res){
+        ori_data_11_2 = res;
+		console.log('3_11_2.json读取成功')
+		console.log(ori_data_11_2);
+    }
+</script>
+<script src="data/3_11_2.json?callback=callback_3_11_2"></script>
+
+<script>
+
+	var dom_11_2 = document.getElementById("container_11_2");
+	var myChart_11_2 = echarts.init(dom_11_2, 'chalk');
+	var app_11_2 = {};
+
+	function view_3_11_2_change(){
+		console.log("3_11_2 change")
+		// Document.getElementById('view_2_11_2').innerHTML
+		console.log(document.getElementById('view_3_11_2').value)
+		document.getElementById('view_3_11_2').innerHTML = document.getElementById('view_3_11_2').value
+	}
+
+	//折线图
+	var option_3_11_2 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_2" onchange="view_3_11_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_2_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_2['legend']['data'].length; ++i){
+							table += (','+option_3_11_2['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_2['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_2.length;
+
+						var X_11_2 = [];
+						var Y_11_2 = [];
+
+						while(Y_11_2.length < valid_num){
+							Y_11_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_2.length; ++j, ++k){
+								Y_11_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_2['legend']['data'] = legend_11_2;
+						option_3_11_2['xAxis'][0]['data'] = X_11_2;
+
+						option_3_11_2['series'] = [];
+
+						for(var i = 0; i < Y_11_2.length; ++i){
+							option_3_11_2['series'].push({
+								name: legend_11_2[i],
+								type: "line",//折线图
+                                areaStyle: {},//阴影情况
+                                stack: '总量',
+								data: Y_11_2[i],
+							})
+						}
+						
+						myChart_11_2.setOption(option_3_11_2);
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_2.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_2('+JSON.stringify(option_3_11_2)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["特种设备类","轻工产品类","机电类","计量类","办公通讯类","家电类","食品相关类","建材产品类","能源类","其他"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+                name: '特种设备类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '轻工产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '机电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '计量类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '英国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '办公通讯类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '家电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '食品相关类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '建材产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '能源类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+		]
+	};
+
+
+	option_3_11_2['series'] = ori_data_11_2['series'];
+	option_3_11_2['legend']['data'] = ori_data_11_2['legend']['data'];
+	option_3_11_2['xAxis'][0]['data'] = ori_data_11_2['xAxis'][0]['data'];
+
+	myChart_11_2.setOption(option_3_11_2, true);
+
 </script>
 
-
 <!--配置页面 11-3 的Echart图-->
-<script>
+<!-- <script>
     var dom_11_3 = document.getElementById("container_11_3");
     var myChart_11_3 = echarts.init(dom_11_3, 'chalk');
 
@@ -499,7 +1009,8 @@
             right: '4%',
             bottom: '3%',
             containLabel: true
-        }, xAxis: [
+        }, 
+        xAxis: [
             {
                 type: 'category',
                 boundaryGap: false,
@@ -585,11 +1096,277 @@
         console.log(data_11_3)
     }
 
+</script> -->
+
+<script>
+    var ori_data_11_3 = {};
+
+    function callback_3_11_3(res){
+        ori_data_11_3 = res;
+		console.log('3_11_3.json读取成功')
+		console.log(ori_data_11_3);
+    }
+</script>
+<script src="data/3_11_3.json?callback=callback_3_11_3"></script>
+
+<script>
+
+	var dom_11_3 = document.getElementById("container_11_3");
+	var myChart_11_3 = echarts.init(dom_11_3, 'chalk');
+	var app_11_3 = {};
+
+	function view_3_11_3_change(){
+		console.log("3_11_3 change")
+		// Document.getElementById('view_2_11_3').innerHTML
+		console.log(document.getElementById('view_3_11_3').value)
+		document.getElementById('view_3_11_3').innerHTML = document.getElementById('view_3_11_3').value
+	}
+
+	//折线图
+	var option_3_11_3 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_3" onchange="view_3_11_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_3_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_3['legend']['data'].length; ++i){
+							table += (','+option_3_11_3['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_3['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_3")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_3 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_3.length;
+
+						var X_11_3 = [];
+						var Y_11_3 = [];
+
+						while(Y_11_3.length < valid_num){
+							Y_11_3.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_3.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_3.length; ++j, ++k){
+								Y_11_3[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_3['legend']['data'] = legend_11_3;
+						option_3_11_3['xAxis'][0]['data'] = X_11_3;
+
+						option_3_11_3['series'] = [];
+
+						for(var i = 0; i < Y_11_3.length; ++i){
+							option_3_11_3['series'].push({
+								name: legend_11_3[i],
+								type: "line",//折线图
+                                areaStyle: {},//阴影情况
+                                stack: "总量",
+								data: Y_11_3[i],
+							})
+						}
+						
+						myChart_11_3.setOption(option_3_11_3);
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_3.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_3('+JSON.stringify(option_3_11_3)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+            data: ["机电产品类","轻工产品类","家电类","办公通讯类","建材产品类","食品相关类","农用产品类","其他"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+                name: '机电产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '轻工产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '家电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '办公通讯类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '建材产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '食品相关类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+           
+            {
+                name: '农用产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+		]
+	};
+
+
+	option_3_11_3['series'] = ori_data_11_3['series'];
+	option_3_11_3['legend']['data'] = ori_data_11_3['legend']['data'];
+	option_3_11_3['xAxis'][0]['data'] = ori_data_11_3['xAxis'][0]['data'];
+
+	myChart_11_3.setOption(option_3_11_3, true);
+
 </script>
 
-
 <!--配置页面 11-4 的Echart图-->
-<script>
+<!-- <script>
     var dom_11_4 = document.getElementById("container_11_4");
     var myChart_11_4 = echarts.init(dom_11_4, 'chalk');
 
@@ -750,11 +1527,281 @@
         console.log(data_11_4)
     }
 
+</script> -->
+<script>
+    var ori_data_11_4 = {};
+
+    function callback_3_11_4(res){
+        ori_data_11_4 = res;
+		console.log('3_11_4.json读取成功')
+		console.log(ori_data_11_4);
+    }
+</script>
+<script src="data/3_11_4.json?callback=callback_3_11_4"></script>
+
+<script>
+
+	var dom_11_4 = document.getElementById("container_11_4");
+	var myChart_11_4 = echarts.init(dom_11_4, 'chalk');
+	var app_11_4 = {};
+
+	function view_3_11_4_change(){
+		console.log("3_11_4 change")
+		// Document.getElementById('view_2_11_4').innerHTML
+		console.log(document.getElementById('view_3_11_4').value)
+		document.getElementById('view_3_11_4').innerHTML = document.getElementById('view_3_11_4').value
+	}
+
+	//折线图
+	var option_3_11_4 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_4" onchange="view_3_11_4_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_4_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_4['legend']['data'].length; ++i){
+							table += (','+option_3_11_4['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_4['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_4")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_4 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_4.length;
+
+						var X_11_4 = [];
+						var Y_11_4 = [];
+
+						while(Y_11_4.length < valid_num){
+							Y_11_4.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_4.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_4.length; ++j, ++k){
+								Y_11_4[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_4['legend']['data'] = legend_11_4;
+						option_3_11_4['xAxis'][0]['data'] = X_11_4;
+
+						option_3_11_4['series'] = [];
+
+						for(var i = 0; i < Y_11_4.length; ++i){
+							option_3_11_4['series'].push({
+								name: legend_11_4[i],
+								type: "line",//折线图
+                                areaStyle: {},//阴影情况
+                                stack: "总量",
+								data: Y_11_4[i],
+							})
+						}
+						
+						myChart_11_4.setOption(option_3_11_4);
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_4.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_4('+JSON.stringify(option_3_11_4)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["产品质量违法行为","认证相关违法行为","标准违法行为","计量违法行为","特种设备违法行为","纤维违法行为","强制性产品认证违法行为","生产许可违法行为","其他违法行为"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+                name: '产品质量违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '认证相关违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '标准违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '计量违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '特种设备违法行为',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '纤维违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '强制性产品认证违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '生产许可违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '其他违法行为',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+		]
+	};
+
+
+	option_3_11_4['series'] = ori_data_11_4['series'];
+	option_3_11_4['legend']['data'] = ori_data_11_4['legend']['data'];
+	option_3_11_4['xAxis'][0]['data'] = ori_data_11_4['xAxis'][0]['data'];
+
+	myChart_11_4.setOption(option_3_11_4, true);
+
 </script>
 
-
 <!--配置页面 11-5 的Echart图-->
-<script>
+<!-- <script>
     var dom_11_5 = document.getElementById("container_11_5");
     var myChart_11_5 = echarts.init(dom_11_5, 'chalk');
 
@@ -829,11 +1876,215 @@
         console.log(data_11_5)
     }
 
+</script> -->
+
+<script>
+    var ori_data_11_5 = {};
+
+    function callback_3_11_5(res){
+        ori_data_11_5 = res;
+		console.log('3_11_5.json读取成功')
+		console.log(ori_data_11_5);
+    }
+</script>
+<script src="data/3_11_5.json?callback=callback_3_11_5"></script>
+
+<script>
+
+	var dom_11_5 = document.getElementById("container_11_5");
+	var myChart_11_5 = echarts.init(dom_11_5, 'chalk');
+	var app_11_5 = {};
+
+	function view_3_11_5_change(){
+		console.log("3_11_5 change")
+		// Document.getElementById('view_2_11_5').innerHTML
+		console.log(document.getElementById('view_3_11_5').value)
+		document.getElementById('view_3_11_5').innerHTML = document.getElementById('view_3_11_5').value
+	}
+
+	//折线图
+	var option_3_11_5 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_5" onchange="view_3_11_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_5_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_5['legend']['data'].length; ++i){
+							table += (','+option_3_11_5['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_5['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_5")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_5 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_5.length;
+
+						var X_11_5 = [];
+						var Y_11_5 = [];
+
+						while(Y_11_5.length < valid_num){
+							Y_11_5.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_5.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_5.length; ++j, ++k){
+								Y_11_5[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_5['legend']['data'] = legend_11_5;
+						option_3_11_5['xAxis'][0]['data'] = X_11_5;
+
+						option_3_11_5['series'] = [];
+
+						for(var i = 0; i < Y_11_5.length; ++i){
+							option_3_11_5['series'].push({
+								name: legend_11_5[i],
+								type: "line",//折线图
+								data: Y_11_5[i],
+							})
+						}
+						
+						myChart_11_5.setOption(option_3_11_5);
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_5.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_5('+JSON.stringify(option_3_11_5)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['“三品”认证率'],
+            textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+                name: "百分比",
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+                name: '“三品”认证率',
+                type: 'line',
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+		]
+	};
+	option_3_11_5['series'] = ori_data_11_5['series'];
+	option_3_11_5['legend']['data'] = ori_data_11_5['legend']['data'];
+	option_3_11_5['xAxis'][0]['data'] = ori_data_11_5['xAxis'][0]['data'];
+
+	myChart_11_5.setOption(option_3_11_5, true);
+
 </script>
 
 
 <!--配置页面 11-6 的Echart图-->
-<script>
+<!-- <script>
     var dom_11_6 = document.getElementById("container_11_6");
     var myChart_11_6 = echarts.init(dom_11_6, 'chalk');
 
@@ -908,7 +2159,355 @@
         console.log(data_11_6)
     }
 
+</script> -->
+<script>
+    var data_11_6 = {};
+
+    function callback_3_11_6(res){
+        ori_data_11_6 = res;
+		console.log('3_11_6.json读取成功')
+		console.log(ori_data_11_6);
+    }
 </script>
+<script src="data/3_11_6.json?callback=callback_3_11_6"></script>
+
+<script>
+
+	var dom_11_6 = document.getElementById("container_11_6");
+	var myChart_11_6 = echarts.init(dom_11_6, 'chalk');
+	var app_11_6 = {};
+
+	function view_11_6_1_change(){
+		console.log("11_6_1 change")
+		// Document.getElementById('view_11_6_1').innerHTML
+		console.log(document.getElementById('view_11_6_1').value)
+		document.getElementById('view_11_6_1').innerHTML = document.getElementById('view_11_6_1').value
+	}
+
+	var option_11_6_1 = {
+        textStyle: {
+            fontSize: fontSize_all_legend,
+        },
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					// optionToContent: function(opt) {
+    				// 	str = '<textarea id="view_2_11_6" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
+					// 	return str
+					// },
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_11_6_1" onchange="view_11_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
+						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
+						// 			+ '<td><font color="red">时间</font></td>'
+						// 			+ '<td>' + '数值' + '</td>'
+						// 			+ '</tr>';
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							// table += '<tr>'
+							// 		+ '<td>' + axisData[i] + '</td>'
+							// 		+ '<td>' + series[0].data[i] + '</td>'
+							// 		+ '</tr>';
+							table += axisData[i]+','+series[0].data[i]+'\n'
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_11_6_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save")
+						// console.log(opt)
+						// console.log(HTMLDomElement.firstChild)
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+						// console.log(arr_tex)
+
+						X_11_6 = [];
+						Y_11_6 = [];
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							if(cur_pair.length != 2){
+								// console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == '' || cur_pair[0] == undefined){
+								continue
+							}
+							X_11_6.push(cur_pair[0]);
+							Y_11_6.push(cur_pair[1]);
+						}
+
+						// console.log(X_11_6)
+						// console.log(Y_11_6)
+
+						option_11_6_1['series'][0]['data'] = Y_11_6;
+						option_11_6_1['xAxis']['data'] = X_11_6;
+						myChart_11_6.setOption(option_11_6_1);
+
+						option_11_6_2['series'][0]['data'] = Y_11_6;
+						option_11_6_2['xAxis']['data'] = X_11_6;
+						
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_6('+JSON.stringify(option_11_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: 0,
+			// max: function (value) {
+			// 	return value.max + 20;
+			// },
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+            name: '吊销营业执照数量',
+			data: [120, 200, 150, 80, 70, 110, 130],
+			type: 'bar',
+			showBackground: true,
+			backgroundStyle: {
+				color: 'rgba(180, 180, 180, 0.2)'
+			}
+		}],
+        legend: {
+            data: ['吊销营业执照数量'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+	};
+
+	// // 折线图
+	var option_11_6_2 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
+            orient: 'vertical',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					// optionToContent: function(opt) {
+    				// 	str = '<textarea id="view_2_11_6" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);"></textarea>'
+					// 	return str
+					// },
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_11_6_1" onchange="view_11_6_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">时间,数值\n';
+						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
+						// 			+ '<td><font color="red">时间</font></td>'
+						// 			+ '<td>' + '数值' + '</td>'
+						// 			+ '</tr>';
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							// table += '<tr>'
+							// 		+ '<td>' + axisData[i] + '</td>'
+							// 		+ '<td>' + series[0].data[i] + '</td>'
+							// 		+ '</tr>';
+							table += axisData[i]+','+series[0].data[i]+'\n'
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_11_6_1['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save")
+						// console.log(opt)
+						// console.log(HTMLDomElement.firstChild)
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+						// console.log(arr_tex)
+
+						X_11_6 = [];
+						Y_11_6 = [];
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							if(cur_pair.length != 2){
+								// console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == '' || cur_pair[0] == undefined){
+								continue
+							}
+							X_11_6.push(cur_pair[0]);
+							Y_11_6.push(cur_pair[1]);
+						}
+
+						// console.log(X_11_6)
+						// console.log(Y_11_6)
+
+						option_11_6_1['series'][0]['data'] = Y_11_6;
+						option_11_6_1['xAxis']['data'] = X_11_6;
+						myChart_11_6.setOption(option_11_6_1);
+
+						option_11_6_2['series'][0]['data'] = Y_11_6;
+						option_11_6_2['xAxis']['data'] = X_11_6;
+						
+
+						var Link = document.createElement('a');
+						Link.download = "3_11_6.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_11_6('+JSON.stringify(option_11_6_1)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line', 'bar']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		yAxis: {
+			type: 'value',
+			min: function (value) {
+				return value.min - 20;
+			},
+			max: function (value) {
+				return value.max + 20;
+			},
+			axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+		},
+		series: [{
+			markPoint: {
+                data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+			data: [820, 932, 901, 934, 1290, 1330, 1320],
+			type: 'line',
+			smooth: true
+		}],
+        legend: {
+            data: ['吊销营业执照数量'],
+            textStyle: {
+                color: '#F0F8FF'
+            }
+        },
+	};
+
+
+	var X_11_6 = ori_data_11_6['xAxis']['data'];
+	var Y_11_6 = ori_data_11_6['series'][0]['data'];
+
+	option_11_6_1['series'][0]['data'] = Y_11_6;
+	option_11_6_1['xAxis']['data'] = X_11_6;
+	myChart_11_6.setOption(option_11_6_1);
+
+	option_11_6_2['series'][0]['data'] = Y_11_6;
+	option_11_6_2['xAxis']['data'] = X_11_6;
+
+	// var arr_option_11_6 = [option_11_6_1, option_11_6_2];
+	// var cur_option_11_6 = 0;
+
+	// console.log('arr_option_11_6')
+	// console.log(arr_option_11_6)
+
+	// function change_option_11_6(){
+	// 	console.log('exchange');
+	// 	cur_option_11_6 = (cur_option_11_6+1)%arr_option_11_6.length;
+	// 	myChart_11_6.setOption(arr_option_11_6[cur_option_11_6]);
+	// }
+
+	myChart_11_6.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			o.newOption = option_11_6_2;
+		}else if(params.currentType == 'bar'){
+			o.newOption = option_11_6_1;
+		}
+		myChart_11_6.setOption(o.newOption, true);
+	});
+
+
+</script>
+
+
 
 <!-- <script>
 	$('<i id="back-to-top" onclick="history.back()"></i>').appendTo($('body'));

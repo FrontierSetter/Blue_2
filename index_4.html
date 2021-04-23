@@ -321,13 +321,14 @@
 		yAxis: [
             {
                 type: 'value',
+				name: '起',
                 axisLabel: {
                     fontSize: fontSize_axis_label
                 }
             },
 			{
                 type: 'value',
-                // name: '亿美元',
+                name: '万元',
                 axisLabel: {
                     fontSize: fontSize_axis_label
                 }
@@ -1745,22 +1746,14 @@
                 }
 			}
 		],
-        legend: {
-			data: [
-				{
-					name: '安全检查人员/百人次',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '发出安全监察指令数目',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '处罚罚金(万元)',
-                    textStyle: { color:"#5793f3" }
-				}
-			],
+		legend: {
+			data: ['安全检查人员/百人次', '发出安全监察指令数目', '处罚罚金(万元)'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
 		},
+        
 		tooltip: {
             trigger: 'item',
 			formatter: '{a} <br/>{b} : {c} ({d}%)'

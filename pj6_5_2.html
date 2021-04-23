@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>大屏数据可视化 - 模板</title>
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/mine.css" />
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- echarts -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+		<script type="text/javascript" src="js/global_config.js"></script>
+        <script src="js/china.js"></script>
+		<link rel="stylesheet" href="css/mine.css" />
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+		<!-- bootstrap -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header" style="padding:0px">
+			<h1 class="header-title" style="font-size:40px">优质制造数据展图</h1>
+		</div>
+		<div class="wrapper">
+            <div class="content">
+                <div class="col col-ll">
+                    <div class="xpanel-wrapper xpanel-wrapper-90">
+                        <div class="xpanel xpanel-r-t">
+                            <div class="title">各地区竞争力数据
+								<a href="./pj6_5_3.html" style="color: white;" class="title_link" ><i class="hand point right outline icon"></i></a>
+							</div>
+                            <div class="echart-container" style="height: 100%;" id="container_1_1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-r">
+                    <div class="xpanel-wrapper xpanel-wrapper-90">
+						<div class="xpanel xpanel-c-t">
+							<div class="title">制造业质量竞争力指数</div>
+							<div class="echart-container" id="container_1_2" style="height: 100%;"></div>
+						</div>
+                    </div>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>
+
+<!--解决本地json跨域问题-->
+<script>
+    var alldata = {};
+    function callback5(res){
+        alldata = res;
+    }
+</script>
+<script src="dataproc/pj6-data/data-5.json?callback=callback5"></script>
+
+<script>
+    var ori_data_5_1 = {}
+    function callback_5_1(res){
+        ori_data_5_1 = res;
+		console.log('6_5_1.json读取成功')
+		console.log(ori_data_5_1)
+    }
+</script>
+<script src="data/6_5_1.json?callback=callback_5_1"></script>
+
+<script>
+    var ori_data_5_3 = {}
+    function callback_5_3(res){
+        ori_data_5_3 = res;
+		console.log('6_5_3.json读取成功')
+		console.log(ori_data_5_3)
+    }
+</script>
+<script src="data/6_5_3.json?callback=callback_5_3"></script>
+
+<script>
+    var ori_data_5_4 = {}
+    function callback_5_4(res){
+        ori_data_5_4 = res;
+		console.log('6_5_4.json读取成功')
+		console.log(ori_data_5_4)
+    }
+</script>
+<script src="data/6_5_4.json?callback=callback_5_4"></script>
+
+<!--配置页面 5-1 的Echart图-->
+<script>
+	var dom_5_1 = document.getElementById("container_1_1");
+	var myChart_5_1 = echarts.init(dom_5_1, 'chalk');
+
+	// var data_5_1 = alldata["近三届中国质量奖各地区累计获奖企业数"]
+    // var data_5_2 = alldata["近三届全国质量奖各地区累计获奖企业数 "]
+    // var data_5_3 = alldata["2017年各个城市制造业竞争力指数"]
+    // var xAxis_5_1a = [] //省份1
+    // var xAxis_5_1b = [] //省份2
+    // var xAxis_5_1c = [] //省份3
+    // var yAxis_5_1a = [] //中国质量奖
+    // var yAxis_5_1b = [] //全国质量奖
+    // var yAxis_5_1c = [] //竞争力指数
+    // for(var i = 1; i < data_5_1.length; ++i) {
+	// 	xAxis_5_1a.push(data_5_1[i][0]) //省份1
+    //     xAxis_5_1b.push(data_5_2[i][0]) //省份2
+    //     xAxis_5_1c.push(data_5_3[i][0]) //省份3
+	// 	yAxis_5_1a.push(data_5_1[i][1]) //中国质量奖
+    //     yAxis_5_1b.push(data_5_2[i][1]) //全国质量奖
+    //     yAxis_5_1c.push(data_5_3[i][1]) //竞争力指数
+	// }
+    // var XYs_1 = new Array()
+    // var XYs_2 = new Array()
+    // var XYs_3 = new Array()
+    // for(var i = 0; i < xAxis_5_1a.length; ++ i) {
+    //     XYs_1.push({'name':xAxis_5_1a[i], 'value':yAxis_5_1a[i]})
+    //     XYs_2.push({'name':xAxis_5_1b[i], 'value':yAxis_5_1b[i]})
+    //     XYs_3.push({'name':xAxis_5_1c[i], 'value':yAxis_5_1c[i]})
+    // }
+
+    var XYs_1 = ori_data_5_1['series'][0]['data']
+    var XYs_2 = ori_data_5_3['series'][0]['data']
+    var XYs_3 = ori_data_5_4['series'][0]['data']
+
+    function view_5_1_change(){
+		console.log("5_1 change")
+		//console.log(document.getElementById('view_5_1').value)
+		document.getElementById('view_5_1').innerHTML = document.getElementById('view_5_1').value
+	}
+ 
+    option_5_1 = {
+        title: [
+            {
+                subtext: '近三届中国质量奖各地区累计获奖企业数',
+                left: '50%',
+                top: '2%',
+                textAlign: 'center',
+                subtextStyle:{
+                    color: "#ffffff",
+                    fontSize: fontSize_all_title,
+                    align: "center"
+                }
+            },
+		],
+        visualMap: {  
+            type: 'continuous',
+			show: true,
+            min: 0,  
+			max: 20,  
+			range: [0, 20],
+			text:['High','Low'],    
+			calculable: true,  
+			color: ['red', 'yellow', 'lightskyblue'],
+            //color: ['#5475f5', '#9feaa5', '#3FA7FF','#66E0E3', '#FFDC5E', '#9fb5ea'],
+			formatter: function (value) {
+            	return value;
+        	},
+		},
+        tooltip : {
+            trigger: 'item'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var series = opt['series']
+						console.log("start show")
+						console.log(series)
+						var table = '<textarea id="view_5_1" onchange="view_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">省份,近三届中国质量奖各地区累计获奖企业数\n'
+						for (var i = 0, l = series[0].data.length; i < l; i++) {
+							table += series[0].data[i].name + ',' + series[0].data[i].value + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						XYs_1 = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							XYs_1.push({'name':cur_pair[0], 'value':cur_pair[1]})
+						}
+						console.log(XYs_1)
+						option_5_1['series'][0]['data'] = XYs_1;
+						myChart_5_1.setOption(option_5_1);
+
+						var Link = document.createElement('a')
+						Link.download = "6_5_1.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_1('+JSON.stringify(option_5_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+                myTool1: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_1['series'][0]['data'] = XYs_1;
+						myChart_5_1.setOption(option_5_1, true);
+					}
+				},
+                myTool2: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_3['series'][0]['data'] = XYs_2;
+						myChart_5_1.setOption(option_5_3, true);
+					}
+				},
+                myTool3: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_4['series'][0]['data'] = XYs_3;
+						myChart_5_1.setOption(option_5_4, true);
+					}
+				},
+                saveAsImage: {show: true}
+            }
+		},
+        series : [
+            {
+                name: '近三届中国质量奖各地区累计获奖企业数',
+                type: 'map',
+                mapType: 'china',
+                itemStyle:{
+                    emphasis:{
+                        label:{
+                            show: true
+                        },
+                    }
+                },
+                data: XYs_1
+            },
+        ]
+    };
+    
+    option_5_3 = {
+        title: [
+            {
+                subtext: '近三届全国质量奖各地区累计获奖企业数',
+                left: '50%',
+                top: '2%',
+                textAlign: 'center',
+                subtextStyle:{
+                    color: "#ffffff",
+                    fontSize: fontSize_all_title,
+                    align: "center"
+                }
+            },
+		],
+        visualMap: {  
+            type: 'continuous',
+			show: true,
+            min: 0,  
+			max: 20,  
+			range: [0, 20],
+			text:['High','Low'],    
+			calculable: true,  
+			color: ['red', 'yellow', 'lightskyblue'],
+            //color: ['#5475f5', '#9feaa5', '#3FA7FF','#66E0E3', '#FFDC5E', '#9fb5ea'],
+			formatter: function (value) {
+            	return 'aaaa' + value;
+        	},
+		},
+        tooltip : {
+            trigger: 'item'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var series = opt['series']
+						console.log("start show")
+						console.log(series)
+						var table = '<textarea id="view_5_1" onchange="view_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">省份,近三届全国质量奖各地区累计获奖企业数\n'
+						for (var i = 0, l = series[0].data.length; i < l; i++) {
+							table += series[0].data[i].name + ',' + series[0].data[i].value + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						XYs_2 = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							XYs_2.push({'name':cur_pair[0], 'value':cur_pair[1]})
+						}
+						console.log(XYs_2)
+						option_5_3['series'][0]['data'] = XYs_2;
+						myChart_5_1.setOption(option_5_3);
+
+						var Link = document.createElement('a')
+						Link.download = "6_5_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_3('+JSON.stringify(option_5_3)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+                myTool1: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_1['series'][0]['data'] = XYs_1;
+						myChart_5_1.setOption(option_5_1, true);
+					}
+				},
+                myTool2: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_3['series'][0]['data'] = XYs_2;
+						myChart_5_1.setOption(option_5_3, true);
+					}
+				},
+                myTool3: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_4['series'][0]['data'] = XYs_3;
+						myChart_5_1.setOption(option_5_4, true);
+					}
+				},
+                saveAsImage: {show: true}
+            }
+		},
+        series : [
+            {
+                name: '近三届全国质量奖各地区累计获奖企业数',
+                type: 'map',
+                mapType: 'china',
+                itemStyle:{
+                    emphasis:{
+                        label:{
+                            show: true
+                        },
+                    }
+                },
+                data: XYs_2
+            },
+        ]
+    };
+
+    option_5_4 = {
+        title: [
+            {
+                subtext: '2017年各个城市制造业竞争力指数',
+                left: '50%',
+                top: '2%',
+                textAlign: 'center',
+                subtextStyle:{
+                    color: "#ffffff",
+                    fontSize: fontSize_all_title,
+                    align: "center"
+                }
+            },
+		],
+        visualMap: {  
+            type: 'continuous',
+			show: true,
+            min: 75,  
+			max: 95,  
+			range: [75, 95],
+			text:['High','Low'],    
+			calculable: true,  
+			color: ['red', 'yellow', 'lightskyblue'],
+            //color: ['#5475f5', '#9feaa5', '#3FA7FF','#66E0E3', '#FFDC5E', '#9fb5ea'],
+			formatter: function (value) {
+            	return 'aaaa' + value;
+        	},
+		},
+        tooltip : {
+            trigger: 'item'
+        },
+        toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var series = opt['series']
+						console.log("start show")
+						console.log(series)
+						var table = '<textarea id="view_5_1" onchange="view_5_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">省份,2017年各个城市制造业竞争力指数\n'
+						for (var i = 0, l = series[0].data.length; i < l; i++) {
+							table += series[0].data[i].name + ',' + series[0].data[i].value + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						XYs_3 = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							XYs_3.push({'name':cur_pair[0], 'value':cur_pair[1]})
+						}
+						console.log(XYs_3)
+						option_5_4['series'][0]['data'] = XYs_3;
+						myChart_5_1.setOption(option_5_4);
+
+						var Link = document.createElement('a')
+						Link.download = "6_5_4.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_4('+JSON.stringify(option_5_4)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+                myTool1: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_1['series'][0]['data'] = XYs_1;
+						myChart_5_1.setOption(option_5_1, true);
+					}
+				},
+                myTool2: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_3['series'][0]['data'] = XYs_2;
+						myChart_5_1.setOption(option_5_3, true);
+					}
+				},
+                myTool3: {
+					show: true,
+					icon: 'image://img/shuju-data.png',
+					onclick: function (){
+                        option_5_4['series'][0]['data'] = XYs_3;
+						myChart_5_1.setOption(option_5_4, true);
+					}
+				},
+                saveAsImage: {show: true}
+            }
+		},
+        series : [
+            {
+                name: '2017年各个城市制造业竞争力指数',
+                type: 'map',
+                mapType: 'china',
+                itemStyle:{
+                    emphasis:{
+                        label:{
+                            show: true
+                        },
+                    }
+                },
+                data: XYs_3
+            },
+        ]
+    };
+    
+    if (option_5_3 && typeof option_5_3 === 'object') {
+        option_5_3['series'][0]['data'] = XYs_2;
+		myChart_5_1.setOption(option_5_3);
+		console.log(ori_data_5_3)
+	}
+    myChart_5_1.on('magictypechanged', function (params) {
+		let o = { ...params };
+		console.log(params)
+		if(params.currentType == 'line'){
+			option_5_1['series'][0]['data'] = XYs_1;
+			o.newOption = option_5_1;
+		}else if(params.currentType == 'bar'){
+			option_5_4['series'][0]['data'] = XYs_3;
+			o.newOption = option_5_4;
+		}
+		myChart_5_1.setOption(o.newOption, true);
+	});
+
+	myChart_5_1.on('restore', function (params) {
+		let o = { ...params };
+		console.log(params)
+        option_5_3['series'][0]['data'] = XYs_2;
+		o.newOption = option_5_3;
+		myChart_5_1.setOption(o.newOption, true);
+	});
+
+</script>
+
+<script>
+    var ori_data_5_2 = {}
+    function callback_5_2(res){
+        ori_data_5_2 = res;
+		console.log('6_5_2.json读取成功')
+		console.log(ori_data_5_2)
+    }
+</script>
+<script src="data/6_5_2.json?callback=callback_5_2"></script>
+
+<!--配置页面 5-2 的Echart图-->
+<script>
+    var dom_5_2 = document.getElementById("container_1_2");
+	var myChart_5_2 = echarts.init(dom_5_2, 'chalk');
+
+	// var data_5_5 = alldata["2005-2017年制造业质量竞争力指数增长比例"]
+    // var data_5_6 = alldata["2017年制造业质量竞争力指数"]
+    // var xAxis_5_2 = [] //行业
+    // var yAxis_5_2a = [] //05-17增长比例
+    // var yAxis_5_2b = [] //17竞争力指数
+    // for(var i = 1; i < data_5_5.length; ++i) {
+	// 	xAxis_5_2.push(data_5_5[i][0])
+	// 	yAxis_5_2a.push(data_5_5[i][1]*100)
+    //     yAxis_5_2b.push(data_5_6[i][1])
+	// }
+
+    var xAxis_5_2 = ori_data_5_2['yAxis'][0]['data'] //行业
+	var yAxis_5_2a = ori_data_5_2['series'][0]['data'] //05-17增长比例
+    var yAxis_5_2b = ori_data_5_2['series'][1]['data'] //17竞争力指数
+
+	function view_5_2_change(){
+		console.log("5_2 change")
+		//console.log(document.getElementById('view_5_2').value)
+		document.getElementById('view_5_2').innerHTML = document.getElementById('view_5_2').value
+	}
+
+	var option_5_2 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
+		tooltip: {
+            trigger: 'axis',
+			axisPointer: {
+                type: 'shadow'
+            }
+        },
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+			orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['yAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_5_2" onchange="view_5_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">行业,2005-2017增长比例,2017质量竞争力指数\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_5_2 = []
+						yAxis_5_2a = []
+                        yAxis_5_2b = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 3) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_5_2.push(cur_pair[0])
+							yAxis_5_2a.push(cur_pair[1])
+                            yAxis_5_2b.push(cur_pair[2])
+						}
+						console.log(xAxis_5_2)
+						console.log(yAxis_5_2a)
+                        console.log(yAxis_5_2b)
+						option_5_2['series'][0]['data'] = yAxis_5_2a;
+                        option_5_2['series'][1]['data'] = yAxis_5_2b;
+						option_5_2['yAxis'][0]['data'] = xAxis_5_2;
+						myChart_5_2.setOption(option_5_2);
+
+						var Link = document.createElement('a')
+						Link.download = "6_5_2.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_5_2('+JSON.stringify(option_5_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
+                magicType: {show: true, type: ['bar', 'line']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+		calculable: true,
+		legend: {
+			data: ['2005-2017增长比例', '2017竞争力指数'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: [
+            {
+                type: 'value',
+                name: '比例',
+                nameLocation: 'end',
+                position: 'bottom',
+                axisLine: {
+                    lineStyle: {
+                        color: '#7FFF00'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value} %',
+                    fontSize: fontSize_axis_label
+                },
+            },
+            {
+                type: 'value',
+                name: '竞争力指数',
+                nameLocation: 'start',
+                position: 'top',
+                axisLine: {
+                    lineStyle: {
+                        color: '#40E0D0'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    fontSize: fontSize_axis_label
+                },
+            },
+        ],
+		yAxis: [
+			{
+				type: 'category',
+				data: xAxis_5_2,
+				axisLine: {
+					lineStyle: {
+						color: color_axis
+					}
+				},
+                axisLabel: {
+                    fontSize: fontSize_axis_label,
+                    rotate: 20,
+                    interval: 0
+                }
+			},
+		],
+		grid: {
+			left: '30%'
+		},
+		series: [
+			{
+				name: '2005-2017增长比例',
+				data: yAxis_5_2a,
+			    type: 'bar',
+                xAxisIndex: 0,
+		    },
+            {
+				name: '2017竞争力指数',
+				data: yAxis_5_2b,
+			    type: 'line',
+                xAxisIndex: 1,
+		    },
+		]
+	};
+	option_5_2['series'][0]['data'] = yAxis_5_2a;
+    option_5_2['series'][1]['data'] = yAxis_5_2b;
+	option_5_2['yAxis'][0]['data'] = xAxis_5_2;
+	if (option_5_2 && typeof option_5_2 === 'object') {
+		myChart_5_2.setOption(option_5_2);
+		console.log(ori_data_5_2)
+	}
+
+</script>
+
+<script type="text/javascript" src="js/left_top_but.js"></script>

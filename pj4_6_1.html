@@ -30,7 +30,7 @@
 	
 	<body>
 		<div class="header" style="padding:0px">
-			<h1 class="header-title" style="font-size:40px">宏观经济数据</h1>
+			<h1 class="header-title" style="font-size:40px">宏观经济数据展图</h1>
 		</div>
 		<div class="wrapper">
             <div class="content">
@@ -246,11 +246,12 @@
             },
             xAxis: {
                 type: 'value',
-				name: '劳动生产率(美元每人)',
+				name: '劳动生产率 (美元每人)',
                 nameGap: 25,
                 nameLocation: 'middle',
                 nameTextStyle: {
-                    fontSize: fontSize_bubble_xy_axis_label
+                    fontSize: fontSize_bubble_xy_axis_label,
+                    padding: [10, 10, 10, 10]
                 },
                 splitLine: {
                     show: false
@@ -267,9 +268,11 @@
             },
             yAxis: {
                 type: 'value',
-				name: 'GDP(万亿美元)',
+				name: 'GDP (万亿美元)',
+                nameLocation: 'center',
                 nameTextStyle: {
-                    fontSize: fontSize_bubble_xy_axis_label
+                    fontSize: fontSize_bubble_xy_axis_label,
+                    padding: [10, 10, 10, 10]
                 },
                 axisLine: {
                     lineStyle: {
