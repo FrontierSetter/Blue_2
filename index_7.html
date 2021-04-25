@@ -984,8 +984,8 @@
 							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
 								continue
 							}
-							option_1_3['series'][0]['data'][i-1].value =cur_pair[0]
-							option_1_3['series'][0]['data'][i-1].name =cur_pair[1]
+							option_1_3['series'][0]['data'][i].value =cur_pair[0]
+							option_1_3['series'][0]['data'][i].name =cur_pair[1]
 							// _value.push(cur_pair[0])
 							// _name.push(cur_pair[1])
 						}
@@ -1054,7 +1054,7 @@
 	// var Y_3_5 = ori_data_1_3['series'];
 
 	option_1_3['legend']['data'] = ori_data_1_3['legend']['data'];
-	option_1_3['series']['data'] = ori_data_1_3['series']['data'];
+	option_1_3['series'][0]['data'] = ori_data_1_3['series'][0]['data'];
 
 	// for(var i = 0; i < Y_3_5.length; ++i){
 	// 	option_1_5_1['series'][i]['data'] = Y_3_5[i]['data'];
