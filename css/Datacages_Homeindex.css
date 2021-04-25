@@ -11,7 +11,7 @@ img{border: none}
     font-size: 18px; line-height: 69px;}
 
 /*动效栏*/
-.flasheffectoutbox{ width: 1000px; height: 500px;margin: auto; margin-top: 100px; background-image: url("../images/chain_bg.png"); background-repeat: no-repeat; background-position: center;position: relative}
+.flasheffectoutbox{ width: 1000px; height: 500px;margin: auto; margin-top: 10px; background-image: url("../images/chain_bg.png"); background-repeat: no-repeat; background-position: center;position: relative}
 .circleeffectclass{ border-radius: 50%; border: rgba(0,168,255,0.6) 1px solid; cursor: pointer; position: absolute;}
 .effectposition{ position: absolute;}
 .acrossremindeffectout{ background-color: rgba(0,126,255,0.05); border-radius: 50%;}
