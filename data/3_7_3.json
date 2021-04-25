@@ -1,0 +1,70 @@
+callback_3_7_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "机电",
+            "轻工",
+            "食品",
+            "建材",
+            "农产品",
+            "化工",
+            "医药",
+            "汽车及零部件",
+            "服装",
+            "仪电",
+            "纺织",
+            "化学建材",
+            "冶金有色金属",
+                     
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "series": [
+        {
+            "name": "认证证书数",
+            "type": "pie",
+            "radius": "180",
+            "center": ["50%", "50%"],
+            "data": [
+                {"value": "24.63", "name": "机电"},
+                {"value": "18.23", "name": "轻工"},
+                {"value": "8.29", "name": "食品"},
+                {"value": "8.02", "name": "建材"},
+                {"value": "7.21", "name": "农产品"},
+                {"value": "6.80", "name": "化工"},
+                {"value": "6.53", "name": "医药"},
+                {"value": "5.85", "name": "汽车及零部件"},
+                {"value": "4.35", "name": "服装"},
+                {"value": "3.94", "name": "仪电"},
+                {"value": "2.85", "name": "纺织"},
+                {"value": "2.44", "name": "化学建材"},
+                {"value": "0.82", "name": "冶金及有色金属"},
+               
+                
+            ],
+        },
+       
+    ]
+})

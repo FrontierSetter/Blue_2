@@ -216,6 +216,17 @@
 </script>
 <script src="data/3_10_6.json?callback=callback_3_10_6"></script>
 
+<script>
+    var ori_data_11_2 = {};
+
+    function callback_3_10_3(res){
+        ori_data_11_2 = res;
+		console.log('3_11_2.json读取成功')
+		console.log(ori_data_11_2);
+    }
+</script>
+<script src="data/3_10_3.json?callback=callback_3_10_3"></script>
+
 
 <!--配置页面 1-1 的Echart图-->
 <script>
@@ -446,109 +457,7 @@
 
 <!--配置页面 1-2 的Echart图-->
 <script>
-    // var dom_1_2 = document.getElementById("container_1_2");
-    // var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
-
-    // var data_1_2 = alldata["2015-2017年上海市农业标准化示范试点立项"]
     
-    // var xAxis_1_2 = [] 
-    // var yAxis_1_2a = []
-    // var yAxis_1_2b = []
-    
-    // for(var i = 1; i < data_1_2.length; ++i){
-    //     xAxis_1_2.push(data_1_2[i][0])
-    //     yAxis_1_2a.push(data_1_2[i][1])
-    //     yAxis_1_2b.push(data_1_2[i][2])
-    // }
-
-    // var labelOption = {
-    //     show: true,
-    //     position: 'insideBottom',
-    //     distance: 15,
-    //     align: 'left',
-    //     verticalAlign: 'middle',
-    //     rotate: 90,
-    //     formatter: '{c}  {name|{a}}',
-    //     fontSize: 16,
-    //     rich: {
-    //         name: {
-    //             textBorderColor: '#fff'
-    //         }
-    //     }
-    // };
-
-    // var option_1_2 = {
-    //     textStyle: {
-    //         fontSize: fontSize_all_title,
-    //     },
-    //     //color: ['#FFCCCC', '#FFFF99', '#99CCFF'],
-    //     tooltip: {
-    //         trigger: 'axis',
-    //         axisPointer: {
-    //             type: 'shadow'
-    //         }
-    //     },
-    //     legend: {
-    //         data: ['国家级', '市级'],
-    //         textStyle:{
-    //             color: '#F0F8FF'
-    //         }
-    //     },
-    //     toolbox: {
-    //         show: true,
-    //         orient: 'vertical',
-    //         left: 'right',
-    //         top: 'center',
-    //         itemSize: echart_toolbox_size, 
-    //         feature: {
-    //             mark: {show: true},
-    //             dataView: {show: true, readOnly: false},
-    //             magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-    //             restore: {show: true},
-    //             saveAsImage: {show: true}
-    //         }
-    //     },
-    //     xAxis: [
-    //         {
-    //             axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-    //             type: 'category',
-    //             axisTick: {show: false},
-    //             data: xAxis_1_2
-    //         }
-    //     ],
-    //     yAxis: [
-    //         {
-    //             axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-    //             type: 'value'
-    //         }
-    //     ],
-    //     series: [
-    //         {
-    //             name: '国家级',
-    //             type: 'bar',
-    //             barGap: 0,
-    //             //label: labelOption,
-    //             data: yAxis_1_2a
-    //         },
-    //         {
-    //             name: '市级',
-    //             type: 'bar',
-    //             //label: labelOption,
-    //             data: yAxis_1_2b
-    //         }
-    //     ]
-    // };
-
-
-
-    // if (option_1_2 && typeof option_1_2 === 'object') {
-    //     myChart_1_2.setOption(option_1_2);
-    //     console.log(data_1_2)
-    // }
     var dom_1_2 = document.getElementById("container_1_2");
 	var myChart_1_2 = echarts.init(dom_1_2, 'chalk');
 	var app_1_2 = {};
@@ -576,6 +485,20 @@
 				dataView: {
                     show: true, 
                     readOnly: false,
+                    // optionToContent: function(opt) {
+					// 	console.log(opt)
+					// 	var axisData = opt['xAxis'][0]['data']
+					// 	var series = opt['series']
+					// 	console.log("start show")
+					// 	console.log(axisData)
+					// 	console.log(series)
+					// 	var table = '<textarea id="view_1_2" onchange="view_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,国家级,市级\n'
+					// 	for (var i = 0, l = axisData.length; i < l; i++) {
+					// 		table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+ '\n'
+					// 	}
+					// 	table += '</textarea>'
+					// 	return table;
+					// },
                     optionToContent: function(opt) {
 						console.log(opt)
 						var axisData = opt['xAxis'][0]['data']
@@ -585,12 +508,12 @@
 						console.log(series)
 						var table = '<textarea id="view_1_2" onchange="view_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,国家级,市级\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+ '\n'
+							table += axisData[i] + ',' + series[0].data[i]+ ',' + series[1].data[i] + '\n'
 						}
 						table += '</textarea>'
 						return table;
 					},
-					contentToOption: function(HTMLDomElement, opt) {
+                    contentToOption: function(HTMLDomElement, opt) {
 						console.log('start save')
 						console.log(opt)
 						console.log(HTMLDomElement.firstChild)
@@ -600,7 +523,7 @@
 						xAxis_1_2 = []
 						yAxis_1_2a = []
                         yAxis_1_2b = []
-					
+                       
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
 							if(cur_pair.length != 3) {
@@ -613,15 +536,14 @@
 							xAxis_1_2.push(cur_pair[0])
 							yAxis_1_2a.push(cur_pair[1])
                             yAxis_1_2b.push(cur_pair[2])
-					
+                           
 						}
 						console.log(xAxis_1_2)
 						console.log(yAxis_1_2a)
-                        console.log(yAxis_1_2b)
-						
+                      
 						option_1_2_1['series'][0]['data'] = yAxis_1_2a;
                         option_1_2_1['series'][1]['data'] = yAxis_1_2b;
-			
+                      
 						option_1_2_1['xAxis']['data'] = xAxis_1_2;
 						myChart_1_2.setOption(option_1_2_1);
 
@@ -696,108 +618,383 @@
 	}
 
 	myChart_1_2.setOption(option_1_2_1);
+
 </script> 
 
 
 <!--配置页面 1-3 的Echart图-->
 <script>
-    var dom_1_3 = document.getElementById("container_1_3");
-    var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
+//     var dom_1_3 = document.getElementById("container_1_3");
+//     var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
 
     
-    var option_1_3 = {
+//     var option_1_3 = {
+//         textStyle: {
+//             fontSize: fontSize_all_title,
+//         },
+//     tooltip: {
+//         trigger: 'axis',
+//         axisPointer: {
+//             type: 'cross',
+//             label: {
+//                 backgroundColor: '#6a7985'
+//             }
+//         }
+//     },
+//     legend: {
+//                   data: ['批发','零售','批发兼零售','其他','总和'],
+//             textStyle: {
+//                 color: '#F0F8FF'
+//             }
+//     },
+//     toolbox: {
+//             show: true,
+//             orient: 'vertical',
+//             left: 'right',
+//             top: 'center',
+//             itemSize: echart_toolbox_size, 
+//             feature: {
+//                 dataView: { show: true, readOnly: false },
+//                 magicType: { show: true, type: ['line', 'bar'] },
+//                 restore: { show: true },
+//                 saveAsImage: { show: true }
+//             }
+//         },
+//     grid: {
+//         left: '3%',
+//         right: '4%',
+//         bottom: '3%',
+//         containLabel: true
+//     },
+//     xAxis: [
+//         {
+//             axisLabel: {
+//                     fontSize: fontSize_axis_label
+//                 },
+//             type: 'category',
+//             boundaryGap: false,
+//             data: ['2013','2014','2015','2016','2017']
+//         }
+//     ],
+//     yAxis: [
+//         {
+//             axisLabel: {
+//                     fontSize: fontSize_axis_label
+//                 },
+//             type: 'value'
+//         }
+//     ],
+//     series: [
+//         {
+//             name: '批发',
+//             type: 'line',
+//             stack: '总量',
+//             areaStyle: {},
+//             data: [23218,27892,39350,44805,32395]
+//         },
+//         {
+//             name: '零售',
+//             type: 'line',
+//             stack: '总量',
+//             areaStyle: {},
+//             data: [101140,108456,116692,125887,83586]
+//         },
+//         {
+//             name: '批发兼零售',
+//             type: 'line',
+//             stack: '总量',
+//             areaStyle: {},
+//             data: [12668,13441,15724,17098,9547]
+//         },
+//         {
+//             name: '其他',
+//             type: 'line',
+//             stack: '总量',
+//             areaStyle: {},
+//             data: [172,233,277,0,2321]
+//         }
+//     ]
+// };
+
+
+//     if (option_1_3 && typeof option_1_3 === 'object') {
+//         myChart_1_3.setOption(option_1_3);
+//         console.log(data_1_3)
+//     }
+
+    var dom_11_2 = document.getElementById("container_1_3");
+	var myChart_11_2 = echarts.init(dom_11_2, 'chalk');
+	var app_11_2 = {};
+
+	function view_3_11_2_change(){
+		console.log("3_11_2 change")
+		// Document.getElementById('view_2_11_2').innerHTML
+		console.log(document.getElementById('view_3_11_2').value)
+		document.getElementById('view_3_11_2').innerHTML = document.getElementById('view_3_11_2').value
+	}
+
+	//折线图
+	var option_3_11_2 = {
         textStyle: {
-            fontSize: fontSize_all_title,
+            fontSize: fontSize_all_legend,
         },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross',
-            label: {
-                backgroundColor: '#6a7985'
-            }
-        }
-    },
-    legend: {
-                  data: ['批发','零售','批发兼零售','其他','总和'],
-            textStyle: {
-                color: '#F0F8FF'
-            }
-    },
-    toolbox: {
-            show: true,
+        tooltip: {
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
             orient: 'vertical',
-            left: 'right',
             top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: { show: true, readOnly: false },
-                magicType: { show: true, type: ['line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
-        },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-            type: 'category',
-            boundaryGap: false,
-            data: ['2013','2014','2015','2016','2017']
-        }
-    ],
-    yAxis: [
-        {
-            axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-            type: 'value'
-        }
-    ],
-    series: [
-        {
-            name: '批发',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            data: [23218,27892,39350,44805,32395]
-        },
-        {
-            name: '零售',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            data: [101140,108456,116692,125887,83586]
-        },
-        {
-            name: '批发兼零售',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            data: [12668,13441,15724,17098,9547]
-        },
-        {
-            name: '其他',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            data: [172,233,277,0,2321]
-        }
-    ]
-};
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						// console.log(opt)
+						var axisData = opt['xAxis'][0]['data'];
+						var series = opt['series'];
+						console.log("start show")
+						// console.log(axisData)
+						// console.log(series)
+						var table = '<textarea id="view_3_11_2" onchange="view_3_11_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_11_2_9['series'][0]['name'];
+						// table += '\n';
+						table += "年份"
+						for(var i = 0; i < option_3_11_2['legend']['data'].length; ++i){
+							table += (','+option_3_11_2['legend']['data'][i]);
+						}
+						table += '\n';
+
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i];
+							for(var j = 0; j < series.length; ++j){
+								// if(series[j].data[i] == undefined){
+								// 	table += (',null'+series[j].data[i]);
+
+								// }
+								table += (','+series[j].data[i]);
+							}
+							table += '\n';
+						}
+						table += '</textarea>'
+						// table += '</tbody></table></div>';
+						// console.log(table)
+						return table;
+						// return option_2_11_2['xAxis']['data']
+					},
+					contentToOption:function(HTMLDomElement, opt){
+						console.log("start save 11_2")
+
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var legend_11_2 = arr_tex[0].split(',').slice(1);
+						var valid_num = legend_11_2.length;
+
+						var X_11_2 = [];
+						var Y_11_2 = [];
+
+						while(Y_11_2.length < valid_num){
+							Y_11_2.push([])
+						}
+
+						for(var i = 1; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							// if(cur_pair.length != valid_num){
+							// 	// console.alert('wrong data')
+							// 	continue
+							// }
+							// if(cur_pair[0] == '' || cur_pair[0] == undefined){
+							// 	continue
+							// }
+							
+							if(cur_pair.length < valid_num+1 || cur_pair[0].length == 0){
+								continue;
+							}
+
+							X_11_2.push(cur_pair[0]);
+
+							for(var j = 1,k = 0; j < cur_pair.length && k < Y_11_2.length; ++j, ++k){
+								Y_11_2[k].push(cur_pair[j]);
+							}
+							// Y_9_1.push(cur_pair[1]);
+						}
+
+						option_3_11_2['legend']['data'] = legend_11_2;
+						option_3_11_2['xAxis'][0]['data'] = X_11_2;
+
+						option_3_11_2['series'] = [];
+
+						for(var i = 0; i < Y_11_2.length; ++i){
+							option_3_11_2['series'].push({
+								name: legend_11_2[i],
+								type: "line",//折线图
+                                areaStyle: {},//阴影情况
+                                stack: '总量',
+								data: Y_11_2[i],
+							})
+						}
+						
+						myChart_11_2.setOption(option_3_11_2);
+
+						var Link = document.createElement('a');
+						Link.download = "3_10_3.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_10_3('+JSON.stringify(option_3_11_2)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+						return opt
+					},
+				},
+				magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ["特种设备类","轻工产品类","机电类","计量类","办公通讯类","家电类","食品相关类","建材产品类","能源类","其他"],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+			{
+                name: '特种设备类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '轻工产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '机电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+                name: '计量类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+				name: '英国',
+				type: 'line',
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '办公通讯类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '家电类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+			{
+                name: '食品相关类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '建材产品类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '能源类',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			},
+            {
+                name: '其他',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {},
+				// stack: '抽查情况',
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+
+		]
+	};
 
 
-    if (option_1_3 && typeof option_1_3 === 'object') {
-        myChart_1_3.setOption(option_1_3);
-        console.log(data_1_3)
-    }
+	option_3_11_2['series'] = ori_data_11_2['series'];
+	option_3_11_2['legend']['data'] = ori_data_11_2['legend']['data'];
+	option_3_11_2['xAxis'][0]['data'] = ori_data_11_2['xAxis'][0]['data'];
+
+	myChart_11_2.setOption(option_3_11_2, true);
     
 </script>
 

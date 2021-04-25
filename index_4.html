@@ -177,6 +177,17 @@
 <script src="data/3_4_2.json?callback=callback_3_4_2"></script>
 
 <script>
+    var ori_data_1_3 = {};
+
+    function callback_3_4_3(res){
+        ori_data_1_3 = res;
+		console.log('航天制造业主营业务收入与利润.json读取成功')
+		console.log(ori_data_1_3);
+    }
+</script>
+<script src="data/3_4_3.json?callback=callback_3_4_3"></script>
+
+<script>
     var ori_data_1_4 = {};
 
     function callback_3_4_4(res){
@@ -197,6 +208,16 @@
     }
 </script>
 <script src="data/3_4_5.json?callback=callback_3_4_5"></script>
+<script>
+    var ori_data_1_6 = {};
+
+    function callback_3_4_6(res){
+        ori_data_1_6 = res;
+		console.log('航天制造业主营业务收入与利润.json读取成功')
+		console.log(ori_data_1_6);
+    }
+</script>
+<script src="data/3_4_6.json?callback=callback_3_4_6"></script>
 
 <script>
 
@@ -860,323 +881,334 @@
 
 <script>
 
-	// var dom = document.getElementById("container_1_1");
-	// var myChart = echarts.init(dom, 'chalk');
-	// var app = {};
-
-	// var option = {
-	// 	textStyle: {
-    //         fontSize: fontSize_all_title,
-    //     },
-	// 	legend : {
-    //         textStyle:{
-	// 			color: '#F0F8FF',
-    //         },
-	// 		data : ['立案查办案件（起）', '案件信息公开（起）', '涉案金额（万元）','罚没款（万元）']
-	// 	},
-	// 	tooltip: {
-    //         trigger: 'axis'
-    //     },
-    //     toolbox: {
-	// 		show: true,
-	// 		itemSize: echart_toolbox_size, 
-	// 		orient: 'vertical',
-    //         left: 'right',
-    //         top: 'center',
-    //         feature: {
-    //             dataView: {show: true, readOnly: false},
-    //             magicType: {show: true, type: ['line', 'bar']},
-    //             restore: {show: true},
-    //             saveAsImage: {show: true}
-    //         }
-    //     },
-    //     calculable: true,
-    // xAxis: [
-    //     {
-    //         type: 'category',
-	// 		data: ['2012','2013','2014','2015','2016'],
-	// 		axisLabel: {
-    //             fontSize: fontSize_axis_label
-    //         }
-    //     }
-    // ],
-    // yAxis: [ 
-	// 	{
-	// 	    axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //         },
-	// 		type : 'value',
-	// 		name : '起',
-	// 		min : 0,
-	// 		max : 2000,
-	// 		position : 'left',
-	// 		axisLine : {
-	// 			lineStyle : {}
-	// 		},
-				 
-	// 		}, 
-			
-	// 		{axisLabel: {
-    //                 fontSize:fontSize_axis_label
-    //             },
-	// 			type : 'value',
-	// 			name : '万元',
-	// 			min : 0,
-	// 			max : 40000,
-	// 			position : 'right',
-	// 			axisLine : {
-	// 				lineStyle : {}
-	// 			},
-	// 			// axisLabel : {
-	// 			// 	formatter : '{value}'
-	// 			// }
-	// 		} ],
-    // series: [
-	// 	{
-	// 		name:'立案查办案件（起）',
-	// 		data: [984, 810,673,1102,1980],
-	// 		yAxisIndex:0,
-	// 		type: 'bar',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	},
-    //     {
-    //         name: '案件信息公开（起）',
-    //         type: 'bar',
-    //         showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		},
-	// 		data: [0,0,20,469,974],
-	// 		yAxisIndex:0,
-    //     },
-    //     {
-    //         name: '涉案金额（万元）',
-    //         type: 'bar',
-    //         showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		},
-	// 		yAxisIndex:1,
-    //         data: [15800,17200,37800,12000,17800]
-    //     },
-	// 	{
-    //         name: '罚没款（万元）',
-    //         type: 'bar',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		},
-	// 		data: [6781,5413,4607,4020,5917],
-	// 		yAxisIndex:1,
-    //     }
-    // ]
-	// };
-
-	// if (option && typeof option === 'object') {
-	// 	myChart.setOption(option);
-	// }
-
 	
+	var dom_4_3 = document.getElementById("container_1_3");
+	var myChart_4_3 = echarts.init(dom_4_3, 'chalk');
 
-	// var dom2 = document.getElementById("container_1_2");
-	// var myChart2 = echarts.init(dom2, 'chalk');
-	// var app2 = {};
-
-	// var option2 = {
-	// 	textStyle: {
-    //         fontSize: fontSize_all_title,
-    //     },
-	// 	legend : {
-    //         textStyle:{
-    //             color: '#F0F8FF'
-    //         },
-	// 		data : ['上海市产品','外省市产品']
-	// 	},
-	// 	tooltip: {
-    //         trigger: 'axis'
-    //     },
-    //     toolbox: {
-	// 		show: true,
-	// 		itemSize: echart_toolbox_size, 
-	// 		orient: 'vertical',
-    //         left: 'right',
-    //         top: 'center',
-    //         feature: {
-    //             dataView: {show: true, readOnly: false},
-    //             magicType: {show: true, type: ['line', 'bar']},
-    //             restore: {show: true},
-    //             saveAsImage: {show: true}
-    //         }
-    //     },
-    //     calculable: true,
-	// 	xAxis: {
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-	// 		type: 'category',
-	// 		data: ['2008','2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
-	// 	},
-	// 	yAxis: {
-	// 		min:0.7,
-	// 			    max:1.0,
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-	// 		type: 'value'
-	// 	},
-	// 	series: [{
-	// 		name:'上海市产品',
-	// 		data: [0.841,0.87,0.89,0.892,0.899,0.92,0.894,0.91,0.923,0.921],
-	// 		type: 'line',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	},{
-	// 		name:'外省市产品',
-	// 		data: [0.713,0.83,0.837,0.85,0.855,0.873,0.8034,0.84,0.843,0.828],
-	// 		type: 'line',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	}]
-	// };
-
-	// if (option2 && typeof option2 === 'object') {
-	// 	myChart2.setOption(option2);
-	// }
-
-	
-	var dom_3 = document.getElementById("container_1_3");
-	var myChart_3 = echarts.init(dom_3, 'chalk');
-	var data_3 = alldata["2009-2017年上海市各类产品质量监督抽查合格率"]
-    var xAxis_3 = ['2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
-	var yAxis_3a = []
-	var yAxis_3b = []
-	var yAxis_3c = []
-    for(var i = 1; i < data_3[1].length; i+=1) {
-		yAxis_3a.push(data_3[1][i])
-		yAxis_3b.push(data_3[2][i])
-		yAxis_3c.push(data_3[3][i])
+	var xAxis_4_3 = ori_data_1_3['xAxis']['data'] //年份
+	var yAxis_4_3a = ori_data_1_3['series'][0]['data'] //A级
+	var yAxis_4_3b = ori_data_1_3['series'][1]['data'] //B级
+	var yAxis_4_3c = ori_data_1_3['series'][2]['data'] //C级
+    
+	function view_4_3_change(){
+		console.log("5_6 change")
+		//console.log(document.getElementById('view_4_3').value)
+		document.getElementById('view_4_3').innerHTML = document.getElementById('view_4_3').value
 	}
-
-    var option_3_1 = {
+	
+    //option_4_3_1-柱状图
+    var option_4_3_1 = {
 		textStyle: {
             fontSize: fontSize_all_title,
         },
 		tooltip: {
 			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			axisPointer: {        
+				type: 'shadow'
 			}
 		},
 		toolbox: {
 			show: true,
-			itemSize: echart_toolbox_size, 
-			orient: 'vertical',
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
             left: 'right',
             top: 'center',
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-		legend: {
-			data: [
-				{
-					name: '农资产品',
-                    textStyle: { color:"#5793f3" }
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_4_3" onchange="view_4_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,农资产品,工业生产资料,日用消费品\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_4_3 = []
+						yAxis_4_3a = []
+						yAxis_4_3b = []
+						yAxis_4_3c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_4_3.push(cur_pair[0])
+							yAxis_4_3a.push(cur_pair[1])
+							yAxis_4_3b.push(cur_pair[2])
+							yAxis_4_3c.push(cur_pair[3])
+						}
+						console.log(xAxis_4_3)
+						console.log(yAxis_4_3a)
+						console.log(yAxis_4_3b)
+						console.log(yAxis_4_3c)
+						option_4_3_1['series'][0]['data'] = yAxis_4_3a;
+						option_4_3_1['series'][1]['data'] = yAxis_4_3b;
+						option_4_3_1['series'][2]['data'] = yAxis_4_3c;
+						option_4_3_1['xAxis']['data'] = xAxis_4_3;
+						myChart_4_3.setOption(option_4_3_1);
+
+						var Link = document.createElement('a')
+						Link.download = "3_4_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_4_3('+JSON.stringify(option_4_3_1)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
 				},
-				{
-					name: '工业生产资料',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '日用消费品',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
+				magicType: {show: true, type: ['bar', 'line']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
 		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
+		legend: {
+			data: ['农资产品', '工业生产资料', '日用消费品'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
 		},
 		xAxis: {
-			axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
 			type: 'category',
 			name: '年份',
-		    data: xAxis_3,
+			boundaryGap: true,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
+		    data: xAxis_4_3,
 		},
-		yAxis: [
-			{
-				axisLabel: {
-                    fontSize: fontSize_axis_label
-				},
-				type: 'value'
-			}
-		],
+		yAxis: {
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value}',
+                fontSize: fontSize_axis_label
+            }
+		},
 		series: [
 			{
 				name: '农资产品',
 				type: 'bar',
 				stack: '合计',
-				data: yAxis_3a
+				areaStyle: {},
+				data: yAxis_4_3a
 			},
 			{
 				name: '工业生产资料',
 				type: 'bar',
 				stack: '合计',
-				data: yAxis_3b
+				areaStyle: {},
+				data: yAxis_4_3b
 			},
 			{
 				name: '日用消费品',
 				type: 'bar',
 				stack: '合计',
-				data: yAxis_3c
+				areaStyle: {},
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+				data: yAxis_4_3c
 			},
 		]
 	};
-
-	var option_3 = {
+	//option_4_3_2-折线图
+    var option_4_3_2 = {
 		textStyle: {
             fontSize: fontSize_all_title,
         },
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {        
+				type: 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+			feature: {
+				dataView: {
+					show: true, 
+					readOnly: false,
+					optionToContent: function(opt) {
+						console.log(opt)
+						var axisData = opt['xAxis'][0]['data']
+						var series = opt['series']
+						console.log("start show")
+						console.log(axisData)
+						console.log(series)
+						var table = '<textarea id="view_4_3" onchange="view_4_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,农资产品,工业生产资料,日用消费品\n'
+						for (var i = 0, l = axisData.length; i < l; i++) {
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] + ',' + series[2].data[i] + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						xAxis_4_3 = []
+						yAxis_4_3a = []
+						yAxis_4_3b = []
+						yAxis_4_3c = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 4) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							xAxis_4_3.push(cur_pair[0])
+							yAxis_4_3a.push(cur_pair[1])
+							yAxis_4_3b.push(cur_pair[2])
+							yAxis_4_3c.push(cur_pair[3])
+						}
+						console.log(xAxis_4_3)
+						console.log(yAxis_4_3a)
+						console.log(yAxis_4_3b)
+						console.log(yAxis_4_3c)
+						option_4_3_2['series'][0]['data'] = yAxis_4_3a;
+						option_4_3_2['series'][1]['data'] = yAxis_4_3b;
+						option_4_3_2['series'][2]['data'] = yAxis_4_3c;
+						option_4_3_2['xAxis']['data'] = xAxis_4_3;
+						myChart_4_3.setOption(option_4_3_2);
+
+						var Link = document.createElement('a')
+						Link.download = "3_4_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_4_3('+JSON.stringify(option_4_3_2)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+					}
+				},
+				magicType: {show: true, type: ['bar', 'line']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			data: ['农资产品', '工业生产资料', '日用消费品'],
+			textStyle: {
+				color: color_legend,
+				fontSize: fontSize_all_legend,
+			}
+		},
+		xAxis: {
+			type: 'category',
+			name: '年份',
+			boundaryGap: false,
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+                fontSize: fontSize_axis_label
+            },
+		    data: xAxis_4_3,
+		},
+		yAxis: {
+			type: 'value',
+			axisLine: {
+                lineStyle: {
+                    color: color_axis
+                }
+			},
+			axisLabel: {
+				formatter: '{value} ',
+                fontSize: fontSize_axis_label
+            }
+		},
+		series: [
+			{
+				name: '农资产品',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_4_3a
+			},
+			{
+				name: '工业生产资料',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				data: yAxis_4_3b
+			},
+			{
+				name: '日用消费品',
+				type: 'line',
+				stack: '合计',
+				areaStyle: {},
+				// label: {
+                //     normal: {
+                //         show: true,
+                //         position: 'top'
+                //     }
+			    // },
+				data: yAxis_4_3c
+			},
+		]
+	};
+    //option_4_3-饼状图
+	var option_4_3 = {
+		textStyle: {
+			fontSize: fontSize_all_title,
+		},
 		title: [
 			{
-				subtext: '2009',
-				left: '10%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2010',
-				left: '30%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
 				subtext: '2011',
-				left: '50%',
+				left: '20%',
 				top: '30%',
 				textAlign: 'center',
 				subtextStyle:{
@@ -1187,7 +1219,7 @@
 			},
 			{
 				subtext: '2012',
-				left: '70%',
+				left: '40%',
 				top: '30%',
 				textAlign: 'center',
 				subtextStyle:{
@@ -1198,7 +1230,7 @@
 			},
 			{
 				subtext: '2013',
-				left: '90%',
+				left: '60%',
 				top: '30%',
 				textAlign: 'center',
 				subtextStyle:{
@@ -1209,8 +1241,8 @@
 			},
 			{
 				subtext: '2014',
-				left: '20%',
-				top: '70%',
+				left: '80%',
+				top: '30%',
 				textAlign: 'center',
 				subtextStyle:{
                     color:"#5793f3",
@@ -1220,7 +1252,7 @@
 			},
 			{
 				subtext: '2015',
-				left: '40%',
+				left: '30%',
 				top: '70%',
 				textAlign: 'center',
 				subtextStyle:{
@@ -1231,500 +1263,6 @@
 			},
 			{
 				subtext: '2016',
-				left: '60%',
-				top: '70%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2017',
-				left: '80%',
-				top: '70%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			}
-		],
-        legend: {
-			data: [
-				{
-					name: '农资产品',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '工业生产资料',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '日用消费品',
-                    textStyle: { color:"#5793f3" }
-				}
-			],
-		},
-		tooltip: {
-            trigger: 'item',
-			formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-		toolbox: {
-			show: true,
-			orient: 'vertical',
-            left: 'right',
-            top: 'center',
-			itemSize: echart_toolbox_size, 
-            feature: {
-				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        series: [
-			{
-                type: 'pie',
-				name: '2009',
-                radius: 50,
-                center: ['10%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[0], name: '农资产品'},
-					{value: yAxis_3b[0], name: '工业生产资料'},
-					{value: yAxis_3c[0], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2010',
-                radius: 50,
-                center: ['30%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[1], name: '农资产品'},
-					{value: yAxis_3b[1], name: '工业生产资料'},
-					{value: yAxis_3c[1], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2011',
-                radius: 50,
-                center: ['50%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[2], name: '农资产品'},
-					{value: yAxis_3b[2], name: '工业生产资料'},
-					{value: yAxis_3c[2], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2012',
-                radius: 50,
-                center: ['70%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[3], name: '农资产品'},
-					{value: yAxis_3b[3], name: '工业生产资料'},
-					{value: yAxis_3c[3], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2013',
-                radius: 50,
-                center: ['90%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[4], name: '农资产品'},
-					{value: yAxis_3b[4], name: '工业生产资料'},
-					{value: yAxis_3c[4], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2014',
-                radius: 50,
-                center: ['20%', '70%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[5], name: '农资产品'},
-					{value: yAxis_3b[5], name: '工业生产资料'},
-					{value: yAxis_3c[5], name: '日用消费品'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2015',
-                radius: 50,
-                center: ['40%', '70%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[6], name: '农资产品'},
-					{value: yAxis_3b[6], name: '工业生产资料'},
-					{value: yAxis_3c[6], name: '日用消费品'},
-				]
-			}, 
-			{
-                type: 'pie',
-				name: '2016',
-                radius: 50,
-                center: ['60%', '70%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[7], name: '农资产品'},
-					{value: yAxis_3b[7], name: '工业生产资料'},
-					{value: yAxis_3c[7], name: '日用消费品'},
-				]
-			}, 
-			{
-                type: 'pie',
-				name: '2017',
-                radius: 50,
-                center: ['80%', '70%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_3a[8], name: '农资产品'},
-					{value: yAxis_3b[8], name: '工业生产资料'},
-					{value: yAxis_3c[8], name: '日用消费品'},
-				]
-            }, 
-		]
-    };
-	if (option_3 && typeof option_3 === 'object') {
-		myChart_3.setOption(option_3);
-		console.log(data_3)
-	}
-	myChart_3.on('magictypechanged', function (params) {
-		let o = { ...params };
-		console.log(params)
-		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
-		}else if(params.currentType == 'bar'){
-			o.newOption = option_3_1;
-		}
-		myChart_3.setOption(o.newOption, true);
-	});
-
-	myChart_3.on('restore', function (params) {
-		let o = { ...params };
-		console.log(params)
-		o.newOption = option_3;
-		myChart_3.setOption(o.newOption, true);
-	});
-
-
-    // var dom4 = document.getElementById("container_2_1");
-	// var myChart4 = echarts.init(dom4, 'chalk');
-	// var app4 = {};
-
-	// var option4 = {
-	// 	textStyle: {
-    //         fontSize: fontSize_all_title,
-    //     },
-	// 	toolbox: {
-	// 		show: true,
-	// 		itemSize: echart_toolbox_size, 
-	// 		orient: 'vertical',
-    //         left: 'right',
-    //         top: 'center',
-    //         feature: {
-    //             dataView: {show: true, readOnly: false},
-    //             magicType: {show: true, type: ['line', 'bar']},
-    //             restore: {show: true},
-    //             saveAsImage: {show: true}
-    //         }
-    //     },
-	// 	xAxis: {
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-	// 		type: 'category',
-	// 		data: ['2012', '2013', '2014', '2015', '2016', '2017']
-	// 	},
-	// 	yAxis: {
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-	// 		type: 'value'
-	// 	},
-	// 	series: [{
-	// 		data: [40, 55.5, 30.8, 50.3, 45.9, 0],
-	// 		type: 'bar',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	}]
-	// };
-	
-	// if (option4 && typeof option4 === 'object') {
-	// 	myChart4.setOption(option4);
-	// }
-
-	// var dom5 = document.getElementById("container_2_2");
-	// var myChart5 = echarts.init(dom5, 'chalk');
-	// var app5 = {};
-
-	// var option5 = {
-	// 	textStyle: {
-    //         fontSize: fontSize_all_title,
-    //     },
-	// 	legend : {
-    //         textStyle:{
-    //             color: '#F0F8FF'
-    //         },
-	// 		data : ['国抽','市抽']
-	// 	},
-	// 	tooltip: {
-    //         trigger: 'axis'
-    //     },
-    //     toolbox: {
-	// 		show: true,
-	// 		itemSize: echart_toolbox_size, 
-	// 		orient: 'vertical',
-    //         left: 'right',
-    //         top: 'center',
-    //         feature: {
-    //             dataView: {show: true, readOnly: false},
-    //             magicType: {show: true, type: ['line', 'bar']},
-    //             restore: {show: true},
-    //             saveAsImage: {show: true}
-    //         }
-    //     },
-    //     calculable: true,
-	// 	xAxis: {
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-    //             },
-	// 		type: 'category',
-	// 		data: ['2007','2008','2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017']
-	// 	},
-	// 	yAxis: {
-	// 		axisLabel: {
-    //                 fontSize: fontSize_axis_label
-	// 			},
-	// 			min:0.7,
-	// 			    max:1.0,
-	// 		type: 'value'
-	// 	},
-	// 	series: [{
-	// 		name:'国抽',
-	// 		data: [0.820,0.871,0.926,0.922,0.94,0.92,0.932,0.931,0.907,0.924,0.923],
-	// 		type: 'line',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	},{
-	// 		name:'市抽',
-	// 		data: [0.765,0.805,0.853,0.88,0.892,0.888,0.913,0.894,0.887,0.892,0.881],
-	// 		type: 'line',
-	// 		showBackground: true,
-	// 		backgroundStyle: {
-	// 			color: 'rgba(180, 180, 180, 0.2)'
-	// 		}
-	// 	}]
-	// };
-
-	// if (option5 && typeof option5 === 'object') {
-	// 	myChart5.setOption(option5);
-	// }
-
-	var dom_6 = document.getElementById("container_2_3");
-	var myChart_6 = echarts.init(dom_6, 'chalk');
-	var data_6 = alldata["2009-2015年特种设备安全监督执法情况"]
-	// var data_6 = alldata["2009-2017年上海市各类产品质量监督抽查合格率"]
-    var xAxis_6 = ['2009','2010','2011','2012', '2013', '2014', '2015']
-	var yAxis_6a = []
-	var yAxis_6b = []
-	var yAxis_6c = []
-    for(var i = 1; i < data_6.length; i++) {
-		yAxis_6a.push(data_6[i][1])
-		yAxis_6b.push(data_6[i][2])
-		yAxis_6c.push(data_6[i][3])
-	}
-
-    var option_6_1 = {
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-			}
-		},
-		toolbox: {
-			show: true,
-			itemSize: echart_toolbox_size, 
-			orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-		legend: {
-			data: [
-				{
-					name: '安全检查人员/百人次',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '发出安全监察指令数目',
-                    textStyle: { color:"#5793f3" }
-				},
-				{
-					name: '处罚罚金(万元)',
-                    textStyle: { color:"#5793f3" }
-				},
-			],
-		},
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '3%',
-			containLabel: true
-		},
-		xAxis: {
-			axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-			type: 'category',
-			name: '年份',
-		    data: xAxis_6,
-		},
-		yAxis: [
-			{
-				axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-				type: 'value'
-			}
-		],
-		series: [
-			{
-				name: '安全检查人员/百人次',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6a
-			},
-			{
-				name: '发出安全监察指令数目',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6b
-			},
-			{
-				name: '处罚罚金(万元)',
-				type: 'bar',
-				stack: '合计',
-				data: yAxis_6c
-			},
-		]
-	};
-
-	var option_6 = {
-		title: [
-			{
-				subtext: '2009',
-				left: '20%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2010',
-				left: '40%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2011',
-				left: '60%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2012',
-				left: '80%',
-				top: '30%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2013',
-				left: '30%',
-				top: '70%',
-				textAlign: 'center',
-				subtextStyle:{
-                    color:"#5793f3",
-                    fontSize:20,
-                    align:"center"
-                }
-			},
-			{
-				subtext: '2014',
 				left: '50%',
 				top: '70%',
 				textAlign: 'center',
@@ -1735,7 +1273,7 @@
                 }
 			},
 			{
-				subtext: '2015',
+				subtext: '2017',
 				left: '70%',
 				top: '70%',
 				textAlign: 'center',
@@ -1746,27 +1284,26 @@
                 }
 			}
 		],
-		legend: {
-			data: ['安全检查人员/百人次', '发出安全监察指令数目', '处罚罚金(万元)'],
-			textStyle: { //图例文字的样式
+        legend: {
+			data: ['A级', 'B级', 'C级'],
+			textStyle: {
 				color: color_legend,
-				fontSize: fontSize_all_legend
-			},
+				fontSize: fontSize_all_legend,
+			}
 		},
-        
 		tooltip: {
             trigger: 'item',
 			formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
 		toolbox: {
 			show: true,
-			itemSize: echart_toolbox_size, 
-			orient: 'vertical',
+			itemSize: echart_toolbox_size,
+            orient: 'vertical',
             left: 'right',
             top: 'center',
             feature: {
 				dataView: {show: true, readOnly: false},
-				magicType: {show: true, type: ['bar']},
+				magicType: {show: true, type: ['bar', 'line']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
@@ -1774,139 +1311,334 @@
         series: [
 			{
                 type: 'pie',
-				name: '2009',
-                radius: 50,
+				name: '2011',
+                radius: 70,
                 center: ['20%', '30%'],
 				label: {
-					fontSize: 20,
+					// show: false,
                     formatter: '{d}%',
-					color:"#5793f3",
-                },
+					color: color_legend,
+					fontSize: 20,
+				},/*
+				itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                colors[2], colors[3], colors[4]
+                            ];
+							return colorList[params.dataIndex]
+						}
+                    }
+                },*/
 				data: [
-					{value: yAxis_6a[0], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[0], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[0], name: '处罚罚金(万元)'},
+					{value: yAxis_4_3a[0], name: 'A级'},
+					{value: yAxis_4_3b[0], name: 'B级'},
+					{value: yAxis_4_3c[0], name: 'C级'},
 				]
             }, 
-			{
-                type: 'pie',
-				name: '2010',
-                radius: 50,
-                center: ['40%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_6a[1], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[1], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[1], name: '处罚罚金(万元)'},
-				]
-            }, 
-			{
-                type: 'pie',
-				name: '2011',
-                radius: 50,
-                center: ['60%', '30%'],
-				label: {
-					fontSize: 20,
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-					{value: yAxis_6a[2], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[2], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[2], name: '处罚罚金(万元)'},
-				]
-			}, 
 			{
                 type: 'pie',
 				name: '2012',
-                radius: 50,
-                center: ['80%', '30%'],
+                radius: 70,
+                center: ['40%', '30%'],
 				label: {
-					fontSize: 20,
+					// show: false,
                     formatter: '{d}%',
-					color:"#5793f3",
-                },
+					color: color_legend,
+					fontSize: 20,
+				},
 				data: [
-					{value: yAxis_6a[3], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[3], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[3], name: '处罚罚金(万元)'},
+				    {value: yAxis_4_3a[1], name: 'A级'},
+					{value: yAxis_4_3b[1], name: 'B级'},
+					{value: yAxis_4_3c[1], name: 'C级'},
 				]
-			}, 
+            }, 
 			{
                 type: 'pie',
 				name: '2013',
-                radius: 50,
-                center: ['30%', '70%'],
+                radius: 70,
+                center: ['60%', '30%'],
 				label: {
-					fontSize: 20,
+					// show: false,
                     formatter: '{d}%',
-					color:"#5793f3",
-                },
+					color: color_legend,
+					fontSize: 20,
+				},
 				data: [
-					{value: yAxis_6a[4], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[4], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[4], name: '处罚罚金(万元)'},
+				    {value: yAxis_4_3a[2], name: 'A级'},
+					{value: yAxis_4_3b[2], name: 'B级'},
+					{value: yAxis_4_3c[2], name: 'C级'},
 				]
             }, 
 			{
                 type: 'pie',
 				name: '2014',
-                radius: 50,
-                center: ['50%', '70%'],
+                radius: 70,
+                center: ['80%', '30%'],
 				label: {
-					fontSize: 20,
+					// show: false,
                     formatter: '{d}%',
-					color:"#5793f3",
-                },
+					color: color_legend,
+					fontSize: 20,
+				},
 				data: [
-					{value: yAxis_6a[5], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[5], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[5], name: '处罚罚金(万元)'},
+				    {value: yAxis_4_3a[3], name: 'A级'},
+					{value: yAxis_4_3b[3], name: 'B级'},
+					{value: yAxis_4_3c[3], name: 'C级'},
 				]
-			}, 
+            }, 
 			{
                 type: 'pie',
 				name: '2015',
-                radius: 50,
-                center: ['70%', '70%'],
+                radius: 70,
+                center: ['30%', '70%'],
 				label: {
-					fontSize: 20,
+					// show: false,
                     formatter: '{d}%',
-					color:"#5793f3",
-                },
+					color: color_legend,
+					fontSize: 20,
+				},
 				data: [
-					{value: yAxis_6a[6], name: '安全检查人员/百人次'},
-					{value: yAxis_6b[6], name: '发出安全监察指令数目'},
-					{value: yAxis_6c[6], name: '处罚罚金(万元)'},
+				    {value: yAxis_4_3a[4], name: 'A级'},
+					{value: yAxis_4_3b[4], name: 'B级'},
+					{value: yAxis_4_3c[4], name: 'C级'},
 				]
             }, 
+			{
+                type: 'pie',
+				name: '2016',
+                radius: 70,
+                center: ['50%', '70%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_4_3a[5], name: 'A级'},
+					{value: yAxis_4_3b[5], name: 'B级'},
+					{value: yAxis_4_3c[5], name: 'C级'},
+				]
+            },
+			{
+                type: 'pie',
+				name: '2017',
+                radius: 70,
+                center: ['70%', '70%'],
+				label: {
+					// show: false,
+                    formatter: '{d}%',
+					color: color_legend,
+					fontSize: 20,
+				},
+				data: [
+				    {value: yAxis_4_3a[6], name: 'A级'},
+					{value: yAxis_4_3b[6], name: 'B级'},
+					{value: yAxis_4_3c[6], name: 'C级'},
+				]
+            }
 		]
-    };
-	if (option_6 && typeof option_6 === 'object') {
-		myChart_6.setOption(option_6);
-		console.log(data_6)
+	};
+	//option之间切换，默认饼状图
+	// if (option_4_3 && typeof option_4_3 === 'object') {
+	// 	myChart_4_3.setOption(option_4_3);
+	// 	console.log(ori_data_1_3)
+	// }
+	if (option_4_3_1 && typeof option_4_3_1 === 'object') {
+		myChart_4_3.setOption(option_4_3_1);
+		console.log(ori_data_1_3)
 	}
-	myChart_6.on('magictypechanged', function (params) {
+	myChart_4_3.on('magictypechanged', function (params) {
 		let o = { ...params };
 		console.log(params)
 		if(params.currentType == 'line'){
-			// o.newOption = option_2_1_2;
+			option_4_3_2['series'][0]['data'] = yAxis_4_3a;
+			option_4_3_2['series'][1]['data'] = yAxis_4_3b;
+			option_4_3_2['series'][2]['data'] = yAxis_4_3c;
+			option_4_3_2['xAxis']['data'] = xAxis_4_3;
+			o.newOption = option_4_3_2;
 		}else if(params.currentType == 'bar'){
-			o.newOption = option_6_1;
+			option_4_3_1['series'][0]['data'] = yAxis_4_3a;
+			option_4_3_1['series'][1]['data'] = yAxis_4_3b;
+			option_4_3_1['series'][2]['data'] = yAxis_4_3c;
+			option_4_3_1['xAxis']['data'] = xAxis_4_3;
+			o.newOption = option_4_3_1;
 		}
-		myChart_6.setOption(o.newOption, true);
+		myChart_4_3.setOption(o.newOption, true);
 	});
 
-	myChart_6.on('restore', function (params) {
+	myChart_4_3.on('restore', function (params) {
 		let o = { ...params };
 		console.log(params)
-		o.newOption = option_6;
-		myChart_6.setOption(o.newOption, true);
+		o.newOption = option_4_3_1;
+		myChart_4_3.setOption(o.newOption, true);
 	});
+
+
+
+
+var dom_1_6 = document.getElementById("container_2_3");
+var myChart_1_6 = echarts.init(dom_1_6, 'chalk');
+var app_1_6 = {};
+
+function view_1_6_change(){
+	console.log("3_6 change")
+	//console.log(document.getElementById('view_1_6').value)
+	document.getElementById('view_1_6').innerHTML = document.getElementById('view_1_6').value
+}
+var option_1_6_1 = {
+	tooltip: {
+		trigger: 'axis',
+		axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+			type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		}
+	},
+	toolbox: {
+		show: true,
+		itemSize: echart_toolbox_size, 
+		orient: 'vertical',
+		left: 'right',
+		top: 'center',
+		feature: {
+			dataView: {
+				show: true, 
+				readOnly: false,
+				optionToContent: function(opt) {
+					console.log(opt)
+					var axisData = opt['xAxis'][0]['data']
+					var series = opt['series']
+					console.log("start show")
+					console.log(axisData)
+					console.log(series)
+					var table = '<textarea id="view_1_6" onchange="view_1_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,安全检查人员/百人次,发出安全监察指令书,处罚罚金(万元)\n'
+					for (var i = 0, l = axisData.length; i < l; i++) {
+
+						table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i]  + '\n'
+					}
+					table += '</textarea>'
+					return table;
+				},
+				contentToOption: function(HTMLDomElement, opt) {
+					console.log('start save')
+					console.log(opt)
+					console.log(HTMLDomElement.firstChild)
+					var plain_tex = HTMLDomElement.firstChild.innerHTML
+					var arr_tex = plain_tex.split('\n')
+					console.log(arr_tex)
+					xAxis_1_2 = []
+					yAxis_1_2a = []
+					yAxis_1_2b = []
+					yAxis_1_2c = []
+
+					for(var i = 1; i < arr_tex.length; i++) {
+						cur_pair = arr_tex[i].split(',')
+						if(cur_pair.length != 4) {
+							//console.alert('wrong data')
+							continue
+						}
+						if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+							continue
+						}
+						xAxis_1_2.push(cur_pair[0])
+						yAxis_1_2a.push(cur_pair[1])
+						yAxis_1_2b.push(cur_pair[2])
+						yAxis_1_2c.push(cur_pair[3])
+		
+					}
+					console.log(xAxis_1_2)
+					console.log(yAxis_1_2a)
+					console.log(yAxis_1_2b)
+					console.log(yAxis_1_2c)
+				
+					option_1_6_1['series'][0]['data'] = yAxis_1_2a;
+					option_1_6_1['series'][1]['data'] = yAxis_1_2b;
+					option_1_6_1['series'][2]['data'] = yAxis_1_2c;
+		
+					option_1_6_1['xAxis']['data'] = xAxis_1_2;
+					myChart_1_6.setOption(option_1_6_1);
+
+					var Link = document.createElement('a')
+					Link.download = "3_4_6.json"
+					Link.style.display = 'none'
+					//字符内容转变成blob地址
+					var blob = new Blob(['callback_3_4_6('+JSON.stringify(option_1_6_1)+')'])
+					Link.href = URL.createObjectURL(blob)
+					//触发点击
+					document.body.appendChild(Link)
+					Link.click()
+					//然后移除
+					document.body.removeChild(Link)
+					return opt
+				},
+			},
+			magicType: {show: true, type: ['line', 'bar']},
+			restore: {show: true},
+			saveAsImage: {show: true}
+		}
+	},
+	legend: {
+		data: ['中国', '韩国', '日本', '其他'],
+		textStyle: { //图例文字的样式
+			color: color_legend,
+			fontSize: fontSize_all_legend
+		},
+	},
+	xAxis: {
+		type: 'category',
+		data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		axisLabel:{
+			textStyle: { //图例文字的样式
+				color: color_axis,
+				fontSize: fontSize_axis_label
+			},
+		}
+	},
+	yAxis: [
+		{
+			type: 'value',
+
+			axisLabel: {
+				fontSize: fontSize_axis_label
+			}
+		}
+	],
+	series: [
+		{
+			name: '销量',
+			type: 'bar',
+			data: [1,2,3],
+
+		},
+		{
+			name: '汽车市场占比',
+			type: 'bar',
+			data: [],
+
+		},
+		{
+			name: '汽车市场占比',
+			type: 'bar',
+			data: [],
+
+		}
+	]
+};
+
+
+var X_3_5 = ori_data_1_6['xAxis']['data'];
+var Y_3_5 = ori_data_1_6['series'];
+
+option_1_6_1['legend']['data'] = ori_data_1_6['legend']['data'];
+option_1_6_1['xAxis']['data'] = X_3_5;
+
+for(var i = 0; i < Y_3_5.length; ++i){
+	option_1_6_1['series'][i]['data'] = Y_3_5[i]['data'];
+	option_1_6_1['series'][i]['name'] = Y_3_5[i]['name'];
+}
+
+myChart_1_6.setOption(option_1_6_1);
+
 
 </script>
 

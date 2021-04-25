@@ -1,0 +1,106 @@
+callback_3_4_6({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "安全检查人员/百人次",
+            "发出安全监察指令书",
+            "处罚罚金(万元)"
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "2009",
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+           
+        ],
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff",
+                "fontSize": 22
+            }
+        }
+    },
+    "yAxis": [
+        {
+            "type": "value",
+            "axisLabel": {
+                "fontSize": 22
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "安全检查人员/百人次",
+            "type": "bar",
+            "data": [
+                "168.93",
+                "221.82",
+                "111.12",
+                "144.92",
+                "755.6",
+                "",
+                "1500",
+                
+                
+            ],
+        },
+        
+        {
+            "name": "发出安全监察指令书",
+            "type": "bar",
+            "data": [
+                "1278",
+                "1493",
+                "1405",
+                "1228",
+                "550",
+                "",
+                "",
+                
+            ],
+        },
+        {
+            "name": "处罚罚金(万元)",
+            "type": "bar",
+            "data": [
+                "265",
+                "514.1",
+                "555.7",
+                "422.38",
+                "151.258",
+                "",
+                "1164"
+                
+            ],
+        }
+    ]
+})

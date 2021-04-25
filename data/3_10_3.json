@@ -1,0 +1,134 @@
+callback_3_10_3({
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar",
+                    "stack",
+                    "tiled"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "批发",
+            "零售",
+            "批发兼零售",
+            "其他",
+        ],
+        "textStyle": {
+            "color": "#fff",
+            "fontSize": 20
+        }
+    },
+    "grid": {
+        "left": "3%",
+        "right": "4%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                "2013",
+                "2014",
+                "2015",
+                "2016",
+                "2017"
+            ],
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "series": [
+        
+        {
+            "name": "批发",
+            "type": "line",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "23218",
+                "27892",
+                "39350",
+                "44805",
+                "32395"
+            ]
+        },
+        {
+            "name": "零售",
+            "type": "line",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "101140",
+                "108456",
+                "116692",
+                "125887",
+                "83586"
+            ]
+        },
+        {
+            "name": "批发兼零售",
+            "type": "line",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "12668",
+                "13441",
+                "15724",
+                "17098",
+                "9547"
+            ]
+        },
+        {
+            "name": "其他",
+            "type": "line",
+            "areaStyle": {},
+            "stack": "总量",
+            "data": [
+                "172",
+                "233",
+                "277",
+                "0",
+                "2321"
+            ]
+        },
+        
+    ]
+})

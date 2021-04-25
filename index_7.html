@@ -22,27 +22,41 @@
     <!-- echarts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
     <script type="text/javascript" src="js/color.js"></script>
-    <script type="text/javascript" src="js/global_config.js"></script>
-		<link rel="stylesheet" href="css/mine.css" />
 
     <!-- semantic UI -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
     <!-- bootstrap -->
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- <script src="json/data.json"></script> -->
+    <script type="text/javascript" src="js/global_config.js"></script></head>
 
 </head>
-  
 
+<style type="text/css"> 
+	.flip_card_side{
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	.flip_card{
+		position: relative;
+	}
+</style> 
 
 <body>
-    <div class="header" style="padding:0px">
+    <div class="header">
         <h1 class="header-title" style="font-size:40px">上海市质量状况可视化展图</h1>
     </div>
     <div class="wrapper">
         <div class="content">
-            <div class="col col-l">
+			<div class="col col-l">
                 <div class="xpanel-wrapper xpanel-wrapper-50">
                     <div class="xpanel xpanel-l-t">
                         <div class="title">2008-2017年上海市名建设工程白玉兰奖获得情况</div>
@@ -69,25 +83,30 @@
                     </div>
                 </div>
                 <div class="xpanel-wrapper xpanel-wrapper-55">
-                    <div class="xpanel xpanel-c-b">
-                        <div class="title">2017年度上海市“质量标杆”获奖组织一览表</div>
-                        <!-- <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1> -->
-                        <div id="container_1_4" style="height: 95%">
-                            <div class="container_table">
-                                <table class="pure-table pure-table-horizontal" id="table_1_4">
-                                    <thead>
-                                        <tr>
-                                            <th>编号</th>
-                                            <th>“质量标杆”名称                                            </th>
+                    <div class="xpanel xpanel-l-b">
+                        <div class="title">上海市近年与环保规划相关的政策文件</div>
+						<div class="flip_card" style="position: relative; height: 90%;">
+							<div id="container_7_4" class="flip_card_side" style="position: absolute;">
+								
+							</div>
+							<!-- ?如果右边的按钮点不到，就修改right值调整挡在前面的表格的边距 -->
+							<div class="flip_card_side" style="position: absolute; z-index: 10; right: 8%; bottom: 5%;">
+								<div class="container_table" style="overflow: scroll;">
+									<table class="pure-table pure-table-horizontal" id="table_6_2">
+										<thead>
+											<tr>
+											<th>编号</th>
+                                            <th>“质量标杆”名称</th>
                                             <th>获奖组织名称</th>
-                                        </tr>
-                                    </thead>
+											</tr>
+										</thead>
 
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -109,12 +128,12 @@
     </div>
 
     <div id="popLayer"></div>
-    <div id="popBox_1_1" class="popBox">
+    <div id="popBox_6_1" class="popBox">
         <!-- <div class="close">
-				<a href="javascript:void(0)" onclick="closeBoxSuffix('_1_1')">关闭</a>
+				<a href="javascript:void(0)" onclick="closeBoxSuffix('_6_1')">关闭</a>
 			</div> -->
         <div class="content" style="overflow: scroll; max-height: 80%;">
-            <table id="table_1_1" class="ui definition table">
+            <table id="table_6_1" class="ui definition table">
                 <thead>
                     <tr>
                         <th></th>
@@ -146,23 +165,22 @@
             <button class="ui primary button" onclick="alert('submit success!')">
                 保存
             </button>
-            <button class="ui button" onclick="closeBoxSuffix('_1_1')">
+            <button class="ui button" onclick="closeBoxSuffix('_6_1')">
                 关闭
             </button>
-            <button class="ui button" onclick="addTableRow('_1_1')">
+            <button class="ui button" onclick="addTableRow('_6_1')">
                 添加一行
             </button>
         </div>
 
     </div>
-    <script>
-			// initHoverWindowBySuffix('_1_1', submitHandler, function(){hideDialogID('_1_1')});
-    </script>
+
+
 </body>
 
 </html>
 
-<!--解决本地json跨域问题-->
+
 <script>
     var alldata = {};
 
@@ -200,6 +218,28 @@
 <script src="data/3_7_2.json?callback=callback_3_7_2"></script>
 
 <script>
+    var ori_data_1_3 = {};
+
+    function callback_3_7_3(res){
+        ori_data_1_3 = res;
+		console.log('航天制造业主营业务收入与利润.json读取成功')
+		console.log(ori_data_1_3);
+    }
+</script>
+<script src="data/3_7_3.json?callback=callback_3_7_3"></script>
+
+<!-- <script>
+    var ori_data_2_1 = {};
+
+    function callback_3_7_4(res){
+        ori_data_2_1 = res;
+		console.log('3_7_4.json读取成功')
+		console.log(ori_data_2_1);
+    }
+</script>
+<script src="data/3_7_4.json?callback=callback_3_7_4"></script> -->
+
+<script>
     var ori_data_1_5 = {};
 
     function callback_3_7_5(res){
@@ -220,87 +260,193 @@
     }
 </script>
 <script src="data/3_7_6.json?callback=callback_3_7_6"></script>
-<!--配置页面 1-1 的Echart图-->
-<!-- <script>
-    var dom_1_1 = document.getElementById("container_1_1");
-    var myChart_1_1 = echarts.init(dom_1_1, 'chalk');
+<script>
+    var ori_data_6_1 = {};
 
-    var data_1_1 = alldata["2008-2017年上海市名建设工程“白玉兰”奖获得情况"]
-    
-    var xAxis_1_1 = [] 
-    var yAxis_1_1a = []
-    
-    for(var i = 1; i < data_1_1[0].length; ++i){
-        xAxis_1_1.push(data_1_1[0][i])
-        yAxis_1_1a.push(data_1_1[1][i])
+    function callback_3_6_1(res){
+        ori_data_6_1 = res;
+		console.log('3_6_1.json读取成功')
+		console.log(ori_data_6_1);
     }
+</script>
+<script src="data/3_6_1.json?callback=callback_3_6_1"></script>
 
 
-    var option_1_1 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
+
+<!--配置页面 6-2 的表格-->
+<script>
+    var ori_data_2_1 = {};
+
+    function callback_3_7_4(res){
+        ori_data_2_1 = res;
+		console.log('3_7_4.json读取成功')
+		console.log(ori_data_2_1);
+    }
+</script>
+<script src="data/3_7_4.json?callback=callback_3_7_4"></script>
+
+<script>
+	var dom_6_2 = document.getElementById("container_7_4");
+	var myChart_6_2 = echarts.init(dom_6_2, 'chalk');
+	var app_6_2 = {};
+
+	function view_6_2_1_change(){
+		console.log("6_2_1 change")
+		// Document.getElementById('view_2_1_1').innerHTML
+		console.log(document.getElementById('view_6_2_1').value)
+		document.getElementById('view_6_2_1').innerHTML = document.getElementById('view_6_2_1').value
+	}
+
+	//折线图
+	var option_3_6_2 = {
         tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['建设工程“白玉兰”奖数量'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
+			show:false,
+			trigger: 'axis',
+			axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		toolbox: {
+			show: true,
+			itemSize: echart_toolbox_size, 
             orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        calculable: true,
-        xAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                type: 'category',
-                data: xAxis_1_1
-            }
-        ],
-        yAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                type: 'value',
-                max: 250,
-                min: 150,
-                boundaryGap: [0.2, 0.2]
-            }
-        ],
-        series: [
-            {
-                name: '建设工程“白玉兰”奖数量',
-                type: 'bar',
-                data: yAxis_1_1a,
-                yAxisIndex: 0
-            }
-        ]
-    };
+			feature: {
+				dataView: {
+					optionToContent: function(opt) {
+						document.getElementById("container_7_4").style.zIndex=20;
+						var table = '<textarea id="view_6_2_1" onchange="view_6_2_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						// table += option_9_1_1['series'][0]['name'];
+						// table += '\n';
+						// table += "年份,文件\n"
+
+						// console.log(data_6_2)
+
+						for (var i = 0; i < data_6_2.length; ++i) {
+							// console.log(data_6_2[i])
+							table += data_6_2[i][0] + ',' + data_6_2[i][1] +',' + data_6_2[i][2] + '\n';
+						}
+						
+						table += '</textarea>'
+
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt){
+						var plain_tex = HTMLDomElement.firstChild.innerHTML;
+						var arr_tex = plain_tex.split('\n')
+
+						var result_data = {'data':[]};
+
+						for(var i = 0; i < arr_tex.length; ++i){
+							cur_pair = arr_tex[i].split(',');
+							
+							if(cur_pair.length != 3){
+								continue;
+							}
+
+							result_data['data'].push(cur_pair)
+						}
+
+						console.log(result_data);
+
+						var Link = document.createElement('a');
+						Link.download = "3_7_4.json";
+						Link.style.display = 'none';
+						// 字符内容转变成blob地址
+						var blob = new Blob(['callback_3_7_4('+JSON.stringify(result_data)+')']);
+						Link.href = URL.createObjectURL(blob);
+						// 触发点击 	
+						document.body.appendChild(Link);
+						Link.click();
+						// 然后移除
+						document.body.removeChild(Link);
+
+						document.getElementById("container_7_4").style.zIndex=0;
+						return opt
+					},
+					show: true, 
+					readOnly: false,
+				},
+				// magicType: {show: true, type: ['line','bar','stack','tiled']},
+				// // restore: {show: true},
+				// saveAsImage: {show: true}
+			}
+		},
+		legend: {
+			show:false,
+            data: ['建成区绿化覆盖率', '森林覆盖率', '生活垃圾无害化处理率', '人均生活垃圾处理减量率'],
+			textStyle: { //图例文字的样式
+				color: color_legend,
+				fontSize: fontSize_all_legend
+			},
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				show: false,
+				type: 'category',
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                boundaryGap: false,
+                axisLabel:{
+				textStyle: { //图例文字的样式
+					color: color_axis,
+					fontSize: fontSize_axis_label
+				},
+			}
+			}
+		],
+		yAxis: [
+			{
+				show: false,
+				type: 'value',
+                name: '百分比%',
+				axisLabel:{
+					textStyle: { //图例文字的样式
+						color: color_axis,
+						fontSize: fontSize_axis_label
+					},
+				}
+				// max: 365,
+			}
+		],
+		series: [
+		
+		]
+	};
+
+	myChart_6_2.setOption(option_3_6_2, true);
 
 
+    // var data_6_2 = alldata["上海市近年与环保规划相关的政策文件"]
+    var data_6_2 = ori_data_2_1["data"]
 
-    if (option_1_1 && typeof option_1_1 === 'object') {
-        myChart_1_1.setOption(option_1_1);
-        console.log(data_1_1)
+    function addRow_6_2_once(data1, data2, data3) {
+        var oTable = document.getElementById("table_6_2");
+        var tBodies = oTable.tBodies;
+        var tbody = tBodies[0];
+        var tr = tbody.insertRow(tbody.rows.length);
+        var td_1 = tr.insertCell(0);
+        td_1.innerHTML = "<div contenteditable='true' class='table_info'>" + data1 + "</div>";
+        var td_2 = tr.insertCell(1);
+        td_2.innerHTML = "<div contenteditable='true' class='table_info'>" + data2 + "</div>";
+		var td_3 = tr.insertCell(2);
+        td_3.innerHTML = "<div contenteditable='true' class='table_info'>" + data3 + "</div>";
     }
 
-</script> -->
+    function addRow_6_2(data) {
+        for (var i = 1; i < data.length; ++i) {
+            addRow_6_2_once(data[i][0], data[i][1], data[i][2])
+        }
+    }
+    window.onload = addRow_6_2(data_6_2);
+
+</script>
+
+
 <script>
 
 	var dom_1_1 = document.getElementById("container_1_1");
@@ -709,10 +855,16 @@
 
 </script>
 
-<!--配置页面 1-3 的Echart图-->
 <script>
     var dom_1_3 = document.getElementById("container_1_3");
     var myChart_1_3 = echarts.init(dom_1_3, 'chalk');
+
+
+	function view_1_3_change(){
+		console.log("3_3 change")
+		//console.log(document.getElementById('view_1_2').value)
+		document.getElementById('view_1_3').innerHTML = document.getElementById('view_1_3').value
+	}
 
     var option_1_3 ={
         textStyle: {
@@ -720,7 +872,6 @@
         },
 		title: [
 			{
-				subtext: '其他',
 				left: '80%',
 				top: '70%',
 				textAlign: 'center',
@@ -735,56 +886,56 @@
 			data: [
 				{
 					name: '机电',
-                    textStyle: { color:"#5793f3" }
+                    // // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '轻工',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '食品',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
                 }
                 ,
 				{
 					name: '建材',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '农产品',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '化工',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '医药',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '汽车及零部件',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
                 },
 				{
 					name: '服装',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
                 },
 				{
 					name: '仪电',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '纺织',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				},
 				{
 					name: '化学建材',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
                 },
 				{
 					name: '冶金有色金属',
-                    textStyle: { color:"#5793f3" }
+                    // textStyle: { color:"#5793f3" }
 				}
                 
 			],
@@ -800,34 +951,76 @@
             top: 'center',
             itemSize: echart_toolbox_size, 
             feature: {
-				dataView: {show: true, readOnly: false},
+				dataView: {
+                    show: true, 
+                    readOnly: false,
+                    optionToContent: function(opt) {
+						console.log(opt)
+						var series = opt['series'][0]['data']
+						console.log("start show")
+						console.log(series)
+						var table = '<textarea id="view_1_3" onchange="view_1_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n'
+						for (var i = 0, l = series.length; i < l; i++) {
+							table +=  series[i].value + ',' + series[i].name + '\n'
+						}
+						table += '</textarea>'
+						return table;
+					},
+					contentToOption: function(HTMLDomElement, opt) {
+						console.log('start save')
+						console.log(opt)
+						console.log(HTMLDomElement.firstChild)
+						var plain_tex = HTMLDomElement.firstChild.innerHTML
+						var arr_tex = plain_tex.split('\n')
+						console.log(arr_tex)
+						// _value = []
+						// _name = []
+						for(var i = 1; i < arr_tex.length; i++) {
+							cur_pair = arr_tex[i].split(',')
+							if(cur_pair.length != 2) {
+								//console.alert('wrong data')
+								continue
+							}
+							if(cur_pair[0] == ' ' || cur_pair[0] == undefined) {
+								continue
+							}
+							option_1_3['series'][0]['data'][i-1].value =cur_pair[0]
+							option_1_3['series'][0]['data'][i-1].name =cur_pair[1]
+							// _value.push(cur_pair[0])
+							// _name.push(cur_pair[1])
+						}
+						// for(var j = 0;j < _value.length;j++){
+						// 	option_1_3['series'][0]['data'][j].value =_value[j]
+						// 	option_1_3['series'][0]['data'][j].name =_name[j]
+						// }
+						
+						myChart_1_3.setOption(option_1_3);
+
+						var Link = document.createElement('a')
+						Link.download = "3_7_3.json"
+						Link.style.display = 'none'
+						//字符内容转变成blob地址
+						var blob = new Blob(['callback_3_7_3('+JSON.stringify(option_1_3)+')'])
+						Link.href = URL.createObjectURL(blob)
+						//触发点击
+						document.body.appendChild(Link)
+						Link.click()
+						//然后移除
+						document.body.removeChild(Link)
+						return opt
+                    },
+                },
 				magicType: {show: true, type: ['bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
         },
         series: [
-        {
-                type: 'pie',
-				name: '其他',
-                radius: 80,
-                center: ['80%', '50%'],
-				label: {
-                    formatter: '{d}%',
-					color:"#5793f3",
-                },
-				data: [
-                    {value: 3.94, name: '仪电'},
-                    {value: 2.85, name: '纺织'},
-                    {value: 2.44, name: '化学建材'},
-                    {value: 0.82, name: '冶金及有色金属'},
-				]
-            }, 
+      
 			{
                 type: 'pie',
-				name: '2011',
                 radius: 180,
-                center: ['30%', '50%'],
+                center: ['50%', '50%'],
 				label: {
                     formatter: '{d}%',
 					color:"#5793f3",
@@ -842,137 +1035,34 @@
                     {value: 6.53, name: '医药'},
                     {value: 5.85, name: '汽车及零部件'},
                     {value: 4.35, name: '服装'},
-                    // {value: 3.94, name: '仪电'},
-                    // {value: 2.85, name: '纺织'},
-                    // {value: 2.44, name: '化学建材'},
-                    // {value: 0.82, name: '冶金及有色金属'},
-                    {value: 10.05, name: '其他'},
+                    {value: 3.94, name: '仪电'},
+                    {value: 2.85, name: '纺织'},
+                    {value: 2.44, name: '化学建材'},
+                    {value: 0.82, name: '冶金及有色金属'},
 				]
             }
 		]
     };
 
 
-    if (option_1_3 && typeof option_1_3 === 'object') {
-        myChart_1_3.setOption(option_1_3);
-        console.log(data_1_3)
-    }
+    // if (option_1_3 && typeof option_1_3 === 'object') {
+    //     myChart_1_3.setOption(option_1_3);
+    //     console.log(data_1_3)
+    // }
+
+	// var X_3_5 = ori_data_1_3['legend']['data'];
+	// var Y_3_5 = ori_data_1_3['series'];
+
+	option_1_3['legend']['data'] = ori_data_1_3['legend']['data'];
+	option_1_3['series']['data'] = ori_data_1_3['series']['data'];
+
+	// for(var i = 0; i < Y_3_5.length; ++i){
+	// 	option_1_5_1['series'][i]['data'] = Y_3_5[i]['data'];
+	// 	option_1_5_1['series'][i]['name'] = Y_3_5[i]['name'];
+	// }
+
+	myChart_1_3.setOption(option_1_3);
 </script>
-
-
-<!--配置页面 1-4 的Echart图-->
-<script>
-    var data_1_4 = alldata["2017年度上海市“质量标杆”获奖组织一览表"]
-
-    function addRow_1_4_once(data1, data2,data3) {
-    var oTable = document.getElementById("table_1_4");
-    var tBodies = oTable.tBodies;
-    var tbody = tBodies[0];
-    var tr = tbody.insertRow(tbody.rows.length);
-    var td_1 = tr.insertCell(0);
-    td_1.innerHTML = "<div contenteditable='true' class='table_info'>" + data1 + "</div>";
-    var td_2 = tr.insertCell(1);
-    td_2.innerHTML = "<div contenteditable='true' class='table_info'>" + data2 + "</div>";
-    var td_3 = tr.insertCell(1);
-    td_3.innerHTML = "<div contenteditable='true' class='table_info'>" + data3 + "</div>";
-}
-
-function addRow_1_4(data) {
-    for (var i = 1; i < data.length-2; ++i) {
-        addRow_1_4_once(data[i][0], data[i][1],data[i][2])
-    }
-}
-window.onload = addRow_1_4(data_1_4);
-
-
-</script>
-
-
-<!-- 配置页面 1-5 的Echart图
-<script>
-    var dom_1_5 = document.getElementById("container_1_5");
-    var myChart_1_5 = echarts.init(dom_1_5, 'chalk');
-
-    var data_1_5 = alldata["2009-2017年生产许可证获证企业数和省 市级审查数"]
-    
-    var xAxis_1_5 = [] 
-    var yAxis_1_5a = []
-    var yAxis_1_5b = []
-    
-    for(var i = 1; i < data_1_5.length; ++i){
-        xAxis_1_5.push(data_1_5[i][0])
-        yAxis_1_5a.push(data_1_5[i][1])
-        yAxis_1_5b.push(data_1_5[i][2])
-    }
-
-
-    var option_1_5 = {
-        textStyle: {
-            fontSize: fontSize_all_title,
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['发证总数','省/市级审查数'],
-            textStyle:{
-                color: '#F0F8FF'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            itemSize: echart_toolbox_size, 
-            feature: {
-                mark: {show: true},
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar', 'tiled']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        xAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                type: 'category',
-                boundaryGap: false,
-                data: xAxis_1_5
-            }
-        ],
-        yAxis: [
-            {
-                axisLabel: {
-                    fontSize: fontSize_axis_label
-                },
-                type: 'value',
-            }
-        ],
-        series: [
-        {
-                name: '发证总数',
-                type: 'bar',
-                data: yAxis_1_5a,
-            },
-            {
-                name: '省/市级审查数',
-                type: 'bar',
-                data: yAxis_1_5b,
-            }
-        ]
-    };
-
-    if (option_1_5 && typeof option_1_5 === 'object') {
-        myChart_1_5.setOption(option_1_5);
-        console.log(data_1_5)
-    }
-
-</script> -->
-
-<!--* 图 2_5 -->
 <script>
 
 	var dom_1_5 = document.getElementById("container_1_5");
@@ -1355,3 +1445,6 @@ window.onload = addRow_1_4(data_1_4);
 </script> -->
 
 <script type="text/javascript" src="js/left_top_but.js"></script>
+
+
+
