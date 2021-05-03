@@ -2484,13 +2484,17 @@
 <script type="text/javascript" src="js/left_top_but.js"></script>
 
 <script>
+	// 原本是vue版本的实现，所以需要整个父页面跳走，现在不需要了
 	function link_to_heatmap(){
-		console.log("go")
-		var _parent = window.parent;
-		if(_parent){
-			_parent.location.href="./pj4_4_map/index.html";
-		}else{
-			window.location.href="./pj4_4_map/index.html";
-		}
+		window.location.href="pj4_4_map_1.html";
+		// console.log("go")
+		// var _parent = window.parent;
+		// if(_parent){
+		// 	// _parent.location.href="./pj4_4_map/index.html";
+		// 	_parent.location.href="pj4_4_map_1.html";
+		// }else{
+		// 	// window.location.href="./pj4_4_map/index.html";
+		// 	window.location.href="pj4_4_map_1.html";
+		// }
 	}
 </script>

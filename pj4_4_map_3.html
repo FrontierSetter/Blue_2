@@ -59,6 +59,8 @@
 
 </html>
 
+<script type="text/javascript" src="js/left_top_but.js"></script>
+
 
 <script>
     var ori_data_china = {};
@@ -96,13 +98,13 @@
 <script>
     var ori_data_map = {};
 
-    function callback_4_4_map_1(res) {
+    function callback_4_4_map_3(res) {
         ori_data_map = res;
-        console.log('4_4_map_1.json读取成功')
+        console.log('4_4_map_3.json读取成功')
         console.log(ori_data_map);
     }
 </script>
-<script src="data/4_4_map_1.json?callback=callback_4_4_map_1"></script>
+<script src="data/4_4_map_3.json?callback=callback_4_4_map_3"></script>
 
 
 <!--配置页面 6-1 的Echart图-->
@@ -168,7 +170,7 @@
             console.log(cur_data)
             cur_data.forEach(j => {
                 var name = j["地区"]
-                var value = j["产品抽查合格率（％）"]
+                var value = j["合格产品数（批次）"]
 
                 oriData[item].push({
                     name: name,
@@ -334,7 +336,7 @@
                                 return table;
                             },
                             contentToOption: function (HTMLDomElement, opt) {
-                                console.log("start save 4_4_map_1")
+                                console.log("start save 4_4_map_2")
 
                                 var plain_tex = HTMLDomElement.firstChild.innerHTML;
                                 console.log(plain_tex)
@@ -358,16 +360,16 @@
 
                                     result[cur_year].push({
                                         "地区": cur_line_arr[0],
-                                        "产品抽查合格率（％）": parseFloat(cur_line_arr[1])
+                                        "合格产品数（批次）": parseInt(cur_line_arr[1])
                                     })
                                 }
 
 
                                 var Link = document.createElement('a');
-                                Link.download = "4_4_map_1.json";
+                                Link.download = "4_4_map_3.json";
                                 Link.style.display = 'none';
                                 // 字符内容转变成blob地址
-                                var blob = new Blob(['callback_4_4_map_1(' + JSON.stringify(result) + ')']);
+                                var blob = new Blob(['callback_4_4_map_3(' + JSON.stringify(result) + ')']);
                                 Link.href = URL.createObjectURL(blob);
                                 // 触发点击 	
                                 document.body.appendChild(Link);
@@ -378,7 +380,7 @@
                             },
                         },
                         saveAsImage: {
-                            name: '4_4_map_1'
+                            name: '4_4_map_3'
                         },
                         dataZoom: {
                             show: false
@@ -409,8 +411,7 @@
                                 val = 0;
                             }
                             let txtCon =
-                                "<div style='text-align:left'>" + p.name + ":<br />合格率：" + val.toFixed(
-                                    2) + '%</div>';
+                                "<div style='text-align:left'>" + p.name + ":<br />产品数：" + val.toFixed(0) + '%</div>';
                             return txtCon;
                         }
                     },
@@ -503,14 +504,14 @@
                     top: 10,
                     text: item +
                         '年' +
-                        '合格率统计图',
+                        '合格产品数统计图',
                     textStyle: {
                         color: 'rgb(179, 239, 255)',
                         fontSize: 16
                     },
                 },
                 {
-                    text: "平均合格率：" + (sum[item] / data_len[item]).toFixed(2) + '%',
+                    text: "合格产品总数：" + (sum[item]).toFixed(0) + '批次',
                     left: 'center',
                     top: '4%',
                     textStyle: {
@@ -597,7 +598,7 @@
                             }
                             let txtCon =
                                 "<div style='text-align:left'>" + p.name +
-                                ":<br />合格率：" + val.toFixed(2) + '%</div>';
+                                ":<br />合格产品数：" + val.toFixed(0) + '批次</div>';
                             return txtCon;
                         }
                     },
@@ -648,357 +649,5 @@
         myChart.off('click');
         // this.myChart.on('click', this.echartsMapClick);
     }
-    // function initEchartMap(mapData, pointData, sum, data_len) {
-    //     var xData = [];
-    //     var yData = [];
-    //     var min = mapData[mapData.length - 1].value;
-    //     var max = mapData[0].value;
-
-    //     if (mapData.length === 1) {
-    //         min = 0
-    //     }
-    //     mapData.forEach(c => {
-    //         xData.unshift(c.name)
-    //         yData.unshift(c.value)
-    //     })
-    //     //这里做个切换，全国的时候才显示南海诸岛  只有当注册的名字为china的时候才会显示南海诸岛
-    //     echarts.registerMap('china', geoJson);
-
-    //     var option = {
-    //         timeline: {
-    //             data: timeTitle,
-    //             axisType: 'category',
-    //             autoPlay: true,
-    //             playInterval: 3000,
-    //             left: '10%',
-    //             right: '10%',
-    //             bottom: '2%',
-    //             width: '80%',
-    //             label: {
-    //                 normal: {
-    //                     textStyle: {
-    //                         color: 'rgb(179, 239, 255)'
-    //                     }
-    //                 },
-    //                 emphasis: {
-    //                     textStyle: {
-    //                         color: '#fff'
-    //                     }
-    //                 }
-    //             },
-    //             symbolSize: 10,
-    //             lineStyle: {
-    //                 color: '#8df4f4'
-    //             },
-    //             checkpointStyle: {
-    //                 borderColor: '#8df4f4',
-    //                 color: '#53D9FF',
-    //                 borderWidth: 2,
-    //             },
-    //             controlStyle: {
-    //                 showNextBtn: true,
-    //                 showPrevBtn: true,
-    //                 normal: {
-    //                     color: '#53D9FF',
-    //                     borderColor: '#53D9FF'
-    //                 },
-    //                 emphasis: {
-    //                     color: 'rgb(58,115,192)',
-    //                     borderColor: 'rgb(58,115,192)'
-    //                 }
-    //             },
-
-    //         },
-    //         baseOption: {
-    //             animation: true,
-    //             animationDuration: 900,
-    //             animationEasing: 'cubicInOut',
-    //             animationDurationUpdate: 900,
-    //             animationEasingUpdate: 'cubicInOut',
-    //             tooltip: {
-    //                 trigger: 'axis',
-    //                 axisPointer: {
-    //                     type: 'shadow'
-    //                 },
-    //             },
-    //             grid: {
-    //                 right: '2%',
-    //                 top: '12%',
-    //                 bottom: '8%',
-    //                 width: '20%'
-    //             },
-    //             toolbox: {
-    //                 feature: {
-    //                     restore: {
-    //                         show: false
-    //                     },
-    //                     dataView: {
-    //                         optionToContent: function (opt) {
-    //                             let series = opt.series[0].data //折线图数据
-    //                             let tdHeads =
-    //                                 '<th  style="padding: 0 20px">地区</th><th style="padding: 0 20px">合格率</th>' //表头
-    //                             let tdBodys = '' //数据
-    //                             let table =
-    //                                 `<table border="1" style="margin-left:20px;border-collapse:collapse;font-size:14px;text-align:left;"><tbody><tr>${tdHeads} </tr>`
-    //                             for (let i = 0; i < series.length; i++) {
-    //                                 table += `<tr>
-    //                 <td style="padding: 0 50px">${series[i].name}</td>
-    //                 <td style="padding: 0 50px">${series[i].value.toFixed(2)}%</td>
-    //                 </tr>`
-    //                             }
-    //                             table += '</tbody></table>'
-    //                             return table
-    //                         }
-    //                     },
-    //                     // saveAsImage: {
-    //                     //     name: this.parentInfo[this.parentInfo.length - 1].cityName + '合格率统计图'
-    //                     // },
-    //                     dataZoom: {
-    //                         show: false
-    //                     },
-    //                     magicType: {
-    //                         show: false
-    //                     }
-    //                 },
-    //                 iconStyle: {
-    //                     normal: {
-    //                         borderColor: '#1990DA'
-    //                     }
-    //                 },
-    //                 top: 15,
-    //                 right: 35
-    //             },
-    //             geo: {
-    //                 map: 'china',
-    //                 zoom: 1.1,
-    //                 roam: true,
-    //                 center: ['118.83531246', '32.0267395887'],
-    //                 tooltip: {
-    //                     trigger: 'item',
-    //                     formatter: (p) => {
-    //                         let val = p.value[2];
-    //                         if (window.isNaN(val)) {
-    //                             val = 0;
-    //                         }
-    //                         let txtCon =
-    //                             "<div style='text-align:left'>" + p.name + ":<br />合格率：" + val.toFixed(
-    //                                 2) + '%</div>';
-    //                         return txtCon;
-    //                     }
-    //                 },
-    //                 label: {
-    //                     normal: {
-    //                         show: true,
-    //                         color: "rgb(249, 249, 249)", //省份标签字体颜色
-    //                         formatter: p => {
-    //                             switch (p.name) {
-    //                                 case '内蒙古自治区':
-    //                                     p.name = "内蒙古"
-    //                                     break;
-    //                                 case '西藏自治区':
-    //                                     p.name = "西藏"
-    //                                     break;
-    //                                 case '新疆维吾尔自治区':
-    //                                     p.name = "新疆"
-    //                                     break;
-    //                                 case '宁夏回族自治区':
-    //                                     p.name = "宁夏"
-    //                                     break;
-    //                                 case '广西壮族自治区':
-    //                                     p.name = "广西"
-    //                                     break;
-    //                                 case '香港特别行政区':
-    //                                     p.name = "香港"
-    //                                     break;
-    //                                 case '澳门特别行政区':
-    //                                     p.name = "澳门"
-    //                                     break;
-    //                                 default:
-    //                                     break;
-    //                             }
-    //                             return p.name;
-    //                         }
-    //                     },
-    //                     emphasis: {
-    //                         show: true,
-    //                         color: '#f75a00',
-    //                     }
-    //                 },
-    //                 itemStyle: {
-    //                     normal: {
-    //                         areaColor: '#24CFF4',
-    //                         borderColor: '#53D9FF',
-    //                         borderWidth: 1.3,
-    //                         shadowBlur: 15,
-    //                         shadowColor: 'rgb(58,115,192)',
-    //                         shadowOffsetX: 7,
-    //                         shadowOffsetY: 6,
-    //                     },
-    //                     emphasis: {
-    //                         areaColor: '#8dd7fc',
-    //                         borderWidth: 1.6,
-    //                         shadowBlur: 25,
-    //                     }
-
-    //                 },
-    //             },
-
-    //         },
-    //         options: []
-    //     }
-
-    //     option.options.push({
-    //         title: [{
-    //             left: 'center',
-    //             top: 10,
-    //             text: '年' +
-    //                 '合格率统计图',
-    //             textStyle: {
-    //                 color: 'rgb(179, 239, 255)',
-    //                 fontSize: 16
-    //             },
-    //         },
-    //         {
-    //             text: "平均合格率：" + (sum[item] / data_len[item]).toFixed(2) + '%',
-    //             left: 'center',
-    //             top: '6.5%',
-    //             textStyle: {
-    //                 color: '#FFAC50',
-    //                 fontSize: 26
-    //             }
-    //         }
-    //         ],
-    //         visualMap: {
-    //             min: min,
-    //             max: max,
-    //             left: '3%',
-    //             bottom: '5%',
-    //             calculable: true,
-    //             seriesIndex: [0],
-    //             inRange: {
-    //                 color: ['#24CFF4', '#2E98CA', '#1E62AC']
-    //             },
-    //             textStyle: {
-    //                 color: '#24CFF4'
-    //             }
-    //         },
-    //         xAxis: {
-    //             type: 'value',
-    //             scale: true,
-    //             position: 'top',
-    //             boundaryGap: false,
-    //             splitLine: {
-    //                 show: false
-    //             },
-    //             axisLine: {
-    //                 show: true,
-    //                 lineStyle: {
-    //                     color: '#455B77'
-    //                 }
-    //             },
-    //             axisTick: {
-    //                 show: false
-    //             },
-    //             axisLabel: {
-    //                 margin: 2,
-    //                 textStyle: {
-    //                     fontSize: 12,
-    //                     color: '#c0e6f9'
-    //                 }
-    //             },
-    //         },
-    //         yAxis: {
-    //             type: 'category',
-    //             nameGap: 16,
-    //             axisLine: {
-    //                 show: true,
-    //                 lineStyle: {
-    //                     color: '#455B77'
-    //                 }
-    //             },
-    //             axisTick: {
-    //                 show: false,
-    //             },
-    //             axisLabel: {
-    //                 interval: 0,
-    //                 textStyle: {
-    //                     color: '#c0e6f9'
-    //                 }
-    //             },
-    //             data: xData
-    //         },
-    //         series: [{
-    //             name: item + '合格率',
-    //             type: 'map',
-    //             geoIndex: 0,
-    //             map: 'china',
-    //             roam: true,
-    //             zoom: 1.3,
-    //             tooltip: {
-    //                 trigger: "item",
-    //                 formatter: p => {
-    //                     let val = p.value;
-    //                     if (p.name == '南海诸岛') return
-    //                     if (window.isNaN(val)) {
-    //                         val = 0;
-    //                     }
-    //                     let txtCon =
-    //                         "<div style='text-align:left'>" + p.name +
-    //                         ":<br />合格率：" + val.toFixed(2) + '%</div>';
-    //                     return txtCon;
-    //                 }
-    //             },
-    //             label: {
-    //                 normal: {
-    //                     show: false,
-    //                 },
-    //                 emphasis: {
-    //                     show: false,
-    //                 }
-    //             },
-    //             data: mapData[item],
-
-    //         },
-    //         {
-    //             type: 'bar',
-    //             barGap: '-100%',
-    //             barCategoryGap: '55%',
-    //             itemStyle: {
-    //                 normal: {
-    //                     barBorderRadius: 30,
-    //                     color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-    //                         offset: 0,
-    //                         color: 'rgb(57,89,255,1)'
-    //                     }, {
-    //                         offset: 1,
-    //                         color: 'rgb(46,200,207,1)'
-    //                     }]),
-    //                 },
-    //                 emphasis: {
-    //                     show: false
-    //                 }
-    //             },
-    //             data: yData
-    //         }]
-    //     })
-
-    //     var dom_1_1 = document.getElementById("container_1_1");
-    //     var myChart = echarts.init(dom_1_1, 'chalk');
-
-    //     myChart.setOption(option, true)
-
-
-    //     //点击前解绑，防止点击事件触发多次
-    //     myChart.off('click');
-    //     // myChart.on('click', echartsMapClick);
-
-    //     //监听时间切换事件
-    //     // myChart.off('timelinechanged');
-    //     // myChart.on('timelinechanged', params => {
-
-    //     //     currentIndex = params.currentIndex;
-    //     //     getMapData();
-    //     // });
-    // }
 
 </script>
