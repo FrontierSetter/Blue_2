@@ -55,10 +55,10 @@
 				</div>
 				<div class="xpanel-wrapper xpanel-wrapper-55">
 					<div class="xpanel xpanel-l-b">
-						<div class="title">世界500强排行榜数据 <a href="./pj4_front_2.html" style="color: white;" class="title_link" ><i
+						<div class="title">世界500强排行榜数据 <a href="./pj4_front.html" style="color: white;" class="title_link" ><i
 							class="hand point right outline icon"></i></a><a href="./pj4_2.html" style="color: white;" class="title_link"><i
 									class="external square alternate icon"></i></a></div>
-						<h1 class="subtitle">2018年世界品牌500强(按国家分布)</h1>
+						<h1 class="subtitle">2018年世界品牌500强（按行业分布）</h1>
 						<div id="container_2" style="height: 85%"></div>
 					</div>
 				</div>
@@ -702,31 +702,31 @@
 </script> -->
 
 <script>
-    var ori_data_1_7 = {};
+    var ori_data_1_8 = {};
 
-    function callback_4_0_7(res){
-        ori_data_1_7 = res;
-		console.log('4_0_7.json读取成功')
-		console.log(ori_data_1_7);
+    function callback_4_0_8(res){
+        ori_data_1_8 = res;
+		console.log('4_0_8.json读取成功')
+		console.log(ori_data_1_8);
     }
 </script>
-<script src="data/4_0_7.json?callback=callback_4_0_7"></script>
+<script src="data/4_0_8.json?callback=callback_4_0_8"></script>
 
 <script>
 
-	var dom_1_7 = document.getElementById("container_2");
-	var myChart_1_7 = echarts.init(dom_1_7, 'chalk');
-	var app_1_7 = {};
+	var dom_1_8 = document.getElementById("container_2");
+	var myChart_1_8 = echarts.init(dom_1_8, 'chalk');
+	var app_1_8 = {};
 
-	function view_1_7_1_change(){
-		console.log("1_7_1 change")
+	function view_1_8_1_change(){
+		console.log("1_8_1 change")
 		// Document.getElementById('view_2_1_1').innerHTML
-		console.log(document.getElementById('view_1_7_1').value)
-		document.getElementById('view_1_7_1').innerHTML = document.getElementById('view_1_7_1').value
+		console.log(document.getElementById('view_1_8_1').value)
+		document.getElementById('view_1_8_1').innerHTML = document.getElementById('view_1_8_1').value
 	}
 
 	// 柱状图
-	var option_1_7_1 = {
+	var option_1_8_1 = {
 		// title: {
 		// 	text: '漏斗图',
 		// 	subtext: '纯属虚构'
@@ -748,8 +748,8 @@
 						console.log("start show")
 						// console.log(axisData)
 						// console.log(series)
-						var table = '<textarea id="view_1_7_1" onchange="view_1_7_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
-						table += option_1_7_1['series'][0]['name'];
+						var table = '<textarea id="view_1_8_1" onchange="view_1_8_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">\n';
+						table += option_1_8_1['series'][0]['name'];
 						table += '\n';
 						table += "类别,数值\n"
 						// var table = '<div style=" overflow-y:auto;height: 100%;width:100%;"><table style="width:100%;text-align:center"><tbody><tr>'
@@ -770,13 +770,13 @@
 						// return option_2_1_1['xAxis']['data']
 					},
 					contentToOption:function(HTMLDomElement, opt){
-						console.log("start save 1_7")
+						console.log("start save 1_8")
 
 						var plain_tex = HTMLDomElement.firstChild.innerHTML;
 						var arr_tex = plain_tex.split('\n')
 
-						X_1_7 = [];
-						Y_1_7 = [];
+						X_1_8 = [];
+						Y_1_8 = [];
 
 						for(var i = 2; i < arr_tex.length; ++i){
 							cur_pair = arr_tex[i].split(',');
@@ -787,28 +787,28 @@
 							if(cur_pair[0] == '' || cur_pair[0] == undefined){
 								continue
 							}
-							X_1_7.push(cur_pair[0]);
-							Y_1_7.push(cur_pair[1]);
+							X_1_8.push(cur_pair[0]);
+							Y_1_8.push(cur_pair[1]);
 						}
 
-						option_1_7_1['legend']['data'] = X_1_7;
+						option_1_8_1['legend']['data'] = X_1_8;
 
-						option_1_7_1['series'][0]['data'] = [];
+						option_1_8_1['series'][0]['data'] = [];
 
-						for(var i = 0; i < X_1_7.length; ++i){
-							option_1_7_1['series'][0]['data'].push({
-								value: Y_1_7[i],
-								name: X_1_7[i],
+						for(var i = 0; i < X_1_8.length; ++i){
+							option_1_8_1['series'][0]['data'].push({
+								value: Y_1_8[i],
+								name: X_1_8[i],
 							})
 						}
 						
-						myChart_1_7.setOption(option_1_7_1);
+						myChart_1_8.setOption(option_1_8_1);
 
 						var Link = document.createElement('a');
-						Link.download = "4_0_7.json";
+						Link.download = "4_0_8.json";
 						Link.style.display = 'none';
 						// 字符内容转变成blob地址
-						var blob = new Blob(['callback_4_0_7('+JSON.stringify(option_1_7_1)+')']);
+						var blob = new Blob(['callback_4_0_8('+JSON.stringify(option_1_8_1)+')']);
 						Link.href = URL.createObjectURL(blob);
 						// 触发点击 	
 						document.body.appendChild(Link);
@@ -836,7 +836,7 @@
 				name:'上海市出境不合格货值分布情况',
 				type:'funnel',
 				left: '10%',
-				top: 60,
+				top: 0,
 				//x2: 80,
 				bottom: 60,
 				width: '80%',
@@ -848,7 +848,7 @@
 				sort: 'descending',
 				gap: 2,
 				label: {
-					show: true,
+					show: false,
 					position: 'inside',
 					textStyle: { //图例文字的样式
 						color: color_axis,
@@ -868,7 +868,7 @@
 				},
 				emphasis: {
 					label: {
-						fontSize: 20
+						fontSize: 2
 					}
 				},
 				data: [
@@ -881,11 +881,11 @@
 		]
 	};
 
-	option_1_7_1['series'][0]['data'] = ori_data_1_7['series'][0]['data'];
-	option_1_7_1['series'][0]['name'] = ori_data_1_7['series'][0]['name'];
-	option_1_7_1['legend']['data'] = ori_data_1_7['legend']['data'];
+	option_1_8_1['series'][0]['data'] = ori_data_1_8['series'][0]['data'];
+	option_1_8_1['series'][0]['name'] = ori_data_1_8['series'][0]['name'];
+	option_1_8_1['legend']['data'] = ori_data_1_8['legend']['data'];
 
-	myChart_1_7.setOption(option_1_7_1, true);
+	myChart_1_8.setOption(option_1_8_1, true);
 
 
 </script>
