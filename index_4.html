@@ -43,13 +43,15 @@
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
 							<div class="title">2012-2017年质量监督执法情况</div>
+							<h1 class="subtitle">2012-2017年质量监督执法情况</h1>
 							<div id="container_1_1" style="height: 90%"></div>
 						</div>
 						
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">2012-2017年食品安全执法检查次数</div>
+							<div class="title">2012-2019年食品安全执法检查次数</div>
+							<h1 class="subtitle">2012-2019年食品安全执法检查次数</h1>
 							<div id="container_2_1" style="height: 90%"></div>
 						</div>
 					</div>
@@ -57,13 +59,15 @@
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
-							<div class="title">2008-2017年上海市产品质量监督抽查合格率</div>
+							<div class="title">2008-2019年上海市产品质量监督抽查合格率</div>
+							<h1 class="subtitle">2008-2019年上海市产品质量监督抽查合格率</h1>
 							<div id="container_1_2" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
-							<div class="title">2007-2017年上海市国家监督抽查及市监督抽查合格率</div>
+							<div class="title">2007-2019年上海市国家监督抽查及市监督抽查合格率</div>
+							<h1 class="subtitle">2007-2019年上海市国家监督抽查及市监督抽查合格率</h1>
 							<div id="container_2_2" style="height: 90%"></div>
 						</div>
 					</div>
@@ -71,13 +75,15 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2009-2017年上海市各类产品质量监督抽查合格率 <i  onclick="popBoxSuffix('_1_3')"></i></div>
+							<div class="title">2009-2019年上海市各类产品质量监督抽查合格率 <i  onclick="popBoxSuffix('_1_3')"></i></div>
+							<h1 class="subtitle">2009-2019年上海市各类产品质量监督抽查合格率</h1>
 							<div id="container_1_3" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">2009-2015年特种设备安全监督执法情况</div>
+							<div class="title">2015-2019年全国及上海市制造业产品质量合格率</div>
+							<h1 class="subtitle">2015-2019年全国及上海市制造业产品质量合格率</h1>
 							<div id="container_2_3" style="height: 90%"></div>
 						</div>
 					</div>
@@ -1597,6 +1603,8 @@ var option_1_6_1 = {
 	yAxis: [
 		{
 			type: 'value',
+			min:80,
+			max:100,
 
 			axisLabel: {
 				fontSize: fontSize_axis_label
@@ -1606,22 +1614,22 @@ var option_1_6_1 = {
 	series: [
 		{
 			name: '销量',
-			type: 'bar',
+			type: 'line',
 			data: [1,2,3],
 
 		},
 		{
 			name: '汽车市场占比',
-			type: 'bar',
+			type: 'line',
 			data: [],
 
 		},
-		{
-			name: '汽车市场占比',
-			type: 'bar',
-			data: [],
+		// {
+		// 	name: '汽车市场占比',
+		// 	type: 'bar',
+		// 	data: [],
 
-		}
+		// }
 	]
 };
 

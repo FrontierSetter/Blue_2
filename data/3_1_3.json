@@ -1,1 +1,169 @@
-callback_3_1_3({"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"}},"toolbox":{"show":true,"itemSize":18,"orient":"vertical","feature":{"dataView":{"show":true,"readOnly":false},"magicType":{"show":true,"type":["line","bar","stack","tiled"]},"saveAsImage":{"show":true}}},"legend":{"data":["国抽","市抽"],"textStyle":{"color":"#fff","fontSize":20}},"grid":{"left":"3%","right":"4%","bottom":"3%","containLabel":true},"xAxis":[{"type":"category","data":["2008","2009","2010","2011","2012","2013","2014","2015","2016","2017"],"boundaryGap":false,"axisLabel":{"textStyle":{"color":"#fff","fontSize":22}}}],"yAxis":[{"type":"value","axisLabel":{"textStyle":{"color":"#fff","fontSize":22}}}],"series":[{"name":"国抽","type":"line","data":["83.6","87.1","92.6","92.2","94","92","93.2","93.1","90.7","92.4"]},{"name":"市抽","type":"line","data":["76.5","80.5","85.3","88","89.2","88.8","91.3","89.4","88.7","89.2"]}]})
+callback_3_1_3({
+    "textStyle": {
+        "fontSize": 20
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        }
+    },
+    "toolbox": {
+        "show": true,
+        "itemSize": 18,
+        "orient": "vertical",
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar",
+                    "stack",
+                    "tiled"
+                ]
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "data": [
+            "竞争力指数",
+
+        ],
+        "textStyle": {
+            "color": "#F0F8FF"
+        }
+    },
+    "calculable": true,
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                
+                "2009",
+                "2010",
+                "2011",
+                "2012",
+                "2013",
+                "2014",
+                "2015",
+                "2016",
+                "2017",
+                "2018",
+                "2019"
+            ],
+            "boundaryGap": false,
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "得分",
+            "min": 80,
+            "max": 100,
+            "axisLabel": {
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 22
+                }
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "竞争力指数",
+            "type": "line",
+            "data": [
+                "89.06",
+                "90.85",
+                "90.42",
+                "92.01",
+                "93.14",
+                "93.27",
+                "93.58",
+                "92.7",
+                "93.2",
+                "94.01",
+                "95.78",
+            
+            ]
+        },
+        // {
+        //     "name": "市抽",
+        //     "type": "line",
+        //     "data": [
+        //         "76.5",
+        //         "80.5",
+        //         "85.3",
+        //         "88",
+        //         "89.2",
+        //         "88.8",
+        //         "91.3",
+        //         "89.4",
+        //         "88.7",
+        //         "89.2",
+        //         "89.9",
+        //         "93"
+        //     ]
+        // }
+    ],
+    // "visualMap": {
+    //     "top": 10,
+    //     "right": 10,
+    //     "pieces": [
+    //         {
+    //             "gt": 60,
+    //             "lte": 75,
+    //             "color": "#333300"
+    //         },
+    //         {
+    //             "gt": 75,
+    //             "lte": 80,
+    //             "color": "#555500"
+    //         },
+    //         {
+    //             "gt": 80,
+    //             "lte": 84,
+    //             "color": "#777700"
+    //         },
+    //         {
+    //             "gt": 84,
+    //             "lte": 88,
+    //             "color": "#999900"
+    //         },
+    //         {
+    //             "gt": 88,
+    //             "lte": 92,
+    //             "color": "#bbbb00"
+    //         },
+    //         {
+    //             "gt": 92,
+    //             "lte": 98,
+    //             "color": "#dddd00"
+    //         },
+    //         {
+    //             "gt": 98,
+    //             "lte": 100,
+    //             "color": "#eeee00"
+    //         }
+    //     ],
+    //     "outOfRange": {
+    //         "color": "#ffff00"
+    //     },
+    //     "textStyle": {
+    //         "color": "#ffffff"
+    //     }
+    // }
+})

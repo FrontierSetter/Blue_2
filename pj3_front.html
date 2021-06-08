@@ -45,7 +45,7 @@
                 <div class="xpanel-wrapper xpanel-wrapper-50">
                     <div class="xpanel xpanel-l-t">
                         <div class="title">上海市质量监管状况分析<a href="./index_4.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        <h1 class="subtitle">2010-2017年质量监督执法情况</h1>
+                        <h1 class="subtitle">2010-2020年质量监督执法情况</h1>
                         <div id="container_1_1" style="height: 85%"></div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <div class="xpanel-wrapper xpanel-wrapper-50">
                     <div class="xpanel xpanel-c-t">
                         <div class="title">上海市总体质量状况分析<a href="./index_2.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        <h1 class="subtitle">2008-2017年上海市国家级监督抽查及市级监督抽查合格率</h1>
+                        <h1 class="subtitle">2009-2019年上海市制造业质量竞争力指数</h1>
                         <div id="container_1_3" style="height: 85%"></div>
                     </div>
                 </div>
@@ -78,14 +78,14 @@
                 <div class="xpanel-wrapper xpanel-wrapper-50">
                     <div class="xpanel xpanel-r-t">
                         <div class="title">上海市食品质量状况分析<a href="./index_8.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        <h1 class="subtitle">2010-2017年上海食品监督抽检合格率情况</h1>
+                        <h1 class="subtitle">2010-2019年上海食品监督抽检合格率情况</h1>
                         <div id="container_1_5" style="height: 85%"></div>
                     </div>
                 </div>
                 <div class="xpanel-wrapper xpanel-wrapper-55">
                     <div class="xpanel xpanel-r-b">
                         <div class="title">上海市质量奖获奖状况<a href="./index_7.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
-                        <h1 class="subtitle">2008-2017年上海市各质量激励奖获得情况</h1>
+                        <h1 class="subtitle">2008-2019年上海市各质量激励奖获得情况</h1>
                         <div id="container_1_6" style="height: 90%"></div>
                     </div>
                 </div>
@@ -834,7 +834,7 @@
             {
                 type: 'value',
                 name: '企业标准数',
-                max: 200000,
+                max: 250000,
                 min: 0,
                 boundaryGap: [0.2, 0.2],
                 axisLabel: {
@@ -1156,7 +1156,7 @@
 			}
 		},
 		legend: {
-            data: ['国抽', '市抽'],
+            data: ['竞争力指数'],
             textStyle: {
                 color: '#F0F8FF'
             }
@@ -1178,8 +1178,8 @@
 		yAxis: [
 			{
 				type: 'value',
-                name: '合格率（%）',
-                min: 60,
+                name: '得分',
+                min: 80,
                 max: 100,
 				axisLabel:{
 					textStyle: { //图例文字的样式
@@ -1192,57 +1192,57 @@
 		],
 		series: [
 			{
-                name: '国抽',
+                name: '竞争力指数',
                 type: 'line',
 				// stack: '抽查情况',
 				data: [120, 132, 101, 134, 90, 230, 210]
 			},
-			{
-                name: '市抽',
-                type: 'line',
-				// stack: '抽查情况',
-				data: [220, 182, 191, 234, 290, 330, 310]
-			},
+			// {
+            //     name: '市抽',
+            //     type: 'line',
+			// 	// stack: '抽查情况',
+			// 	data: [220, 182, 191, 234, 290, 330, 310]
+			// },
 		],
-        visualMap: {
-            top: 10,
-            right: 10,
-            pieces: [{
-                gt: 60,
-                lte: 75,
-                color: '#333300'
-            }, {
-                gt: 75,
-                lte: 80,
-                color: '#555500'
-            }, {
-                gt: 80,
-                lte: 84,
-                color: '#777700'
-            }, {
-                gt: 84,
-                lte: 88,
-                color: '#999900'
-            }, {
-                gt: 88,
-                lte: 92,
-                color: '#bbbb00'
-            }, {
-                gt: 92,
-                lte: 98,
-                color: '#dddd00'
-            }, {
-                gt: 98,
-                lte: 100,
-                color: '#eeee00'
-            }],
-            outOfRange: {
-                color: '#ffff00'
-            },
-            textStyle: {
-                color: "#ffffff"
-            }
-        },
+        // visualMap: {
+        //     top: 10,
+        //     right: 10,
+        //     pieces: [{
+        //         gt: 60,
+        //         lte: 75,
+        //         color: '#333300'
+        //     }, {
+        //         gt: 75,
+        //         lte: 80,
+        //         color: '#555500'
+        //     }, {
+        //         gt: 80,
+        //         lte: 84,
+        //         color: '#777700'
+        //     }, {
+        //         gt: 84,
+        //         lte: 88,
+        //         color: '#999900'
+        //     }, {
+        //         gt: 88,
+        //         lte: 92,
+        //         color: '#bbbb00'
+        //     }, {
+        //         gt: 92,
+        //         lte: 98,
+        //         color: '#dddd00'
+        //     }, {
+        //         gt: 98,
+        //         lte: 100,
+        //         color: '#eeee00'
+        //     }],
+        //     outOfRange: {
+        //         color: '#ffff00'
+        //     },
+        //     textStyle: {
+        //         color: "#ffffff"
+        //     }
+        // },
 	};
 
 
@@ -1482,13 +1482,15 @@
 		},
 		yAxis: {
 			type: 'value',
-            name: '合格率（%）',
-			min: function (value) {
-				return value.min - 20;
-			},
-			max: function (value) {
-				return value.max + 20;
-			},
+            name: '分数',
+			// min: function (value) {
+			// 	return value.min - 20;
+			// },
+			min:75,
+			max:100,
+			// max: function (value) {
+			// 	return value.max + 20;
+			// },
 			axisLabel:{
 				textStyle: { //图例文字的样式
 					color: color_axis,
