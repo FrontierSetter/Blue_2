@@ -43,14 +43,14 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-l-t">
-							<div class="title">月度企业数和亏损企业数</div>
+							<div class="title">各国制造业PMI指数对比</div>
 							<div id="container_1_1" style="height: 90%"></div>
 						</div>
 						
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">采购经理指数</div>
+							<div class="title">邮储小微指数</div>
 							<div id="container_1_4" style="height: 90%"></div>
 						</div>
 					</div>
@@ -58,13 +58,13 @@
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-c-t">
-							<div class="title">中小企业发展、成本、投入、效益指数<a href="./pj4_3.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
+							<div class="title">企业景气及企业家信心指数<a href="./pj4_3.html" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></div>
 							<div id="container_1_2" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-c-b">
-							<div class="title">邮储小微企业指数</div>
+							<div class="title">PMI采购经理指数</div>
 							<div id="container_1_5" style="height: 90%"></div>
 						</div>
 					</div>
@@ -72,13 +72,13 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-50">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">渣打中国中小企业信心指数 <i  onclick="popBoxSuffix('_1_3')"></i></div>
+							<div class="title">渣打中国中小企业信心指数（按进出口）<i  onclick="popBoxSuffix('_1_3')"></i></div>
 							<div id="container_1_3" style="height: 90%"></div>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-55">
 						<div class="xpanel xpanel-r-t">
-							<div class="title">渣打中国中小企业信心指数经营现状子指标指数</div>
+							<div class="title">渣打中国中小企业信心指数（按行业分）</div>
 							<div id="container_1_6" style="height: 90%"></div>
 						</div>
 					</div>
@@ -261,9 +261,9 @@
 						console.log("start show")
 						console.log(axisData)
 						console.log(series)
-						var table = '<textarea id="view_1_1" onchange="view_1_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,德国,美国,日本,中国\n'
+						var table = '<textarea id="view_1_1" onchange="view_1_1_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,中国,美国\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] +  '\n'
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i] +  '\n'
 						}
 						table += '</textarea>'
 						return table;
@@ -282,7 +282,7 @@
    
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
-							if(cur_pair.length != 4) {
+							if(cur_pair.length != 3) {
 								//console.alert('wrong data')
 								continue
 							}
@@ -292,17 +292,14 @@
 							xAxis_1_1.push(cur_pair[0])
 							yAxis_1_1a.push(cur_pair[1])
                             yAxis_1_1b.push(cur_pair[2])
-							yAxis_1_1c.push(cur_pair[3])
              
 						}
 						console.log(xAxis_1_1)
 						console.log(yAxis_1_1a)
                         console.log(yAxis_1_1b)
-						console.log(yAxis_1_1c)
                  
 						option_1_1_1['series'][0]['data'] = yAxis_1_1a;
                         option_1_1_1['series'][1]['data'] = yAxis_1_1b;
-						option_1_1_1['series'][2]['data'] = yAxis_1_1c;
                   
 						option_1_1_1['xAxis']['data'] = xAxis_1_1;
 						myChart_1_1.setOption(option_1_1_1);
@@ -355,7 +352,7 @@
 		dataZoom: [
             {
                 show: true,
-                start: 94,
+                start: 0,
                 end: 100
             }
         ],
@@ -370,11 +367,7 @@
                 type: 'bar',
                 data: [],
             },
-			{
-                name: '立案案件数',
-                type: 'bar',
-                data: [1,2,3],
-            }
+			
         ]
 	};
 
@@ -433,9 +426,9 @@
 						console.log("start show")
 						console.log(axisData)
 						console.log(series)
-						var table = '<textarea id="view_1_2" onchange="view_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,制造业,PMI大型,PMI中型,PMI小型\n'
+						var table = '<textarea id="view_1_2" onchange="view_1_2_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,企业景气指数,企业家信心指数\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+ '\n'
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  + '\n'
 						}
 						table += '</textarea>'
 						return table;
@@ -454,7 +447,7 @@
                         yAxis_1_2d = []
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
-							if(cur_pair.length != 5) {
+							if(cur_pair.length != 3) {
 								//console.alert('wrong data')
 								continue
 							}
@@ -464,18 +457,15 @@
 							xAxis_1_2.push(cur_pair[0])
 							yAxis_1_2a.push(cur_pair[1])
                             yAxis_1_2b.push(cur_pair[2])
-							yAxis_1_2c.push(cur_pair[3])
-                            yAxis_1_2d.push(cur_pair[4])
+				
 						}
 						console.log(xAxis_1_2)
 						console.log(yAxis_1_2a)
                         console.log(yAxis_1_2b)
-						console.log(yAxis_1_2c)
-                        console.log(yAxis_1_2d)
+				
 						option_1_2_1['series'][0]['data'] = yAxis_1_2a;
                         option_1_2_1['series'][1]['data'] = yAxis_1_2b;
-						option_1_2_1['series'][2]['data'] = yAxis_1_2c;
-                        option_1_2_1['series'][3]['data'] = yAxis_1_2d;
+				
 						option_1_2_1['xAxis']['data'] = xAxis_1_2;
 						myChart_1_2.setOption(option_1_2_1);
 
@@ -526,7 +516,7 @@
 		dataZoom: [
             {
                 show: true,
-                start: 94,
+                start: 0,
                 end: 100
             }
         ],
@@ -610,9 +600,9 @@
 						console.log("start show")
 						console.log(axisData)
 						console.log(series)
-						var table = '<textarea id="view_1_3" onchange="view_1_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,发展指数,成本指数,投入指数,效益指数\n'
+						var table = '<textarea id="view_1_3" onchange="view_1_3_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,主营国内业务的中小企业,出口型中小企业\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  + ',' + series[2].data[i] + ',' + series[3].data[i]  +'\n'
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +'\n'
 						}
 						table += '</textarea>'
 						return table;
@@ -631,7 +621,7 @@
                         yAxis_1_2d = []
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
-							if(cur_pair.length != 5) {
+							if(cur_pair.length != 3) {
 								//console.alert('wrong data')
 								continue
 							}
@@ -641,18 +631,15 @@
 							xAxis_1_2.push(cur_pair[0])
 							yAxis_1_2a.push(cur_pair[1])
                             yAxis_1_2b.push(cur_pair[2])
-							yAxis_1_2c.push(cur_pair[3])
-                            yAxis_1_2d.push(cur_pair[4])
+						
 						}
 						console.log(xAxis_1_2)
 						console.log(yAxis_1_2a)
                         console.log(yAxis_1_2b)
-						console.log(yAxis_1_2c)
-                        console.log(yAxis_1_2d)
+				
 						option_1_3_1['series'][0]['data'] = yAxis_1_2a;
                         option_1_3_1['series'][1]['data'] = yAxis_1_2b;
-						option_1_3_1['series'][2]['data'] = yAxis_1_2c;
-                        option_1_3_1['series'][3]['data'] = yAxis_1_2d;
+		
 						option_1_3_1['xAxis']['data'] = xAxis_1_2;
 						myChart_1_3.setOption(option_1_3_1);
 
@@ -719,7 +706,7 @@
 			dataZoom: [
             {
                 show: true,
-                start: 94,
+                start: 0,
                 end: 100
             }
         ],
@@ -1010,9 +997,9 @@
 						console.log("start show")
 						console.log(axisData)
 						console.log(series)
-						var table = '<textarea id="view_1_5" onchange="view_1_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,SMEI,现状指数,信誉指数,预期指数\n'
+						var table = '<textarea id="view_1_5" onchange="view_1_5_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,制造业,非制造业\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+ '\n'
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  + '\n'
 						}
 						table += '</textarea>'
 						return table;
@@ -1031,7 +1018,7 @@
 						yAxis_1_2d = []
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
-							if(cur_pair.length != 5) {
+							if(cur_pair.length != 3) {
 								//console.alert('wrong data')
 								continue
 							}
@@ -1041,18 +1028,16 @@
 							xAxis_1_2.push(cur_pair[0])
 							yAxis_1_2a.push(cur_pair[1])
                             yAxis_1_2b.push(cur_pair[2])
-							yAxis_1_2c.push(cur_pair[3])
-							yAxis_1_2d.push(cur_pair[4])
+						
 						}
 						console.log(xAxis_1_2)
 						console.log(yAxis_1_2a)
                         console.log(yAxis_1_2b)
 						console.log(yAxis_1_2c)
-						console.log(yAxis_1_2d)
+					
 						option_1_5_1['series'][0]['data'] = yAxis_1_2a;
                         option_1_5_1['series'][1]['data'] = yAxis_1_2b;
-						option_1_5_1['series'][2]['data'] = yAxis_1_2c;
-						option_1_5_1['series'][3]['data'] = yAxis_1_2d;
+				
 						option_1_5_1['xAxis']['data'] = xAxis_1_2;
 						myChart_1_5.setOption(option_1_5_1);
 
@@ -1190,9 +1175,9 @@
 						console.log("start show")
 						console.log(axisData)
 						console.log(series)
-						var table = '<textarea id="view_1_6" onchange="view_1_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,生产,新订单,用工,原材料库存,产成品价格,投资,盈利\n'
+						var table = '<textarea id="view_1_6" onchange="view_1_6_change()" style="width: 100%; height: 100%; font-family: monospace; font-size: 14px; line-height: 1.6rem; color: rgb(0, 0, 0); border-color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">年份,制造业,服务业\n'
 						for (var i = 0, l = axisData.length; i < l; i++) {
-							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +',' + series[2].data[i] + ',' + series[3].data[i]+',' + series[4].data[i]  +',' + series[5].data[i] + ',' + series[6].data[i]+ '\n'
+							table += axisData[i] + ',' + series[0].data[i] + ',' + series[1].data[i]  +'\n'
 						}
 						table += '</textarea>'
 						return table;
@@ -1215,7 +1200,7 @@
                         
 						for(var i = 1; i < arr_tex.length; i++) {
 							cur_pair = arr_tex[i].split(',')
-							if(cur_pair.length != 8) {
+							if(cur_pair.length != 3) {
 								//console.alert('wrong data')
 								continue
 							}
@@ -1225,29 +1210,17 @@
 							xAxis_1_2.push(cur_pair[0])
 							yAxis_1_2a.push(cur_pair[1])
 							yAxis_1_2b.push(cur_pair[2])
-							yAxis_1_2c.push(cur_pair[3])
-							yAxis_1_2d.push(cur_pair[4])
-							yAxis_1_2b.push(cur_pair[5])
-							yAxis_1_2c.push(cur_pair[6])
-							yAxis_1_2d.push(cur_pair[7])
+					
 
 						}
 						console.log(xAxis_1_2)
 						console.log(yAxis_1_2a)
 						console.log(yAxis_1_2b)
-						console.log(yAxis_1_2c)
-						console.log(yAxis_1_2d)
-						console.log(yAxis_1_2e)
-						console.log(yAxis_1_2f)
-						console.log(yAxis_1_2g)
+					
       
 						option_1_6_1['series'][0]['data'] = yAxis_1_2a;
 						option_1_6_1['series'][1]['data'] = yAxis_1_2b;
-						option_1_6_1['series'][2]['data'] = yAxis_1_2c;
-						option_1_6_1['series'][3]['data'] = yAxis_1_2d;
-						option_1_6_1['series'][4]['data'] = yAxis_1_2e;
-						option_1_6_1['series'][5]['data'] = yAxis_1_2f;
-						option_1_6_1['series'][6]['data'] = yAxis_1_2g;
+						
 
 						option_1_6_1['xAxis']['data'] = xAxis_1_2;
 						myChart_1_6.setOption(option_1_6_1);
@@ -1313,32 +1286,7 @@
                 name: '销量',
                 type: 'line',
                 data: [1,2,3],
-            },
-			{
-                name: '销量',
-                type: 'line',
-                data: [1,2,3],
-            },
-			{
-                name: '销量',
-                type: 'line',
-                data: [1,2,3],
-            },
-			{
-                name: '销量',
-                type: 'line',
-                data: [1,2,3],
-            },
-			{
-                name: '销量',
-                type: 'line',
-                data: [1,2,3],
-            },
-			{
-                name: '销量',
-                type: 'line',
-                data: [1,2,3],
-            },
+            }
             
         ]
 	};
